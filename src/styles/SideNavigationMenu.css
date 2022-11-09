@@ -1,0 +1,73 @@
+#side-nav-menu {
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  /* disable horizontal scroll */
+  /* without this, the menu doesn't actually close. 
+     it's content remains squeezed together, still visible on the left side of the screen */
+  overflow-x: hidden;
+
+  /* to distinguish it from main page */
+  color: white;
+  background-color: #222;
+
+  /* transition effect */
+  transition: 0.5s;
+}
+
+.side-nav-menu-visible {
+  width: 250px;
+}
+
+.side-nav-menu-hidden {
+  width: 0;
+}
+
+/* don't do the media query for when the screen width passes 650px here
+   it won't work */
+
+#side-nav-menu-header, #side-nav-menu-profile {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+#side-nav-menu-title {
+  flex-grow: 9;
+}
+
+#side-nav-menu-close {
+  flex-grow: 0;
+}
+
+#side-nav-menu-profile-icon {
+  width: 1%;
+  height: 1%;
+  flex-grow: 2;
+}
+
+#side-nav-menu-profile-name {
+  flex-grow: 9;
+  vertical-align: middle;
+}
+
+.side-nav-menu-link {
+  display: block;
+  color: white;
+  text-decoration: none;
+}
+
+.side-nav-menu-link:hover {
+  background-color: rgb(201, 65, 65);
+}
+
+.indented {
+  margin-left: 2em;
+}
+
+hr {
+  width: 98%;
+}
