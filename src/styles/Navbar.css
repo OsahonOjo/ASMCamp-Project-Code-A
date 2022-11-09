@@ -1,0 +1,17 @@
+.navbar {
+    border: soild 1px black;
+    background-color: #eeeeee;
+}
+
+.navbar-title {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.navbar-icon {
+    vertical-align: middle;
+    display: inline-block;
+    height: 30px;
+    width: 36px;
+    padding: 15px;
+}

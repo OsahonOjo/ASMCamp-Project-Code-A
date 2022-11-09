@@ -26,7 +26,8 @@ export const styles = {
     bmMenu: {
       background: '#373a47',
       padding: '0px',
-      fontSize: '1.15em'
+      fontSize: '1.15em',
+      overflowY: 'hidden'  /* hide vertical scroll bar */
     },
     bmMorphShape: {
       fill: '#373a47'
