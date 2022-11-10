@@ -1,0 +1,75 @@
+details {
+    margin: 10px;
+}
+
+hr {
+    border: solid 1px #cccccc;
+}
+
+.inline {
+    display: inline;
+}
+
+.list-item-icon {
+    height: 20px;
+    width: 20px;
+}
+
+.card {
+    border: solid 1px #cccccc;
+    margin: 10px;
+    margin-top: 0px;  /* to prevent weird interaction with burger menu */
+}
+
+.header-text {
+    margin: 0;
+}
+
+.header hr {
+    margin: auto;
+    margin-bottom: 10px;
+    width: 95%;
+    border: solid 1px #f1f1f1;
+}
+
+.header-flex-container {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    -ms-flex-align: center;
+}
+
+.header-flex-container img {
+    margin: 10px;
+    margin-top: 15px;
+}
+
+.header-flex-container a {
+    margin: 10px;
+    margin-top: 15px;
+    text-decoration: none;
+}
+
+.header-flex-container a:hover, .topic-item a:hover {
+    text-decoration: underline;
+}
+
+.header-topic-details {
+    margin-left: 40px;
+}
+
+.topic-item {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    padding: 5px;
+}
+
+.topic-item p {
+    flex-grow: 9;
+    vertical-align: top;
+}
+
+.topic-item-element {
+    margin: 5px;
+}

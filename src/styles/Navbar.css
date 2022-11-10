@@ -1,6 +1,10 @@
 .navbar {
     border: soild 1px black;
     background-color: #eeeeee;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
 }
 
 .navbar-title {
@@ -14,4 +18,8 @@
     height: 30px;
     width: 36px;
     padding: 15px;
+}
+
+.navbar-padding {
+    height: 70px;
 }

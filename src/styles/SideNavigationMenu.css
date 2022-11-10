@@ -3,13 +3,13 @@
   height: 30px;
 }
 
-a {
+.side-nav-menu-link {
   display: block;
   color: white;
   text-decoration: none;
 }
 
-a:hover {
+.side-nav-menu-link:hover {
   background-color: rgb(201, 65, 65);
 }
 

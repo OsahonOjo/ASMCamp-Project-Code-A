@@ -33,24 +33,23 @@ function SideNavigationMenu() {
       
       {/* you want to call closeMenu() and return its result here, not just pass its name closeMenu */}
       
-      <NavLink to="/topic/all" onClick={() => closeMenu()}>Topics</NavLink>
-      <NavLink to="/" onClick={() => closeMenu()}>Dashboard</NavLink>
-      <div className="indented">
-        <a href="#">Learning Objectives</a>
-        <a href="#">XP Points</a>
-        <a href="#">Badges</a>
-        <a href="#">Grade</a>
-      </div>
-      <a href="#">Leaderboard</a>
+      <NavLink to="/topic/all" onClick={() => closeMenu()} className="side-nav-menu-link">Topics</NavLink>
+      <NavLink to="/" onClick={() => closeMenu()} className="side-nav-menu-link">Dashboard</NavLink>
+      <a href="#" className="indented side-nav-menu-link">Learning Objectives</a>
+      <a href="#" className="indented side-nav-menu-link">XP Points</a>
+      <a href="#" className="indented side-nav-menu-link">Badges</a>
+      <a href="#" className="indented side-nav-menu-link">Grade</a>
+
+      <a href="#" className="side-nav-menu-link">Leaderboard</a>
 
       <hr />
       
-      <a href="#">For Teachers</a>
+      <a href="#" className="side-nav-menu-link">For Teachers</a>
       
       <hr />
       
-      <a href="#">Settings</a>
-      <a href="#">Contact</a>
+      <a href="#" className="side-nav-menu-link">Settings</a>
+      <a href="#" className="side-nav-menu-link">Contact</a>
     </Menu>
   );
 }
