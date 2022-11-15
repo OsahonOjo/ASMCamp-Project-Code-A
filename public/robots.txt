@@ -1,3 +1,36 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Disallow: /
+# Allow: 
+
+# asterisk after “user-agent” means that the robots.txt file applies to all web robots that visit the site
+
+# "Disallow" is a URL path you don't want the bot to crawl; you can have multiple Disallows
+# slash after “Disallow” tells the robot to not visit any pages on the site. otherwise, the bot would crawl your ENTIRE site, which could be immensely large
+
+# "Allow" is the URL path of a subdirectory within a blocked parent directory, that you want to unblock
+
+# If you have any pages that you don’t want indexed (like those precious thank you pages), you can use both disallow and noindex directive
+# this makes it so someone can't find the page using a search engine results page (SERP)
+# Disallow: /thank-you
+# Noindex: /thank-you
+
+# <head><meta name=”robots” content=”nofollow”></head>
+# the nofollow directive tells web robots to not crawl the links on a page
+
+# you can also do this to set up noindex and nofollow in the same place
+# <head><meta name=”robots” content=”noindex,nofollow”></head>
+
+# you may be able to see a site's robots.txt file by adding '/robots.txt' to its basic URL; e.g. youtube.com/robots.txt
+
+# you can have multiple User-agent 's in one robots.txt file
+# then the file is structured like:
+# User-agent: *
+# Disallow:
+# Disallow:
+# Allow:
+# 
+# User-agent: Googlebot-Image
+# Disallow:
+# Allow:
+# Allow:
