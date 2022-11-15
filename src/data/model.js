@@ -18,7 +18,7 @@ export default class Model {
   getAllTopicData() {
     return JSON.parse(localStorage.getItem("courseMaterial"));
   }
-
+//minor
   getTopic(topicId) {
     //this.getAllTopicData()[topicIndex];
     return this.getAllTopicData().find(topic => topic.id === topicId);
