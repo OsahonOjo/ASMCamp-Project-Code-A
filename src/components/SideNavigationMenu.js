@@ -1,6 +1,6 @@
 /* libraries */
 import React from "react";
-import {slide as Menu } from 'react-burger-menu';  /* https://www.npmjs.com/package/react-burger-menu */
+import { stack as Menu } from 'react-burger-menu';  /* https://www.npmjs.com/package/react-burger-menu */
 import { NavLink } from "react-router-dom";
 
 /* assets */
@@ -35,6 +35,7 @@ function SideNavigationMenu() {
       
       <NavLink to="/topic/all" onClick={() => closeMenu()} className="side-nav-menu-link">Topics</NavLink>
       <NavLink to="/" onClick={() => closeMenu()} className="side-nav-menu-link">Dashboard</NavLink>
+      
       <a href="#" className="indented side-nav-menu-link">Learning Objectives</a>
       <a href="#" className="indented side-nav-menu-link">XP Points</a>
       <a href="#" className="indented side-nav-menu-link">Badges</a>
