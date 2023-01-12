@@ -5,9 +5,9 @@ import React from "react";
 import Model from "../data/model";
 
 /* components */
-import TopicCard from "./TopicCard";
-import SideNavigationMenu from "./SideNavigationMenu";
-import HamburgerNavbar from "./HamburgerNavbar";
+import TopicCard from "../components/TopicCard";
+import SideNavigationMenu from "../components/SideNavigationMenu";
+import HamburgerNavbar from "../components/HamburgerNavbar";
 
 function TopicsScreen() {
   const model = new Model(true);

@@ -14,3 +14,8 @@ import { Link } from "react-router-dom";
 export const noUnderline = {
   textDecoration: "none"
 }
+
+export const clickableCard = {
+  textDecoration: "none",
+  color: 'black'
+};

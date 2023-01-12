@@ -1,0 +1,20 @@
+.card {
+  border: 1px solid #add8e6;
+  border-radius: 5px;
+  margin: 10px;  
+  padding: 10px;
+}
+
+.child-card {
+  border: 1px solid #add8e6;
+  border-radius: 5px;
+}
+
+.card-display--flex {
+  display: flex;
+}
+
+.card--clickable:hover {
+  transform: scale(1.01);
+  border-color: #0E86D4;
+}

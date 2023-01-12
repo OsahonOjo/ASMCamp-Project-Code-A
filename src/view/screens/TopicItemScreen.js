@@ -7,14 +7,11 @@ import backIcon from "../assets/back.png";
 import forwardIcon from "../assets/next.png";
 
 /* components */
-import BackButtonNavbar from "./BackButtonNavbar";
-import LessonView from "./LessonView";
+import BackButtonNavbar from "../components/BackButtonNavbar";
+import LessonView from "../components/LessonView";
 
 /* data */
-import Model from "../data/model";
-
-/* styles */
-import "../styles/TopicItemScreen.css";
+import Model from "../../model/model.js";
 
 function TopicItemScreen() {
   const ids = useLocation().state; /* state: {topicId, topicItemId} */
@@ -50,7 +47,7 @@ function TopicItemScreen() {
       <BackButtonNavbar text={topicItem.title} to={"/topic/all"}/>
 
       {/* TODO: Implement these buttons */}
-      <div className="topic-item-nav">
+      <div style={{ height: "15px", width: "15px" }}>
         <button type="button"><img src={backIcon} alt="go to previous topic item"/></button>
         <button type="button">Topic Outline</button>
         <button type="button"><img src={forwardIcon} alt="go to next topic item"/></button>

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
 /* component */
-import App from './components/App.js';
+import App from './view/App.js';
 
 /* style */
 import './index.css';

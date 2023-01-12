@@ -7,7 +7,7 @@ import TopicCardTopicItem from "./TopicCardTopicItem";
 
 /* styles */
 import '../styles/topicCard.css';
-import { noUnderline } from "../styles/linkStyles.js";
+import { noUnderline } from "../styles/Card.js";
 
 
 /* incoming props: {topicId, topicItems} */

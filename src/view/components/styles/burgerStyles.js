@@ -7,7 +7,7 @@ export const styles = {
       top: '15px'
     },
     bmBurgerBars: {
-      background: '#373a47'
+      background: '#add8e6'
     },
     bmBurgerBarsHover: {
       background: '#a90000'
@@ -43,5 +43,8 @@ export const styles = {
     },
     bmOverlay: {
       background: 'rgba(0, 0, 0, 0.3)'
+    },
+    indented: {
+      marginLeft: '1em'
     }
   };

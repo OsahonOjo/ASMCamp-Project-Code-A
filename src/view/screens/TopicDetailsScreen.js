@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 /* components */
-import BackButtonNavbar from './BackButtonNavbar.js';
+import BackButtonNavbar from '../components/BackButtonNavbar.js';
 
 /* data */
 import Model from "../data/model.js";
