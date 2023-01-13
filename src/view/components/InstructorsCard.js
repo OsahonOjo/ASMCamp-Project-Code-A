@@ -11,6 +11,18 @@ import { commonDisplayStyles } from "./styles/commonDisplayStyles";
 function InstructorsCard({ mainIconSize, itemIconSize, instructors }) {
 
   const HEADING = "Instructors";
+  const iconAndTextListItemStyleMain = {
+		iconSize: {
+			height: mainIconSize,
+			width: mainIconSize
+		}
+	};
+  const iconAndTextListItemStyleItem = {
+		iconSize: {
+			height: itemIconSize,
+			width: itemIconSize
+		}
+	};
 
   return (
     <details open className="card">
@@ -18,8 +30,8 @@ function InstructorsCard({ mainIconSize, itemIconSize, instructors }) {
       <summary>
         <IconAndTextListItem 
           icon={headingIcon}
-          iconSize={mainIconSize}
-          text={HEADING}/>
+          text={HEADING}
+          style={iconAndTextListItemStyleMain}/>
       </summary>
 
       <div style={commonDisplayStyles.indented}>
@@ -27,8 +39,8 @@ function InstructorsCard({ mainIconSize, itemIconSize, instructors }) {
           <IconAndTextListItem 
             key={instructor.name}
             icon={instructor.icon}
-            iconSize={itemIconSize}
-            text={instructor.name}/>)}
+            text={instructor.name}
+            style={iconAndTextListItemStyleItem}/>)}
       </div>
 
     </details>

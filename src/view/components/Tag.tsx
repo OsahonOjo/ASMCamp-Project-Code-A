@@ -1,17 +1,26 @@
 import React from "react";
 
-function Tag({ text, displayBlock, backgroundColor, borderColor, borderWidth, fontSize }) {
+interface TagProps {
+  text: string;
+  displayBlock: boolean;
+  backgroundColor: string;
+  borderColor: string;
+  borderWidth: string; 
+  fontSize: string;
+};
+
+function Tag({ text, displayBlock, backgroundColor, borderColor, borderWidth, fontSize }: TagProps): JSX.Element {
   const style = {
     display: displayBlock ? 'block' : 'inline',
     backgroundColor: backgroundColor ? backgroundColor : 'transparent',
     borderStyle: 'solid', // create borders then color for declare borderStyle before borderColor 
-    borderWidth: borderWidth ? borderWidth : '4px',
+    borderWidth: borderWidth ? borderWidth : '0px',
     borderColor: borderColor ? borderColor : 'transparent', 
     fontSize: fontSize ? fontSize : '16px',
     width: 'fit-content'
   };
 
-  return <div style={style}><span>{text}</span></div>
+  return <div style={style}><span>{text}</span></div>;
 }
 
 export default Tag;

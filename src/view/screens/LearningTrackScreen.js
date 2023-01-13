@@ -8,6 +8,8 @@ import CourseListCard from "../components/CourseListCard";
 import InstructorsCard from "../components/InstructorsCard";
 import RewardsCard from "../components/RewardsCard";
 
+import { rewardTypes } from "../../model/enums";
+
 import headerIcon from '../assets/hexagons_Prosymbols_Premium.png';
 import forwardIcon from '../assets/next.png';
 import infoIcon from '../assets/polygon_riajulislam.png';
@@ -67,10 +69,22 @@ function LearningTrackScreen() {
     ],
     rewards: [
       {
-        type: "BADGE",
+        type: rewardTypes.BADGE,
         name: "Expertise",
         criteria: "Complete 'Learning Track Alpha'",
-        complete: false
+        isComplete: true
+      },
+      {
+        type: rewardTypes.BADGE,
+        name: "First Steps",
+        criteria: "Complete one topic item in 'Learning Track Alpha'",
+        isComplete: true
+      },
+      {
+        type: rewardTypes.BADGE,
+        name: "Made it Halfway",
+        criteria: "Halfway through 'Learning Track Alpha'",
+        isComplete: false
       }
     ]
   };
@@ -81,7 +95,7 @@ function LearningTrackScreen() {
 
       <LearningTrackDetailsCard 
         title={learningTrackData.title}
-        description={learningTrackData.longDescription}
+        longDescription={learningTrackData.longDescription}
         nHours={learningTrackData.nHours}
         nCourses={learningTrackData.nCourses}
         userIsEnrolled={learningTrackData.userIsEnrolled}/> 
@@ -102,7 +116,7 @@ function LearningTrackScreen() {
       <RewardsCard 
         mainIconSize={"20px"}
         itemIconSize={"20px"}
-        rewards={[]}/>
+        rewards={learningTrackData.rewards}/>
     </>
   );
 }

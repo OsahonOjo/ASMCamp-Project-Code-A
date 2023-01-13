@@ -23,6 +23,12 @@ function CourseSummaryCard({ title, shortDescription, nHours, userIsEnrolled, pe
   const NEXT_PAGE_URL = "/course";
   const N_HOURS_TEXT = `${nHours} Hours`;
   const BULLET_ICON_SIZE = "10px";
+  const iconAndTextListItemStyle = {
+		iconSize: {
+			height: BULLET_ICON_SIZE,
+			width: BULLET_ICON_SIZE
+		}
+	};
 
   return (
     <Link to={NEXT_PAGE_URL}>
@@ -57,8 +63,8 @@ function CourseSummaryCard({ title, shortDescription, nHours, userIsEnrolled, pe
 
           <IconAndTextListItem 
             icon={bulletIcon}
-            iconSize={BULLET_ICON_SIZE}
-            text={N_HOURS_TEXT}/>
+            text={N_HOURS_TEXT}
+            style={iconAndTextListItemStyle}/>
         </div>
 
       </div>

@@ -15,6 +15,12 @@ function ProgressCard({ isForLearningTrack, nInProgress, nComplete, nTotal }) {
 
 	const [state, setState] = React.useState({ open: true });
 	const BULLET_ICON_SIZE = '10px';
+	const iconAndTextListItemStyle = {
+		iconSize: {
+			height: BULLET_ICON_SIZE,
+			width: BULLET_ICON_SIZE
+		}
+	};
 	const COURSES = "Courses";
 	const TOPICS = "Topics";
 	const COURSES_COMPLETE = `${nInProgress}/${nTotal} ${isForLearningTrack ? COURSES : TOPICS} In Progress`;
@@ -39,13 +45,13 @@ function ProgressCard({ isForLearningTrack, nInProgress, nComplete, nTotal }) {
 
 				{<IconAndTextListItem 
 					icon={bulletIcon}
-					iconSize={BULLET_ICON_SIZE}
-					text={COURSES_COMPLETE}/>}
+					text={COURSES_COMPLETE}
+					style={iconAndTextListItemStyle}/>}
 
 				{<IconAndTextListItem 
 					icon={bulletIcon}
-					iconSize={BULLET_ICON_SIZE}
-					text={COURSES_IN_PROGRESS}/>}
+					text={COURSES_IN_PROGRESS}
+					style={iconAndTextListItemStyle}/>}
 
 			</div>
 

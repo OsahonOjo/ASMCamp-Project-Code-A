@@ -11,17 +11,19 @@ import './styles/card.css';
 import './styles/icon.css';
 import { commonDisplayStyles } from "./styles/commonDisplayStyles";
 
-function LearningTrackDetailsCard({ title, longDescription, nHours, nCourses, userIsEnrolled }) {
+function CourseDetailsCard({ title, learningTrackTitle, longDescription, nHours, nXP, nLessons, nQuestions, userIsEnrolled }) {
 
-  const TAG_TEXT = "ENROLLED";
+  const TAG_TEXT = `${nXP} XP`;
   const TAG_BORDER_WIDTH = "1px";
   const TAG_BORDER_COLOR = "black";
   const TAG_FONT_SIZE = "20px";
   const TAG_DISPLAY_BLOCK = true;
-  const BUTTON_TEXT_ENROLL = "Enroll";
-  const BUTTON_TEXT_RESUME = "Resume Track";
+  const BUTTON_TEXT_BEGIN = "Begin Course";
+  const BUTTON_TEXT_RESUME = "Resume Course";
   const N_HOURS_TEXT = `${nHours} Hours`;
-  const N_COURSES_TEXT = `${nCourses} Courses`;
+  const N_LESSONS_TEXT = `${nLessons} Lessons`;
+  const N_QUESTIONS_TEXT = `${nQuestions} Questions`;
+  const LEARNING_TRACK_TEXT = `Part of ${learningTrackTitle}`;
   const BULLET_ICON_SIZE = "10px";
   const iconAndTextListItemStyle = {
 		iconSize: {
@@ -40,11 +42,14 @@ function LearningTrackDetailsCard({ title, longDescription, nHours, nCourses, us
       <div>
         
         <h4>{title}</h4>
-        {userIsEnrolled ? <Tag text={TAG_TEXT} displayBlock={TAG_DISPLAY_BLOCK} borderWidth={TAG_BORDER_WIDTH} borderColor={TAG_BORDER_COLOR} fontSize={TAG_FONT_SIZE}/> : null}
+        <Tag text={TAG_TEXT} displayBlock={TAG_DISPLAY_BLOCK} borderWidth={TAG_BORDER_WIDTH} borderColor={TAG_BORDER_COLOR} fontSize={TAG_FONT_SIZE}/>
 
-        <div>
-          <p>{longDescription}</p>
-        </div>
+        <IconAndTextListItem 
+            icon={bulletIcon}
+            text={LEARNING_TRACK_TEXT}
+            style={iconAndTextListItemStyle}/>
+
+        <p>{longDescription}</p>
 
         <div style={commonDisplayStyles.displayFlexCenter}>
 
@@ -55,12 +60,17 @@ function LearningTrackDetailsCard({ title, longDescription, nHours, nCourses, us
 
           <IconAndTextListItem 
             icon={bulletIcon}
-            text={N_COURSES_TEXT}
+            text={N_LESSONS_TEXT}
+            style={iconAndTextListItemStyle}/>
+
+          <IconAndTextListItem 
+            icon={bulletIcon}
+            text={N_QUESTIONS_TEXT}
             style={iconAndTextListItemStyle}/>
 
         </div>
 
-        <button type="button">{userIsEnrolled ? BUTTON_TEXT_RESUME : BUTTON_TEXT_ENROLL}</button>
+        <button type="button">{userIsEnrolled ? BUTTON_TEXT_RESUME : BUTTON_TEXT_BEGIN}</button>
 
       </div>
 
@@ -68,12 +78,15 @@ function LearningTrackDetailsCard({ title, longDescription, nHours, nCourses, us
   );
 }
 
-LearningTrackDetailsCard.propTypes = {
+CourseDetailsCard.propTypes = {
   title: PropTypes.string,
+  learningTrackTitle: PropTypes.string,
   longDescription: PropTypes.string,
   nHours: PropTypes.number,
-  nCourses: PropTypes.number,
+  nXP: PropTypes.number,
+  nLessons: PropTypes.number,
+  nQuestions: PropTypes.number,
   userIsEnrolled: PropTypes.bool
 };
 
-export default LearningTrackDetailsCard;
+export default CourseDetailsCard;
