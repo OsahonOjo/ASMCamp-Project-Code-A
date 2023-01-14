@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import ProgressBar from "./ProgressBar";
 import IconAndTextListItem from "./IconAndTextListItem";
+import Tag from "./Tag";
 
 import mainCardIcon from '../assets/hexagons_Prosymbols_Premium.png';
 import nextPageIcon from '../assets/next.png';
@@ -22,7 +23,7 @@ import { commonDisplayStyles } from "./styles/commonDisplayStyles";
  *  comprise that topic.
  */
 
-function TopicDetailsCard({ title, shortDescription, userIsEnrolled, percentage, hasLabel, labelOnRightSide, topicItems }) {
+function TopicDetailsCard({ title, shortDescription, nXP, userIsEnrolled, percentage, hasLabel, labelOnRightSide, topicItems }) {
 
   const NEXT_PAGE_URL = "/topicitem";
   const BULLET_ICON_SIZE = "10px";
@@ -33,6 +34,11 @@ function TopicDetailsCard({ title, shortDescription, userIsEnrolled, percentage,
 		},
     displayInline: true
 	};
+  const TAG_TEXT = `${nXP} XP`;
+  const TAG_BORDER_WIDTH = "1px";
+  const TAG_BORDER_COLOR = "black";
+  const TAG_FONT_SIZE = "20px";
+  const TAG_DISPLAY_BLOCK = true;
   const SHOW_ITEMS_TEXT = "Show Topic Items";
   const HIDE_ITEMS_TEXT = "Hide Topic Items";
 
@@ -50,6 +56,7 @@ function TopicDetailsCard({ title, shortDescription, userIsEnrolled, percentage,
         <div>
 
           <h4>{title}</h4>
+          <Tag text={TAG_TEXT} displayBlock={TAG_DISPLAY_BLOCK} borderWidth={TAG_BORDER_WIDTH} borderColor={TAG_BORDER_COLOR} fontSize={TAG_FONT_SIZE}/>
 
           {userIsEnrolled ? 
               <ProgressBar 

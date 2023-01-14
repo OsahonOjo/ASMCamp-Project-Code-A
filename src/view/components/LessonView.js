@@ -1,22 +1,17 @@
-/* libraries */
-import React from "react";
+import TopicItemContentCard from "./TopicItemContentCard";
 
-function LessonView({ type, title, xp, content }) {
+function LessonView({ title, nXP, content }) {
+
+  const BUTTON_TEXT = "Continue";
 
   return (
-    <>
-      <p>Type: {type}</p>
-
-      <div>
-        <p>{title}</p>
-        <p><span>{xp}</span> XP</p>
-      </div>
-
-      <p>{content}</p>
-
-      <button type="button">Continue</button>
-      <br />
-    </>
+    <div>
+      <TopicItemContentCard 
+        title={title}
+        content={content}
+        nXP={nXP}/>
+      <button type="button">{BUTTON_TEXT}</button>
+    </div>
   );
 }
 

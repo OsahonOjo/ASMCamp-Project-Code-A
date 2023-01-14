@@ -31,6 +31,7 @@ function TopicsListCard({ topics, userIsEnrolled }) {
             key={topic.title}
             title={topic.title}
             shortDescription={topic.shortDescription}
+            nXP={topic.xp}
             userIsEnrolled={userIsEnrolled}
             percentage={topic.percentage}
             hasLabel={true}

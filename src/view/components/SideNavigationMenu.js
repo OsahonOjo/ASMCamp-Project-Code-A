@@ -15,7 +15,7 @@ function SideNavigationMenu() {
     { url: "/dashboard", itemTitle: "Student Dashboard", isIndented: false },
     { url: "/", itemTitle: "Progress and Rewards", isIndented: true }, 
     { url: "/", itemTitle: "Leaderboards", isIndented: true },
-    { url: "/", itemTitle: "Instructors Area", isIndented: false },
+    { url: "/instructorsarea", itemTitle: "Instructors Area", isIndented: false },
     { url: "/", itemTitle: "Settings", isIndented: false },
     { url: "/", itemTitle: "Contact", isIndented: false }
   ];

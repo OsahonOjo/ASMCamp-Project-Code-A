@@ -6,6 +6,7 @@ import LearningTrackScreen from './screens/LearningTrackScreen';
 import TopicItemScreen from './screens/TopicItemScreen';
 import CourseScreen from './screens/CourseScreen';
 import StudentDashboardScreen from './screens/StudentDashboardScreen';
+import InstructorsAreaScreen from './screens/InstructorsAreaScreen';
 
 /* /tracks/trackName/courseName/topicName?item=1 */
 /* let { id } = useParams(); */
@@ -21,6 +22,7 @@ function App() {
         <Route path="/course" element={<CourseScreen />} />
         <Route path="/topicitem" element={<TopicItemScreen />}/>
         <Route path="/dashboard" element={<StudentDashboardScreen />} />
+        <Route path="/instructorsarea" element={<InstructorsAreaScreen />} />
         <Route path="/" element={<Navigate replace to="/tracks" />} />
         {/* Without the 'replace' prop, the browser will keep track of the history, including the redirect. */}
 

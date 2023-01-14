@@ -27,7 +27,7 @@ function CourseScreen() {
     learningTrackTitle: "Learning Track Title", 
     longDescription: "Learning Track Long Description. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor amet consectetur adipsicing. \nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",  // 367 characters
     nHours: 4, 
-    nXP: 1200, 
+    nXP: 2700, 
     nLessons: 7, 
     nQuestions: 7, 
     userIsEnrolled: true,

@@ -12,6 +12,12 @@ export const commonDisplayStyles = {
   },
   indented: {
     marginLeft: '30px'
+  },
+  stickToBottom: {
+    position: 'fixed',
+    left: '0px',
+    right: '0px',
+    bottom: '0px'
   }
 };
 
