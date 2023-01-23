@@ -5,7 +5,7 @@ import Tag from "./Tag";
 
 import './styles/card.css';
 
-function BadgeCard({ icon, iconSize, name, criteria, isComplete }) {
+function BadgeCard({ icon, iconSize, name, criteria, isComplete, displayInline }) {
 
   const TAG_TEXT = "BADGE";
   const TAG_FONT_SIZE = "12px";
@@ -16,7 +16,7 @@ function BadgeCard({ icon, iconSize, name, criteria, isComplete }) {
   };
 
   return (
-    <div className="child-card card-display--flex">
+    <div className="child-card card-display--flex" style={{display: displayInline ? 'inline' : 'block'}}>
 
       <div>
         <img src={icon} style={style} alt="list item icon"/>

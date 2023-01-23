@@ -1,4 +1,5 @@
 import React from "react";
+import AllLearningTracksScreenViewModel from './AllLearningTracksScreenViewModel';
 
 import SideNavigationMenu from "../components/SideNavigationMenu";
 import HamburgerNavbar from "../components/HamburgerNavbar";
@@ -35,11 +36,15 @@ function AllLearningTracksScreen() {
       percentageOnRightSide: false
     }
   ];
+  const { learningTrackSummaries } = AllLearningTracksScreenViewModel();
+
+  console.log('data', learningTrackSummaries);
 
   return (
     <>
       <SideNavigationMenu />
       <HamburgerNavbar title={NAVBAR_TEXT}/>
+      {learningTrackSummaries.toString()}
       {learningTracksSummaryData.map(datum => 
         <LearningTrackSummaryCard 
           key={datum.title}

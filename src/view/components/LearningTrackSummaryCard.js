@@ -7,6 +7,7 @@ import Tag from "./Tag";
 
 import mainCardIcon from '../assets/hexagons_Prosymbols_Premium.png';
 import nextPageIcon from '../assets/next.png';
+import editIcon from '../assets/pen_alkhalifi_design.png';
 
 import './styles/card.css';
 import './styles/icon.css';
@@ -16,7 +17,7 @@ import './styles/icon.css';
   const url = "/tracks/" + slug;
 */
 
-function LearningTrackSummaryCard({ title, shortDescription, userIsEnrolled, percentage, hasLabel, labelOnRightSide }) {
+function LearningTrackSummaryCard({ title, shortDescription, userIsEnrolled, percentage, hasLabel, labelOnRightSide, editMode, to }) {
 
   const NEXT_PAGE_URL = "/track";
   const TAG_TEXT = "ENROLLED";
@@ -26,7 +27,7 @@ function LearningTrackSummaryCard({ title, shortDescription, userIsEnrolled, per
   const TAG_DISPLAY_BLOCK = true;
 
   return (
-    <Link to={NEXT_PAGE_URL}>
+    <Link to={to ? to : NEXT_PAGE_URL}>
 
       <div className="card card--clickable card-display--flex">
         
@@ -47,10 +48,17 @@ function LearningTrackSummaryCard({ title, shortDescription, userIsEnrolled, per
         </div>
 
         <div>
-          <img 
-            src={nextPageIcon} 
+          {
+          editMode ? 
+            <img 
+            src={editIcon} 
             alt="next page icon" 
-            className="icon--20px"/>
+            className="icon--20px"/> : 
+              <img 
+                src={nextPageIcon} 
+                alt="next page icon" 
+                className="icon--20px"/>
+          }
         </div>
 
       </div>

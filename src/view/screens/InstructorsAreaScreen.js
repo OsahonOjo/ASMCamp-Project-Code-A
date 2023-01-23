@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import HamburgerNavbar from "../components/HamburgerNavbar";
 import IconAndTextListItem from "../components/IconAndTextListItem";
 import SideNavigationMenu from "../components/SideNavigationMenu";
@@ -10,6 +12,7 @@ import '../components/styles/icon.css';
 
 function InstructorsAreaScreen() {
 
+  const NEXT_PAGE_URL = "/managetracks";
   const NAVBAR_TEXT = "Instructors Area";
   const menuOptions = [
     "Manage Learning Tracks",
@@ -30,9 +33,14 @@ function InstructorsAreaScreen() {
       <HamburgerNavbar title={NAVBAR_TEXT} />
       <SideNavigationMenu />
       {menuOptions.map(menuOption => 
-        <div className="card">
-          <IconAndTextListItem icon={mainIcon} text={menuOption} style={iconAndTextListItemStyle}/>  
-          <img src={nextPageIcon} alt="next page icon" className="icon--20px"/>
+        <div 
+          key={menuOption}
+          className="card">
+          <Link 
+            to={NEXT_PAGE_URL}>
+            <IconAndTextListItem icon={mainIcon} text={menuOption} style={iconAndTextListItemStyle}/>  
+            <img src={nextPageIcon} alt="next page icon" className="icon--20px"/>
+          </Link> 
         </div>)}
     </div>
   );
