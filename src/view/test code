@@ -1,0 +1,16 @@
+const obj1 = {
+  name: 'obj1'
+};
+const obj2 = {
+  name: 'obj2'
+};
+const parent = {
+  objs: [obj1, obj2]
+};
+let obj2_ref = parent.objs[1];
+
+console.log('objs before: ', obj1, obj2); // objs before:  { name: 'obj1' } { name: 'obj2' }
+console.log('parent before: ', parent); // parent before:  { objs: [ { name: 'obj1' }, { name: 'obj2' } ] }
+obj2_ref.name = "obj2_ref";
+console.log('objs after: ', obj1, obj2);  // objs after:  { name: 'obj1' } { name: 'obj2_ref' }
+console.log('parent before: ', parent);  // parent before:  { objs: [ { name: 'obj1' }, { name: 'obj2_ref' } ] }

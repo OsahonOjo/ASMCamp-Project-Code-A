@@ -18,6 +18,12 @@ export const commonDisplayStyles = {
     left: '0px',
     right: '0px',
     bottom: '0px'
+  },
+  icon24Style: {
+    fontSize: '24px', 
+    backgroundColor: '#add8e6', 
+    borderRadius: '50%', 
+    padding: '5px'
   }
 };
 

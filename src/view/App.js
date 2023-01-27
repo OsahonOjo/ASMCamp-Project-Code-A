@@ -42,7 +42,7 @@ function App() {
       
       <Routes>
         <Route path="/tracks" element={<AllLearningTracksScreen />} />
-        <Route path="/track" element={<LearningTrackScreen />} />
+        <Route path="/track" element={<LearningTrackScreen />}  />
         {/* /tracks must be placed above /track */}
         <Route path="/course" element={<CourseScreen />} />
         <Route path="/topicitem" element={<TopicItemScreen />}/>

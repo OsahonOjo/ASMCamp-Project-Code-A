@@ -1,7 +1,13 @@
-import * as apiEndpoints from './apiEndpoints';
-
 // BASE_API_URL: localhost:3001/api/v1
-const { BASE_API_URL, VIEW_PREFIX } = apiEndpoints;
+import { BASE_API_URL, VIEW_PREFIX, ALL_TRACKS } from './apiEndpoints';
+
+const options = {
+    method: "GET",
+    headers: {
+      "Accept": "application/json"
+    },
+    mode: "cors"
+};
 
 const responseFactory = (response, error) => {
     return {
@@ -11,25 +17,35 @@ const responseFactory = (response, error) => {
 };
 
 export async function getAllTracks() {
-    let path = `http://localhost:3001/api/v1/view`;  // ${BASE_API_URL}${VIEW_PREFIX}${apiEndpoints.ALL_TRACKS}
-    const options = {
-        method: "GET",
-        headers: {
-          "Accept": "application/json"
-        }
-    };
-    // using mode: "no-cors" will give you an opaque response, which doesn't seem to return data in the body.
+    let path = `${BASE_API_URL}${VIEW_PREFIX}${ALL_TRACKS}`;  // http://localhost:3001/api/v1/view/tracks
     let response = await fetch(path, options);
-    console.log('response: ', response);
-    console.log('response body: ', response.body);
-    console.log('response headers: ', response.headers);
-    console.log('response status: ', response.status);
-    let data = response.body ? await response.json() : { body: 'Error' };
-    return responseFactory(data, null);
-    // ALSO: try to connect FBInstant to app in App.js file using import statement
+    let data, error;
+    if (response.body) {
+        data = await response.json();
+        error = null;
+    }
+    else {
+        data = null;
+        error = { message: `GET request failed at ${ALL_TRACKS} endpoint.` };
+    }
+    return responseFactory(data, error);
 }
 
-/**
- * 
-tracks:1 Access to fetch at 'http://localhost:3001/api/v1/view' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
- */
+const mcq = {
+  type: "MCQ",
+  title: "MCQ Question",
+  xp: 200,
+  content: "",
+  seqNumber: 2, 
+  instructions: ["1 Lorem ipsum sit dolor amet consectetur adipsicing.", "2 Lorem ipsum sit dolor amet consectetur adipsicing.", "3 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."], 
+  hints: ["Lorem ipsum sit dolor amet consectetur adipsicing.", "Lorem ipsum sit dolor amet consectetur."], 
+  mcqOptions: ["Option A", "Option B", "Option C", "Option D"], 
+  mcqAnswerIndex: 1, 
+  cqAnswer: null, 
+  saqAnswers: [], 
+  tfqAnswer: null
+};
+
+export async function getTopicItem(topicId, seqNumber) {
+    return responseFactory({ response: mcq }, null);
+}

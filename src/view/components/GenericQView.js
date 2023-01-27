@@ -2,7 +2,7 @@ import TopicItemContentCard from "./TopicItemContentCard";
 import CollapsibleHeadingAndListCard from "./CollapsibleHeadingAndListCard";
 import MCQResponseCard from "./MCQResponseCard";
 
-function GenericQView({ title, nXP, content, instructions, options, hints, ResponseCard }) {
+function GenericQView({ title, nXP, content, instructions, hints, ResponseCard }) {
 
   const INSTRUCTIONS_HEADING = "Instructions";
   const HINTS_HEADING = "Hints";

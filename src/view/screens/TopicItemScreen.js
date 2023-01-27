@@ -23,6 +23,7 @@ import SAQView from "../components/SAQView";
 import CQView from "../components/CQView";
 import { GeneratedIdentifierFlags } from "typescript";
 import GenericQView from "../components/GenericQView";
+import TopicItemScreenViewModel from "./TopicItemScreenViewModel";
 
 // const ids = useLocation().state; /* state: {topicId, topicItemId} */
 
@@ -121,6 +122,12 @@ function TopicItemScreen() {
     }
   };
 
+  const { topicItemData, getTopicItemData, handleTopicItemSubmit, handleMCQSubmit } = TopicItemScreenViewModel();
+  getTopicItemData();
+  // console.log('mcq topic item data: ', topicItemData);
+
+
+
   return (
     <>
       <TopicItemScreenNavbar 
@@ -141,7 +148,8 @@ function TopicItemScreen() {
       <LessonView 
         title={topicItems.lesson1.title} 
         nXP={topicItems.lesson1.xp} 
-        content={topicItems.lesson1.content}/>
+        content={topicItems.lesson1.content}
+        onSubmit={() => { handleTopicItemSubmit(topicItems.lesson1.type, null); }}/>
 
       <hr />
 
@@ -151,7 +159,10 @@ function TopicItemScreen() {
         content={topicItems.mcq.content}
         instructions={topicItems.mcq.instructions}
         hints={topicItems.mcq.hints}
-        ResponseCard={<MCQResponseCard options={topicItems.mcq.mcqOptions}/>}/>
+        ResponseCard={
+          <MCQResponseCard 
+            options={topicItems.mcq.mcqOptions}
+            handleSubmit={handleMCQSubmit} />} />
 
       <hr />
 

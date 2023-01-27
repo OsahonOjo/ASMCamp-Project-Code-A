@@ -1,0 +1,51 @@
+/**
+ *  @description 
+ *  Question: 
+ *  Let's say I have multiple objects of TopicProgress inside CourseProgress.
+ *  If I save a ref to one of those TopicProgress's and change it, will that 
+ *  change be reflected in CourseProgress? 
+ * 
+ *  Let's say there are five TopicProgress objects: TopicProgress 1-5
+ *  and one CourseProgress.
+ */
+
+function topicItemProgressFactory(id, xp, seqNumber) {
+  return { id, xp, seqNumber };
+}
+
+class TopicProgress {
+  constructor(id, seqNumber) {
+    this.id = id;
+    this.seqNumber = seqNumber;
+    this.nTopicItems = 5;
+    this.topicItemsCompleted = Array.from({length: this.nTopicItems});
+    this.topicItemsCompleted.fill({});
+    this.topicItemsNotCompleted = [
+      topicItemProgressFactory(1, 100, 1), topicItemProgressFactory(2, 100, 2),
+      topicItemProgressFactory(3, 100, 3), topicItemProgressFactory(4, 100, 4),
+      topicItemProgressFactory(5, 100, 5)
+    ];
+    this.nextTopicItemIndex = 0;    
+    this.totalTopicXP = 500;
+    this.totalXPEarned = 0;
+    this.setItemComplete = this.setItemComplete.bind(this);
+  }
+
+  setItemComplete(seqNumber) {
+    let index = seqNumber - 1;
+    completedItem = this.topicItemsNotCompleted[index];
+    this.topicItemsCompleted[index] = Object.assign({}, completedItem);
+    this.topicItemsNotCompleted[index] = {};
+  }
+}
+
+class CourseProgress {
+  constructor() {
+    this.topicsCompleted = [];
+    this.topicNotCompleted = [];
+  }
+}
+
+let userData = {
+
+};

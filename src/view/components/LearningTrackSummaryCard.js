@@ -4,20 +4,17 @@ import { Link } from 'react-router-dom';
 
 import ProgressBar from "./ProgressBar";
 import Tag from "./Tag";
+import CollapsibleParagraph from './CollapsibleParagraph';
 
-import mainCardIcon from '../assets/hexagons_Prosymbols_Premium.png';
 import nextPageIcon from '../assets/next.png';
 import editIcon from '../assets/pen_alkhalifi_design.png';
 
 import './styles/card.css';
 import './styles/icon.css';
+import { commonDisplayStyles } from "./styles/commonDisplayStyles";
+import './styles/common-styles.css';
 
-/*
-  let slug = title.toLowerCase().replace(/ /g, "-");
-  const url = "/tracks/" + slug;
-*/
-
-function LearningTrackSummaryCard({ title, shortDescription, userIsEnrolled, percentage, hasLabel, labelOnRightSide, editMode, to }) {
+function LearningTrackSummaryCard({ trackId, title, shortDescription, userIsEnrolled, percentage, hasLabel, labelOnRightSide, editMode, to }) {
 
   const NEXT_PAGE_URL = "/track";
   const TAG_TEXT = "ENROLLED";
@@ -27,43 +24,49 @@ function LearningTrackSummaryCard({ title, shortDescription, userIsEnrolled, per
   const TAG_DISPLAY_BLOCK = true;
 
   return (
-    <Link to={to ? to : NEXT_PAGE_URL}>
-
-      <div className="card card--clickable card-display--flex">
-        
-        <div>
-          <img 
-            src={mainCardIcon} 
-            alt="main card icon" 
-            className="icon--30px"/>
-        </div>
-
-        <div>
-          <h4>
-            {title}
-            {userIsEnrolled ? (<Tag text={TAG_TEXT} displayBlock={TAG_DISPLAY_BLOCK} borderWidth={TAG_BORDER_WIDTH} borderColor={TAG_BORDER_COLOR} fontSize={TAG_FONT_SIZE}/>) : null}
-          </h4>
-          {userIsEnrolled ? <ProgressBar percentage={percentage} hasLabel={hasLabel} labelOnRightSide={labelOnRightSide}/> : null}
-          <p>{shortDescription}</p>
-        </div>
-
-        <div>
-          {
-          editMode ? 
-            <img 
-            src={editIcon} 
-            alt="next page icon" 
-            className="icon--20px"/> : 
-              <img 
-                src={nextPageIcon} 
-                alt="next page icon" 
-                className="icon--20px"/>
-          }
-        </div>
-
+    <div className="card card-display--flex">
+      
+      <div>
+        <i className="fa fa-road" style={commonDisplayStyles.icon24Style}></i>
       </div>
 
-    </Link>
+      <div>
+        <h4>
+          <Link 
+            to={to ? to : NEXT_PAGE_URL}
+            state={{
+              from: to ? to : NEXT_PAGE_URL,
+              trackId: trackId 
+            }} >
+            {title}
+          </Link>
+            {userIsEnrolled ? (<Tag text={TAG_TEXT} displayBlock={TAG_DISPLAY_BLOCK} borderWidth={TAG_BORDER_WIDTH} borderColor={TAG_BORDER_COLOR} fontSize={TAG_FONT_SIZE}/>) : null}
+        </h4>
+        {userIsEnrolled ? <ProgressBar percentage={percentage} hasLabel={hasLabel} labelOnRightSide={labelOnRightSide}/> : null}
+        <CollapsibleParagraph text={shortDescription} />
+      </div>
+
+      <Link 
+        to={to ? to : NEXT_PAGE_URL}
+        state={{
+          from: to ? to : NEXT_PAGE_URL,
+          trackId: trackId 
+        }} >
+        <div>
+          {
+            editMode 
+            ? <img 
+                src={editIcon} 
+                alt="next page icon" 
+                className="icon--20px"/> 
+            : <span className="material-symbols-outlined">
+                navigate_next
+              </span>
+          }
+        </div>
+      </Link>
+
+    </div>
   );
 }
 
