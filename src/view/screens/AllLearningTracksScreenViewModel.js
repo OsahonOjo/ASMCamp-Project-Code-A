@@ -5,14 +5,14 @@ export default function AllLearningTracksScreenViewModel() {
 
     const [learningTrackSummaries, setState] = React.useState([]);
 
-    function summaryFactory(id, title, shortDescription) {
-        return { id, title, shortDescription };
+    function summaryFactory(id, title, shortDescription, longDescription, nCourses) {
+        return { id, title, shortDescription, longDescription, nCourses };
     }
 
     function summarizeLearningTrackEntities(entities) {
         const summaries = [];
         entities.forEach(entity => 
-            summaries.push(summaryFactory(entity._id, entity.title, entity.shortDescription)));
+            summaries.push(summaryFactory(entity._id, entity.title, entity.shortDescription, entity.longDescription, entity.courseIds.length)));
         return summaries;
     }
 

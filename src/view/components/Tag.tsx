@@ -2,11 +2,11 @@ import React from "react";
 
 interface TagProps {
   text: string;
-  displayBlock: boolean;
-  backgroundColor: string;
-  borderColor: string;
-  borderWidth: string; 
-  fontSize: string;
+  displayBlock?: boolean;
+  backgroundColor?: string;
+  borderColor?: string;
+  borderWidth?: string; 
+  fontSize?: string;
 };
 
 function Tag({ text, displayBlock, backgroundColor, borderColor, borderWidth, fontSize }: TagProps): JSX.Element {

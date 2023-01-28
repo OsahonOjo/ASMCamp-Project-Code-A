@@ -6,7 +6,7 @@ interface CollapsibleParagraphProps {
   paragraphStyle?: any
 };
 
-export default function CollapsibleParagraph({ text, limit,   paragraphStyle }: CollapsibleParagraphProps): JSX.Element {
+export default function CollapsibleParagraph({ text, limit, paragraphStyle }: CollapsibleParagraphProps): JSX.Element {
 
   const DEFAULT_LIMIT = 80;
   const [isCollapsed, setIsCollapsed] = React.useState(true);
@@ -18,7 +18,7 @@ export default function CollapsibleParagraph({ text, limit,   paragraphStyle }: 
     fontSize: '18px'
   };
 
-  let abbreviatedText = text.slice(0, limit ? limit : DEFAULT_LIMIT) + "...";
+  let abbreviatedText = text ? text.slice(0, limit ? limit : DEFAULT_LIMIT) + "..." : "";  // throws TypeError if text prop is empty
   let displayText = isCollapsed ? abbreviatedText : text;
   let buttonText = isCollapsed ? "Show more" : "Hide text";
   

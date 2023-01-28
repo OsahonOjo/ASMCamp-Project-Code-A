@@ -8,17 +8,18 @@ import bulletIcon from "../assets/cell_Freepik.png";
 
 import './styles/icon.css';
 import './styles/card.css';
+import { commonDisplayStyles } from "./styles/commonDisplayStyles";
 
 function CourseListCard({ courses }) {
 
   return (
     <>
-      <details open className="card card--clickable">
+      <details open className="card">
 
         <summary>
-          <img src={mainCardIcon} alt="main card icon" className="icon--30px"/>
-					<span>Courses</span>
-					<img src={bulletIcon} alt="main card icon" className="icon--10px"/>
+          <span className="material-symbols-outlined" style={commonDisplayStyles.icon24Style}>collections_bookmark</span>
+          <span>Courses</span>
+          <img src={bulletIcon} alt="main card icon" className="icon--10px"/>
         </summary>
 
         {courses.map(course => 

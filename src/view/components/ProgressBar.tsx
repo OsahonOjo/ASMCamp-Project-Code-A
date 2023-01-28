@@ -1,7 +1,13 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-function ProgressBar({ percentage, hasLabel, labelOnRightSide }) {
+interface ProgressBarProps {
+  percentage: number,
+  hasLabel: boolean,
+  labelOnRightSide: boolean
+};
+
+export default function ProgressBar({ percentage, hasLabel, labelOnRightSide }: ProgressBarProps): JSX.Element {
 
   const MAX = 100;
   percentage = percentage > MAX ? MAX : percentage;
@@ -23,11 +29,3 @@ function ProgressBar({ percentage, hasLabel, labelOnRightSide }) {
     );
   }
 }
-
-ProgressBar.propTypes = {
-  percentage: PropTypes.number,
-  hasLabel: PropTypes.bool,
-  labelOnRightSide: PropTypes.bool
-};
-
-export default ProgressBar;

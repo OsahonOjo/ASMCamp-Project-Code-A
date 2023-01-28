@@ -41,8 +41,8 @@ function App() {
       {console.log('window.FBInstant: ', window.FBInstant)}
       
       <Routes>
+        <Route path="/track/:trackId" element={<LearningTrackScreen />}  />
         <Route path="/tracks" element={<AllLearningTracksScreen />} />
-        <Route path="/track" element={<LearningTrackScreen />}  />
         {/* /tracks must be placed above /track */}
         <Route path="/course" element={<CourseScreen />} />
         <Route path="/topicitem" element={<TopicItemScreen />}/>

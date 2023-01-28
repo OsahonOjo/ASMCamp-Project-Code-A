@@ -32,7 +32,7 @@ function ProgressCard({ isForLearningTrack, nInProgress, nComplete, nTotal }) {
 		<details open={state.open} className="card card--clicakble">
 
 			<summary>
-				<img src={mainCardIcon} alt="main card icon" className="icon--30px"/>
+				<i className="fa fa-tachometer" style={commonDisplayStyles.icon24Style}></i>
 				<span>Progress</span>
 				<img src={bulletIcon} alt="main card icon" className="icon--10px"/>
 			</summary>

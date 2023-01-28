@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import ProgressBar from "./ProgressBar";
 import IconAndTextListItem from "./IconAndTextListItem";
+import CollapsibleParagraph from "./CollapsibleParagraph";
 
 import mainCardIcon from '../assets/hexagons_Prosymbols_Premium.png';
 import nextPageIcon from '../assets/next.png';
@@ -23,6 +24,7 @@ function CourseSummaryCard({ title, shortDescription, nHours, userIsEnrolled, pe
   const NEXT_PAGE_URL = "/course";
   const N_HOURS_TEXT = `${nHours} Hours`;
   const BULLET_ICON_SIZE = "10px";
+  const SHORT_DESC_CHAR_LIMIT = 80;
   const iconAndTextListItemStyle = {
 		iconSize: {
 			height: BULLET_ICON_SIZE,
@@ -31,45 +33,47 @@ function CourseSummaryCard({ title, shortDescription, nHours, userIsEnrolled, pe
 	};
 
   return (
-    <Link to={NEXT_PAGE_URL}>
+    <div>
 
-      <hr />
+        <hr />
 
-      <div className="card--clickable card-display--flex">
-      
-        <div>
-          <img 
-              src={mainCardIcon} 
-              alt="main card icon" 
-              className="icon--30px"/>
-        </div>
-
-        <div>
+        <div className="card--clickable card-display--flex">
+        
           <div>
-            <h4 style={commonDisplayStyles.inline}>{title}</h4>
-            <img 
-              src={nextPageIcon} 
-              alt="next page icon" 
-              className="icon--20px"/>
+            <span className="material-symbols-outlined" style={commonDisplayStyles.icon24Style}>collections_bookmark</span>
           </div>
 
-          {userIsEnrolled ? 
-            <ProgressBar 
-              percentage={percentage}
-              hasLabel={hasLabel}
-              labelOnRightSide={labelOnRightSide}/> : null }
+          <div>
+            <div>
+              <Link to={NEXT_PAGE_URL}>
+                <h4 style={commonDisplayStyles.inline}>{title}</h4>
+              </Link>
+            </div>
 
-          <p>{shortDescription}</p>
+            {userIsEnrolled ? 
+              <ProgressBar 
+                percentage={percentage}
+                hasLabel={hasLabel}
+                labelOnRightSide={labelOnRightSide}/> : null }
 
-          <IconAndTextListItem 
-            icon={bulletIcon}
-            text={N_HOURS_TEXT}
-            style={iconAndTextListItemStyle}/>
+            <CollapsibleParagraph text={shortDescription} limit={SHORT_DESC_CHAR_LIMIT} />
+
+            <Link to={NEXT_PAGE_URL}>
+              <IconAndTextListItem 
+                  icon={bulletIcon}
+                  text={N_HOURS_TEXT}
+                  style={iconAndTextListItemStyle}/>
+            </Link>
+
+          </div>
+
+          <div>
+            <span className="material-symbols-outlined">navigate_next</span>
+          </div>
+
         </div>
 
-      </div>
-
-    </Link>
+    </div>
   );
 }
 

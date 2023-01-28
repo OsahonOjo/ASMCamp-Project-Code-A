@@ -1,5 +1,6 @@
 import React from "react";
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, useParams, Link } from 'react-router-dom';
+import LearningTrackScreenViewModel from "./LearningTrackScreenViewModel";
 
 import BackButtonNavbar from "../components/BackButtonNavbar";
 import LearningTrackDetailsCard from "../components/LearningTrackDetailsCard";
@@ -21,6 +22,7 @@ export default function LearningTrackScreen() {
 
   const NAVBAR_TEXT = "Learning Track";
   const PREVIOUS_PAGE_URL = "/tracks";
+  const HOURS_PER_COURSE = 4;
   const instructorsData = [
     {
       icon: headerIcon,
@@ -51,59 +53,36 @@ export default function LearningTrackScreen() {
       isComplete: false
     }
   ];
-  
-  const location = useLocation();
-  const { trackId } = location.state;
-  const trackIdRef = React.useRef(trackId);
 
-  // 
-
-  const [trackDetails, setTrackDetails] = React.useState({
-    title: "Learning Track Title",
-    longDescription: "Learning Track Long Description. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor amet consectetur adipsicing. \nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",  // 367 characters
-    nHours: 16,
-    nCourses: 4
-  });
-  const [courseSummaries, setCourseSummaries] = React.useState([
-    {
-      title: "Course Title",
-      shortDescription: "Course Short Description. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor amet conse",  // 160 characters
-      nHours: 4,
-      userIsEnrolled: true,
-      percentage: 42
-    },
-    {
-      title: "Course Title",
-      shortDescription: "Course Short Description. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor amet conse",  // 160 characters
-      nHours: 4,
-      userIsEnrolled: true,
-      percentage: 12
-    },
-    {
-      title: "Course Title",
-      shortDescription: "Course Short Description. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor amet conse",  // 160 characters
-      nHours: 4,
-      userIsEnrolled: false,
-      percentage: 98
-    },
-    {
-      title: "Course Title",
-      shortDescription: "Course Short Description. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor amet conse",  // 160 characters
-      nHours: 4,
-      userIsEnrolled: true,
-      percentage: 52
-    }
-  ]);
+  const { trackId } = useParams();
+  const { trackDetails, courseSummaries, getTrackDetailsData, getCourseSummariesData } = LearningTrackScreenViewModel();
   
+  // if trackDetailsState is empty, CollapsibleParagraph throws a TypeError
+  const [trackDetailsState, setTrackDetailsState] = React.useState({});
+  const [courseSummariesState, setCourseSummariesState] = React.useState([]);
+
+  React.useEffect(() => {
+    getTrackDetailsData(trackId);
+    getCourseSummariesData(trackId);
+  }, []);
+
+  React.useEffect(() => {
+    trackDetails ? setTrackDetailsState(trackDetails) : setTrackDetailsState({});
+    courseSummaries ? setCourseSummariesState(courseSummaries) : setCourseSummariesState([])
+  }, [trackDetails, courseSummaries]);
+
+  console.log('courseSummaries: ', courseSummaries);
+  console.log('courseSummariesState: ', courseSummariesState);
+
   return (
     <>
       <BackButtonNavbar title={NAVBAR_TEXT} to={PREVIOUS_PAGE_URL}/> 
 
       <LearningTrackDetailsCard 
-        title={trackDetails.title}
-        longDescription={trackDetails.longDescription}
-        nHours={trackDetails.nHours}
-        nCourses={trackDetails.nCourses} /> 
+        title={trackDetailsState.title}
+        longDescription={trackDetailsState.longDescription}
+        nHours={trackDetailsState.nHours}
+        nCourses={trackDetailsState.nCourses} /> 
 
       <ProgressCard 
         isForLearningTrack={true}
@@ -111,7 +90,7 @@ export default function LearningTrackScreen() {
         nComplete={2}
         nTotal={4}/>    
 
-      <CourseListCard courses={courseSummaries}/>
+      <CourseListCard courses={courseSummariesState}/>
 
       <InstructorsCard 
         mainIconSize={"20px"}
@@ -126,7 +105,54 @@ export default function LearningTrackScreen() {
   );
 }
 
-/*
+/*  
+    details:
+    {
+      title: "Learning Track Title",
+      longDescription: "Learning Track Long Description. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor amet consectetur adipsicing. \nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",  // 367 characters
+      nHours: 16,
+      nCourses: 4
+    }
+
+
+    courses
+    [
+      {
+        title: "Course Title",
+        shortDescription: "Course Short Description. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor amet conse",  // 160 characters
+        nHours: 4,
+        userIsEnrolled: true,
+        percentage: 42
+      },
+      {
+        title: "Course Title",
+        shortDescription: "Course Short Description. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor amet conse",  // 160 characters
+        nHours: 4,
+        userIsEnrolled: true,
+        percentage: 12
+      },
+      {
+        title: "Course Title",
+        shortDescription: "Course Short Description. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor amet conse",  // 160 characters
+        nHours: 4,
+        userIsEnrolled: false,
+        percentage: 98
+      },
+      {
+        title: "Course Title",
+        shortDescription: "Course Short Description. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor amet conse",  // 160 characters
+        nHours: 4,
+        userIsEnrolled: true,
+        percentage: 52
+      }
+    ]
+
+
+    // const location = useLocation();
+    // const { payload } = location.state;
+    // payload.nHours = payload.nCourses * HOURS_PER_COURSE;
+
+
     const learningTrackData = {
       title: "Learning Track Title",
       longDescription: "Learning Track Long Description. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor amet consectetur adipsicing. \nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",  // 367 characters

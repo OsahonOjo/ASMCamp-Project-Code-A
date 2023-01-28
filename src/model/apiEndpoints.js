@@ -2,8 +2,11 @@ const PORT = 3001;
 const BASE_URL = `http://localhost:${PORT}`;
 const API_PREFIX = "/api/v1";
 
-export const BASE_API_URL = `${BASE_URL}${API_PREFIX}`;
+const BASE_API_URL = `${BASE_URL}${API_PREFIX}`;
+const VIEW_PREFIX = "/view";
+const ALL_TRACKS = "/tracks";
+const TRACK = "/track";
 
-export const VIEW_PREFIX = "/view";
-
-export const ALL_TRACKS = "/tracks";
+export {
+    BASE_API_URL, VIEW_PREFIX, ALL_TRACKS, TRACK
+};

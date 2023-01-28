@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Tag from "./Tag";
 import IconAndTextListItem from "./IconAndTextListItem";
+import CollapsibleParagraph from "./CollapsibleParagraph";
 
 import mainCardIcon from '../assets/hexagons_Prosymbols_Premium.png';
 import bulletIcon from "../assets/cell_Freepik.png";
@@ -13,6 +14,7 @@ import { commonDisplayStyles } from "./styles/commonDisplayStyles";
 
 function LearningTrackDetailsCard({ title, longDescription, nHours, nCourses, userIsEnrolled }) {
 
+  const LONG_DESC_CHAR_LIMIT = 300;
   const TAG_TEXT = "ENROLLED";
   const TAG_BORDER_WIDTH = "1px";
   const TAG_BORDER_COLOR = "black";
@@ -34,7 +36,7 @@ function LearningTrackDetailsCard({ title, longDescription, nHours, nCourses, us
     <div className="card" style={commonDisplayStyles.displayFlex}>
 
       <div>
-        <img src={mainCardIcon} alt="main card icon" className="icon--30px"/>
+        <i className="fa fa-road" style={commonDisplayStyles.icon24Style}></i>
       </div>
 
       <div>
@@ -42,9 +44,7 @@ function LearningTrackDetailsCard({ title, longDescription, nHours, nCourses, us
         <h4>{title}</h4>
         {userIsEnrolled ? <Tag text={TAG_TEXT} displayBlock={TAG_DISPLAY_BLOCK} borderWidth={TAG_BORDER_WIDTH} borderColor={TAG_BORDER_COLOR} fontSize={TAG_FONT_SIZE}/> : null}
 
-        <div>
-          <p>{longDescription}</p>
-        </div>
+        <CollapsibleParagraph text={longDescription} limit={LONG_DESC_CHAR_LIMIT} />
 
         <div style={commonDisplayStyles.displayFlexCenter}>
 
