@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import ProgressBar from "./ProgressBar";
 import IconAndTextListItem from "./IconAndTextListItem";
@@ -19,9 +19,11 @@ import { commonDisplayStyles } from "./styles/commonDisplayStyles";
   const url = "/tracks/" + slug;
 */
 
-function CourseSummaryCard({ title, shortDescription, nHours, userIsEnrolled, percentage, hasLabel, labelOnRightSide }) {
+function CourseSummaryCard({ courseId, learningTrackId, title, shortDescription, nHours, userIsEnrolled, percentage, hasLabel, labelOnRightSide }) {
 
-  const NEXT_PAGE_URL = "/course";
+  const location = useLocation();
+  const NEXT_PAGE_URL = `/course/${courseId}`;
+  // const NEXT_PAGE_URL = location.pathname + NEXT_PAGE_URL_SUFFIX;
   const N_HOURS_TEXT = `${nHours} Hours`;
   const BULLET_ICON_SIZE = "10px";
   const SHORT_DESC_CHAR_LIMIT = 80;
@@ -31,6 +33,8 @@ function CourseSummaryCard({ title, shortDescription, nHours, userIsEnrolled, pe
 			width: BULLET_ICON_SIZE
 		}
 	};
+  
+
 
   return (
     <div>
@@ -45,8 +49,10 @@ function CourseSummaryCard({ title, shortDescription, nHours, userIsEnrolled, pe
 
           <div>
             <div>
-              <Link to={NEXT_PAGE_URL}>
-                <h4 style={commonDisplayStyles.inline}>{title}</h4>
+              <Link 
+                to={NEXT_PAGE_URL}
+                state={{ from: location.pathname, learningTrackId: learningTrackId }}>
+                  <h4 style={commonDisplayStyles.inline}>{title}</h4>
               </Link>
             </div>
 
@@ -58,18 +64,20 @@ function CourseSummaryCard({ title, shortDescription, nHours, userIsEnrolled, pe
 
             <CollapsibleParagraph text={shortDescription} limit={SHORT_DESC_CHAR_LIMIT} />
 
-            <Link to={NEXT_PAGE_URL}>
-              <IconAndTextListItem 
+            <IconAndTextListItem 
                   icon={bulletIcon}
                   text={N_HOURS_TEXT}
                   style={iconAndTextListItemStyle}/>
-            </Link>
 
           </div>
 
-          <div>
-            <span className="material-symbols-outlined">navigate_next</span>
-          </div>
+          <Link 
+            to={NEXT_PAGE_URL}
+            state={{ from: location.pathname, learningTrackId: learningTrackId }}>
+              <div>
+                <span className="material-symbols-outlined">navigate_next</span>
+              </div>
+          </Link>
 
         </div>
 

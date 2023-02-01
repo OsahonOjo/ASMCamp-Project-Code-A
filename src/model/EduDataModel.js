@@ -26,7 +26,10 @@ export async function getAllTracks() {
     }
     else {
         data = null;
-        error = { message: `GET request failed at ${ALL_TRACKS} endpoint.` };
+        error = { 
+            message: `GET request failed at ${ALL_TRACKS} endpoint.`,
+            response
+        };
     }
     return responseFactory(data, error);
 }
@@ -42,7 +45,10 @@ export async function getTrack(trackId) {
     }
     else {
         data = null;
-        error = { message: `GET request failed at ${TRACK}/${trackId} endpoint.` };
+        error = { 
+            message: `GET request failed at ${TRACK}/${trackId} endpoint.`,
+            response
+        };
     }
     return responseFactory(data, error);
 }
@@ -57,26 +63,70 @@ export async function getAllCoursesInTrack(trackId) {
     }
     else {
         data = null;
-        error = { message: `GET request failed at ${TRACK}/${trackId}/courses endpoint.` };
+        error = { 
+            message: `GET request failed at ${TRACK}/${trackId}/courses endpoint.`,
+            response
+        };
     }
     return responseFactory(data, error);
 }
 
-const mcq = {
-  type: "MCQ",
-  title: "MCQ Question",
-  xp: 200,
-  content: "",
-  seqNumber: 2, 
-  instructions: ["1 Lorem ipsum sit dolor amet consectetur adipsicing.", "2 Lorem ipsum sit dolor amet consectetur adipsicing.", "3 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."], 
-  hints: ["Lorem ipsum sit dolor amet consectetur adipsicing.", "Lorem ipsum sit dolor amet consectetur."], 
-  mcqOptions: ["Option A", "Option B", "Option C", "Option D"], 
-  mcqAnswerIndex: 1, 
-  cqAnswer: null, 
-  saqAnswers: [], 
-  tfqAnswer: null
-};
+export async function getCourse(courseId) {
+    let path = `${BASE_API_URL}${VIEW_PREFIX}/course/${courseId}`;
+    let response = await fetch(path, GET_REQUEST_OPTIONS);
+    let data = null, error = null;
+    if (response.body) 
+        data = await response.json();
+    else 
+        error = { 
+            message: `GET request failed at /course/${courseId} endpoint.`,
+            response
+        };
+    return responseFactory(data, error);
+}
+
+export async function getAllTopicsInCourse(courseId) {
+    let path = `${BASE_API_URL}${VIEW_PREFIX}/course/${courseId}/topics`;
+    let response = await fetch(path, GET_REQUEST_OPTIONS);
+    let data = null, error = null;
+    if (response.body)
+        data = await response.json();
+    else
+        error = { 
+            message: `GET request failed at /course/${courseId}/topics endpoint.`,
+            response
+        };
+    return responseFactory(data, error);
+}
+
+export async function getAllTopicItemsInCourse(courseId) {
+    let path = `${BASE_API_URL}${VIEW_PREFIX}/course/${courseId}/items`;
+    let response = await fetch(path, GET_REQUEST_OPTIONS);
+    let data = null, error = null;
+    if (response.body) 
+        data = await response.json();
+    else
+        error = { 
+            message: `GET request failed at /course/${courseId}/items endpoint.`,
+            response
+        };
+    return responseFactory(data, error);
+}
+
+// getTopic(topicId)
+// getAllTopicItemsInTopic(topicId)
 
 export async function getTopicItem(topicId, seqNumber) {
-    return responseFactory({ response: mcq }, null);
+    let path = `${BASE_API_URL}${VIEW_PREFIX}/topic/${topicId}/item/${seqNumber}`;
+    let response = await fetch(path, GET_REQUEST_OPTIONS);
+    let data = null, error = null;
+    if (response.body)
+        data = await response.json();
+    else   
+        error = { 
+            message: `GET request failed at /topic/${topicId}/item/${seqNumber} endpoint.`,
+            response
+        };
+    // NOTE: ['learningTrackId'], ['courseId'], ['trackId']
+    return responseFactory(data, error);
 }

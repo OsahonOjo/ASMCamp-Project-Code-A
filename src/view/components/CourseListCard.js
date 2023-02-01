@@ -24,7 +24,9 @@ function CourseListCard({ courses }) {
 
         {courses.map(course => 
           <CourseSummaryCard 
-            key={course.percentage}
+            key={course.id}
+            courseId={course.id}
+            learningTrackId={course.learningTrackId}
             title={course.title}
             shortDescription={course.shortDescription}
             nHours={course.nHours}

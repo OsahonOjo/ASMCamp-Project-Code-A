@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import ProgressBar from "./ProgressBar";
 import Tag from "./Tag";
@@ -41,6 +41,7 @@ export default function LearningTrackSummaryCard({ trackDetails, userIsEnrolled,
   const TAG_DISPLAY_BLOCK = true;
   const nextPageIcon = '../assets/next.png';
   const editIcon = '../assets/pen_alkhalifi_design.png';
+  const location = useLocation();
 
   return (
     <div className="card card-display--flex">
@@ -53,7 +54,7 @@ export default function LearningTrackSummaryCard({ trackDetails, userIsEnrolled,
         <h4>
           <Link 
             to={to}
-            state={{ from: to, payload: trackDetails }}>
+            state={{ from: location.pathname, payload: trackDetails }}>
               {trackDetails.title}
           </Link>
             {userIsEnrolled ? (<Tag text={TAG_TEXT} displayBlock={TAG_DISPLAY_BLOCK} borderWidth={TAG_BORDER_WIDTH} borderColor={TAG_BORDER_COLOR} fontSize={TAG_FONT_SIZE}/>) : null}
@@ -64,7 +65,7 @@ export default function LearningTrackSummaryCard({ trackDetails, userIsEnrolled,
 
       <Link 
         to={to}
-        state={{ from: to, payload: trackDetails }}>
+        state={{ from: location.pathname, payload: trackDetails }}>
           <div>
             {
               editMode 

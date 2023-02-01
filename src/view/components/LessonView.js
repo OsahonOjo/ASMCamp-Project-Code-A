@@ -1,6 +1,6 @@
 import TopicItemContentCard from "./TopicItemContentCard";
 
-function LessonView({ title, nXP, content }) {
+function LessonView({ topicItemId, title, nXP, content, handleSubmit }) {
 
   const BUTTON_TEXT = "Continue";
 
@@ -10,7 +10,7 @@ function LessonView({ title, nXP, content }) {
         title={title}
         content={content}
         nXP={nXP}/>
-      <button type="button">{BUTTON_TEXT}</button>
+      <button type="button" onClick={ () => { handleSubmit(topicItemId) } }>{BUTTON_TEXT}</button>
     </div>
   );
 }

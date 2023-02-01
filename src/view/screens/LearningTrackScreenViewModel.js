@@ -22,15 +22,14 @@ export default function LearningTrackScreenViewModel() {
     setTrackDetails(details);
   }
 
-  function courseSummaryFactory(id, title, shortDescription) {
-    return { id, title, shortDescription, nHours: 4 };
+  function courseSummaryFactory(id, learningTrackId, title, shortDescription) {
+    return { id, learningTrackId, title, shortDescription, nHours: HOURS_PER_COURSE };
   }
 
   function summarizeCourseEntities(entities) {
     const summaries = [];
     entities.forEach(entity => {
-      console.log('entity: ', entity);
-      summaries.push(courseSummaryFactory(entity._id, entity.title. entity.shortDescription))
+      summaries.push(courseSummaryFactory(entity._id, entity.learningTrackId, entity.title, entity.shortDescription));
     });
     return summaries;
   }
@@ -64,9 +63,7 @@ export default function LearningTrackScreenViewModel() {
         return;
     }
     // NOTE: here, learningTrackId is [String] for some reason
-    console.log('inside viewmodel: summaries response: ', response);
     let summaries = summarizeCourseEntities(response.response);
-    console.log('inside viewmodel: summaries: ', summaries);
     setCourseSummaries(summaries);
   }
 

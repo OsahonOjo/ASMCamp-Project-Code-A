@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 
 import ProgressBar from "./ProgressBar";
 import IconAndTextListItem from "./IconAndTextListItem";
 import Tag from "./Tag";
+import CollapsibleParagraph from "./CollapsibleParagraph";
 
 import mainCardIcon from '../assets/hexagons_Prosymbols_Premium.png';
 import nextPageIcon from '../assets/next.png';
@@ -41,6 +42,7 @@ function TopicDetailsCard({ title, shortDescription, nXP, userIsEnrolled, percen
   const TAG_DISPLAY_BLOCK = true;
   const SHOW_ITEMS_TEXT = "Show Topic Items";
   const HIDE_ITEMS_TEXT = "Hide Topic Items";
+  const location = useLocation();
 
   return (
 
@@ -64,7 +66,7 @@ function TopicDetailsCard({ title, shortDescription, nXP, userIsEnrolled, percen
                 hasLabel={hasLabel}
                 labelOnRightSide={labelOnRightSide}/> : null }
 
-          <p>{shortDescription}</p>
+          <CollapsibleParagraph text={shortDescription} />
 
           <details>
             <summary>
@@ -73,9 +75,10 @@ function TopicDetailsCard({ title, shortDescription, nXP, userIsEnrolled, percen
             </summary>
 
             {
-              topicItems.map(topicItem => 
+              topicItems.map((topicItem, index) => 
                 <Link 
-                  to={NEXT_PAGE_URL}
+                  to={`/topic/${topicItem.topicId}/item/${index+1}`}
+                  state={{ courseId: topicItem.courseId }}
                   key={topicItem.title}>
 
                     <div style={commonDisplayStyles.displayFlex}>

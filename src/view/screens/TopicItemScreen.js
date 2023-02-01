@@ -1,6 +1,6 @@
 /* libraries */
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 /* assets */
 import backIcon from "../assets/back.png";
@@ -16,6 +16,7 @@ import SAQResponseCard from "../components/SAQResponseCard";
 
 /* data */
 import Model from "../../model/model.js";
+import { topicItemTypes } from "../../model/enums";
 
 import { commonDisplayStyles } from "../components/styles/commonDisplayStyles";
 import MCQView from "../components/MCQView";
@@ -27,13 +28,123 @@ import TopicItemScreenViewModel from "./TopicItemScreenViewModel";
 
 // const ids = useLocation().state; /* state: {topicId, topicItemId} */
 
-function TopicItemScreen() {
+export default function TopicItemScreen() {
   
   const NAVBAR_TEXT = "Topic Item";
-  const NAVBAR_TYPE = "MCQ";
   const COURSE_OUTLINE_TEXT = "Course Outline";
-  const PREVIOUS_PAGE_URL = "/course";
-  let content = "Topic Item Content. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor amet consectetur adipsicing. \nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+  
+  const { topicId, seqNumber } = useParams();
+
+  const { topicItem, getTopicItemData, handleLessonSubmit, handleMCQSubmit, handleTFQSubmit, handleSAQSubmit, handleCQSubmit } = TopicItemScreenViewModel();
+  
+  const [loading, setLoading] = React.useState(true);
+  const [topicItemState, setTopicItemState] = React.useState({});
+
+  const PREVIOUS_PAGE = `/course/${topicItemState.courseId}`;
+
+  React.useEffect(() => {
+    getTopicItemData(topicId, seqNumber);
+    setLoading(true);
+  }, []);
+
+  React.useEffect(() => {
+    if (topicItem)
+      setTopicItemState(topicItem);
+    if (topicItem)
+      setLoading(false);
+  }, [topicItem]);
+  
+  // /topic/:topicId/item/:seqNumber
+
+  return (
+    <>
+      <TopicItemScreenNavbar 
+        title={NAVBAR_TEXT} 
+        to={PREVIOUS_PAGE} 
+        itemType={topicItemTypes.LSN }
+        disabled={loading ? true : false}/>
+
+      <div style={commonDisplayStyles.displayFlexCenter}>
+        <button type="button">
+          <img src={backIcon} alt="go to previous topic item" className="icon--20px"/>
+        </button>
+        <button type="button">{COURSE_OUTLINE_TEXT}</button>
+        <button type="button">
+          <img src={forwardIcon} alt="go to next topic item" className="icon--20px"/>
+        </button>
+      </div>
+
+      { topicItemState.type == topicItemTypes.LSN 
+        ? <LessonView 
+            topicItemId={topicItemState.id}
+            title={topicItemState.title} 
+            nXP={topicItemState.xp} 
+            content={topicItemState.content}
+            handleSubmit={handleLessonSubmit}/> 
+        : null }
+
+      { topicItemState.type == topicItemTypes.MCQ 
+        ? <GenericQView 
+            title={topicItemState.title} 
+            nXP={topicItemState.xp} 
+            content={topicItemState.content}
+            instructions={topicItemState.instructions}
+            hints={topicItemState.hints}
+            ResponseCard={
+              <MCQResponseCard 
+                topicItemId={topicItemState.id}
+                options={topicItemState.mcqOptions}
+                handleSubmit={handleMCQSubmit} />} />
+        : null }
+      
+      { topicItemState.type == topicItemTypes.TFQ 
+        ? <GenericQView 
+            title={topicItemState.title} 
+            nXP={topicItemState.xp} 
+            content={topicItemState.content}
+            instructions={topicItemState.instructions}
+            hints={topicItemState.hints}
+            ResponseCard={
+              <TFQResponseCard 
+                topicItemId={topicItemState.id}
+                handleSubmit={handleTFQSubmit}/>} />
+        : null }
+
+      { topicItemState.type == topicItemTypes.SAQ 
+        ? <GenericQView 
+            title={topicItemState.title} 
+            nXP={topicItemState.xp} 
+            content={topicItemState.content}
+            instructions={topicItemState.instructions}
+            hints={topicItemState.hints}
+            ResponseCard={
+              <SAQResponseCard 
+                topicItemId={topicItemState.id}
+                handleSubmit={handleSAQSubmit}/>}/>
+        : null }
+
+      { topicItemState.type == topicItemTypes.CQ 
+        ? <CQView
+            topicItemId={topicItemState.id}
+            title={topicItemState.title} 
+            nXP={topicItemState.xp} 
+            content={topicItemState.content}
+            instructions={topicItemState.instructions}
+            hints={topicItemState.hints}/>
+        : null }
+
+      <div style={{background: 'blue', height: '40px', width: '100%'}}><p></p></div>
+      
+      <div style={{...commonDisplayStyles.stickToBottom, ...commonDisplayStyles.displayFlexCenter, background: '#ACC8F1', height: '40px'}}>
+        <ProgressBar percentage={null} hasLabel={true} labelOnRightSide={false}/>
+      </div>
+    </>
+  );
+}
+
+/*
+
+let content = "Topic Item Content. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor amet consectetur adipsicing. \nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
   content += content;
   const topicItems = {
     lesson1: {
@@ -121,97 +232,6 @@ function TopicItemScreen() {
       tfqAnswer: null
     }
   };
-
-  const { topicItemData, getTopicItemData, handleTopicItemSubmit, handleMCQSubmit } = TopicItemScreenViewModel();
-  getTopicItemData();
-  // console.log('mcq topic item data: ', topicItemData);
-
-
-
-  return (
-    <>
-      <TopicItemScreenNavbar 
-        title={NAVBAR_TEXT} 
-        to={PREVIOUS_PAGE_URL} 
-        itemType={NAVBAR_TYPE}/>
-
-      <div style={commonDisplayStyles.displayFlexCenter}>
-        <button type="button">
-          <img src={backIcon} alt="go to previous topic item" className="icon--20px"/>
-        </button>
-        <button type="button">{COURSE_OUTLINE_TEXT}</button>
-        <button type="button">
-          <img src={forwardIcon} alt="go to next topic item" className="icon--20px"/>
-        </button>
-      </div>
-
-      <LessonView 
-        title={topicItems.lesson1.title} 
-        nXP={topicItems.lesson1.xp} 
-        content={topicItems.lesson1.content}
-        onSubmit={() => { handleTopicItemSubmit(topicItems.lesson1.type, null); }}/>
-
-      <hr />
-
-      <GenericQView 
-        title={topicItems.mcq.title} 
-        nXP={topicItems.mcq.xp} 
-        content={topicItems.mcq.content}
-        instructions={topicItems.mcq.instructions}
-        hints={topicItems.mcq.hints}
-        ResponseCard={
-          <MCQResponseCard 
-            options={topicItems.mcq.mcqOptions}
-            handleSubmit={handleMCQSubmit} />} />
-
-      <hr />
-
-      <GenericQView 
-        title={topicItems.tfq.title} 
-        nXP={topicItems.tfq.xp} 
-        content={topicItems.tfq.content}
-        instructions={topicItems.tfq.instructions}
-        hints={topicItems.tfq.hints}
-        ResponseCard={<TFQResponseCard/>}/>
-
-      <hr />
-
-      <LessonView 
-        title={topicItems.lesson2.title} 
-        nXP={topicItems.lesson2.xp} 
-        content={topicItems.lesson2.content}/>
-      
-      <hr />
-
-      <GenericQView 
-        title={topicItems.saq.title} 
-        nXP={topicItems.saq.xp} 
-        content={topicItems.saq.content}
-        instructions={topicItems.saq.instructions}
-        hints={topicItems.saq.hints}
-        ResponseCard={<SAQResponseCard />}/>
-
-      <hr />
-
-      <CQView
-        title={topicItems.cq.title} 
-        nXP={topicItems.cq.xp} 
-        content={topicItems.cq.content}
-        instructions={topicItems.cq.instructions}
-        hints={topicItems.cq.hints}/>
-
-      <div style={{background: 'blue', height: '40px', width: '100%'}}><p></p></div>
-      
-      <div style={{...commonDisplayStyles.stickToBottom, ...commonDisplayStyles.displayFlexCenter, background: '#ACC8F1', height: '40px'}}>
-        <ProgressBar percentage={null} hasLabel={true} labelOnRightSide={false}/>
-      </div>
-    </>
-  );
-}
-
-export default TopicItemScreen;
-
-/*
 
 <MCQView 
   isTFQ={false}

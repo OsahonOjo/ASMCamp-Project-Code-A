@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Tag from "./Tag";
 import IconAndTextListItem from "./IconAndTextListItem";
+import CollapsibleParagraph from "./CollapsibleParagraph";
 
 import mainCardIcon from '../assets/hexagons_Prosymbols_Premium.png';
 import bulletIcon from "../assets/cell_Freepik.png";
@@ -25,6 +26,7 @@ function CourseDetailsCard({ title, learningTrackTitle, longDescription, nHours,
   const N_QUESTIONS_TEXT = `${nQuestions} Questions`;
   const LEARNING_TRACK_TEXT = `Part of ${learningTrackTitle}`;
   const BULLET_ICON_SIZE = "10px";
+  const LONG_DESC_CHAR_LIMIT = 300;
   const iconAndTextListItemStyle = {
 		iconSize: {
 			height: BULLET_ICON_SIZE,
@@ -49,7 +51,7 @@ function CourseDetailsCard({ title, learningTrackTitle, longDescription, nHours,
             text={LEARNING_TRACK_TEXT}
             style={iconAndTextListItemStyle}/>
 
-        <p>{longDescription}</p>
+        <CollapsibleParagraph text={longDescription} limit={LONG_DESC_CHAR_LIMIT} />
 
         <div style={commonDisplayStyles.displayFlexCenter}>
 

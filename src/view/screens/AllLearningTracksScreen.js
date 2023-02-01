@@ -8,16 +8,14 @@ import LearningTrackSummaryCard from '../components/LearningTrackSummaryCard';
 export default function AllLearningTracksScreen() {
 
   const NAVBAR_TEXT = "ASMCamp";
-  const NEXT_PAGE_URL = "/track";
+  const NEXT_PAGE = "/track";
   const { learningTrackSummaries, getLearningTrackSummaries } = AllLearningTracksScreenViewModel();
   const [summaries, setSummaries] = React.useState([]);
 
   React.useEffect(() => { getLearningTrackSummaries() }, []);
 
   React.useEffect(() => {
-    learningTrackSummaries
-      ? setSummaries(learningTrackSummaries)
-      : setSummaries([]);
+    learningTrackSummaries ? setSummaries(learningTrackSummaries) : setSummaries([]);
   }, [learningTrackSummaries]);
 
   return (
@@ -33,7 +31,7 @@ export default function AllLearningTracksScreen() {
             shortDescription: summary.shortDescription,
             longDescription: summary.longDescription,
             nCourses: summary.nCourses }} 
-          to={`${NEXT_PAGE_URL}/${summary.id}`}/>)}
+          to={`${NEXT_PAGE}/${summary.id}`}/>)}
     </>
   );
 }

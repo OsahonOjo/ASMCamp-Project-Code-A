@@ -9,6 +9,8 @@ interface TagProps {
   fontSize?: string;
 };
 
+/**@description A React.js component for creating a text-based tag */
+
 function Tag({ text, displayBlock, backgroundColor, borderColor, borderWidth, fontSize }: TagProps): JSX.Element {
   const style = {
     display: displayBlock ? 'block' : 'inline',

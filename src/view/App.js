@@ -41,11 +41,14 @@ function App() {
       {console.log('window.FBInstant: ', window.FBInstant)}
       
       <Routes>
+        
+        {/* /tracks must be placed above /track */}
+        
+        <Route path="/topic/:topicId/item/:seqNumber" element={<TopicItemScreen />}/>
+        <Route path="/course/:courseId" element={<CourseScreen />} />
         <Route path="/track/:trackId" element={<LearningTrackScreen />}  />
         <Route path="/tracks" element={<AllLearningTracksScreen />} />
-        {/* /tracks must be placed above /track */}
-        <Route path="/course" element={<CourseScreen />} />
-        <Route path="/topicitem" element={<TopicItemScreen />}/>
+
         <Route path="/dashboard" element={<StudentDashboardScreen />} />
         <Route path="/instructorsarea" element={<InstructorsAreaScreen />} />
         <Route path="/managetracks" element={<ManageLearningTracksScreen />} />

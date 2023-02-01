@@ -6,12 +6,14 @@ import backButton from "../assets/back.png";
 
 import "./styles/Navbar.css";
 
-function BackButtonNavbar({ title, to }) {
+function BackButtonNavbar({ title, to, disabled }) {
+
+  let events = disabled ? 'none' : 'auto';
 
   return (
     <>
       <div className="navbar">
-        <Link to={to}>
+        <Link to={to} style={{ pointerEvents: events }}>
           <img src={backButton} alt="back button icon" className="navbar-icon"/>
         </Link>
         <span className="navbar-title">{title}</span>

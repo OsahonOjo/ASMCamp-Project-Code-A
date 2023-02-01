@@ -14,7 +14,7 @@ import './styles/card.css';
  *  comprise each of those topics. 
  */
 
-function TopicsListCard({ topics, userIsEnrolled }) {
+function TopicsListCard({ topicsData, userIsEnrolled }) {
 
   return (
     <>
@@ -26,11 +26,11 @@ function TopicsListCard({ topics, userIsEnrolled }) {
 					<img src={bulletIcon} alt="main card icon" className="icon--10px"/>
         </summary>
 
-        {topics.map(topic => 
+        {topicsData.map(topic => 
           <TopicDetailsCard 
             key={topic.title}
             title={topic.title}
-            shortDescription={topic.shortDescription}
+            shortDescription={topic.description}
             nXP={topic.xp}
             userIsEnrolled={userIsEnrolled}
             percentage={topic.percentage}
@@ -43,7 +43,7 @@ function TopicsListCard({ topics, userIsEnrolled }) {
 }
 
 TopicsListCard.propTypes = {
-  topics: PropTypes.array,
+  topicsData: PropTypes.array,
   userIsEnrolled: PropTypes.bool
 };
 

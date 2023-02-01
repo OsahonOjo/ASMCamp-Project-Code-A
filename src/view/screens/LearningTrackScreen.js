@@ -21,7 +21,7 @@ import infoIcon from '../assets/polygon_riajulislam.png';
 export default function LearningTrackScreen() {
 
   const NAVBAR_TEXT = "Learning Track";
-  const PREVIOUS_PAGE_URL = "/tracks";
+  const PREVIOUS_PAGE = "/tracks";
   const HOURS_PER_COURSE = 4;
   const instructorsData = [
     {
@@ -53,7 +53,7 @@ export default function LearningTrackScreen() {
       isComplete: false
     }
   ];
-
+  
   const { trackId } = useParams();
   const { trackDetails, courseSummaries, getTrackDetailsData, getCourseSummariesData } = LearningTrackScreenViewModel();
   
@@ -71,12 +71,9 @@ export default function LearningTrackScreen() {
     courseSummaries ? setCourseSummariesState(courseSummaries) : setCourseSummariesState([])
   }, [trackDetails, courseSummaries]);
 
-  console.log('courseSummaries: ', courseSummaries);
-  console.log('courseSummariesState: ', courseSummariesState);
-
   return (
     <>
-      <BackButtonNavbar title={NAVBAR_TEXT} to={PREVIOUS_PAGE_URL}/> 
+      <BackButtonNavbar title={NAVBAR_TEXT} to={PREVIOUS_PAGE}/> 
 
       <LearningTrackDetailsCard 
         title={trackDetailsState.title}
