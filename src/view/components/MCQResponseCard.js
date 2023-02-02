@@ -3,7 +3,7 @@ import Tag from './Tag';
 import './styles/card.css';
 import { commonDisplayStyles } from './styles/commonDisplayStyles';
 
-function MCQResponseCard({ topicItemId, options, handleSubmit }) {
+function MCQResponseCard({ topicItemId, options, handleSubmit, showModal }) {
 
   const HEADING_TEXT = "Responses";
 
@@ -14,7 +14,10 @@ function MCQResponseCard({ topicItemId, options, handleSubmit }) {
       <h4>{HEADING_TEXT}</h4>
       {options.map((option, index) => 
         <div key={index}>
-          <button onClick={() => { handleSubmit(topicItemId, index) }}>
+          <button onClick={() => { 
+            let isCorrect = handleSubmit(topicItemId, index);
+            showModal(isCorrect);
+          }}>
             <input type="radio" name="mcqOptionChosen" value={option}/> 
             <label>{option}</label>
           </button>

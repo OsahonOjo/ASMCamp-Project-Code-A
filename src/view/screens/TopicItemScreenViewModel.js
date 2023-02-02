@@ -25,24 +25,31 @@ export default function TopicItemScreenViewModel() {
 
   function handleLessonSubmit(topicItemId) {
     console.log('lesson completed; id: ', topicItemId);
+    return true;
   }
 
   function handleMCQSubmit(topicItemId, optionIndex) {
-    return (optionIndex == topicItem.mcqAnswerIndex)
+    let isCorrect = (optionIndex == topicItem.mcqAnswerIndex);
+    isCorrect
       ? console.log('correct MCQ answer; id: ', topicItemId)
       : console.log('incorrect MCQ answer; id: ', topicItemId);
+    return isCorrect;
   }
 
   function handleTFQSubmit(topicItemId, answer) {
-    return (answer == topicItem.tfqAnswer)
+    let isCorrect = (answer == topicItem.tfqAnswer);
+    isCorrect
       ? console.log('correct TFQ answer; id: ', topicItemId)
       : console.log('incorrect TFQ answer; id: ', topicItemId);
+    return isCorrect;
   }
 
   function handleSAQSubmit(topicItemId, answer) {
-    return topicItem.saqAnswer.find(element => element == answer)
+    let isCorrect = (topicItem.saqAnswer.find(element => element == answer));
+    isCorrect
       ? console.log('correct SAQ answer; [answer, id]: ', answer, topicItemId)
       : console.log('incorrect SAQ answer; [answer, id]: ', answer, topicItemId);
+    return isCorrect;
   }
 
   function handleCQSubmit(topicItemId, code) {

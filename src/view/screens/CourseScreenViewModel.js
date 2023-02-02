@@ -31,32 +31,33 @@ export default function CourseScreenViewModel() {
     }
 
     function combinedTopicAndTopicItemsFactory(topicEntities, topicItemEntities) {
-        const combined = [];
-        const topicIdToCombinedIndexDict = {};
+        let combined = [];
+        let topicIdToCombinedIndexDict = {};
 
         // filter for the topic entity fields you want
         topicEntities.forEach((topicEntity, index) => {
-            combined.push({
+            let topic = {
                 id: topicEntity._id,
                 title: topicEntity.title,
                 description: topicEntity.description,
                 topicItems: []
-            });
-            topicIdToCombinedIndexDict[topicEntity._id] = index;
+            };
+            combined.push(topic);
         });
 
         // get desired topic item entity fields, append to parent topic
         topicItemEntities.forEach((topicItemEntity, index) => {
+            // NOTE: topicItemEntity.courseId: ['courseId'], topicItemEntity.topicId: ['topicId']
             let topicItem = {
                 id: topicItemEntity._id,
                 type: topicItemEntity.type,
                 title: topicItemEntity.title,
                 xp: topicItemEntity.xp,
-                topicId: topicItemEntity.topicId,
-                courseId: topicItemEntity.courseId
+                topicId: topicItemEntity.topicId[0],
+                courseId: topicItemEntity.courseId[0]
             };
-            let indexInCombinedArray = topicIdToCombinedIndexDict[topicItemEntity.topicId];
-            combined[indexInCombinedArray].topicItems.push(topicItem);
+            let parentTopic = combined.find(topic => topic.id == topicItem.topicId);
+            parentTopic.topicItems.push(topicItem);
         });
 
         return combined;

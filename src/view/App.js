@@ -9,6 +9,8 @@ import StudentDashboardScreen from './screens/StudentDashboardScreen';
 import InstructorsAreaScreen from './screens/InstructorsAreaScreen';
 import ManageLearningTracksScreen from './screens/ManageLearningTracksScreen';
 import EditLearningTrackScreen from './screens/EditLearningTrackScreen';
+import ProgressAndRewardsScreen from './screens/ProgressAndRewardsScreen';
+import StudentLeaderboardScreen from './screens/StudentLeaderboardScreen';
 
 /* /tracks/trackName/courseName/topicName?item=1 */
 /* let { id } = useParams(); */
@@ -42,15 +44,18 @@ function App() {
       
       <Routes>
         
-        {/* /tracks must be placed above /track */}
+        {/* routes can be placed in any order because React Router is smart now */}
         
         <Route path="/topic/:topicId/item/:seqNumber" element={<TopicItemScreen />}/>
         <Route path="/course/:courseId" element={<CourseScreen />} />
         <Route path="/track/:trackId" element={<LearningTrackScreen />}  />
         <Route path="/tracks" element={<AllLearningTracksScreen />} />
 
-        <Route path="/dashboard" element={<StudentDashboardScreen />} />
-        <Route path="/instructorsarea" element={<InstructorsAreaScreen />} />
+        <Route path="/students/progress" element={<ProgressAndRewardsScreen />} />
+        <Route path="/students/leaderboards" element={<StudentLeaderboardScreen />} />
+        <Route path="/students" element={<StudentDashboardScreen />} />
+
+        <Route path="/instructors" element={<InstructorsAreaScreen />} />
         <Route path="/managetracks" element={<ManageLearningTracksScreen />} />
         <Route path="/edittrack" element={<EditLearningTrackScreen />} />
         <Route path="/" element={<Navigate replace to="/tracks" />} />

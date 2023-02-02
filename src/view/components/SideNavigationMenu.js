@@ -12,10 +12,10 @@ function SideNavigationMenu() {
 
   const menuItems = [
     { url: "/tracks", itemTitle: "Learning Tracks", isIndented: false }, 
-    { url: "/dashboard", itemTitle: "Student Dashboard", isIndented: false },
-    { url: "/", itemTitle: "Progress and Rewards", isIndented: true }, 
-    { url: "/", itemTitle: "Leaderboards", isIndented: true },
-    { url: "/instructorsarea", itemTitle: "Instructors Area", isIndented: false },
+    { url: "/students", itemTitle: "Student Dashboard", isIndented: false },
+    { url: "/students/progress", itemTitle: "Progress and Rewards", isIndented: true }, 
+    { url: "/students/leaderboards", itemTitle: "Leaderboards", isIndented: true },
+    { url: "/instructors", itemTitle: "Instructors Area", isIndented: false },
     { url: "/", itemTitle: "Settings", isIndented: false },
     { url: "/", itemTitle: "Contact", isIndented: false }
   ];

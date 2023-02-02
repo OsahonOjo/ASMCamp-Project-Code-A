@@ -8,6 +8,7 @@ import forwardIcon from "../assets/next.png";
 
 /* components */
 import TopicItemScreenNavbar from "../components/TopicItemScreenNavbar";
+import TopicItemSuccessModal from "../components/TopicItemSuccessModal";
 import LessonView from "../components/LessonView";
 import ProgressBar from "../components/ProgressBar";
 import MCQResponseCard from "../components/MCQResponseCard";
@@ -56,6 +57,32 @@ export default function TopicItemScreen() {
   
   // /topic/:topicId/item/:seqNumber
 
+  const modelRef = React.useRef(null);
+  const MODAL_SUCCESS_TEXT = "Success!";
+  const MODAL_FAILURE_TEXT = "Incorrect...";
+  const [modalState, setModalOpen]  = React.useState({ open: false, text: "" });
+  const modalStyle = { 
+    display: modalState.open ? "block" : "none", 
+    borderStyle: 'solid', 
+    borderWidth: '1px', 
+    borderColor: '#ccc', 
+    margin: '10px', 
+    textAlign: 'center' 
+  };
+
+  function closeModal() {
+    const nextState = Object.assign({}, modalState);
+    nextState.open = false;
+    setModalOpen(nextState);
+  }
+
+  function openModal(success) {
+    const nextState = Object.assign({}, modalState);
+    nextState.open = true;
+    nextState.text = success ? MODAL_SUCCESS_TEXT : MODAL_FAILURE_TEXT;
+    setModalOpen(nextState);
+  }
+
   return (
     <>
       <TopicItemScreenNavbar 
@@ -64,6 +91,7 @@ export default function TopicItemScreen() {
         itemType={topicItemTypes.LSN }
         disabled={loading ? true : false}/>
 
+      {/* buttons for navigation between topic items */}
       <div style={commonDisplayStyles.displayFlexCenter}>
         <button type="button">
           <img src={backIcon} alt="go to previous topic item" className="icon--20px"/>
@@ -80,7 +108,8 @@ export default function TopicItemScreen() {
             title={topicItemState.title} 
             nXP={topicItemState.xp} 
             content={topicItemState.content}
-            handleSubmit={handleLessonSubmit}/> 
+            handleSubmit={handleLessonSubmit}
+            showModal={openModal}/> 
         : null }
 
       { topicItemState.type == topicItemTypes.MCQ 
@@ -94,7 +123,8 @@ export default function TopicItemScreen() {
               <MCQResponseCard 
                 topicItemId={topicItemState.id}
                 options={topicItemState.mcqOptions}
-                handleSubmit={handleMCQSubmit} />} />
+                handleSubmit={handleMCQSubmit}
+                showModal={openModal} />} />
         : null }
       
       { topicItemState.type == topicItemTypes.TFQ 
@@ -107,7 +137,8 @@ export default function TopicItemScreen() {
             ResponseCard={
               <TFQResponseCard 
                 topicItemId={topicItemState.id}
-                handleSubmit={handleTFQSubmit}/>} />
+                handleSubmit={handleTFQSubmit}
+                showModal={openModal}/>} />
         : null }
 
       { topicItemState.type == topicItemTypes.SAQ 
@@ -120,7 +151,8 @@ export default function TopicItemScreen() {
             ResponseCard={
               <SAQResponseCard 
                 topicItemId={topicItemState.id}
-                handleSubmit={handleSAQSubmit}/>}/>
+                handleSubmit={handleSAQSubmit}
+                showModal={openModal}/>}/>
         : null }
 
       { topicItemState.type == topicItemTypes.CQ 
@@ -132,6 +164,14 @@ export default function TopicItemScreen() {
             instructions={topicItemState.instructions}
             hints={topicItemState.hints}/>
         : null }
+
+      {/* modal */}
+      <div id="modal" ref={modelRef} style={modalStyle}>
+        <span onClick={closeModal}>&times;</span>
+        <div>
+          <h3>{modalState.text}</h3>
+        </div>
+      </div>
 
       <div style={{background: 'blue', height: '40px', width: '100%'}}><p></p></div>
       
