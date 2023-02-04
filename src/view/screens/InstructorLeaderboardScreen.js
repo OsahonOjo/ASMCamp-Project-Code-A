@@ -4,10 +4,10 @@ import BackButtonNavbar from "../components/BackButtonNavbar";
 import '../components/styles/card.css';
 import '../components/styles/icon.css';
 
-export default function StudentLeaderboardScreen() {
+export default function InstructorLeaderboardScreen() {
 
     const NAVBAR_TEXT = "Leaderboards";
-    const PREVIOUS_PAGE = "/students";
+    const PREVIOUS_PAGE = "/instructors";
     const PROGRESS_LEADERBOARD_LABEL = "Progress Leaderboard";
     const REWARDS_LEADERBOARD_LABEL = "Rewards Leaderboard";
     const tracks = [
@@ -67,20 +67,20 @@ export default function StudentLeaderboardScreen() {
                 <div>
                     <label htmlFor="view-rewards-by-track">Select Learning Track:</label><br />
                     <select name="view-rewards-by-track" style={{ width: '90%' }}>
-                        {tracks.map(track => 
-                            <option key={track} value={track}>{track}</option>)}
+                        {tracks.map((track, index) => 
+                            <option key={track} value={index}>{track}</option>)}
                     </select>
 
                     <label htmlFor="view-rewards-by-group">Select Group:</label><br />
                     <select name="view-rewards-by-group" style={{ width: '90%' }}>
-                        {groups.map(group => 
-                            <option key={group} value={group}>{group}</option>)}
+                        {groups.map((group, index) => 
+                            <option key={group} value={index}>{group}</option>)}
                     </select>
 
                     <label htmlFor="view-rewards-by-reward">Select Reward:</label><br />
                     <select name="view-rewards-by-reward" style={{ width: '90%' }}>
-                        {rewards.map(reward => 
-                            <option key={reward} value={reward}>{reward}</option>)}
+                        {rewards.map((reward, index) => 
+                            <option key={reward} value={index}>{reward}</option>)}
                     </select>
                 </div>
 

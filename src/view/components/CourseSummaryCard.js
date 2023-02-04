@@ -19,10 +19,12 @@ import { commonDisplayStyles } from "./styles/commonDisplayStyles";
   const url = "/tracks/" + slug;
 */
 
-function CourseSummaryCard({ courseId, learningTrackId, title, shortDescription, nHours, userIsEnrolled, percentage, hasLabel, labelOnRightSide }) {
+function CourseSummaryCard({ courseId, learningTrackId, title, shortDescription, nHours, userIsEnrolled, percentage, hasLabel, labelOnRightSide, editMode }) {
 
   const location = useLocation();
-  const NEXT_PAGE_URL = `/course/${courseId}`;
+  const NORMAL_MODE_NEXT_PAGE_URL = `/course/${courseId}`;
+  const EDIT_MODE_NEXT_PAGE_URL = `/instructors/edit/course`;
+  const NEXT_PAGE_URL = editMode ? EDIT_MODE_NEXT_PAGE_URL : NORMAL_MODE_NEXT_PAGE_URL;
   // const NEXT_PAGE_URL = location.pathname + NEXT_PAGE_URL_SUFFIX;
   const N_HOURS_TEXT = `${nHours} Hours`;
   const BULLET_ICON_SIZE = "10px";
@@ -33,8 +35,6 @@ function CourseSummaryCard({ courseId, learningTrackId, title, shortDescription,
 			width: BULLET_ICON_SIZE
 		}
 	};
-  
-
 
   return (
     <div>
@@ -75,7 +75,15 @@ function CourseSummaryCard({ courseId, learningTrackId, title, shortDescription,
             to={NEXT_PAGE_URL}
             state={{ from: location.pathname, learningTrackId: learningTrackId }}>
               <div>
-                <span className="material-symbols-outlined">navigate_next</span>
+                {
+                  editMode 
+                  ? <span className="material-symbols-outlined">
+                      edit
+                    </span>
+                  : <span className="material-symbols-outlined">
+                      navigate_next
+                    </span>
+                }
               </div>
           </Link>
 

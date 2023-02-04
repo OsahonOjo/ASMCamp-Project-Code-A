@@ -1,16 +1,39 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
 
 import CourseSummaryCard from "./CourseSummaryCard";
+import IconAndTextListItem from "./IconAndTextListItem";
 
-import mainCardIcon from '../assets/hexagons_Prosymbols_Premium.png';
+import mainIcon from '../assets/hexagons_Prosymbols_Premium.png';
 import bulletIcon from "../assets/cell_Freepik.png";
 
 import './styles/icon.css';
 import './styles/card.css';
 import { commonDisplayStyles } from "./styles/commonDisplayStyles";
 
-function CourseListCard({ courses }) {
+function CourseListCard({ courses, editMode }) {
+
+  const EDIT_MODE_NEXT_PAGE_URL = "/instructors/edit/course";
+  const NEW_COURSE_TEXT = "Create New Course";
+  const ICON_SIZE = "20px";
+  const iconAndTextListItemStyle = {
+		iconSize: {
+			height: ICON_SIZE,
+			width: ICON_SIZE
+		},
+    displayInline: true
+	};
+
+  const newCourseElement = 
+    <div>
+      <hr />
+      <Link 
+        to={EDIT_MODE_NEXT_PAGE_URL}>
+          <IconAndTextListItem icon={mainIcon} text={NEW_COURSE_TEXT} style={iconAndTextListItemStyle}/>  
+          <span className="material-symbols-outlined">navigate_next</span>
+      </Link> 
+    </div>;
 
   return (
     <>
@@ -33,7 +56,10 @@ function CourseListCard({ courses }) {
             userIsEnrolled={course.userIsEnrolled}
             percentage={course.percentage}
             hasLabel={true}
-            labelOnRightSide={false}/>)}
+            labelOnRightSide={false}
+            editMode={editMode}/>)}
+
+        {editMode ? newCourseElement : null}
       </details>
     </>
   );

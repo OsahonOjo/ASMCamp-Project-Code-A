@@ -54,6 +54,15 @@ export default function ProgressAndRewardsScreen() {
             <details className="card">
                 <summary style={{ textAlign: 'center' }}>{MY_PROGRESS_LABEL}</summary>
                 <hr />
+
+                <div>
+                    <label htmlFor="view-progress-by-track">Select Learning Track:</label><br />
+                    <select name="view-progress-by-track" style={{ width: '90%' }}>
+                        {tracksOptions.map(track => 
+                            <option key={track} value={track}>{track}</option>)}
+                    </select>
+                </div>
+
                 <ul>
                     <li>Item 1</li>
                     <li>Item 2</li>
@@ -65,14 +74,14 @@ export default function ProgressAndRewardsScreen() {
                 <hr />
 
                 <div>
-                    <label htmlFor="track-to-view">Select Learning Track:</label><br />
-                    <select name="track-to-view" style={{ width: '90%' }}>
+                    <label htmlFor="view-rewards-by-track">Select Learning Track:</label><br />
+                    <select name="view-rewards-by-track" style={{ width: '90%' }}>
                         {tracksOptions.map(track => 
                             <option key={track} value={track}>{track}</option>)}
                     </select>
 
-                    <label htmlFor="reward-to-view">Select Reward:</label><br />
-                    <select name="reward-to-view" style={{ width: '90%' }}>
+                    <label htmlFor="view-rewards-by-reward">Select Reward:</label><br />
+                    <select name="view-rewards-by-reward" style={{ width: '90%' }}>
                         {rewardsOptions.map(reward => 
                             <option key={reward} value={reward}>{reward}</option>)}
                     </select>

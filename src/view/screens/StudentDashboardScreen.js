@@ -16,7 +16,7 @@ export default function StudentDashboardScreen() {
   
   const menuItems = [
     { url: "/students/progress", itemTitle: "Progress and Rewards" }, 
-    { url: "/students/leaderboard", itemTitle: "Student Leaderboards" },
+    { url: "/students/leaderboards", itemTitle: "Leaderboards" },
   ];
 
   const ICON_SIZE = "30px";

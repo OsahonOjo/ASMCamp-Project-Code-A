@@ -12,12 +12,11 @@ import '../components/styles/icon.css';
 
 function InstructorsAreaScreen() {
 
-  const NEXT_PAGE_URL = "/managetracks";
   const NAVBAR_TEXT = "Instructors Area";
-  const menuOptions = [
-    "Manage Learning Tracks",
-    "Manage Groups",
-    "Leaderboards"
+  const menuItems = [
+    { url: "/instructors/tracks", itemTitle: "Manage Learning Tracks" }, 
+    { url: "/instructors/groups", itemTitle: "Manage Groups" },
+    { url: "/instructors/leaderboards", itemTitle: "Leaderboards" }
   ];
   const ICON_SIZE = "30px";
   const iconAndTextListItemStyle = {
@@ -29,20 +28,21 @@ function InstructorsAreaScreen() {
 	};
 
   return (
-    <div>
+    <>
       <HamburgerNavbar title={NAVBAR_TEXT} />
       <SideNavigationMenu />
-      {menuOptions.map(menuOption => 
+      {menuItems.map(menuItem => 
         <div 
-          key={menuOption}
+          key={menuItem.itemTitle}
           className="card">
-          <Link 
-            to={NEXT_PAGE_URL}>
-            <IconAndTextListItem icon={mainIcon} text={menuOption} style={iconAndTextListItemStyle}/>  
-            <img src={nextPageIcon} alt="next page icon" className="icon--20px"/>
-          </Link> 
-        </div>)}
-    </div>
+            <Link 
+              to={menuItem.url}>
+                <IconAndTextListItem icon={mainIcon} text={menuItem.itemTitle} style={iconAndTextListItemStyle}/>  
+                <img src={nextPageIcon} alt="next page icon" className="icon--20px"/>
+            </Link> 
+        </div>
+      )}
+    </>
   );
 }
 

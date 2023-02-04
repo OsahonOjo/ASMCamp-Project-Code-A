@@ -69,10 +69,9 @@ export default function LearningTrackSummaryCard({ trackDetails, userIsEnrolled,
           <div>
             {
               editMode 
-              ? <img 
-                  src={editIcon} 
-                  alt="next page icon" 
-                  className="icon--20px"/> 
+              ? <span className="material-symbols-outlined">
+                  edit
+                </span>
               : <span className="material-symbols-outlined">
                   navigate_next
                 </span>
