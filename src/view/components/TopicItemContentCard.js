@@ -3,7 +3,7 @@ import Tag from './Tag';
 import './styles/card.css';
 import { commonDisplayStyles } from './styles/commonDisplayStyles';
 
-function TopicItemContentCard({ title, content, nXP }) {
+export default function TopicItemContentCard({ title, content, nXP }) {
 
   const TAG_TEXT = `${nXP} XP`;
 
@@ -20,5 +20,3 @@ function TopicItemContentCard({ title, content, nXP }) {
     </div>
   );
 }
-
-export default TopicItemContentCard;

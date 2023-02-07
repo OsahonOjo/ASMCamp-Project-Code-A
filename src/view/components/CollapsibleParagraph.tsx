@@ -18,10 +18,17 @@ export default function CollapsibleParagraph({ text, limit, paragraphStyle }: Co
     fontSize: '18px'
   };
 
-  let abbreviatedText = text ? text.slice(0, limit ? limit : DEFAULT_LIMIT) + "..." : "";  // throws TypeError if text prop is empty
+  let characterLimit = limit ? limit : DEFAULT_LIMIT;
+  let abbreviatedText = (text && text.length <= characterLimit) ? text : text.slice(0, characterLimit) + "...";  // throws TypeError if text prop is empty
   let displayText = isCollapsed ? abbreviatedText : text;
-  let buttonText = isCollapsed ? "Show more" : "Hide text";
   
+  let displayButton = text && text.length > characterLimit;
+  let buttonText = isCollapsed ? "Show more" : "Hide text";
+  const buttonElement = 
+    <button onClick={handleClick} style={buttonStyle}>
+      {buttonText}
+    </button>;
+    
   function handleClick() {
     let nextState = !isCollapsed;
     setIsCollapsed(nextState);
@@ -32,9 +39,7 @@ export default function CollapsibleParagraph({ text, limit, paragraphStyle }: Co
       <p style={paragraphStyle ? paragraphStyle : {}}>
         {displayText}
       </p>
-      <button onClick={handleClick} style={buttonStyle}>
-        {buttonText}
-      </button>
+      {displayButton ? buttonElement : null}
     </>
   );
 }

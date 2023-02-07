@@ -12,6 +12,7 @@
 
 .card-display--flex {
   display: flex;
+  flex-direction: row;
 }
 
 .card--clickable:hover {

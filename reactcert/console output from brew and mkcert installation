@@ -1,0 +1,739 @@
+osahon@osahon-HP-Laptop-15-bs1xx:~/vscode_ws/ASMCamp ECNG 3020/evo-prototype$ sudo apt install libnss3-tools
+[sudo] password for osahon: 
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  gir1.2-goa-1.0 gyp libc-ares2 libfwupdplugin1 libjs-inherits
+  libjs-is-typedarray libjs-psl libjs-typedarray-to-buffer libllvm11
+  libuv1-dev libxmlb1 node-abbrev node-accepts node-ajv node-ansi
+  node-ansi-align node-ansi-regex node-ansi-styles node-ansistyles node-aproba
+  node-archy node-are-we-there-yet node-array-flatten node-asap node-asn1
+  node-assert-plus node-asynckit node-aws-sign2 node-aws4 node-balanced-match
+  node-bcrypt-pbkdf node-bl node-bluebird node-boxen node-brace-expansion
+  node-builtins node-bytes node-cacache node-call-limit node-camelcase
+  node-caseless node-chalk node-chownr node-ci-info node-cli-boxes node-cliui
+  node-clone node-co node-color-convert node-color-name node-colors
+  node-columnify node-combined-stream node-concat-map node-concat-stream
+  node-config-chain node-configstore node-console-control-strings
+  node-content-disposition node-content-type node-cookie node-cookie-signature
+  node-copy-concurrently node-core-util-is node-cross-spawn
+  node-crypto-random-string node-cyclist node-dashdash node-debug
+  node-decamelize node-decompress-response node-deep-extend node-defaults
+  node-define-properties node-delayed-stream node-delegates node-depd
+  node-detect-indent node-detect-newline node-dot-prop node-duplexer3
+  node-duplexify node-ecc-jsbn node-editor node-encodeurl node-encoding
+  node-end-of-stream node-err-code node-errno node-es6-promise
+  node-escape-html node-escape-string-regexp node-etag node-execa node-extend
+  node-extsprintf node-fast-deep-equal node-finalhandler node-find-up
+  node-flush-write-stream node-forever-agent node-form-data node-fresh
+  node-from2 node-fs-vacuum node-fs-write-stream-atomic node-fs.realpath
+  node-function-bind node-gauge node-genfun node-get-caller-file
+  node-get-stream node-getpass node-glob node-got node-graceful-fs
+  node-har-schema node-har-validator node-has-flag node-has-symbol-support-x
+  node-has-to-string-tag-x node-has-unicode node-hosted-git-info
+  node-http-errors node-http-signature node-iconv-lite node-iferr
+  node-import-lazy node-imurmurhash node-inflight node-inherits node-ini
+  node-invert-kv node-ip node-ip-regex node-ipaddr.js node-is-npm node-is-obj
+  node-is-object node-is-path-inside node-is-plain-obj node-is-retry-allowed
+  node-is-stream node-is-typedarray node-isarray node-isexe node-isstream
+  node-isurl node-jsbn node-json-parse-better-errors node-json-schema
+  node-json-schema-traverse node-json-stable-stringify
+  node-json-stringify-safe node-jsonify node-jsonparse node-jsonstream
+  node-jsprim node-latest-version node-lazy-property node-lcid node-libnpx
+  node-locate-path node-lockfile node-lodash node-lodash-packages
+  node-lowercase-keys node-lru-cache node-make-dir node-media-typer node-mem
+  node-merge-descriptors node-methods node-mime node-mime-types node-mimic-fn
+  node-mimic-response node-minimatch node-minimist node-mississippi
+  node-move-concurrently node-ms node-mute-stream node-negotiator node-nopt
+  node-normalize-package-data node-npm-bundled node-npm-package-arg
+  node-npm-run-path node-npmlog node-number-is-nan node-oauth-sign
+  node-object-assign node-on-finished node-once node-opener node-os-locale
+  node-os-tmpdir node-osenv node-p-cancelable node-p-finally node-p-is-promise
+  node-p-limit node-p-locate node-p-timeout node-package-json
+  node-parallel-transform node-parseurl node-path-exists node-path-is-absolute
+  node-path-is-inside node-path-to-regexp node-performance-now node-pify
+  node-prepend-http node-process-nextick-args node-promise-inflight
+  node-promise-retry node-promzard node-proto-list node-proxy-addr node-prr
+  node-pseudomap node-psl node-pump node-pumpify node-punycode node-qs node-qw
+  node-range-parser node-rc node-read node-read-package-json
+  node-readable-stream node-registry-auth-token node-registry-url node-request
+  node-require-directory node-require-main-filename node-resolve
+  node-resolve-from node-retry node-rimraf node-run-queue node-safe-buffer
+  node-semver node-semver-diff node-send node-serve-static node-set-blocking
+  node-setprototypeof node-sha node-shebang-command node-shebang-regex
+  node-signal-exit node-slash node-slide node-sorted-object node-spdx-correct
+  node-spdx-exceptions node-spdx-expression-parse node-spdx-license-ids
+  node-sshpk node-ssri node-statuses node-stream-each node-stream-iterate
+  node-stream-shift node-strict-uri-encode node-string-decoder
+  node-string-width node-strip-ansi node-strip-eof node-strip-json-comments
+  node-supports-color node-tar node-term-size node-text-table node-through
+  node-through2 node-timed-out node-toidentifier node-tough-cookie
+  node-tunnel-agent node-tweetnacl node-type-is node-typedarray
+  node-typedarray-to-buffer node-uid-number node-unique-filename
+  node-unique-string node-unpipe node-uri-js node-url-parse-lax
+  node-url-to-options node-util-deprecate node-utils-merge node-uuid
+  node-validate-npm-package-license node-validate-npm-package-name node-vary
+  node-verror node-wcwidth.js node-which node-which-module node-wide-align
+  node-widest-line node-wrap-ansi node-wrappy node-write-file-atomic
+  node-xdg-basedir node-xtend node-y18n node-yallist node-yargs
+  node-yargs-parser python-pkg-resources
+Use 'sudo apt autoremove' to remove them.
+The following NEW packages will be installed:
+  libnss3-tools
+0 upgraded, 1 newly installed, 0 to remove and 12 not upgraded.
+Need to get 997 kB of archives.
+After this operation, 4,918 kB of additional disk space will be used.
+Get:1 http://bz.archive.ubuntu.com/ubuntu focal-updates/universe amd64 libnss3-tools amd64 2:3.49.1-1ubuntu1.8 [997 kB]
+Fetched 997 kB in 8s (124 kB/s)        
+Selecting previously unselected package libnss3-tools.
+(Reading database ... 294991 files and directories currently installed.)
+Preparing to unpack .../libnss3-tools_2%3a3.49.1-1ubuntu1.8_amd64.deb ...
+Unpacking libnss3-tools (2:3.49.1-1ubuntu1.8) ...
+Setting up libnss3-tools (2:3.49.1-1ubuntu1.8) ...
+Processing triggers for man-db (2.9.1-1) ...
+osahon@osahon-HP-Laptop-15-bs1xx:~/vscode_ws/ASMCamp ECNG 3020/evo-prototype$ brew install mkcert
+
+Command 'brew' not found, did you mean:
+
+  command 'qbrew' from deb qbrew (0.4.1-8build1)
+  command 'brec' from deb bplay (0.991-10build1)
+
+Try: sudo apt install <deb name>
+
+osahon@osahon-HP-Laptop-15-bs1xx:~/vscode_ws/ASMCamp ECNG 3020/evo-prototype$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+==> Checking for `sudo` access (which may request your password)...
+==> This script will install:
+/home/linuxbrew/.linuxbrew/bin/brew
+/home/linuxbrew/.linuxbrew/share/doc/homebrew
+/home/linuxbrew/.linuxbrew/share/man/man1/brew.1
+/home/linuxbrew/.linuxbrew/share/zsh/site-functions/_brew
+/home/linuxbrew/.linuxbrew/etc/bash_completion.d/brew
+/home/linuxbrew/.linuxbrew/Homebrew
+==> The following new directories will be created:
+/home/linuxbrew/.linuxbrew/bin
+/home/linuxbrew/.linuxbrew/etc
+/home/linuxbrew/.linuxbrew/include
+/home/linuxbrew/.linuxbrew/lib
+/home/linuxbrew/.linuxbrew/sbin
+/home/linuxbrew/.linuxbrew/share
+/home/linuxbrew/.linuxbrew/var
+/home/linuxbrew/.linuxbrew/opt
+/home/linuxbrew/.linuxbrew/share/zsh
+/home/linuxbrew/.linuxbrew/share/zsh/site-functions
+/home/linuxbrew/.linuxbrew/var/homebrew
+/home/linuxbrew/.linuxbrew/var/homebrew/linked
+/home/linuxbrew/.linuxbrew/Cellar
+/home/linuxbrew/.linuxbrew/Caskroom
+/home/linuxbrew/.linuxbrew/Frameworks
+
+Press RETURN/ENTER to continue or any other key to abort:
+==> /usr/bin/sudo /usr/bin/install -d -o osahon -g osahon -m 0755 /home/linuxbrew/.linuxbrew
+==> /usr/bin/sudo /bin/mkdir -p /home/linuxbrew/.linuxbrew/bin /home/linuxbrew/.linuxbrew/etc /home/linuxbrew/.linuxbrew/include /home/linuxbrew/.linuxbrew/lib /home/linuxbrew/.linuxbrew/sbin /home/linuxbrew/.linuxbrew/share /home/linuxbrew/.linuxbrew/var /home/linuxbrew/.linuxbrew/opt /home/linuxbrew/.linuxbrew/share/zsh /home/linuxbrew/.linuxbrew/share/zsh/site-functions /home/linuxbrew/.linuxbrew/var/homebrew /home/linuxbrew/.linuxbrew/var/homebrew/linked /home/linuxbrew/.linuxbrew/Cellar /home/linuxbrew/.linuxbrew/Caskroom /home/linuxbrew/.linuxbrew/Frameworks
+==> /usr/bin/sudo /bin/chmod ug=rwx /home/linuxbrew/.linuxbrew/bin /home/linuxbrew/.linuxbrew/etc /home/linuxbrew/.linuxbrew/include /home/linuxbrew/.linuxbrew/lib /home/linuxbrew/.linuxbrew/sbin /home/linuxbrew/.linuxbrew/share /home/linuxbrew/.linuxbrew/var /home/linuxbrew/.linuxbrew/opt /home/linuxbrew/.linuxbrew/share/zsh /home/linuxbrew/.linuxbrew/share/zsh/site-functions /home/linuxbrew/.linuxbrew/var/homebrew /home/linuxbrew/.linuxbrew/var/homebrew/linked /home/linuxbrew/.linuxbrew/Cellar /home/linuxbrew/.linuxbrew/Caskroom /home/linuxbrew/.linuxbrew/Frameworks
+==> /usr/bin/sudo /bin/chmod go-w /home/linuxbrew/.linuxbrew/share/zsh /home/linuxbrew/.linuxbrew/share/zsh/site-functions
+==> /usr/bin/sudo /bin/chown osahon /home/linuxbrew/.linuxbrew/bin /home/linuxbrew/.linuxbrew/etc /home/linuxbrew/.linuxbrew/include /home/linuxbrew/.linuxbrew/lib /home/linuxbrew/.linuxbrew/sbin /home/linuxbrew/.linuxbrew/share /home/linuxbrew/.linuxbrew/var /home/linuxbrew/.linuxbrew/opt /home/linuxbrew/.linuxbrew/share/zsh /home/linuxbrew/.linuxbrew/share/zsh/site-functions /home/linuxbrew/.linuxbrew/var/homebrew /home/linuxbrew/.linuxbrew/var/homebrew/linked /home/linuxbrew/.linuxbrew/Cellar /home/linuxbrew/.linuxbrew/Caskroom /home/linuxbrew/.linuxbrew/Frameworks
+==> /usr/bin/sudo /bin/chgrp osahon /home/linuxbrew/.linuxbrew/bin /home/linuxbrew/.linuxbrew/etc /home/linuxbrew/.linuxbrew/include /home/linuxbrew/.linuxbrew/lib /home/linuxbrew/.linuxbrew/sbin /home/linuxbrew/.linuxbrew/share /home/linuxbrew/.linuxbrew/var /home/linuxbrew/.linuxbrew/opt /home/linuxbrew/.linuxbrew/share/zsh /home/linuxbrew/.linuxbrew/share/zsh/site-functions /home/linuxbrew/.linuxbrew/var/homebrew /home/linuxbrew/.linuxbrew/var/homebrew/linked /home/linuxbrew/.linuxbrew/Cellar /home/linuxbrew/.linuxbrew/Caskroom /home/linuxbrew/.linuxbrew/Frameworks
+==> /usr/bin/sudo /bin/mkdir -p /home/linuxbrew/.linuxbrew/Homebrew
+==> /usr/bin/sudo /bin/chown -R osahon:osahon /home/linuxbrew/.linuxbrew/Homebrew
+==> Downloading and installing Homebrew...
+remote: Enumerating objects: 225205, done.
+remote: Counting objects: 100% (135/135), done.
+remote: Compressing objects: 100% (103/103), done.
+remote: Total 225205 (delta 39), reused 92 (delta 32), pack-reused 225070
+Receiving objects: 100% (225205/225205), 64.18 MiB | 1.46 MiB/s, done.
+Resolving deltas: 100% (165721/165721), done.
+From https://github.com/Homebrew/brew
+ * [new branch]      import_homebrew_governance_private -> origin/import_homebrew_governance_private
+ * [new branch]      less-agressive-core-tap -> origin/less-agressive-core-tap
+ * [new branch]      master                  -> origin/master
+ * [new tag]             0.1                     -> 0.1
+ * [new tag]             0.2                     -> 0.2
+ * [new tag]             0.3                     -> 0.3
+ * [new tag]             0.4                     -> 0.4
+ * [new tag]             0.5                     -> 0.5
+ * [new tag]             0.6                     -> 0.6
+ * [new tag]             0.7                     -> 0.7
+ * [new tag]             0.7.1                   -> 0.7.1
+ * [new tag]             0.8                     -> 0.8
+ * [new tag]             0.8.1                   -> 0.8.1
+ * [new tag]             0.9                     -> 0.9
+ * [new tag]             0.9.1                   -> 0.9.1
+ * [new tag]             0.9.2                   -> 0.9.2
+ * [new tag]             0.9.3                   -> 0.9.3
+ * [new tag]             0.9.4                   -> 0.9.4
+ * [new tag]             0.9.5                   -> 0.9.5
+ * [new tag]             0.9.8                   -> 0.9.8
+ * [new tag]             0.9.9                   -> 0.9.9
+ * [new tag]             1.0.0                   -> 1.0.0
+ * [new tag]             1.0.1                   -> 1.0.1
+ * [new tag]             1.0.2                   -> 1.0.2
+ * [new tag]             1.0.3                   -> 1.0.3
+ * [new tag]             1.0.4                   -> 1.0.4
+ * [new tag]             1.0.5                   -> 1.0.5
+ * [new tag]             1.0.6                   -> 1.0.6
+ * [new tag]             1.0.7                   -> 1.0.7
+ * [new tag]             1.0.8                   -> 1.0.8
+ * [new tag]             1.0.9                   -> 1.0.9
+ * [new tag]             1.1.0                   -> 1.1.0
+ * [new tag]             1.1.1                   -> 1.1.1
+ * [new tag]             1.1.10                  -> 1.1.10
+ * [new tag]             1.1.11                  -> 1.1.11
+ * [new tag]             1.1.12                  -> 1.1.12
+ * [new tag]             1.1.13                  -> 1.1.13
+ * [new tag]             1.1.2                   -> 1.1.2
+ * [new tag]             1.1.3                   -> 1.1.3
+ * [new tag]             1.1.4                   -> 1.1.4
+ * [new tag]             1.1.5                   -> 1.1.5
+ * [new tag]             1.1.6                   -> 1.1.6
+ * [new tag]             1.1.7                   -> 1.1.7
+ * [new tag]             1.1.8                   -> 1.1.8
+ * [new tag]             1.1.9                   -> 1.1.9
+ * [new tag]             1.2.0                   -> 1.2.0
+ * [new tag]             1.2.1                   -> 1.2.1
+ * [new tag]             1.2.2                   -> 1.2.2
+ * [new tag]             1.2.3                   -> 1.2.3
+ * [new tag]             1.2.4                   -> 1.2.4
+ * [new tag]             1.2.5                   -> 1.2.5
+ * [new tag]             1.2.6                   -> 1.2.6
+ * [new tag]             1.3.0                   -> 1.3.0
+ * [new tag]             1.3.1                   -> 1.3.1
+ * [new tag]             1.3.2                   -> 1.3.2
+ * [new tag]             1.3.3                   -> 1.3.3
+ * [new tag]             1.3.4                   -> 1.3.4
+ * [new tag]             1.3.5                   -> 1.3.5
+ * [new tag]             1.3.6                   -> 1.3.6
+ * [new tag]             1.3.7                   -> 1.3.7
+ * [new tag]             1.3.8                   -> 1.3.8
+ * [new tag]             1.3.9                   -> 1.3.9
+ * [new tag]             1.4.0                   -> 1.4.0
+ * [new tag]             1.4.1                   -> 1.4.1
+ * [new tag]             1.4.2                   -> 1.4.2
+ * [new tag]             1.4.3                   -> 1.4.3
+ * [new tag]             1.5.0                   -> 1.5.0
+ * [new tag]             1.5.1                   -> 1.5.1
+ * [new tag]             1.5.10                  -> 1.5.10
+ * [new tag]             1.5.11                  -> 1.5.11
+ * [new tag]             1.5.12                  -> 1.5.12
+ * [new tag]             1.5.13                  -> 1.5.13
+ * [new tag]             1.5.14                  -> 1.5.14
+ * [new tag]             1.5.2                   -> 1.5.2
+ * [new tag]             1.5.3                   -> 1.5.3
+ * [new tag]             1.5.4                   -> 1.5.4
+ * [new tag]             1.5.5                   -> 1.5.5
+ * [new tag]             1.5.6                   -> 1.5.6
+ * [new tag]             1.5.7                   -> 1.5.7
+ * [new tag]             1.5.8                   -> 1.5.8
+ * [new tag]             1.5.9                   -> 1.5.9
+ * [new tag]             1.6.0                   -> 1.6.0
+ * [new tag]             1.6.1                   -> 1.6.1
+ * [new tag]             1.6.10                  -> 1.6.10
+ * [new tag]             1.6.11                  -> 1.6.11
+ * [new tag]             1.6.12                  -> 1.6.12
+ * [new tag]             1.6.13                  -> 1.6.13
+ * [new tag]             1.6.14                  -> 1.6.14
+ * [new tag]             1.6.15                  -> 1.6.15
+ * [new tag]             1.6.16                  -> 1.6.16
+ * [new tag]             1.6.17                  -> 1.6.17
+ * [new tag]             1.6.2                   -> 1.6.2
+ * [new tag]             1.6.3                   -> 1.6.3
+ * [new tag]             1.6.4                   -> 1.6.4
+ * [new tag]             1.6.5                   -> 1.6.5
+ * [new tag]             1.6.6                   -> 1.6.6
+ * [new tag]             1.6.7                   -> 1.6.7
+ * [new tag]             1.6.8                   -> 1.6.8
+ * [new tag]             1.6.9                   -> 1.6.9
+ * [new tag]             1.7.0                   -> 1.7.0
+ * [new tag]             1.7.1                   -> 1.7.1
+ * [new tag]             1.7.2                   -> 1.7.2
+ * [new tag]             1.7.3                   -> 1.7.3
+ * [new tag]             1.7.4                   -> 1.7.4
+ * [new tag]             1.7.5                   -> 1.7.5
+ * [new tag]             1.7.6                   -> 1.7.6
+ * [new tag]             1.7.7                   -> 1.7.7
+ * [new tag]             1.8.0                   -> 1.8.0
+ * [new tag]             1.8.1                   -> 1.8.1
+ * [new tag]             1.8.2                   -> 1.8.2
+ * [new tag]             1.8.3                   -> 1.8.3
+ * [new tag]             1.8.4                   -> 1.8.4
+ * [new tag]             1.8.5                   -> 1.8.5
+ * [new tag]             1.8.6                   -> 1.8.6
+ * [new tag]             1.9.0                   -> 1.9.0
+ * [new tag]             1.9.1                   -> 1.9.1
+ * [new tag]             1.9.2                   -> 1.9.2
+ * [new tag]             1.9.3                   -> 1.9.3
+ * [new tag]             2.0.0                   -> 2.0.0
+ * [new tag]             2.0.1                   -> 2.0.1
+ * [new tag]             2.0.2                   -> 2.0.2
+ * [new tag]             2.0.3                   -> 2.0.3
+ * [new tag]             2.0.4                   -> 2.0.4
+ * [new tag]             2.0.5                   -> 2.0.5
+ * [new tag]             2.0.6                   -> 2.0.6
+ * [new tag]             2.1.0                   -> 2.1.0
+ * [new tag]             2.1.1                   -> 2.1.1
+ * [new tag]             2.1.10                  -> 2.1.10
+ * [new tag]             2.1.11                  -> 2.1.11
+ * [new tag]             2.1.12                  -> 2.1.12
+ * [new tag]             2.1.13                  -> 2.1.13
+ * [new tag]             2.1.14                  -> 2.1.14
+ * [new tag]             2.1.15                  -> 2.1.15
+ * [new tag]             2.1.16                  -> 2.1.16
+ * [new tag]             2.1.2                   -> 2.1.2
+ * [new tag]             2.1.3                   -> 2.1.3
+ * [new tag]             2.1.4                   -> 2.1.4
+ * [new tag]             2.1.5                   -> 2.1.5
+ * [new tag]             2.1.6                   -> 2.1.6
+ * [new tag]             2.1.7                   -> 2.1.7
+ * [new tag]             2.1.8                   -> 2.1.8
+ * [new tag]             2.1.9                   -> 2.1.9
+ * [new tag]             2.2.0                   -> 2.2.0
+ * [new tag]             2.2.1                   -> 2.2.1
+ * [new tag]             2.2.10                  -> 2.2.10
+ * [new tag]             2.2.11                  -> 2.2.11
+ * [new tag]             2.2.12                  -> 2.2.12
+ * [new tag]             2.2.13                  -> 2.2.13
+ * [new tag]             2.2.14                  -> 2.2.14
+ * [new tag]             2.2.15                  -> 2.2.15
+ * [new tag]             2.2.16                  -> 2.2.16
+ * [new tag]             2.2.17                  -> 2.2.17
+ * [new tag]             2.2.2                   -> 2.2.2
+ * [new tag]             2.2.3                   -> 2.2.3
+ * [new tag]             2.2.4                   -> 2.2.4
+ * [new tag]             2.2.5                   -> 2.2.5
+ * [new tag]             2.2.6                   -> 2.2.6
+ * [new tag]             2.2.7                   -> 2.2.7
+ * [new tag]             2.2.8                   -> 2.2.8
+ * [new tag]             2.2.9                   -> 2.2.9
+ * [new tag]             2.3.0                   -> 2.3.0
+ * [new tag]             2.4.0                   -> 2.4.0
+ * [new tag]             2.4.1                   -> 2.4.1
+ * [new tag]             2.4.10                  -> 2.4.10
+ * [new tag]             2.4.11                  -> 2.4.11
+ * [new tag]             2.4.12                  -> 2.4.12
+ * [new tag]             2.4.13                  -> 2.4.13
+ * [new tag]             2.4.14                  -> 2.4.14
+ * [new tag]             2.4.15                  -> 2.4.15
+ * [new tag]             2.4.16                  -> 2.4.16
+ * [new tag]             2.4.2                   -> 2.4.2
+ * [new tag]             2.4.3                   -> 2.4.3
+ * [new tag]             2.4.4                   -> 2.4.4
+ * [new tag]             2.4.5                   -> 2.4.5
+ * [new tag]             2.4.6                   -> 2.4.6
+ * [new tag]             2.4.7                   -> 2.4.7
+ * [new tag]             2.4.8                   -> 2.4.8
+ * [new tag]             2.4.9                   -> 2.4.9
+ * [new tag]             2.5.0                   -> 2.5.0
+ * [new tag]             2.5.1                   -> 2.5.1
+ * [new tag]             2.5.10                  -> 2.5.10
+ * [new tag]             2.5.11                  -> 2.5.11
+ * [new tag]             2.5.12                  -> 2.5.12
+ * [new tag]             2.5.2                   -> 2.5.2
+ * [new tag]             2.5.3                   -> 2.5.3
+ * [new tag]             2.5.4                   -> 2.5.4
+ * [new tag]             2.5.5                   -> 2.5.5
+ * [new tag]             2.5.6                   -> 2.5.6
+ * [new tag]             2.5.7                   -> 2.5.7
+ * [new tag]             2.5.8                   -> 2.5.8
+ * [new tag]             2.5.9                   -> 2.5.9
+ * [new tag]             2.6.0                   -> 2.6.0
+ * [new tag]             2.6.1                   -> 2.6.1
+ * [new tag]             2.6.2                   -> 2.6.2
+ * [new tag]             2.7.0                   -> 2.7.0
+ * [new tag]             2.7.1                   -> 2.7.1
+ * [new tag]             2.7.2                   -> 2.7.2
+ * [new tag]             2.7.3                   -> 2.7.3
+ * [new tag]             2.7.4                   -> 2.7.4
+ * [new tag]             2.7.5                   -> 2.7.5
+ * [new tag]             2.7.6                   -> 2.7.6
+ * [new tag]             2.7.7                   -> 2.7.7
+ * [new tag]             3.0.0                   -> 3.0.0
+ * [new tag]             3.0.1                   -> 3.0.1
+ * [new tag]             3.0.10                  -> 3.0.10
+ * [new tag]             3.0.11                  -> 3.0.11
+ * [new tag]             3.0.2                   -> 3.0.2
+ * [new tag]             3.0.3                   -> 3.0.3
+ * [new tag]             3.0.4                   -> 3.0.4
+ * [new tag]             3.0.5                   -> 3.0.5
+ * [new tag]             3.0.6                   -> 3.0.6
+ * [new tag]             3.0.7                   -> 3.0.7
+ * [new tag]             3.0.8                   -> 3.0.8
+ * [new tag]             3.0.9                   -> 3.0.9
+ * [new tag]             3.1.0                   -> 3.1.0
+ * [new tag]             3.1.1                   -> 3.1.1
+ * [new tag]             3.1.10                  -> 3.1.10
+ * [new tag]             3.1.11                  -> 3.1.11
+ * [new tag]             3.1.12                  -> 3.1.12
+ * [new tag]             3.1.2                   -> 3.1.2
+ * [new tag]             3.1.3                   -> 3.1.3
+ * [new tag]             3.1.4                   -> 3.1.4
+ * [new tag]             3.1.5                   -> 3.1.5
+ * [new tag]             3.1.6                   -> 3.1.6
+ * [new tag]             3.1.7                   -> 3.1.7
+ * [new tag]             3.1.8                   -> 3.1.8
+ * [new tag]             3.1.9                   -> 3.1.9
+ * [new tag]             3.2.0                   -> 3.2.0
+ * [new tag]             3.2.1                   -> 3.2.1
+ * [new tag]             3.2.10                  -> 3.2.10
+ * [new tag]             3.2.11                  -> 3.2.11
+ * [new tag]             3.2.12                  -> 3.2.12
+ * [new tag]             3.2.13                  -> 3.2.13
+ * [new tag]             3.2.14                  -> 3.2.14
+ * [new tag]             3.2.15                  -> 3.2.15
+ * [new tag]             3.2.16                  -> 3.2.16
+ * [new tag]             3.2.17                  -> 3.2.17
+ * [new tag]             3.2.2                   -> 3.2.2
+ * [new tag]             3.2.3                   -> 3.2.3
+ * [new tag]             3.2.4                   -> 3.2.4
+ * [new tag]             3.2.5                   -> 3.2.5
+ * [new tag]             3.2.6                   -> 3.2.6
+ * [new tag]             3.2.7                   -> 3.2.7
+ * [new tag]             3.2.8                   -> 3.2.8
+ * [new tag]             3.2.9                   -> 3.2.9
+ * [new tag]             3.3.0                   -> 3.3.0
+ * [new tag]             3.3.1                   -> 3.3.1
+ * [new tag]             3.3.10                  -> 3.3.10
+ * [new tag]             3.3.11                  -> 3.3.11
+ * [new tag]             3.3.12                  -> 3.3.12
+ * [new tag]             3.3.13                  -> 3.3.13
+ * [new tag]             3.3.14                  -> 3.3.14
+ * [new tag]             3.3.15                  -> 3.3.15
+ * [new tag]             3.3.16                  -> 3.3.16
+ * [new tag]             3.3.2                   -> 3.3.2
+ * [new tag]             3.3.3                   -> 3.3.3
+ * [new tag]             3.3.4                   -> 3.3.4
+ * [new tag]             3.3.5                   -> 3.3.5
+ * [new tag]             3.3.6                   -> 3.3.6
+ * [new tag]             3.3.7                   -> 3.3.7
+ * [new tag]             3.3.8                   -> 3.3.8
+ * [new tag]             3.3.9                   -> 3.3.9
+ * [new tag]             3.4.0                   -> 3.4.0
+ * [new tag]             3.4.1                   -> 3.4.1
+ * [new tag]             3.4.10                  -> 3.4.10
+ * [new tag]             3.4.11                  -> 3.4.11
+ * [new tag]             3.4.2                   -> 3.4.2
+ * [new tag]             3.4.3                   -> 3.4.3
+ * [new tag]             3.4.4                   -> 3.4.4
+ * [new tag]             3.4.5                   -> 3.4.5
+ * [new tag]             3.4.6                   -> 3.4.6
+ * [new tag]             3.4.7                   -> 3.4.7
+ * [new tag]             3.4.8                   -> 3.4.8
+ * [new tag]             3.4.9                   -> 3.4.9
+ * [new tag]             3.5.0                   -> 3.5.0
+ * [new tag]             3.5.1                   -> 3.5.1
+ * [new tag]             3.5.10                  -> 3.5.10
+ * [new tag]             3.5.2                   -> 3.5.2
+ * [new tag]             3.5.3                   -> 3.5.3
+ * [new tag]             3.5.4                   -> 3.5.4
+ * [new tag]             3.5.5                   -> 3.5.5
+ * [new tag]             3.5.6                   -> 3.5.6
+ * [new tag]             3.5.7                   -> 3.5.7
+ * [new tag]             3.5.8                   -> 3.5.8
+ * [new tag]             3.5.9                   -> 3.5.9
+ * [new tag]             3.6.0                   -> 3.6.0
+ * [new tag]             3.6.1                   -> 3.6.1
+ * [new tag]             3.6.10                  -> 3.6.10
+ * [new tag]             3.6.11                  -> 3.6.11
+ * [new tag]             3.6.12                  -> 3.6.12
+ * [new tag]             3.6.13                  -> 3.6.13
+ * [new tag]             3.6.14                  -> 3.6.14
+ * [new tag]             3.6.15                  -> 3.6.15
+ * [new tag]             3.6.16                  -> 3.6.16
+ * [new tag]             3.6.17                  -> 3.6.17
+ * [new tag]             3.6.18                  -> 3.6.18
+ * [new tag]             3.6.19                  -> 3.6.19
+ * [new tag]             3.6.2                   -> 3.6.2
+ * [new tag]             3.6.20                  -> 3.6.20
+ * [new tag]             3.6.3                   -> 3.6.3
+ * [new tag]             3.6.4                   -> 3.6.4
+ * [new tag]             3.6.5                   -> 3.6.5
+ * [new tag]             3.6.6                   -> 3.6.6
+ * [new tag]             3.6.7                   -> 3.6.7
+ * [new tag]             3.6.8                   -> 3.6.8
+ * [new tag]             3.6.9                   -> 3.6.9
+Updating files: 100% (2974/2974), done.
+HEAD is now at 6a8dd4ff5 Merge pull request #14492 from Rylan12/remove-fetch-print
+==> Tapping homebrew/core
+remote: Enumerating objects: 1408440, done.
+remote: Counting objects: 100% (156/156), done.
+remote: Compressing objects: 100% (68/68), done.
+remote: Total 1408440 (delta 89), reused 150 (delta 88), pack-reused 1408284
+Receiving objects: 100% (1408440/1408440), 538.22 MiB | 154.00 KiB/s, done.
+Resolving deltas: 100% (981957/981957), done.
+From https://github.com/Homebrew/homebrew-core
+ * [new branch]      master     -> origin/master
+HEAD is now at 06288210356 krakend: update 2.2.0 bottle.
+==> Downloading https://ghcr.io/v2/homebrew/portable-ruby/portable-ruby/blobs/sha256:fc45ee6eddf4c7a17f4373dde7b1bc8a58255ea61e6847d3bf895225b28d072a
+######################################################################## 100.0%
+==> Pouring portable-ruby-2.6.8_1.x86_64_linux.bottle.tar.gz
+Updated 1 tap (homebrew/core).
+Warning: /home/linuxbrew/.linuxbrew/bin is not in your PATH.
+  Instructions on how to configure your shell for Homebrew
+  can be found in the 'Next steps' section below.
+==> Installation successful!
+
+==> Homebrew has enabled anonymous aggregate formulae and cask analytics.
+Read the analytics documentation (and how to opt-out) here:
+  https://docs.brew.sh/Analytics
+No analytics data has been sent yet (nor will any be during this install run).
+
+==> Homebrew is run entirely by unpaid volunteers. Please consider donating:
+  https://github.com/Homebrew/brew#donations
+
+==> Next steps:
+- Run these three commands in your terminal to add Homebrew to your PATH:
+    echo '# Set PATH, MANPATH, etc., for Homebrew.' >> /home/osahon/.profile
+    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/osahon/.profile
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+- Install Homebrew's dependencies if you have sudo access:
+    sudo apt-get install build-essential
+  For more information, see:
+    https://docs.brew.sh/Homebrew-on-Linux
+- We recommend that you install GCC:
+    brew install gcc
+- Run brew help to get started
+- Further documentation:
+    https://docs.brew.sh
+
+osahon@osahon-HP-Laptop-15-bs1xx:~/vscode_ws/ASMCamp ECNG 3020/evo-prototype$ brew install mkcert
+
+Command 'brew' not found, did you mean:
+
+  command 'qbrew' from deb qbrew (0.4.1-8build1)
+  command 'brec' from deb bplay (0.991-10build1)
+
+Try: sudo apt install <deb name>
+
+osahon@osahon-HP-Laptop-15-bs1xx:~/vscode_ws/ASMCamp ECNG 3020/evo-prototype$ echo '# Set PATH, MANPATH, etc., for Homebrew.' >> /home/osahon/.profile
+osahon@osahon-HP-Laptop-15-bs1xx:~/vscode_ws/ASMCamp ECNG 3020/evo-prototype$     echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/osahon/.profile
+osahon@osahon-HP-Laptop-15-bs1xx:~/vscode_ws/ASMCamp ECNG 3020/evo-prototype$     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+osahon@osahon-HP-Laptop-15-bs1xx:~/vscode_ws/ASMCamp ECNG 3020/evo-prototype$ sudo apt-get install build-essential
+[sudo] password for osahon: 
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+build-essential is already the newest version (12.8ubuntu1.1).
+The following packages were automatically installed and are no longer required:
+  gir1.2-goa-1.0 gyp libc-ares2 libfwupdplugin1 libjs-inherits
+  libjs-is-typedarray libjs-psl libjs-typedarray-to-buffer libllvm11
+  libuv1-dev libxmlb1 node-abbrev node-accepts node-ajv node-ansi
+  node-ansi-align node-ansi-regex node-ansi-styles node-ansistyles
+  node-aproba node-archy node-are-we-there-yet node-array-flatten node-asap
+  node-asn1 node-assert-plus node-asynckit node-aws-sign2 node-aws4
+  node-balanced-match node-bcrypt-pbkdf node-bl node-bluebird node-boxen
+  node-brace-expansion node-builtins node-bytes node-cacache node-call-limit
+  node-camelcase node-caseless node-chalk node-chownr node-ci-info
+  node-cli-boxes node-cliui node-clone node-co node-color-convert
+  node-color-name node-colors node-columnify node-combined-stream
+  node-concat-map node-concat-stream node-config-chain node-configstore
+  node-console-control-strings node-content-disposition node-content-type
+  node-cookie node-cookie-signature node-copy-concurrently node-core-util-is
+  node-cross-spawn node-crypto-random-string node-cyclist node-dashdash
+  node-debug node-decamelize node-decompress-response node-deep-extend
+  node-defaults node-define-properties node-delayed-stream node-delegates
+  node-depd node-detect-indent node-detect-newline node-dot-prop
+  node-duplexer3 node-duplexify node-ecc-jsbn node-editor node-encodeurl
+  node-encoding node-end-of-stream node-err-code node-errno node-es6-promise
+  node-escape-html node-escape-string-regexp node-etag node-execa node-extend
+  node-extsprintf node-fast-deep-equal node-finalhandler node-find-up
+  node-flush-write-stream node-forever-agent node-form-data node-fresh
+  node-from2 node-fs-vacuum node-fs-write-stream-atomic node-fs.realpath
+  node-function-bind node-gauge node-genfun node-get-caller-file
+  node-get-stream node-getpass node-glob node-got node-graceful-fs
+  node-har-schema node-har-validator node-has-flag node-has-symbol-support-x
+  node-has-to-string-tag-x node-has-unicode node-hosted-git-info
+  node-http-errors node-http-signature node-iconv-lite node-iferr
+  node-import-lazy node-imurmurhash node-inflight node-inherits node-ini
+  node-invert-kv node-ip node-ip-regex node-ipaddr.js node-is-npm node-is-obj
+  node-is-object node-is-path-inside node-is-plain-obj node-is-retry-allowed
+  node-is-stream node-is-typedarray node-isarray node-isexe node-isstream
+  node-isurl node-jsbn node-json-parse-better-errors node-json-schema
+  node-json-schema-traverse node-json-stable-stringify
+  node-json-stringify-safe node-jsonify node-jsonparse node-jsonstream
+  node-jsprim node-latest-version node-lazy-property node-lcid node-libnpx
+  node-locate-path node-lockfile node-lodash node-lodash-packages
+  node-lowercase-keys node-lru-cache node-make-dir node-media-typer node-mem
+  node-merge-descriptors node-methods node-mime node-mime-types node-mimic-fn
+  node-mimic-response node-minimatch node-minimist node-mississippi
+  node-move-concurrently node-ms node-mute-stream node-negotiator node-nopt
+  node-normalize-package-data node-npm-bundled node-npm-package-arg
+  node-npm-run-path node-npmlog node-number-is-nan node-oauth-sign
+  node-object-assign node-on-finished node-once node-opener node-os-locale
+  node-os-tmpdir node-osenv node-p-cancelable node-p-finally
+  node-p-is-promise node-p-limit node-p-locate node-p-timeout
+  node-package-json node-parallel-transform node-parseurl node-path-exists
+  node-path-is-absolute node-path-is-inside node-path-to-regexp
+  node-performance-now node-pify node-prepend-http node-process-nextick-args
+  node-promise-inflight node-promise-retry node-promzard node-proto-list
+  node-proxy-addr node-prr node-pseudomap node-psl node-pump node-pumpify
+  node-punycode node-qs node-qw node-range-parser node-rc node-read
+  node-read-package-json node-readable-stream node-registry-auth-token
+  node-registry-url node-request node-require-directory
+  node-require-main-filename node-resolve node-resolve-from node-retry
+  node-rimraf node-run-queue node-safe-buffer node-semver node-semver-diff
+  node-send node-serve-static node-set-blocking node-setprototypeof node-sha
+  node-shebang-command node-shebang-regex node-signal-exit node-slash
+  node-slide node-sorted-object node-spdx-correct node-spdx-exceptions
+  node-spdx-expression-parse node-spdx-license-ids node-sshpk node-ssri
+  node-statuses node-stream-each node-stream-iterate node-stream-shift
+  node-strict-uri-encode node-string-decoder node-string-width
+  node-strip-ansi node-strip-eof node-strip-json-comments node-supports-color
+  node-tar node-term-size node-text-table node-through node-through2
+  node-timed-out node-toidentifier node-tough-cookie node-tunnel-agent
+  node-tweetnacl node-type-is node-typedarray node-typedarray-to-buffer
+  node-uid-number node-unique-filename node-unique-string node-unpipe
+  node-uri-js node-url-parse-lax node-url-to-options node-util-deprecate
+  node-utils-merge node-uuid node-validate-npm-package-license
+  node-validate-npm-package-name node-vary node-verror node-wcwidth.js
+  node-which node-which-module node-wide-align node-widest-line
+  node-wrap-ansi node-wrappy node-write-file-atomic node-xdg-basedir
+  node-xtend node-y18n node-yallist node-yargs node-yargs-parser
+  python-pkg-resources
+Use 'sudo apt autoremove' to remove them.
+0 upgraded, 0 newly installed, 0 to remove and 12 not upgraded.
+osahon@osahon-HP-Laptop-15-bs1xx:~/vscode_ws/ASMCamp ECNG 3020/evo-prototype$ brew install mkcert
+Running `brew update --auto-update`...
+==> Fetching dependencies for mkcert: linux-headers@5.15, glibc, gmp, isl, mpfr, libmpc, lz4, xz, zlib, zstd, binutils and gcc
+==> Fetching linux-headers@5.15
+==> Downloading https://ghcr.io/v2/homebrew/core/linux-headers/5.15/manifests/5
+######################################################################## 100.0%
+==> Downloading https://ghcr.io/v2/homebrew/core/linux-headers/5.15/blobs/sha25
+==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/s
+######################################################################## 100.0%
+==> Fetching glibc
+==> Downloading https://ghcr.io/v2/homebrew/core/glibc/manifests/2.35_1
+######################################################################## 100.0%
+==> Downloading https://ghcr.io/v2/homebrew/core/glibc/blobs/sha256:274dd06ae6e
+==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/s
+######################################################################## 100.0%
+==> Fetching gmp
+==> Downloading https://ghcr.io/v2/homebrew/core/gmp/manifests/6.2.1_1
+######################################################################## 100.0%
+==> Downloading https://ghcr.io/v2/homebrew/core/gmp/blobs/sha256:786ae29f0c0b0
+==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/s
+######################################################################## 100.0%
+==> Fetching isl
+==> Downloading https://ghcr.io/v2/homebrew/core/isl/manifests/0.25
+######################################################################## 100.0%
+==> Downloading https://ghcr.io/v2/homebrew/core/isl/blobs/sha256:c0244c95ed9cc
+==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/s
+######################################################################## 100.0%
+==> Fetching mpfr
+==> Downloading https://ghcr.io/v2/homebrew/core/mpfr/manifests/4.2.0
+######################################################################## 100.0%
+==> Downloading https://ghcr.io/v2/homebrew/core/mpfr/blobs/sha256:3e62ca94c057
+==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/s
+######################################################################## 100.0%
+==> Fetching libmpc
+==> Downloading https://ghcr.io/v2/homebrew/core/libmpc/manifests/1.3.1
+######################################################################## 100.0%
+==> Downloading https://ghcr.io/v2/homebrew/core/libmpc/blobs/sha256:f6542ae5bc
+==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/s
+######################################################################## 100.0%
+==> Fetching lz4
+==> Downloading https://ghcr.io/v2/homebrew/core/lz4/manifests/1.9.4
+######################################################################## 100.0%
+==> Downloading https://ghcr.io/v2/homebrew/core/lz4/blobs/sha256:1757fefc3840e
+==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/s
+######################################################################## 100.0%
+==> Fetching xz
+==> Downloading https://ghcr.io/v2/homebrew/core/xz/manifests/5.4.1
+######################################################################## 100.0%
+==> Downloading https://ghcr.io/v2/homebrew/core/xz/blobs/sha256:a2e27545d92f53
+==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/s
+######################################################################## 100.0%
+==> Fetching zlib
+==> Downloading https://ghcr.io/v2/homebrew/core/zlib/manifests/1.2.13
+######################################################################## 100.0%
+==> Downloading https://ghcr.io/v2/homebrew/core/zlib/blobs/sha256:0082aa29a615
+==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/s
+######################################################################## 100.0%
+==> Fetching zstd
+==> Downloading https://ghcr.io/v2/homebrew/core/zstd/manifests/1.5.2-3
+######################################################################## 100.0%
+==> Downloading https://ghcr.io/v2/homebrew/core/zstd/blobs/sha256:006b5ab6a461
+==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/s
+######################################################################## 100.0%
+==> Fetching binutils
+==> Downloading https://ghcr.io/v2/homebrew/core/binutils/manifests/2.40
+######################################################################## 100.0%
+==> Downloading https://ghcr.io/v2/homebrew/core/binutils/blobs/sha256:f0917ab2
+==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/s
+######################################################################## 100.0%
+==> Fetching gcc
+==> Downloading https://ghcr.io/v2/homebrew/core/gcc/manifests/12.2.0-2
+######################################################################## 100.0%
+==> Downloading https://ghcr.io/v2/homebrew/core/gcc/blobs/sha256:d2080ede63b45
+==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/s
+######################################################################## 100.0%
+==> Fetching mkcert
+==> Downloading https://ghcr.io/v2/homebrew/core/mkcert/manifests/1.4.4
+######################################################################## 100.0%
+==> Downloading https://ghcr.io/v2/homebrew/core/mkcert/blobs/sha256:f674faa8be
+==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/s
+######################################################################## 100.0%
+==> Installing dependencies for mkcert: linux-headers@5.15, glibc, gmp, isl, mpfr, libmpc, lz4, xz, zlib, zstd, binutils and gcc
+==> Installing mkcert dependency: linux-headers@5.15
+==> Pouring linux-headers@5.15--5.15.91.x86_64_linux.bottle.tar.gz
+🍺  /home/linuxbrew/.linuxbrew/Cellar/linux-headers@5.15/5.15.91: 963 files, 5.7MB
+==> Installing mkcert dependency: glibc
+==> Pouring glibc--2.35_1.x86_64_linux.bottle.tar.gz
+==> /home/linuxbrew/.linuxbrew/Cellar/glibc/2.35_1/sbin/ldconfig
+==> Installing locale data for en_US.UTF-8
+==> /home/linuxbrew/.linuxbrew/Cellar/glibc/2.35_1/bin/localedef -i en_US -f UT
+🍺  /home/linuxbrew/.linuxbrew/Cellar/glibc/2.35_1: 1,404 files, 47MB
+==> Installing mkcert dependency: gmp
+==> Pouring gmp--6.2.1_1.x86_64_linux.bottle.tar.gz
+🍺  /home/linuxbrew/.linuxbrew/Cellar/gmp/6.2.1_1: 23 files, 3.9MB
+==> Installing mkcert dependency: isl
+==> Pouring isl--0.25.x86_64_linux.bottle.tar.gz
+🍺  /home/linuxbrew/.linuxbrew/Cellar/isl/0.25: 74 files, 9.2MB
+==> Installing mkcert dependency: mpfr
+==> Pouring mpfr--4.2.0.x86_64_linux.bottle.tar.gz
+🍺  /home/linuxbrew/.linuxbrew/Cellar/mpfr/4.2.0: 31 files, 3.9MB
+==> Installing mkcert dependency: libmpc
+==> Pouring libmpc--1.3.1.x86_64_linux.bottle.tar.gz
+🍺  /home/linuxbrew/.linuxbrew/Cellar/libmpc/1.3.1: 13 files, 638.6KB
+==> Installing mkcert dependency: lz4
+==> Pouring lz4--1.9.4.x86_64_linux.bottle.tar.gz
+🍺  /home/linuxbrew/.linuxbrew/Cellar/lz4/1.9.4: 22 files, 695.6KB
+==> Installing mkcert dependency: xz
+==> Pouring xz--5.4.1.x86_64_linux.bottle.tar.gz
+🍺  /home/linuxbrew/.linuxbrew/Cellar/xz/5.4.1: 223 files, 3MB
+==> Installing mkcert dependency: zlib
+==> Pouring zlib--1.2.13.x86_64_linux.bottle.tar.gz
+🍺  /home/linuxbrew/.linuxbrew/Cellar/zlib/1.2.13: 13 files, 472.7KB
+==> Installing mkcert dependency: zstd
+==> Pouring zstd--1.5.2.x86_64_linux.bottle.3.tar.gz
+🍺  /home/linuxbrew/.linuxbrew/Cellar/zstd/1.5.2: 31 files, 2.6MB
+==> Installing mkcert dependency: binutils
+==> Pouring binutils--2.40.x86_64_linux.bottle.tar.gz
+🍺  /home/linuxbrew/.linuxbrew/Cellar/binutils/2.40: 4,698 files, 462.5MB
+==> Installing mkcert dependency: gcc
+==> Pouring gcc--12.2.0.x86_64_linux.bottle.2.tar.gz
+==> Creating the GCC specs file: /home/linuxbrew/.linuxbrew/Cellar/gcc/12.2.0/b
+🍺  /home/linuxbrew/.linuxbrew/Cellar/gcc/12.2.0: 1,633 files, 306.6MB
+==> Installing mkcert
+==> Pouring mkcert--1.4.4.x86_64_linux.bottle.tar.gz
+🍺  /home/linuxbrew/.linuxbrew/Cellar/mkcert/1.4.4: 6 files, 3.2MB
+==> Running `brew cleanup mkcert`...
+Disable this behaviour by setting HOMEBREW_NO_INSTALL_CLEANUP.
+Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
+osahon@osahon-HP-Laptop-15-bs1xx:~/vscode_ws/ASMCamp ECNG 3020/evo-prototype$ mkcert -install
+Created a new local CA 💥
+Sudo password:
+The local CA is now installed in the system trust store! ⚡️
+The local CA is now installed in the Firefox and/or Chrome/Chromium trust store (requires browser restart)! 🦊
+
+osahon@osahon-HP-Laptop-15-bs1xx:~/vscode_ws/ASMCamp ECNG 3020/evo-prototype$ ls
+cert.pem  key.pem       package.json       public     README.md  tsconfig.json
+certs     node_modules  package-lock.json  reactcert  src
+osahon@osahon-HP-Laptop-15-bs1xx:~/vscode_ws/ASMCamp ECNG 3020/evo-prototype$ mkcert -key-file ./reactcert/key.pem -cert-file ./reactcert/cert.pem "localhost"
+ 
+Created a new certificate valid for the following names 📜
+ - "localhost"
+
+The certificate is at "./reactcert/cert.pem" and the key at "./reactcert/key.pem" ✅
+
+It will expire on 3 May 2025 🗓
+
+

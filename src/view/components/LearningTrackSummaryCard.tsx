@@ -50,7 +50,7 @@ export default function LearningTrackSummaryCard({ trackDetails, userIsEnrolled,
         <i className="fa fa-road" style={commonDisplayStyles.icon24Style}></i>
       </div>
 
-      <div>
+      <div style={{flexGrow: 9}}>
         <h4>
           <Link 
             to={to}

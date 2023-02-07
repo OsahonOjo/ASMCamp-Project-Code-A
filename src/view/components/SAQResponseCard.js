@@ -17,7 +17,8 @@ function SAQResponseCard({ topicItemId, handleSubmit, showModal }) {
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    let processedInput = input.toLowerCase();
+    //let processedInput = input.toLowerCase();
+    let processedInput = input.slice();
     let isCorrect = handleSubmit(topicItemId, processedInput);
     showModal(isCorrect);
   }

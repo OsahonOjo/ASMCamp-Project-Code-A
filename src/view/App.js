@@ -50,7 +50,7 @@ function App() {
       <Routes>
         
         {/* routes can be placed in any order because React Router is smart now */}
-        
+
         <Route path="/topic/:topicId/item/:seqNumber" element={<TopicItemScreen />}/>
         <Route path="/course/:courseId" element={<CourseScreen />} />
         <Route path="/track/:trackId" element={<LearningTrackScreen />}  />
@@ -59,6 +59,12 @@ function App() {
         <Route path="/students/progress" element={<ProgressAndRewardsScreen />} />
         <Route path="/students/leaderboards" element={<StudentLeaderboardScreen />} />
         <Route path="/students" element={<StudentDashboardScreen />} />
+
+        {/* /instructors/edit/track/0 --> create new
+            /instructors/edit/track/1/:trackId --> edit existing
+        
+            /new/thing for new entity
+            /edit/thing for editing existing entity*/}
 
         <Route path="/instructors/edit/track" element={<EditLearningTrackScreen />} />
         <Route path="/instructors/edit/course" element={<EditCourseScreen />} />
