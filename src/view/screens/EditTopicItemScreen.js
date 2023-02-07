@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Editor from "@monaco-editor/react";
+import DOMPurify from "isomorphic-dompurify";
 
 import BackButtonNavbar from "../components/BackButtonNavbar";
 
@@ -52,9 +53,7 @@ export default function EditTopicItemScreen() {
     const [instructionState, setInstructionState] = React.useState("");
     const [hintState, setHintState] = React.useState("");
     const [mcqOptionState, setMCQOptionState] = React.useState("");
-    const [mcqAnswerState, setMCQAnswerState] = React.useState(-1);
     const [saqAnswerState, setSAQAnswerState] = React.useState("");
-    const [tfqAnswerState, setTFQAnswerState] = React.useState(false);
 
     function handleTitleInputChange(event) {
         let nextInputs = Object.assign({}, inputs);
@@ -104,15 +103,20 @@ export default function EditTopicItemScreen() {
         setInputs(nextInputs);
     }
 
-    function handleContentInputChange(event) {
+    function handleContentInputChange(value, event) {
+        console.log('editor event: ', event);
         let nextInputs = Object.assign({}, inputs);
-        nextInputs.content = event.target.value;
+        nextInputs.content = value;
         setInputs(nextInputs);
     }
 
     function handleSubmit(event) {
         event.preventDefault();
         console.log('form data: ', inputs);
+        let nextInputs = Object.assign({}, inputs);
+        nextInputs.content = DOMPurify.sanitize(nextInputs.content);
+        setInputs(nextInputs);
+        console.log('form data: sanitized content: ', nextInputs);
     }
 
     // for instruction field text entry field

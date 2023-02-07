@@ -173,7 +173,7 @@ export default function TopicItemScreen() {
         </div>
       </div>
 
-      <div style={{background: 'blue', height: '40px', width: '100%'}}><p></p></div>
+      <div style={{background: 'white', height: '40px', width: '100%'}}><p></p></div>
       
       <div style={{...commonDisplayStyles.stickToBottom, ...commonDisplayStyles.displayFlexCenter, background: '#ACC8F1', height: '40px'}}>
         <ProgressBar percentage={null} hasLabel={true} labelOnRightSide={false}/>

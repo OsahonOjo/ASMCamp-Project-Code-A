@@ -19,6 +19,7 @@ export default function LearningTrackScreenViewModel() {
     }
     let trackEntity = response.response;
     let details = trackDetailsFactory(trackEntity._id, trackEntity.title, trackEntity.longDescription, trackEntity.courseIds.length, trackEntity.courseIds.length * HOURS_PER_COURSE);
+    console.log('from viewmodel: long desc: ', details.longDescription);
     setTrackDetails(details);
   }
 

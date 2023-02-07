@@ -19,7 +19,10 @@ export default function CollapsibleParagraph({ text, limit, paragraphStyle }: Co
   };
 
   let characterLimit = limit ? limit : DEFAULT_LIMIT;
-  let abbreviatedText = (text && text.length <= characterLimit) ? text : text.slice(0, characterLimit) + "...";  // throws TypeError if text prop is empty
+
+  // throws TypeError if text prop is empty
+  // also throws TypeError if order of ? text.slice(0, characterLimit) + "..." : text is reversed
+  let abbreviatedText = (text && text.length > characterLimit) ? text.slice(0, characterLimit) + "..." : text; 
   let displayText = isCollapsed ? abbreviatedText : text;
   
   let displayButton = text && text.length > characterLimit;
