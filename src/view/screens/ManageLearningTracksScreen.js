@@ -1,4 +1,6 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
+import AllLearningTracksScreenViewModel from './AllLearningTracksScreenViewModel';
 
 import BackButtonNavbar from "../components/BackButtonNavbar";
 import LearningTrackSummaryCard from "../components/LearningTrackSummaryCard";
@@ -16,9 +18,9 @@ export default function ManageLearningTracksScreen() {
   const NAVBAR_TEXT = "Manage Learning Tracks";
   const NEW_TRACK_TEXT = "Create New Learning Track";
   const PREVIOUS_PAGE_URL = "/instructors";
-  const NEXT_PAGE_URL = "/instructors/edit/track";
+  const NEXT_PAGE_URL_STEM = "/instructors/edit/track"; // /:trackId -> /0, /:trackId
   const EDIT_MODE = true;
-  const shortDescription = "Learning Track Short Description. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor am";  // 160 characters
+  // const shortDescription = "Learning Track Short Description. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor amet consectetur adipsicing. Lorem ipsum sit dolor am";  // 160 characters
   const ICON_SIZE = "20px";
   const iconAndTextListItemStyle = {
 		iconSize: {
@@ -27,32 +29,41 @@ export default function ManageLearningTracksScreen() {
 		},
     displayInline: true
 	};
-  const learningTracksSummaryData = [
-    {
-      id: "kblyvtrjxt66789",
-      title: "Learning Track Alpha",
-      shortDescription: shortDescription,
-      nCourses: 2
-    },
-    {
-      id: "574648kvjjx5689kkl",
-      title: "Learning Track Obsidian",
-      shortDescription: shortDescription,
-      nCourses: 2
-    },
-    {
-      id: "574648kvjjx5689kklkblyvtrjxt66789",
-      title: "Learning Track Ruby",
-      shortDescription: shortDescription,
-      nCourses: 2
-    }
-  ];
+  // const learningTracksSummaryData = [
+  //   {
+  //     id: "kblyvtrjxt66789",
+  //     title: "Learning Track Alpha",
+  //     shortDescription: shortDescription,
+  //     nCourses: 2
+  //   },
+  //   {
+  //     id: "574648kvjjx5689kkl",
+  //     title: "Learning Track Obsidian",
+  //     shortDescription: shortDescription,
+  //     nCourses: 2
+  //   },
+  //   {
+  //     id: "574648kvjjx5689kklkblyvtrjxt66789",
+  //     title: "Learning Track Ruby",
+  //     shortDescription: shortDescription,
+  //     nCourses: 2
+  //   }
+  // ];
+
+  const { learningTrackSummaries, getLearningTrackSummaries } = AllLearningTracksScreenViewModel();
+  const [summaries, setSummaries] = React.useState([]);
+
+  React.useEffect(() => { getLearningTrackSummaries() }, []);
+
+  React.useEffect(() => {
+    learningTrackSummaries ? setSummaries(learningTrackSummaries) : setSummaries([]);
+  }, [learningTrackSummaries]);
 
   return (
     <div>
       <BackButtonNavbar title={NAVBAR_TEXT} to={PREVIOUS_PAGE_URL} />
 
-      {learningTracksSummaryData.map(track => 
+      {summaries.map(track => 
         <div key={track.title}>
           <LearningTrackSummaryCard 
             trackDetails={{ 
@@ -61,13 +72,13 @@ export default function ManageLearningTracksScreen() {
               shortDescription: track.shortDescription,
               nCourses: track.nCourses }}
             editMode={EDIT_MODE} 
-            to={NEXT_PAGE_URL}/>
+            to={`${NEXT_PAGE_URL_STEM}/${track.id}`}/>
         </div>
       )}
 
       <div className="card">
         <Link 
-          to={NEXT_PAGE_URL}>
+          to={`${NEXT_PAGE_URL_STEM}/0`}>
             <IconAndTextListItem icon={mainIcon} text={NEW_TRACK_TEXT} style={iconAndTextListItemStyle}/>  
             <img src={nextPageIcon} alt="next page icon" className="icon--20px"/>
         </Link> 

@@ -112,11 +112,11 @@ export default function EditTopicItemScreen() {
 
     function handleSubmit(event) {
         event.preventDefault();
-        console.log('form data: ', inputs);
+        // console.log('form data: ', inputs);
         let nextInputs = Object.assign({}, inputs);
         nextInputs.content = DOMPurify.sanitize(nextInputs.content);
         setInputs(nextInputs);
-        console.log('form data: sanitized content: ', nextInputs);
+        // console.log('form data: sanitized content: ', nextInputs);
     }
 
     // for instruction field text entry field

@@ -1,63 +1,93 @@
-import React, { ChangeEvent, FormEvent } from 'react';
+import React, { ChangeEvent, FormEvent, FormEventHandler } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import './styles/card.css';
 import './styles/icon.css';
 
 interface GenericEditEntityViewProps {
-    ids: {
-        id: string,
-        learningTrackId?: string, 
-        courseId?: string
-    }, 
-    fields: {
+    relevantFields: {
+        id: boolean,
+        learningTrackId: boolean, 
+        courseId: boolean
         title: boolean, 
-        shortDescription?: boolean, 
-        longDescription?: boolean, 
-        seqNumber?: boolean, 
-        description?: boolean
-    }
+        shortDescription: boolean, 
+        longDescription: boolean, 
+        seqNumber: boolean, 
+        description: boolean
+    },
+    fieldValues: {
+        id: string,
+        learningTrackId: string, 
+        courseId: string,
+        title: string, 
+        shortDescription: string, 
+        longDescription: string, 
+        seqNumber: number | string, 
+        description: string
+    },
+    handleSubmit: Function
 };
 
 /**
  * @description A customizable form that can submit data for Learning Track, Course, and Topic entities only.
  * @interface GenericEditEntityViewProps
  */
-export default function GenericEditEntityView({ ids, fields }: GenericEditEntityViewProps): JSX.Element {
+export default function GenericEditEntityView({ relevantFields, fieldValues, handleSubmit }: GenericEditEntityViewProps): JSX.Element {
 
     const BUTTON_TEXT = "Save";
-    const [inputs, setInputs] = React.useState({
-        id: ids.id,
-        learningTrackId: ids.learningTrackId,
-        courseId: ids.courseId,
-        title: "", 
-        shortDescription: "", 
-        longDescription: "", 
-        seqNumber: "", 
-        description: ""
-    });
+    const N_ROWS_SHORT_DESC = 5;
+    const N_ROWS_LONG_DESC = 7;
+
+    const navigate = useNavigate();
+
+    const [inputs, setInputs] = React.useState(fieldValues);
+
+    React.useEffect(() => {
+        setInputs(fieldValues);
+    }, [fieldValues]);
 
     const titleField = 
         <div>
             <label>Title</label><br />
-            <input type="text" value={inputs.title} onChange={handleTitleInputChange}/>
+            <input 
+                required 
+                type="text" 
+                value={inputs.title} 
+                onChange={handleTitleInputChange}
+                style={{width: '80%'}}/>
         </div>;
 
     const shortDescriptionField = 
         <div>
             <label>Short Description</label><br />
-            <textarea value={inputs.shortDescription} onChange={handleShortDescInputChange}></textarea>
+            <textarea 
+                required 
+                value={inputs.shortDescription} 
+                onChange={handleShortDescInputChange}
+                rows={N_ROWS_SHORT_DESC}
+                style={{width: '80%'}}></textarea>
         </div>;
 
     const longDescriptionField = 
         <div>
             <label>Long Description</label><br />
-            <textarea value={inputs.longDescription} onChange={handleLongDescInputChange}></textarea>
+            <textarea 
+                required 
+                value={inputs.longDescription} 
+                onChange={handleLongDescInputChange}
+                rows={N_ROWS_LONG_DESC}
+                style={{width: '80%'}}></textarea>
         </div>;
 
     const descriptionField = 
         <div>
             <label>Description</label><br />
-            <textarea value={inputs.description} onChange={handleDescInputChange}></textarea>
+            <textarea 
+                required 
+                value={inputs.description} 
+                onChange={handleDescInputChange}
+                rows={N_ROWS_SHORT_DESC}
+                style={{width: '80%'}}></textarea>
         </div>;
 
     const seqNumberField = 
@@ -96,18 +126,13 @@ export default function GenericEditEntityView({ ids, fields }: GenericEditEntity
         setInputs(nextInputs);
     }
 
-    function handleSubmit(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-        console.log('form data: ', inputs);
-    }
-
     return (
-        <form className="card" onSubmit={handleSubmit}>
-            {fields.title ? titleField : null}
-            {fields.seqNumber ? seqNumberField : null}
-            {fields.shortDescription ? shortDescriptionField : null}
-            {fields.description ? descriptionField : null}
-            {fields.longDescription ? longDescriptionField : null}
+        <form className="card" onSubmit={(event) => { handleSubmit(event, inputs) }}>
+            {relevantFields.title ? titleField : null}
+            {relevantFields.seqNumber ? seqNumberField : null}
+            {relevantFields.shortDescription ? shortDescriptionField : null}
+            {relevantFields.description ? descriptionField : null}
+            {relevantFields.longDescription ? longDescriptionField : null}
             <button type="submit">{BUTTON_TEXT}</button>
         </form>
     );

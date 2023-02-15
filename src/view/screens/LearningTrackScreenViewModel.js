@@ -7,8 +7,8 @@ export default function LearningTrackScreenViewModel() {
   const [trackDetails, setTrackDetails] = React.useState({});
   const [courseSummaries, setCourseSummaries] = React.useState([]);
 
-  function trackDetailsFactory(trackId, title, longDescription, nCourses, nHours) {
-    return { trackId, title, longDescription, nCourses, nHours };
+  function trackDetailsFactory(trackId, title, shortDescription, longDescription, nCourses, nHours) {
+    return { trackId, title, longDescription, shortDescription, nCourses, nHours };
   }
 
   async function getTrackDetailsData(trackId) {
@@ -18,8 +18,7 @@ export default function LearningTrackScreenViewModel() {
         return;
     }
     let trackEntity = response.response;
-    let details = trackDetailsFactory(trackEntity._id, trackEntity.title, trackEntity.longDescription, trackEntity.courseIds.length, trackEntity.courseIds.length * HOURS_PER_COURSE);
-    console.log('from viewmodel: long desc: ', details.longDescription);
+    let details = trackDetailsFactory(trackEntity._id, trackEntity.title, trackEntity.shortDescription, trackEntity.longDescription, trackEntity.courseIds.length, trackEntity.courseIds.length * HOURS_PER_COURSE);
     setTrackDetails(details);
   }
 
@@ -63,7 +62,7 @@ export default function LearningTrackScreenViewModel() {
         console.log(error.message);
         return;
     }
-    // NOTE: here, learningTrackId is [String] for some reason
+    // NOTE: here, learningTrackId is ['learningTrackId'] for some reason
     let summaries = summarizeCourseEntities(response.response);
     setCourseSummaries(summaries);
   }
