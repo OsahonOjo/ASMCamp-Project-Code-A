@@ -75,14 +75,23 @@ export default function EditLearningTrackScreen() {
     };
   }
 
-  const { trackId } = useParams();
   const navigate = useNavigate();
+
+  const SCREEN_MODE = {
+    CREATE_NEW_ENTITY: "CREATE_NEW_ENTITY",
+    EDIT_EXISTING_ENTITY: "EDIT_EXISTING_ENTITY"
+  };  
+
+  const { trackId } = useParams();
+
+  const [screenMode, setScreenMode] = React.useState(trackId != 0 ? SCREEN_MODE.EDIT_EXISTING_ENTITY : SCREEN_MODE.CREATE_NEW_ENTITY);
+  const [learningTrackEntityState, setLearningTrackEntityState] = React.useState(fieldValuesFactory(EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING));
+  const [courseSummariesState, setCourseSummariesState] = React.useState([]);
 
   const { trackDetails, courseSummaries, getTrackDetailsData, getCourseSummariesData } = LearningTrackScreenViewModel();
   const { createLearningTrack } = EditLearningTrackScreenViewModel();
 
-  const [learningTrackEntityState, setLearningTrackEntityState] = React.useState(fieldValuesFactory(EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING));
-  const [courseSummariesState, setCourseSummariesState] = React.useState([]);
+  
 
   React.useEffect(() => {
     if (trackId != 0) {
