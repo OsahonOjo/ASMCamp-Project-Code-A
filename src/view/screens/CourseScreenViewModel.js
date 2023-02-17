@@ -9,9 +9,11 @@ export default function CourseScreenViewModel() {
 
     function courseDetailsFactory(courseEntity) {
         return { 
-            courseId: courseEntity._id, 
+            courseId: courseEntity._id, // NB: _id in a Course entity
             learningTrackId: courseEntity.learningTrackId,
             title: courseEntity.title,
+            seqNumber: courseEntity.seqNumber,
+            shortDescription: courseEntity.shortDescription,
             longDescription: courseEntity.longDescription,
             nHours: HOURS_PER_COURSE, 
             nLessons: courseEntity.nLessons, 
@@ -38,6 +40,8 @@ export default function CourseScreenViewModel() {
         topicEntities.forEach((topicEntity, index) => {
             let topic = {
                 id: topicEntity._id,
+                learningTrackId: topicEntity.learningTrackId,
+                courseId: topicEntity.courseId,
                 title: topicEntity.title,
                 description: topicEntity.description,
                 topicItems: []
@@ -53,8 +57,8 @@ export default function CourseScreenViewModel() {
                 type: topicItemEntity.type,
                 title: topicItemEntity.title,
                 xp: topicItemEntity.xp,
-                topicId: topicItemEntity.topicId[0],
-                courseId: topicItemEntity.courseId[0]
+                topicId: topicItemEntity.topicId,
+                courseId: topicItemEntity.courseId
             };
             let parentTopic = combined.find(topic => topic.id == topicItem.topicId);
             parentTopic.topicItems.push(topicItem);

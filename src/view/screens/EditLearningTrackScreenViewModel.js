@@ -1,5 +1,5 @@
 import React from "react";
-import { createTrack } from "../../model/EduDataModel";
+import { createTrack, updateTrack } from "../../model/EduDataModel";
 
 export default function EditLearningTrackScreenViewModel() {
 
@@ -24,8 +24,21 @@ export default function EditLearningTrackScreenViewModel() {
         return formattedLearningTrackEntity;
     }
 
+    async function updateLearningTrack(trackId, title, shortDescription, longDescription) {
+        const { response, error } = await updateTrack(trackId, title, shortDescription, longDescription);
+        if (error) {
+            console.log(error.message);
+            return;
+        }
+        let learningTrackEntity = response.response;
+        let formattedLearningTrackEntity = formattedLearningTrackFactory(learningTrackEntity);
+        console.log('track updated and formatted successfully: ', formattedLearningTrackEntity);
+        return formattedLearningTrackEntity;
+    }
+
     return {
-        createLearningTrack
+        createLearningTrack,
+        updateLearningTrack
     }
 
 };

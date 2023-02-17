@@ -19,7 +19,7 @@ import { commonDisplayStyles } from "./styles/commonDisplayStyles";
   const url = "/tracks/" + slug;
 */
 
-function CourseSummaryCard({ courseId, learningTrackId, title, shortDescription, nHours, userIsEnrolled, percentage, hasLabel, labelOnRightSide, editMode }) {
+function CourseSummaryCard({ courseId, learningTrackId, title, shortDescription, nHours, userIsEnrolled, percentage, hasLabel, labelOnRightSide, editMode, nextPageUrl }) {
 
   const location = useLocation();
   const NORMAL_MODE_NEXT_PAGE_URL = `/course/${courseId}`;
@@ -36,6 +36,8 @@ function CourseSummaryCard({ courseId, learningTrackId, title, shortDescription,
 		}
 	};
 
+  // state={{ from: location.pathname, learningTrackId: learningTrackId }}
+
   return (
     <div>
 
@@ -47,11 +49,9 @@ function CourseSummaryCard({ courseId, learningTrackId, title, shortDescription,
             <span className="material-symbols-outlined" style={commonDisplayStyles.icon24Style}>collections_bookmark</span>
           </div>
 
-          <div>
+          <div style={{ flexGrow: '9' }}>
             <div>
-              <Link 
-                to={NEXT_PAGE_URL}
-                state={{ from: location.pathname, learningTrackId: learningTrackId }}>
+              <Link to={nextPageUrl} >
                   <h4 style={commonDisplayStyles.inline}>{title}</h4>
               </Link>
             </div>
@@ -71,9 +71,7 @@ function CourseSummaryCard({ courseId, learningTrackId, title, shortDescription,
 
           </div>
 
-          <Link 
-            to={NEXT_PAGE_URL}
-            state={{ from: location.pathname, learningTrackId: learningTrackId }}>
+          <Link to={nextPageUrl}>
               <div>
                 {
                   editMode 

@@ -43,8 +43,8 @@ export default function App() {
 
         <Route path="/instructors/tracks" element={<ManageLearningTracksScreen />} />
         <Route path="/instructors/edit/track/:trackId" element={<EditLearningTrackScreen />} />
-        <Route path="/instructors/edit/course" element={<EditCourseScreen />} />
-        <Route path="/instructors/edit/topic" element={<EditTopicScreen />} />
+        <Route path="/instructors/edit/course/:courseId" element={<EditCourseScreen />} />
+        <Route path="/instructors/edit/topic/:topicId" element={<EditTopicScreen />} />
         <Route path="/instructors/edit/item" element={<EditTopicItemScreen />} />
 
         <Route path="/instructors/leaderboards" element={<InstructorLeaderboardScreen />} />

@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 import IconAndTextListItem from "./IconAndTextListItem";
 import VersatileCardSegment from "./VersatileCardSegment";
@@ -29,11 +30,12 @@ import { Link } from "react-router-dom";
 //     }
 // };
 
-export default function TopicsListCardNoTopicItems({ topicData, mainIcon, linkIcon }) {
+export default function TopicsListCardNoTopicItems({ topicData, mainIcon, linkIcon, linkStem, learningTrackId, courseId }) {
 
     const CARD_HEADING = "Topics";
     const CREATE_NEW_TOPIC_TEXT = "Create New Topic";
     const ICON_SIZE = '20px';
+    const location = useLocation();
 
     return (
         <div className="card">
@@ -52,35 +54,41 @@ export default function TopicsListCardNoTopicItems({ topicData, mainIcon, linkIc
                         text: topic.description,
                         style: {}
                     }}
-                    payload={{
-                        topicId: topic.id,
-                        learningTrackId: topic.learningTrackId,
-                        courseId: topic.courseId
-                    }}/>
-            )}
+                    to={`${linkStem}/${topic.id}`}/> )}
 
             <hr />
 
-            <Link to={linkIcon.to}>
-                <div className="card-display--flex">
-                    <div style={{ flexGrow: 9 }}>
-                        <IconAndTextListItem 
-                            icon={headingIcon}
-                            text={CREATE_NEW_TOPIC_TEXT}
-                            style={{
-                                iconSize: {
-                                height: ICON_SIZE,
-                                width: ICON_SIZE
-                                },
-                                displayInline: true
-                            }} />
+            <Link 
+                to={`${linkStem}/0`}
+                state={{ from: location.pathname, learningTrackId, courseId }}>
+                    <div className="card-display--flex">
+                        <div style={{ flexGrow: 9 }}>
+                            <IconAndTextListItem 
+                                icon={headingIcon}
+                                text={CREATE_NEW_TOPIC_TEXT}
+                                style={{
+                                    iconSize: {
+                                        height: ICON_SIZE,
+                                        width: ICON_SIZE
+                                    },
+                                    displayInline: true
+                                }} />
+                        </div>
+                        <div>
+                            <span className="material-symbols-outlined">navigate_next</span>
+                        </div>
                     </div>
-                    <div>
-                        <span className="material-symbols-outlined">navigate_next</span>
-                    </div>
-                </div>
             </Link>
             
         </div>
     );
 }
+
+/*
+    progress, paragraphTwo, extraComponent
+    payload={{
+        id: topic.id,
+        learningTrackId: topic.learningTrackId,
+        courseId: topic.courseId
+    }}
+*/

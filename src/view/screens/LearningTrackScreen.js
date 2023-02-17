@@ -87,7 +87,9 @@ export default function LearningTrackScreen() {
         nComplete={2}
         nTotal={4}/>    
 
-      <CourseListCard courses={courseSummariesState}/>
+      <CourseListCard 
+        courses={courseSummariesState}
+        viewModeNextPageUrlStem={"/course"} />
 
       <InstructorsCard 
         mainIconSize={"20px"}

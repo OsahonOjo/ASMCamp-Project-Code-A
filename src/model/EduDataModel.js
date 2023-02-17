@@ -1,166 +1,123 @@
-// BASE_API_URL: localhost:3001/api/v1
 import { BASE_API_URL, VIEW_PREFIX, POST_PREFIX, DELETE_PREFIX, ALL_TRACKS, TRACK } from './apiEndpoints';
+
+const REQUEST_METHODS = { GET: "GET", POST: "POST" };
 
 const GET_REQUEST_OPTIONS = {
     method: "GET",
-    headers: {
-      "Accept": "application/json"
-    },
+    headers: { "Accept": "application/json" },
     mode: "cors"
 };
 
 const responseFactory = (response, error) => {
-    return {
-        response,
-        error
-    };
+    return { response, error };
 };
 
-export async function getAllTracks() {
-    let path = `${BASE_API_URL}${VIEW_PREFIX}${ALL_TRACKS}`;  // http://localhost:3001/api/v1/view/tracks
-    let response = await fetch(path, GET_REQUEST_OPTIONS);
-    let data, error;
-    if (response.body) {
-        data = await response.json();
-        error = null;
-    }
-    else {
-        data = null;
-        error = { 
-            message: `GET request failed at /${VIEW_PREFIX}/${ALL_TRACKS} endpoint.`,
-            response
-        };
-    }
-    return responseFactory(data, error);
-}
-
-// response is object
-export async function getTrack(trackId) {
-    let path = `${BASE_API_URL}${VIEW_PREFIX}${TRACK}/${trackId}`;
-    let response = await fetch(path, GET_REQUEST_OPTIONS);
-    let data, error;
-    if (response.body) {
-        data = await response.json();
-        error = null;
-    }
-    else {
-        data = null;
-        error = { 
-            message: `GET request failed at /${VIEW_PREFIX}/${TRACK}/${trackId} endpoint.`,
-            response
-        };
-    }
-    return responseFactory(data, error);
-}
-
-export async function getAllCoursesInTrack(trackId) {
-    let path = `${BASE_API_URL}${VIEW_PREFIX}${TRACK}/${trackId}/courses`;
-    let response = await fetch(path, GET_REQUEST_OPTIONS);
-    let data, error;
-    if (response.body) {
-        data = await response.json();
-        error = null;
-    }
-    else {
-        data = null;
-        error = { 
-            message: `GET request failed at /${VIEW_PREFIX}/${TRACK}/${trackId}/courses endpoint.`,
-            response
-        };
-    }
-    return responseFactory(data, error);
-}
-
-export async function getCourse(courseId) {
-    let path = `${BASE_API_URL}${VIEW_PREFIX}/course/${courseId}`;
-    let response = await fetch(path, GET_REQUEST_OPTIONS);
-    let data = null, error = null;
-    if (response.body) 
-        data = await response.json();
-    else 
-        error = { 
-            message: `GET request failed at /${VIEW_PREFIX}/course/${courseId} endpoint.`,
-            response
-        };
-    return responseFactory(data, error);
-}
-
-export async function getAllTopicsInCourse(courseId) {
-    let path = `${BASE_API_URL}${VIEW_PREFIX}/course/${courseId}/topics`;
-    let response = await fetch(path, GET_REQUEST_OPTIONS);
-    let data = null, error = null;
-    if (response.body)
-        data = await response.json();
-    else
-        error = { 
-            message: `GET request failed at /${VIEW_PREFIX}/course/${courseId}/topics endpoint.`,
-            response
-        };
-    return responseFactory(data, error);
-}
-
-export async function getAllTopicItemsInCourse(courseId) {
-    let path = `${BASE_API_URL}${VIEW_PREFIX}/course/${courseId}/items`;
-    let response = await fetch(path, GET_REQUEST_OPTIONS);
-    let data = null, error = null;
-    if (response.body) 
-        data = await response.json();
-    else
-        error = { 
-            message: `GET request failed at /${VIEW_PREFIX}/course/${courseId}/items endpoint.`,
-            response
-        };
-    return responseFactory(data, error);
-}
-
-// for EditTopicScreenViewModel:
-// getTopic(topicId)
-// getAllTopicItemsInTopic(topicId)
-
-export async function getTopicItem(topicId, seqNumber) {
-    let path = `${BASE_API_URL}${VIEW_PREFIX}/topic/${topicId}/item/${seqNumber}`;
-    let response = await fetch(path, GET_REQUEST_OPTIONS);
+async function callFetchAPI(method, path, options) {
+    let response = await fetch(path, options);
     let data = null, error = null;
     if (response.body)
         data = await response.json();
     else   
-        error = { 
-            message: `GET request failed at /${VIEW_PREFIX}/topic/${topicId}/item/${seqNumber} endpoint.`,
+        error = {
+            message: `${method} request failed at ${path} endpoint`,
             response
         };
     // NOTE: ['learningTrackId'], ['courseId'], ['trackId']
     return responseFactory(data, error);
 }
 
-const post_request_options = {
-    method: "POST",
-    mode: "cors",
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json"  // CORS "complex request" due to application/json .: handle pre-flight
-    }
+// BASE_API_URL: localhost:3001/api/v1
+export async function getAllTracks() {
+    let path = `${BASE_API_URL}${VIEW_PREFIX}${ALL_TRACKS}`;
+    return callFetchAPI(REQUEST_METHODS.GET, path, GET_REQUEST_OPTIONS);
+}
+
+export async function getTrack(trackId) {
+    let path = `${BASE_API_URL}${VIEW_PREFIX}${TRACK}/${trackId}`;
+    return callFetchAPI(REQUEST_METHODS.GET, path, GET_REQUEST_OPTIONS);
+}
+
+export async function getAllCoursesInTrack(trackId) {
+    let path = `${BASE_API_URL}${VIEW_PREFIX}${TRACK}/${trackId}/courses`;
+    return callFetchAPI(REQUEST_METHODS.GET, path, GET_REQUEST_OPTIONS);
+}
+
+export async function getCourse(courseId) {
+    let path = `${BASE_API_URL}${VIEW_PREFIX}/course/${courseId}`;
+    return callFetchAPI(REQUEST_METHODS.GET, path, GET_REQUEST_OPTIONS);
+}
+
+export async function getAllTopicsInCourse(courseId) {
+    let path = `${BASE_API_URL}${VIEW_PREFIX}/course/${courseId}/topics`;
+    return callFetchAPI(REQUEST_METHODS.GET, path, GET_REQUEST_OPTIONS);
+}
+
+export async function getAllTopicItemsInCourse(courseId) {
+    let path = `${BASE_API_URL}${VIEW_PREFIX}/course/${courseId}/items`;
+    return callFetchAPI(REQUEST_METHODS.GET, path, GET_REQUEST_OPTIONS);
+}
+
+export async function getTopic(topicId) {
+    let path = `${BASE_API_URL}${VIEW_PREFIX}/topic/${topicId}`;
+    return callFetchAPI(REQUEST_METHODS.GET, path, GET_REQUEST_OPTIONS);
+}
+
+export async function getAllTopicItemsInTopic(topicId) {
+    let path = `${BASE_API_URL}${VIEW_PREFIX}/topic/${topicId}/items`;
+    return callFetchAPI(REQUEST_METHODS.GET, path, GET_REQUEST_OPTIONS);
+}
+
+export async function getTopicItem(topicId, seqNumber) {
+    let path = `${BASE_API_URL}${VIEW_PREFIX}/topic/${topicId}/item/${seqNumber}`;
+    return callFetchAPI(REQUEST_METHODS.GET, path, GET_REQUEST_OPTIONS);
+}
+
+const postRequestOptionsFactory = (body) => {
+    return {
+        method: "POST",
+        mode: "cors",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"  // CORS "complex request" due to application/json .: handle pre-flight
+        }, 
+        body
+    };
 };
 
 // BASE_API_URL: localhost:3001/api/v1
 export async function createTrack(title, shortDescription, longDescription) {
     let path = `${BASE_API_URL}${POST_PREFIX}/create/track`;
-    console.log('path: ', path);
-    post_request_options.body = JSON.stringify({ title: title, shortDescription: shortDescription, longDescription: longDescription });
-    console.log('POST request options: ', post_request_options);
-    let response = await fetch(path, post_request_options);
-    let data = null, error = null;
-    if (response.body)
-        data = await response.json();
-    else   
-        error = {
-            message: `POST request failed at /${POST_PREFIX}/create/track endpoint`,
-            response
-        };
-    return responseFactory(data, error);
+    let post_request_options = postRequestOptionsFactory(JSON.stringify({ title: title, shortDescription: shortDescription, longDescription: longDescription }));
+    return callFetchAPI(REQUEST_METHODS.POST, path, post_request_options);
+}
+
+export async function createCourseEntity(learningTrackId, title, seqNumber, shortDescription, longDescription) {
+    let path = `${BASE_API_URL}${POST_PREFIX}/create/course`;
+    let post_request_options = postRequestOptionsFactory(JSON.stringify({ learningTrackId: learningTrackId, title: title, seqNumber: seqNumber, shortDescription: shortDescription, longDescription: longDescription }));
+    return callFetchAPI(REQUEST_METHODS.POST, path, post_request_options);
+}
+
+export async function createTopicEntity(learningTrackId, courseId, title, seqNumber, description) {
+    let path = `${BASE_API_URL}${POST_PREFIX}/create/topic`;
+    let post_request_options = postRequestOptionsFactory(JSON.stringify({ learningTrackId, courseId, title, seqNumber, description }));
+    return callFetchAPI(REQUEST_METHODS.POST, path, post_request_options);
+}
+
+export async function updateTrack(trackId, title, shortDescription, longDescription) {
+    let path = `${BASE_API_URL}${POST_PREFIX}/update/track`;
+    let post_request_options = postRequestOptionsFactory(JSON.stringify({ id: trackId, title: title, shortDescription: shortDescription, longDescription: longDescription }));
+    return callFetchAPI(REQUEST_METHODS.POST, path, post_request_options);
+}
+
+export async function updateCourseEntity(courseId, learningTrackId, title, seqNumber, shortDescription, longDescription) {
+    let path = `${BASE_API_URL}${POST_PREFIX}/update/course`;
+    let post_request_options = postRequestOptionsFactory(JSON.stringify({ 
+        id: courseId, learningTrackId, title, seqNumber, shortDescription, longDescription }));
+    return callFetchAPI(REQUEST_METHODS.POST, path, post_request_options);
 }
 
 /*
-    // Example POST method implementation:
+    // Example fetch API implementation (POST method):
     async function postData(url = '', data = {}) {
 
         // Default options are marked with *
@@ -170,8 +127,8 @@ export async function createTrack(title, shortDescription, longDescription) {
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
             credentials: 'same-origin', // include, *same-origin, omit
             headers: {
-            'Content-Type': 'application/json'
-            // 'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
             },
             redirect: 'follow', // manual, *follow, error
             referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url

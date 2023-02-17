@@ -30,9 +30,9 @@ import { Link } from "react-router-dom";
 //     }
 // };
 
-export default function TopicItemsListCard({ topicItemsData, mainIcon, linkIcon }) {
+export default function TopicItemsListCard({ topicItemsData, mainIcon, linkIcon, linkStem }) {
 
-    const CARD_HEADING = "Topics Items";
+    const CARD_HEADING = "Topic Items";
     const CREATE_NEW_TOPIC_TEXT = "Create New Topic Item";
     const ICON_SIZE = '20px';
 
@@ -40,24 +40,20 @@ export default function TopicItemsListCard({ topicItemsData, mainIcon, linkIcon 
         <div className="card">
             <p>{CARD_HEADING}</p>
 
-            {topicItemsData.map(topic => 
+            {topicItemsData.map(topicItem => 
                 <VersatileCardSegment 
-                    key={topic.title}
+                    key={topicItem.title}
                     mainIcon={mainIcon}
                     linkIcon={linkIcon}
                     heading={{
-                        text: topic.title,
+                        text: topicItem.title,
                         style: {}
                     }}
                     paragraphOne={{
-                        text: topic.description,
+                        text: topicItem.description,
                         style: {}
                     }}
-                    payload={{
-                        topicId: topic.id,
-                        learningTrackId: topic.learningTrackId,
-                        courseId: topic.courseId
-                    }}/>
+                    to={`${linkStem}/${topicItem.id}`}/>
             )}
 
             <hr />
@@ -85,3 +81,11 @@ export default function TopicItemsListCard({ topicItemsData, mainIcon, linkIcon 
         </div>
     );
 }
+
+/*
+    payload={{
+        topicId: topic.id,
+        learningTrackId: topic.learningTrackId,
+        courseId: topic.courseId
+    }}
+*/

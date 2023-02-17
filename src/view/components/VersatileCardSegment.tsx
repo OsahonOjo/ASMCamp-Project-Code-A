@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import ProgressBar from './ProgressBar';
 import CollapsibleParagraph from './CollapsibleParagraph';
@@ -35,12 +35,13 @@ interface VersatileCardSegmentProps {
         style: object,
         to: string
     },
-    extraComponent?: JSX.Element
-    payload?: object
+    extraComponent?: JSX.Element,
+    to: string
 };
 
-export default function VersatileCardSegment({ mainIcon, heading, progress, paragraphOne, paragraphTwo, extraComponent, linkIcon }: VersatileCardSegmentProps): JSX.Element {
+export default function VersatileCardSegment({ mainIcon, heading, progress, paragraphOne, paragraphTwo, extraComponent, linkIcon, to }: VersatileCardSegmentProps): JSX.Element {
 
+    const location = useLocation();
     const headingElement: JSX.Element = <p style={heading.style}>{heading.text}</p>;
 
     return (
@@ -52,7 +53,13 @@ export default function VersatileCardSegment({ mainIcon, heading, progress, para
                 <div style={{height: '100%'}}>{mainIcon.icon}</div>
 
                 <div style={{ flexGrow: 9 }}>
-                    {linkIcon ? <Link to={linkIcon.to}>{headingElement}</Link> : headingElement}
+                    {linkIcon 
+                        ? <Link 
+                            to={to}
+                            state={{ from: location.pathname }}>
+                                {headingElement}
+                          </Link> 
+                        : headingElement}
 
                     {progress 
                         ? <ProgressBar 
@@ -79,8 +86,10 @@ export default function VersatileCardSegment({ mainIcon, heading, progress, para
                 <div>
                     {linkIcon 
                         ? <div style={{height: '100%'}}>
-                            <Link to={linkIcon.to}>
-                                {linkIcon.icon}
+                            <Link 
+                                to={to} 
+                                state={{ from: location.pathname }}>
+                                    {linkIcon.icon}
                             </Link>
                           </div>
                         : null}

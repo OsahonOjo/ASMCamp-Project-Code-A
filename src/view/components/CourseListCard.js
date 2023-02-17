@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import CourseSummaryCard from "./CourseSummaryCard";
 import IconAndTextListItem from "./IconAndTextListItem";
@@ -12,9 +12,12 @@ import './styles/icon.css';
 import './styles/card.css';
 import { commonDisplayStyles } from "./styles/commonDisplayStyles";
 
-function CourseListCard({ courses, editMode }) {
+function CourseListCard({ courses, viewModeNextPageUrlStem, editMode, editModeNextPageUrlStem, learningTrackId }) {
 
-  const EDIT_MODE_NEXT_PAGE_URL = "/instructors/edit/course";
+  // const EDIT_MODE_NEXT_PAGE_URL = "/instructors/edit/course";
+  // const NORMAL_MODE_NEXT_PAGE_URL = `/course/${courseId}`;
+  // const NEXT_PAGE_URL = editMode ? EDIT_MODE_NEXT_PAGE_URL : NORMAL_MODE_NEXT_PAGE_URL;
+  
   const NEW_COURSE_TEXT = "Create New Course";
   const ICON_SIZE = "20px";
   const iconAndTextListItemStyle = {
@@ -25,11 +28,14 @@ function CourseListCard({ courses, editMode }) {
     displayInline: true
 	};
 
+  const location = useLocation();
+
   const newCourseElement = 
     <div>
       <hr />
       <Link 
-        to={EDIT_MODE_NEXT_PAGE_URL}>
+        to={`${editModeNextPageUrlStem}/0`}
+        state={{ from: location.pathname, learningTrackId: learningTrackId }} >
           <IconAndTextListItem icon={mainIcon} text={NEW_COURSE_TEXT} style={iconAndTextListItemStyle}/>  
           <span className="material-symbols-outlined">navigate_next</span>
       </Link> 
@@ -57,7 +63,8 @@ function CourseListCard({ courses, editMode }) {
             percentage={course.percentage}
             hasLabel={true}
             labelOnRightSide={false}
-            editMode={editMode}/>)}
+            editMode={editMode}
+            nextPageUrl={editMode ? `${editModeNextPageUrlStem}/${course.id}` : `${viewModeNextPageUrlStem}/${course.id}`} />)}
 
         {editMode ? newCourseElement : null}
       </details>

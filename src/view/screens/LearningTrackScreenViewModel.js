@@ -8,7 +8,8 @@ export default function LearningTrackScreenViewModel() {
   const [courseSummaries, setCourseSummaries] = React.useState([]);
 
   function trackDetailsFactory(trackId, title, shortDescription, longDescription, nCourses, nHours) {
-    return { trackId, title, longDescription, shortDescription, nCourses, nHours };
+    return { trackId, // NB: _id in a Learning Track entity
+      title, longDescription, shortDescription, nCourses, nHours };
   }
 
   async function getTrackDetailsData(trackId) {
@@ -34,6 +35,26 @@ export default function LearningTrackScreenViewModel() {
     return summaries;
   }
 
+  async function getCourseSummariesData(trackId) {
+    const { response, error } = await getAllCoursesInTrack(trackId);
+    if (error) {
+        console.log(error.message);
+        return;
+    }
+    // NOTE: here, learningTrackId is ['learningTrackId'] for some reason
+    let summaries = summarizeCourseEntities(response.response);
+    setCourseSummaries(summaries);
+  }
+
+  return {
+    trackDetails, 
+    courseSummaries, 
+    getTrackDetailsData,
+    getCourseSummariesData
+  };
+}
+
+
   /* type MyType = {
         id: number;
         name: string;
@@ -55,22 +76,3 @@ export default function LearningTrackScreenViewModel() {
         { "id": 2, "name": "Started" }
     ];
   */
-
-  async function getCourseSummariesData(trackId) {
-    const { response, error } = await getAllCoursesInTrack(trackId);
-    if (error) {
-        console.log(error.message);
-        return;
-    }
-    // NOTE: here, learningTrackId is ['learningTrackId'] for some reason
-    let summaries = summarizeCourseEntities(response.response);
-    setCourseSummaries(summaries);
-  }
-
-  return {
-    trackDetails, 
-    courseSummaries, 
-    getTrackDetailsData,
-    getCourseSummariesData
-  };
-}

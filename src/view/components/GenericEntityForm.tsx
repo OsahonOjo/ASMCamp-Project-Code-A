@@ -32,7 +32,7 @@ interface GenericEditEntityViewProps {
  * @description A customizable form that can submit data for Learning Track, Course, and Topic entities only.
  * @interface GenericEditEntityViewProps
  */
-export default function GenericEditEntityView({ relevantFields, fieldValues, handleSubmit }: GenericEditEntityViewProps): JSX.Element {
+export default function GenericEntityForm({ relevantFields, fieldValues, handleSubmit }: GenericEditEntityViewProps): JSX.Element {
 
     const BUTTON_TEXT = "Save";
     const N_ROWS_SHORT_DESC = 5;
@@ -40,8 +40,10 @@ export default function GenericEditEntityView({ relevantFields, fieldValues, han
 
     const navigate = useNavigate();
 
+    // props are read-only so store fieldValues in a state
     const [inputs, setInputs] = React.useState(fieldValues);
 
+    // fieldValues is null initially, initialized to working value afterwards
     React.useEffect(() => {
         setInputs(fieldValues);
     }, [fieldValues]);
