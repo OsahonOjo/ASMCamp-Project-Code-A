@@ -43,10 +43,43 @@ export default function GenericEntityForm({ relevantFields, fieldValues, handleS
     // props are read-only so store fieldValues in a state
     const [inputs, setInputs] = React.useState(fieldValues);
 
-    // fieldValues is null initially, initialized to working value afterwards
+    // fieldValues is empty strings initially, initialized to working value afterwards
     React.useEffect(() => {
         setInputs(fieldValues);
     }, [fieldValues]);
+
+    const idField = 
+        <div>
+            <label>ID</label><br />
+            <input 
+                required 
+                readOnly={true}
+                type="text" 
+                value={inputs.id} 
+                style={{width: '80%'}}/>
+        </div>;
+
+    const learningTrackIdField = 
+        <div>
+            <label>Learning Track ID</label><br />
+            <input 
+                required 
+                readOnly={true}
+                type="text" 
+                value={inputs.learningTrackId} 
+                style={{width: '80%'}}/>
+        </div>;
+
+    const courseIdField = 
+        <div>
+            <label>Course ID</label><br />
+            <input 
+                required 
+                readOnly={true}
+                type="text" 
+                value={inputs.courseId} 
+                style={{width: '80%'}}/>
+        </div>;
 
     const titleField = 
         <div>
@@ -130,6 +163,9 @@ export default function GenericEntityForm({ relevantFields, fieldValues, handleS
 
     return (
         <form className="card" onSubmit={(event) => { handleSubmit(event, inputs) }}>
+            {relevantFields.id ? idField : null}
+            {relevantFields.learningTrackId ? learningTrackIdField : null}
+            {relevantFields.courseId ? courseIdField : null}
             {relevantFields.title ? titleField : null}
             {relevantFields.seqNumber ? seqNumberField : null}
             {relevantFields.shortDescription ? shortDescriptionField : null}

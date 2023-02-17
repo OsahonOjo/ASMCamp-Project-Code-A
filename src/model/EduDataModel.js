@@ -116,6 +116,12 @@ export async function updateCourseEntity(courseId, learningTrackId, title, seqNu
     return callFetchAPI(REQUEST_METHODS.POST, path, post_request_options);
 }
 
+export async function updateTopicEntity(id, learningTrackId, courseId, title, seqNumber, description) {
+    let path = `${BASE_API_URL}${POST_PREFIX}/update/topic`;
+    let post_request_options = postRequestOptionsFactory(JSON.stringify({ id, learningTrackId, courseId, title, seqNumber, description }));
+    return callFetchAPI(REQUEST_METHODS.POST, path, post_request_options);
+}
+
 /*
     // Example fetch API implementation (POST method):
     async function postData(url = '', data = {}) {

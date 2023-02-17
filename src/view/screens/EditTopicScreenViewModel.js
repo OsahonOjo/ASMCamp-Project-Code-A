@@ -1,5 +1,5 @@
 import React from "react";
-import { getTopic, getAllTopicItemsInTopic, createTopicEntity } from "../../model/EduDataModel";
+import { getTopic, getAllTopicItemsInTopic, createTopicEntity, updateTopicEntity } from "../../model/EduDataModel";
 
 export default function EditTopicScreenViewModel() {
 
@@ -36,7 +36,7 @@ export default function EditTopicScreenViewModel() {
     }
 
     async function createTopic(learningTrackId, courseId, title, seqNumber, description) {
-        console.log("TODO: create topic");
+        console.log('inside viewmodel: create topic');
         const { response, error } = await createTopicEntity(learningTrackId, courseId, title, seqNumber, description);
         if (error) {
             console.log(error.message);
@@ -44,16 +44,25 @@ export default function EditTopicScreenViewModel() {
         }
         let topicEntity = response.response;
         topicEntity.id = topicEntity._id;
-        console.log('course created and formatted successfully: ', topicEntity);
+        console.log('topic created and formatted successfully: ', topicEntity);
         return topicEntity;
     }
 
-    async function updateTopic() {
-        console.log("TODO: delete topic");
+    async function updateTopic(id, learningTrackId, courseId, title, seqNumber, description) {
+        console.log("inside viewmodel: update topic");
+        const { response, error } = await updateTopicEntity(id, learningTrackId, courseId, title, seqNumber, description);
+        if (error) {
+            console.log(error.message);
+            return;
+        }
+        let topicEntity = response.response;
+        topicEntity.id = topicEntity._id;
+        console.log('topic updated and formatted successfully: ', topicEntity);
+        return topicEntity;
     }
 
     async function deleteTopic() {
-        console.log("TODO: delete topic");
+        console.log("TODO: inside viewmodel: delete topic");
     }
 
     return {

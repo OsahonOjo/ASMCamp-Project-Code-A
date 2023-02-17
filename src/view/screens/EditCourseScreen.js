@@ -76,22 +76,30 @@ export default function EditCourseScreen() {
         CREATE_NEW_ENTITY: "CREATE_NEW_ENTITY",
         EDIT_EXISTING_ENTITY: "EDIT_EXISTING_ENTITY"
     };  
-
-    const { courseId } = useParams();
+    
     const location = useLocation();
     const navigate = useNavigate();
 
+    /**
+     * courseId = 0: CREATE_NEW_ENTITY; only learningTrackId shown in GenericEntityForm; no topics created yet
+     * courseId != 0: EDIT_EXISTING_ENTITY; leave GenericEntityForm empty, it'll be filled out later
+     */
+
+    const { courseId } = useParams();
     const [screenMode, setScreenMode] = React.useState(courseId != 0 ? SCREEN_MODE.EDIT_EXISTING_ENTITY : SCREEN_MODE.CREATE_NEW_ENTITY);
-    const [courseEntityState, setCourseEntityState] = React.useState(courseEntityValuesFactory(EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING));
+    const [courseEntityState, setCourseEntityState] = React.useState(courseEntityValuesFactory(EMPTY_STRING, courseId != 0 ? EMPTY_STRING : location.state.learningTrackId, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING));
     const [topicSummariesState, setTopicSummariesState] = React.useState([]);
     
+    // ViewModel interfaces
     const { courseDetails, topicsAndTopicItems, getCourseDetailsData, getTopicsAndTopicItemsData } = CourseScreenViewModel();
     const { createCourse, updateCourse } = EditCourseScreenViewModel();
 
+    // change in courseId triggers change in screen mode
     React.useEffect(() => {
         setScreenMode(courseId != 0 ? SCREEN_MODE.EDIT_EXISTING_ENTITY : SCREEN_MODE.CREATE_NEW_ENTITY);
     }, [courseId]);
 
+    // change in screen mode conditionally triggers fetching data for existing course entity
     React.useEffect(() => {
         if (screenMode == SCREEN_MODE.EDIT_EXISTING_ENTITY) {
             getCourseDetailsData(courseId);
@@ -99,11 +107,12 @@ export default function EditCourseScreen() {
         }
     }, [screenMode]);
     
+    // successful data fetching conditionally changes content displayed on screen for existing course entity
     React.useEffect(() => {
         if (screenMode == SCREEN_MODE.EDIT_EXISTING_ENTITY) {
             courseDetails 
                 ? setCourseEntityState(courseEntityValuesFactory(courseDetails.courseId, courseDetails.learningTrackId, courseDetails.title, courseDetails.seqNumber, courseDetails.shortDescription, courseDetails.longDescription)) 
-                : setCourseEntityState(courseEntityValuesFactory(EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING));
+                : setCourseEntityState(courseEntityValuesFactory(EMPTY_STRING, 'location.state.learningTrackId', EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING));
             topicsAndTopicItems 
                 ? setTopicSummariesState(topicSummariesFactory(topicsAndTopicItems)) 
                 : setTopicSummariesState([]);
@@ -181,7 +190,7 @@ export default function EditCourseScreen() {
                         linkIcon={topicListLinkIcon}
                         linkStem={NEXT_PAGE_URL_STEM}
                         learningTrackId={courseEntityState.learningTrackId} 
-                        courseId={courseEntityState.courseId} /> {/* maybe change this to id */}
+                        courseId={courseEntityState.id} /> {/* topic's courseId is course's id */}
                         
                     <hr />
                     <button>Delete Course</button>

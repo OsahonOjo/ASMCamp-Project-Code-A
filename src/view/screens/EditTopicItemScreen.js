@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams, useNavigate } from "react-router-dom";
 import Editor from "@monaco-editor/react";
 import DOMPurify from "isomorphic-dompurify";
+import EditTopicItemScreenViewModel from "./EditTopicItemScreenViewModel";
 
 import BackButtonNavbar from "../components/BackButtonNavbar";
 
@@ -11,10 +12,9 @@ import '../components/styles/card.css';
 
 export default function EditTopicItemScreen() {
 
-    // https://reactjs.org/docs/forms.html
-
     const NAVBAR_TEXT = "Edit Topic Item";
     const PREVIOUS_PAGE_URL = "/instructors/edit/topic";
+    const CURRENT_PAGE_URL_STEM = "/instructors/edit/item";
     const editViewIds = {
         id: "ltrack49w5304023",
         learningTrackId: "lanoavrnavlakf",
@@ -31,6 +31,55 @@ export default function EditTopicItemScreen() {
     Object.keys(topicItemTypes).forEach(key => {
         topicItemTypesArray.push(topicItemTypes[key]);
     });
+
+    const SCREEN_MODE = {
+        CREATE_NEW_ENTITY: "CREATE_NEW_ENTITY",
+        EDIT_EXISTING_ENTITY: "EDIT_EXISTING_ENTITY"
+    };  
+
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    /**
+     * itemId = 0: CREATE_NEW_ENTITY; only learningTrackId, courseId shown in GenericEntityForm; no item created yet
+     * itemId != 0: EDIT_EXISTING_ENTITY; leave GenericEntityForm empty, it'll be filled out later
+     */
+
+    const { itemId } = useParams();
+    const [screenMode, setScreenMode] = React.useState(itemId != 0 ? SCREEN_MODE.EDIT_EXISTING_ENTITY : SCREEN_MODE.CREATE_NEW_ENTITY);
+    const [topicItemEntityState, setTopicItemEntityState] = React.useState({});
+
+    // ViewModel interface
+    const { topicItem, getTopicItemData } = EditTopicItemScreenViewModel();
+
+    // change in itemId triggers change in screen mode
+    React.useEffect(() => {
+        setScreenMode(itemId != 0 ? SCREEN_MODE.EDIT_EXISTING_ENTITY : SCREEN_MODE.CREATE_NEW_ENTITY);
+    }, [itemId]);
+
+    // change in screen mode conditionally triggers fetching data for existing topic entity
+    React.useEffect(() => {
+        if (screenMode == SCREEN_MODE.EDIT_EXISTING_ENTITY) {
+            getTopicItemData(itemId);
+        }
+    }, [screenMode]);
+
+/*
+const [topicEntityState, setTopicEntityState] = React.useState(topicEntityValuesFactory(EMPTY_STRING, topicId != 0 ? EMPTY_STRING : location.state.learningTrackId, topicId != 0 ? EMPTY_STRING : location.state.courseId, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING));
+const [topicItemsState, setTopicItemsState] = React.useState([]);
+
+// successful data fetching conditionally changes content displayed on screen for existing topic entity
+React.useEffect(() => {
+    if (screenMode == SCREEN_MODE.EDIT_EXISTING_ENTITY) {
+        topicData
+            ? setTopicEntityState(topicEntityValuesFactory(topicData.id, topicData.learningTrackId, topicData.courseId, topicData.title, topicData.seqNumber, topicData.description)) 
+            : setTopicEntityState(topicEntityValuesFactory(EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING));
+        topicItemsData 
+            ? setTopicItemsState(topicItemsData) 
+            : setTopicItemsState([]);
+    }
+}, [topicData, topicItemsData]);
+*/
 
     const [inputs, setInputs] = React.useState({
         id: "LT1-C1-T1-TI2-LT1-C1-T1-TI2",

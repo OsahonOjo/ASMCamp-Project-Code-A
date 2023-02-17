@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 import IconAndTextListItem from "./IconAndTextListItem";
 import VersatileCardSegment from "./VersatileCardSegment";
@@ -30,11 +31,12 @@ import { Link } from "react-router-dom";
 //     }
 // };
 
-export default function TopicItemsListCard({ topicItemsData, mainIcon, linkIcon, linkStem }) {
+export default function TopicItemsListCard({ topicItemsData, mainIcon, linkIcon, linkStem, learningTrackId, courseId, topicId }) {
 
     const CARD_HEADING = "Topic Items";
     const CREATE_NEW_TOPIC_TEXT = "Create New Topic Item";
     const ICON_SIZE = '20px';
+    const location = useLocation();
 
     return (
         <div className="card">
@@ -58,7 +60,9 @@ export default function TopicItemsListCard({ topicItemsData, mainIcon, linkIcon,
 
             <hr />
 
-            <Link to={linkIcon.to}>
+            <Link 
+                to={`${linkStem}/0`}
+                state={{ from: location.pathname, learningTrackId, courseId, topicId }}>
                 <div className="card-display--flex">
                     <div style={{ flexGrow: 9 }}>
                         <IconAndTextListItem 
