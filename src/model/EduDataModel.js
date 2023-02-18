@@ -72,6 +72,11 @@ export async function getTopicItem(topicId, seqNumber) {
     return callFetchAPI(REQUEST_METHODS.GET, path, GET_REQUEST_OPTIONS);
 }
 
+export async function getTopicItemById(topicItemId) {
+    let path = `${BASE_API_URL}${VIEW_PREFIX}/item/${topicItemId}`;
+    return callFetchAPI(REQUEST_METHODS.GET, path, GET_REQUEST_OPTIONS);
+}
+
 const postRequestOptionsFactory = (body) => {
     return {
         method: "POST",
@@ -103,6 +108,12 @@ export async function createTopicEntity(learningTrackId, courseId, title, seqNum
     return callFetchAPI(REQUEST_METHODS.POST, path, post_request_options);
 }
 
+export async function createTopicItemEntity(topicItemData) {
+    let path = `${BASE_API_URL}${POST_PREFIX}/create/item`;
+    let post_request_options = postRequestOptionsFactory(JSON.stringify(topicItemData));
+    return callFetchAPI(REQUEST_METHODS.POST, path, post_request_options);
+}
+
 export async function updateTrack(trackId, title, shortDescription, longDescription) {
     let path = `${BASE_API_URL}${POST_PREFIX}/update/track`;
     let post_request_options = postRequestOptionsFactory(JSON.stringify({ id: trackId, title: title, shortDescription: shortDescription, longDescription: longDescription }));
@@ -119,6 +130,12 @@ export async function updateCourseEntity(courseId, learningTrackId, title, seqNu
 export async function updateTopicEntity(id, learningTrackId, courseId, title, seqNumber, description) {
     let path = `${BASE_API_URL}${POST_PREFIX}/update/topic`;
     let post_request_options = postRequestOptionsFactory(JSON.stringify({ id, learningTrackId, courseId, title, seqNumber, description }));
+    return callFetchAPI(REQUEST_METHODS.POST, path, post_request_options);
+}
+
+export async function updateTopicItemEntity(topicItemData) {
+    let path = `${BASE_API_URL}${POST_PREFIX}/update/item`;
+    let post_request_options = postRequestOptionsFactory(JSON.stringify(topicItemData));
     return callFetchAPI(REQUEST_METHODS.POST, path, post_request_options);
 }
 

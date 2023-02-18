@@ -14,19 +14,12 @@ export default function EditTopicItemScreen() {
 
     const NAVBAR_TEXT = "Edit Topic Item";
     const PREVIOUS_PAGE_URL = "/instructors/edit/topic";
+    const PREVIOUS_PAGE_URL_STEM = "/instructors/edit/topic";
     const CURRENT_PAGE_URL_STEM = "/instructors/edit/item";
-    const editViewIds = {
-        id: "ltrack49w5304023",
-        learningTrackId: "lanoavrnavlakf",
-        courseId: "6852587461arrha"
-    };
-    const editViewFields = {
-        title: true, 
-        shortDescription: true, 
-        longDescription: true, 
-        seqNumber: true, 
-        description: true
-    };
+    const EMPTY_STRING = ""; 
+    const DEFAULT_FORM_ELEMENT_WIDTH = "80%";
+    const EDITOR_WIDTH = "90%";
+
     const topicItemTypesArray = ["Select"];
     Object.keys(topicItemTypes).forEach(key => {
         topicItemTypesArray.push(topicItemTypes[key]);
@@ -41,64 +34,56 @@ export default function EditTopicItemScreen() {
     const navigate = useNavigate();
 
     /**
-     * itemId = 0: CREATE_NEW_ENTITY; only learningTrackId, courseId shown in GenericEntityForm; no item created yet
-     * itemId != 0: EDIT_EXISTING_ENTITY; leave GenericEntityForm empty, it'll be filled out later
+     * itemId = 0: CREATE_NEW_ENTITY; only learningTrackId, courseId, topicId shown in form; no item created yet
+     * itemId != 0: EDIT_EXISTING_ENTITY; leave form empty, it'll be filled out later
      */
 
     const { itemId } = useParams();
+    const initialInputs = {
+        id: EMPTY_STRING,
+        learningTrackId: itemId != 0 ? EMPTY_STRING : location.state.learningTrackId,
+        courseId: itemId != 0 ? EMPTY_STRING : location.state.courseId,
+        topicId: itemId != 0 ? EMPTY_STRING : location.state.topicId,
+        seqNumber: "",
+        type: "",
+        title: "", 
+        xp: "",
+        content: "# Marked in the browser\nRendered by **Marked**",
+        instructions: [],
+        hints: [],
+        mcqOptions: [],
+        mcqAnswerIndex: -1,
+        cqAnswer: "",
+        saqAnswer: [],
+        tfqAnswer: false
+    };
     const [screenMode, setScreenMode] = React.useState(itemId != 0 ? SCREEN_MODE.EDIT_EXISTING_ENTITY : SCREEN_MODE.CREATE_NEW_ENTITY);
-    const [topicItemEntityState, setTopicItemEntityState] = React.useState({});
+    const [inputs, setInputs] = React.useState(initialInputs);
 
     // ViewModel interface
-    const { topicItem, getTopicItemData } = EditTopicItemScreenViewModel();
-
+    const { topicItem, getTopicItemData, createTopicItem, updateTopicItem } = EditTopicItemScreenViewModel();
+    
     // change in itemId triggers change in screen mode
     React.useEffect(() => {
         setScreenMode(itemId != 0 ? SCREEN_MODE.EDIT_EXISTING_ENTITY : SCREEN_MODE.CREATE_NEW_ENTITY);
     }, [itemId]);
 
-    // change in screen mode conditionally triggers fetching data for existing topic entity
+    // change in screen mode conditionally triggers fetching data for existing topic item entity
     React.useEffect(() => {
         if (screenMode == SCREEN_MODE.EDIT_EXISTING_ENTITY) {
             getTopicItemData(itemId);
         }
     }, [screenMode]);
 
-/*
-const [topicEntityState, setTopicEntityState] = React.useState(topicEntityValuesFactory(EMPTY_STRING, topicId != 0 ? EMPTY_STRING : location.state.learningTrackId, topicId != 0 ? EMPTY_STRING : location.state.courseId, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING));
-const [topicItemsState, setTopicItemsState] = React.useState([]);
+    // successful data fetching conditionally changes content displayed on screen for existing topic item entity
+    React.useEffect(() => {
+        if (screenMode == SCREEN_MODE.EDIT_EXISTING_ENTITY) {
+            topicItem
+                ? setInputs(topicItem) 
+                : setInputs(initialInputs);
+        }
+    }, [topicItem]);
 
-// successful data fetching conditionally changes content displayed on screen for existing topic entity
-React.useEffect(() => {
-    if (screenMode == SCREEN_MODE.EDIT_EXISTING_ENTITY) {
-        topicData
-            ? setTopicEntityState(topicEntityValuesFactory(topicData.id, topicData.learningTrackId, topicData.courseId, topicData.title, topicData.seqNumber, topicData.description)) 
-            : setTopicEntityState(topicEntityValuesFactory(EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING));
-        topicItemsData 
-            ? setTopicItemsState(topicItemsData) 
-            : setTopicItemsState([]);
-    }
-}, [topicData, topicItemsData]);
-*/
-
-    const [inputs, setInputs] = React.useState({
-        id: "LT1-C1-T1-TI2-LT1-C1-T1-TI2",
-        learningTrackId: "63c81af43074896247a739ea",
-        courseId: "63c97f224370423bc6305cf8",
-        topicId: "63c985e730e8bf226256a771",
-        seqNumber: "",
-        type: "",
-        title: "", 
-        xp: "",
-        content: "# Marked in the browser\n\nRendered by **marked**",
-        instructions: [],
-        hints: [],
-        mcqOptions: [],
-        mcqAnswer: -1,
-        cqAnswer: "",
-        saqAnswer: [],
-        tfqAnswer: false
-    });
     const [instructionState, setInstructionState] = React.useState("");
     const [hintState, setHintState] = React.useState("");
     const [mcqOptionState, setMCQOptionState] = React.useState("");
@@ -131,7 +116,7 @@ React.useEffect(() => {
                 nextInputs.instructions = [];
                 nextInputs.hints = [];
                 nextInputs.mcqOptions = [];
-                nextInputs.mcqAnswer = -1;
+                nextInputs.mcqAnswerIndex = -1;
                 nextInputs.cqAnswer = "";
                 nextInputs.saqAnswer = [];
                 nextInputs.tfqAnswer = false;
@@ -143,7 +128,7 @@ React.useEffect(() => {
             case "CQ":
             default:
                 nextInputs.mcqOptions = [];
-                nextInputs.mcqAnswer = -1;
+                nextInputs.mcqAnswerIndex = -1;
                 nextInputs.cqAnswer = "";
                 nextInputs.saqAnswer = [];
                 nextInputs.tfqAnswer = false;
@@ -157,15 +142,6 @@ React.useEffect(() => {
         let nextInputs = Object.assign({}, inputs);
         nextInputs.content = value;
         setInputs(nextInputs);
-    }
-
-    function handleSubmit(event) {
-        event.preventDefault();
-        // console.log('form data: ', inputs);
-        let nextInputs = Object.assign({}, inputs);
-        nextInputs.content = DOMPurify.sanitize(nextInputs.content);
-        setInputs(nextInputs);
-        // console.log('form data: sanitized content: ', nextInputs);
     }
 
     // for instruction field text entry field
@@ -217,7 +193,7 @@ React.useEffect(() => {
         let newMCQOptions = inputs.mcqOptions.slice(0, index).concat(inputs.mcqOptions.slice(index+1));
         let nextInputs = Object.assign({}, inputs);
         nextInputs.mcqOptions = newMCQOptions;
-        nextInputs.mcqAnswer = -1;
+        nextInputs.mcqAnswerIndex = -1;
         setInputs(nextInputs);
     }
 
@@ -235,9 +211,9 @@ React.useEffect(() => {
 
     function selectMCQOptionAsAnswer(event) {
         let nextInputs = Object.assign({}, inputs);
-        nextInputs.mcqAnswer = event.target.value;
+        nextInputs.mcqAnswerIndex = event.target.value;
         setInputs(nextInputs);
-        console.log('chosen option: ', nextInputs.mcqAnswer);
+        console.log('chosen option: ', nextInputs.mcqAnswerIndex);
     }
 
     function handleMCQInputChange(event) {
@@ -276,31 +252,92 @@ React.useEffect(() => {
         setSAQAnswerState(nextInputs);
     }
 
+    function handleSubmit(event) {
+        event.preventDefault();
+        console.log('form data: ', inputs);
+
+        // sanitize content field
+        let nextInputs = Object.assign({}, inputs);
+        nextInputs.content = DOMPurify.sanitize(nextInputs.content);
+        setInputs(nextInputs);
+        console.log('form data: sanitized content: ', nextInputs);
+
+        // TODO: check valid id, not just non-empty id
+        if (screenMode == SCREEN_MODE.EDIT_EXISTING_ENTITY) {
+            console.log('topic item entity already exists');
+            updateTopicItem(inputs)
+                .then(updatedEntity => {
+                    console.log('EDIT_EXISTING_ENTITY updated Topic Item Entity: ', updatedEntity);
+                    setInputs(updatedEntity);
+                })
+                .catch(error => {
+                    console.log('error: ', error);
+                });
+        }
+        // in SCREEN_MODE.CREATE_NEW_ENTITY, you can't go beyond this screen so you can trust location.state
+        else if (screenMode == SCREEN_MODE.CREATE_NEW_ENTITY) {
+            console.log('creating a new topic item entity');
+            createTopicItem(inputs)
+                .then(newEntity => {
+                    console.log('success: new topic item entity: ', newEntity);
+                    navigate(`${CURRENT_PAGE_URL_STEM}/${newEntity.id}`, { state: { from: location.state.from } });  // topic item's id becomes URL param
+                })
+                .catch(err => {
+                    console.log('error: ', err);
+                });
+        }
+    }
+
     return (
         <>
-            <BackButtonNavbar title={NAVBAR_TEXT} to={PREVIOUS_PAGE_URL} />
+            {/* in SCREEN_MODE.CREATE_NEW_ENTITY, you can't go beyond this screen so you can trust the value of location.state.from */}
+            <BackButtonNavbar title={NAVBAR_TEXT} to={location.state.from} />
             
+            <button type="button" onClick={() => { console.log('screenMode: ', screenMode) }}>Click for Screen Mode</button>
+
             <form onSubmit={handleSubmit}>
 
                 <div className="card">
+                    <div>
+                        <label>ID</label><br />
+                        <input required readOnly={true} type="text" value={inputs.id} style={{width: DEFAULT_FORM_ELEMENT_WIDTH}}/>
+                    </div>
+
+                    <div>
+                        <label>Learning Track ID</label><br />
+                        <input required readOnly={true} type="text" value={inputs.learningTrackId} style={{width: DEFAULT_FORM_ELEMENT_WIDTH}}/>
+                    </div>
+
+                    <div>
+                        <label>Course ID</label><br />
+                        <input required readOnly={true} type="text" value={inputs.courseId} style={{width: DEFAULT_FORM_ELEMENT_WIDTH}}/>
+                    </div>
+
+                    <div>
+                        <label>Topic ID</label><br />
+                        <input required readOnly={true} type="text" value={inputs.topicId} style={{width: DEFAULT_FORM_ELEMENT_WIDTH}}/>
+                    </div>
+                </div>
+
+                <div className="card">
                     <label>Title</label><br />
-                    <input required type="text" value={inputs.title} onChange={handleTitleInputChange}/>
+                    <input required type="text" value={inputs.title} onChange={handleTitleInputChange} style={{width: DEFAULT_FORM_ELEMENT_WIDTH}}/>
                 </div>
 
                 <div className="card">
                     <label>Sequence Number</label><br />
-                    <input type="number" min="1" value={inputs.seqNumber} onChange={handleSeqNumberInputChange}/>
+                    <input type="number" min="1" value={inputs.seqNumber} onChange={handleSeqNumberInputChange} style={{width: DEFAULT_FORM_ELEMENT_WIDTH}}/>
                 </div>
 
                 <div className="card">
                     <label>XP</label><br />
-                    <input required type="number" min="1" value={inputs.xp} onChange={handleXPInputChange}/>
+                    <input required type="number" min="1" value={inputs.xp} onChange={handleXPInputChange} style={{width: DEFAULT_FORM_ELEMENT_WIDTH}}/>
                 </div>
 
                 {/* type selection here */}
                 <div className="card">
                     <label htmlFor="select-topic-item-type"><p>Type</p></label><br />
-                    <select name="select-topic-item-type" value={inputs.type} onChange={handleTopicItemTypeSelectChange} style={{ width: '90%' }}>
+                    <select name="select-topic-item-type" value={inputs.type} onChange={handleTopicItemTypeSelectChange} style={{width: DEFAULT_FORM_ELEMENT_WIDTH}}>
                         {topicItemTypesArray.map(type => 
                             <option key={type} value={type}>{type}</option>)}
                     </select>
@@ -312,7 +349,7 @@ React.useEffect(() => {
                     <Editor 
                         required
                         height='30vh'
-                        width='90%'
+                        width={EDITOR_WIDTH}
                         language='markdown'
                         value={inputs.content}
                         onChange={handleContentInputChange}/>
@@ -338,7 +375,8 @@ React.useEffect(() => {
                                 type="text" 
                                 placeholder="Enter instructions for user here" 
                                 value={instructionState} 
-                                onChange={handleInstructionInputChange} />
+                                onChange={handleInstructionInputChange}
+                                style={{width: DEFAULT_FORM_ELEMENT_WIDTH}} />
                             <button 
                                 type="button" 
                                 onClick={handleAddInstruction}>
@@ -358,7 +396,7 @@ React.useEffect(() => {
                                             <input 
                                                 type="radio" 
                                                 value={index}
-                                                checked={inputs.mcqAnswer == index}
+                                                checked={inputs.mcqAnswerIndex == index}
                                                 onChange={selectMCQOptionAsAnswer} />
                                             {option}
                                         </label>
@@ -373,7 +411,8 @@ React.useEffect(() => {
                                 type="text" 
                                 placeholder="Enter option here" 
                                 value={mcqOptionState} 
-                                onChange={handleMCQInputChange}/>
+                                onChange={handleMCQInputChange}
+                                style={{width: DEFAULT_FORM_ELEMENT_WIDTH}} />
                             <button 
                                 type="button" 
                                 onClick={handleAddMCQOption}>
@@ -386,7 +425,7 @@ React.useEffect(() => {
                     ?   <div className="card">
                             <p>Answer</p>
                             <p>Select either True or False.</p>
-                            <select value={inputs.tfqAnswer} onChange={handleTFQSelectChange} style={{ width: '90%' }}>
+                            <select value={inputs.tfqAnswer} onChange={handleTFQSelectChange} style={{width: DEFAULT_FORM_ELEMENT_WIDTH}}>
                                 <option value={false}>False</option>
                                 <option value={true}>True</option>
                             </select>
@@ -412,7 +451,8 @@ React.useEffect(() => {
                                 type="text" 
                                 placeholder="Enter possible answers for question here" 
                                 value={saqAnswerState} 
-                                onChange={handleSAQInputChange} />
+                                onChange={handleSAQInputChange}
+                                style={{width: DEFAULT_FORM_ELEMENT_WIDTH}} />
                             <button 
                                 type="button" 
                                 onClick={handleAddSAQAnswer}>
@@ -443,7 +483,8 @@ React.useEffect(() => {
                                 type="text" 
                                 placeholder="Enter hints for user here" 
                                 value={hintState} 
-                                onChange={handleHintInputChange} />
+                                onChange={handleHintInputChange}
+                                style={{width: DEFAULT_FORM_ELEMENT_WIDTH}} />
                             <button 
                                 type="button" 
                                 onClick={handleAddHint}>

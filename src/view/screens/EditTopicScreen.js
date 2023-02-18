@@ -156,6 +156,7 @@ export default function EditTopicScreen() {
 
     return (
         <>
+            {/* in SCREEN_MODE.CREATE_NEW_ENTITY, you can't go beyond this screen so you can trust the value of location.state.from */}
             <BackButtonNavbar 
                 title={NAVBAR_TEXT}    
                 to={ screenMode == SCREEN_MODE.CREATE_NEW_ENTITY 
