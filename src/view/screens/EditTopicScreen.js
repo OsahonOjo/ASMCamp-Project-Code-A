@@ -107,10 +107,11 @@ export default function EditTopicScreen() {
     // successful data fetching conditionally changes content displayed on screen for existing topic entity
     React.useEffect(() => {
         if (screenMode == SCREEN_MODE.EDIT_EXISTING_ENTITY) {
-            topicData
+            // account for when topicData and topicItemData are {}
+            topicData && Object.keys(topicData).length != 0
                 ? setTopicEntityState(topicEntityValuesFactory(topicData.id, topicData.learningTrackId, topicData.courseId, topicData.title, topicData.seqNumber, topicData.description)) 
                 : setTopicEntityState(topicEntityValuesFactory(EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING));
-            topicItemsData 
+            topicItemsData && Object.keys(topicItemsData).length != 0
                 ? setTopicItemsState(topicItemsData) 
                 : setTopicItemsState([]);
         }

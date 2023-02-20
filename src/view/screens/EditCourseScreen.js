@@ -110,10 +110,11 @@ export default function EditCourseScreen() {
     // successful data fetching conditionally changes content displayed on screen for existing course entity
     React.useEffect(() => {
         if (screenMode == SCREEN_MODE.EDIT_EXISTING_ENTITY) {
-            courseDetails 
+            // account for when courseDetails and topicAndTopicItems are {}
+            courseDetails && Object.keys(courseDetails).length != 0
                 ? setCourseEntityState(courseEntityValuesFactory(courseDetails.courseId, courseDetails.learningTrackId, courseDetails.title, courseDetails.seqNumber, courseDetails.shortDescription, courseDetails.longDescription)) 
                 : setCourseEntityState(courseEntityValuesFactory(EMPTY_STRING, 'location.state.learningTrackId', EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING));
-            topicsAndTopicItems 
+            topicsAndTopicItems && Object.keys(topicsAndTopicItems).length != 0
                 ? setTopicSummariesState(topicSummariesFactory(topicsAndTopicItems)) 
                 : setTopicSummariesState([]);
         }

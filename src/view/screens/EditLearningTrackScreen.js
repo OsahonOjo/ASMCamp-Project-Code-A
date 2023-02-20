@@ -77,10 +77,13 @@ export default function EditLearningTrackScreen() {
   
   React.useEffect(() => {
     if (screenMode == SCREEN_MODE.EDIT_EXISTING_ENTITY) {
-      trackDetails 
+      // account for when trackDetails and courseSummaries are {}
+      trackDetails && Object.keys(trackDetails).length != 0
         ? setLearningTrackEntityState(trackEntityValuesFactory(trackDetails.trackId, trackDetails.title, trackDetails.shortDescription, trackDetails.longDescription)) 
         : setLearningTrackEntityState(trackEntityValuesFactory(EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING));
-      courseSummaries ? setCourseSummariesState(courseSummaries) : setCourseSummariesState([]);
+      courseSummaries && Object.keys(courseSummaries).length != 0
+        ? setCourseSummariesState(courseSummaries) 
+        : setCourseSummariesState([]);
     }
   }, [trackDetails, courseSummaries]);
 

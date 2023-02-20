@@ -78,7 +78,8 @@ export default function EditTopicItemScreen() {
     // successful data fetching conditionally changes content displayed on screen for existing topic item entity
     React.useEffect(() => {
         if (screenMode == SCREEN_MODE.EDIT_EXISTING_ENTITY) {
-            topicItem
+            // also account for if topicItem is {}
+            topicItem && Object.keys(topicItem).length != 0
                 ? setInputs(topicItem) 
                 : setInputs(initialInputs);
         }
@@ -138,7 +139,7 @@ export default function EditTopicItemScreen() {
     }
 
     function handleContentInputChange(value, event) {
-        console.log('editor event: ', event);
+        //console.log('editor event: ', event);
         let nextInputs = Object.assign({}, inputs);
         nextInputs.content = value;
         setInputs(nextInputs);
