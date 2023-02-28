@@ -1,18 +1,30 @@
 import React from 'react';
 import { getAllTracks } from '../../model/EduDataModel';
+import { getTrackProgress } from '../../model/UserDataModel';
 
 export default function AllLearningTracksScreenViewModel() {
 
     const [learningTrackSummaries, setState] = React.useState([]);
 
-    function summaryFactory(id, title, shortDescription, longDescription, nCourses) {
-        return { id, title, shortDescription, longDescription, nCourses };
+    // function summaryBuilder(id, title, shortDescription, longDescription, nCourses) {
+    //     return { id, title, shortDescription, longDescription, nCourses };
+    // }
+
+    function summaryBuilder(learningTrackEntity) {
+        return { 
+            id: learningTrackEntity._id, 
+            title: learningTrackEntity.title, 
+            shortDescription: learningTrackEntity.shortDescription, 
+            longDescription: learningTrackEntity.longDescription, 
+            nCourses: learningTrackEntity.courseIds.length,
+            progress: getTrackProgress(learningTrackEntity._id)
+        };
     }
 
     function summarizeLearningTrackEntities(entities) {
         const summaries = [];
         entities.forEach(entity => 
-            summaries.push(summaryFactory(entity._id, entity.title, entity.shortDescription, entity.longDescription, entity.courseIds.length)));
+            summaries.push(summaryBuilder(entity)));
         return summaries;
     }
 

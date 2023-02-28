@@ -1,5 +1,6 @@
 import React from 'react';
 import { getTopicItem } from '../../model/EduDataModel';
+import { userIsEnrolled, enrollUser } from "../../model/UserDataModel";
 
 export default function TopicItemScreenViewModel() {
 
@@ -23,8 +24,12 @@ export default function TopicItemScreenViewModel() {
       setTopicItem(topicItemFactory(response.response[0]));
   }
 
-  function handleLessonSubmit(topicItemId) {
+  function handleLessonSubmit(trackId, topicItemId) {
+    // console.log('also: topicItem: ', topicItem);  // cannot access topicItem from here
     console.log('lesson completed; id: ', topicItemId);
+    userIsEnrolled(trackId)
+      ? console.log('progress record updated')
+      : console.log('progress record created');
     return true;
   }
 

@@ -22,7 +22,6 @@ async function callFetchAPI(method, path, options) {
             message: `${method} request failed at ${path} endpoint`,
             response
         };
-    // NOTE: ['learningTrackId'], ['courseId'], ['trackId']
     return responseFactory(data, error);
 }
 

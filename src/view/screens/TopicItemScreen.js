@@ -1,6 +1,7 @@
 /* libraries */
 import React from "react";
 import { Link, useParams } from "react-router-dom";
+import { enrollUser } from "../../model/UserDataModel";
 
 /* assets */
 import backIcon from "../assets/back.png";
@@ -91,6 +92,13 @@ export default function TopicItemScreen() {
         itemType={topicItemTypes.LSN }
         disabled={loading ? true : false}/>
 
+      <button onClick={async () => {
+        await enrollUser('63c819463074896247a739e8');
+        console.log('learning track progress: ', window.LearningTrackProgress);
+      }}>
+        Click Here to Enroll 
+      </button>
+
       {/* buttons for navigation between topic items */}
       <div style={commonDisplayStyles.displayFlexCenter}>
         <button type="button">
@@ -104,6 +112,7 @@ export default function TopicItemScreen() {
 
       { topicItemState.type == topicItemTypes.LSN 
         ? <LessonView 
+            trackId={topicItemState.learningTrackId}
             topicItemId={topicItemState.id}
             title={topicItemState.title} 
             nXP={topicItemState.xp} 

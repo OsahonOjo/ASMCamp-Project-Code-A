@@ -12,10 +12,17 @@ export default function AllLearningTracksScreen() {
   const { learningTrackSummaries, getLearningTrackSummaries } = AllLearningTracksScreenViewModel();
   const [summaries, setSummaries] = React.useState([]);
 
-  React.useEffect(() => { getLearningTrackSummaries() }, []);
+  // pass empty dependency array to make useEffect run only once after initial component render
+  React.useEffect(() => { 
+    console.log('AllLearningTracksScreen: inside first useEffect');
+    getLearningTrackSummaries();
+  }, []);
 
   React.useEffect(() => {
-    learningTrackSummaries ? setSummaries(learningTrackSummaries) : setSummaries([]);
+    console.log('AllLearningTracksScreen: inside second useEffect');
+    learningTrackSummaries && learningTrackSummaries.length != 0
+      ? setSummaries(learningTrackSummaries) 
+      : setSummaries([]);
   }, [learningTrackSummaries]);
 
   return (
@@ -31,7 +38,17 @@ export default function AllLearningTracksScreen() {
             shortDescription: summary.shortDescription,
             longDescription: summary.longDescription,
             nCourses: summary.nCourses }} 
-          to={`${NEXT_PAGE}/${summary.id}`}/>)}
+          to={`${NEXT_PAGE}/${summary.id}`}
+          userIsEnrolled={summary.progress ? true : false}
+          progressBar={
+            summary.progress
+              ? {
+                  percentage: summary.progress,
+                  hasLabel: true,
+                  labelOnRightSide: false
+                }
+              : null
+          }/>)}
     </>
   );
 }
@@ -57,7 +74,7 @@ export default function AllLearningTracksScreen() {
       also doesn't get called either.
 
       If the component state is large or if it references other objects in 
-      memory, because preserving it in memory can lead to memory leaks and 
+      memory, preserving it in memory can lead to memory leaks and 
       performance issues. In these cases, it's better to unmount the 
       component and create a new instance of it when navigating back to the route.
       This can be achieved by using the unmountOnExit prop on the <Route> 

@@ -1,6 +1,6 @@
 import TopicItemContentCard from "./TopicItemContentCard";
 
-export default function LessonView({ topicItemId, title, nXP, content, handleSubmit, showModal }) {
+export default function LessonView({ trackId, topicItemId, title, nXP, content, handleSubmit, showModal }) {
 
   const BUTTON_TEXT = "Continue";
 
@@ -15,7 +15,7 @@ export default function LessonView({ topicItemId, title, nXP, content, handleSub
       <button 
         type="button" 
         onClick={() => { 
-          let isCorrect = handleSubmit(topicItemId);
+          let isCorrect = handleSubmit(trackId, topicItemId);
           showModal(isCorrect); 
         }}>
           {BUTTON_TEXT}
