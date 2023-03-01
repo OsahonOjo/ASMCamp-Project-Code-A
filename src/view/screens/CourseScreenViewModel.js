@@ -1,5 +1,6 @@
 import React from "react"
 import { getCourse, getAllTopicsInCourse, getAllTopicItemsInCourse } from '../../model/EduDataModel';
+import { getCourseProgressInfo } from '../../model/UserDataModel';
 
 export default function CourseScreenViewModel() {
 
@@ -8,6 +9,7 @@ export default function CourseScreenViewModel() {
     const [topicsAndTopicItems, setTopicsAndTopicItems] = React.useState([]);
 
     function courseDetailsFactory(courseEntity) {
+        let courseProgressInfo = getCourseProgressInfo(courseEntity._id);  // { percentage, nTopics }
         return { 
             courseId: courseEntity._id, // NB: _id in a Course entity
             learningTrackId: courseEntity.learningTrackId,
@@ -18,7 +20,8 @@ export default function CourseScreenViewModel() {
             nHours: HOURS_PER_COURSE, 
             nLessons: courseEntity.nLessons, 
             nQuestions: courseEntity.nQuestions, 
-            nXP: courseEntity.xp 
+            nXP: courseEntity.xp,
+            progressInfo: courseProgressInfo ? courseProgressInfo : null
         };
       }
 

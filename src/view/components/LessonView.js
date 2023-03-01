@@ -1,6 +1,6 @@
 import TopicItemContentCard from "./TopicItemContentCard";
 
-export default function LessonView({ trackId, topicItemId, title, nXP, content, handleSubmit, showModal }) {
+export default function LessonView({ trackId, courseId, topicId, topicItemId, title, nXP, content, handleSubmit, showModal }) {
 
   const BUTTON_TEXT = "Continue";
 
@@ -14,8 +14,8 @@ export default function LessonView({ trackId, topicItemId, title, nXP, content, 
 
       <button 
         type="button" 
-        onClick={() => { 
-          let isCorrect = handleSubmit(trackId, topicItemId);
+        onClick={async () => { 
+          let isCorrect = await handleSubmit(trackId, courseId, topicId, topicItemId);
           showModal(isCorrect); 
         }}>
           {BUTTON_TEXT}

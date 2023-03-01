@@ -1,16 +1,24 @@
 import React from 'react';
 import { getTopicItem } from '../../model/EduDataModel';
-import { userIsEnrolled, enrollUser } from "../../model/UserDataModel";
+import { userIsEnrolledInTrack, enrollUser, updateProgress, getTrackProgressInfo } from "../../model/UserDataModel";
 
 export default function TopicItemScreenViewModel() {
 
   const [topicItem, setTopicItem] = React.useState({});
 
   // rename _id field to id
-  function topicItemFactory(topicItem) {
+  function topicItemBuilder(topicItem) {
+    let trackProgressInfo = getTrackProgressInfo(topicItem.learningTrackId);  // { percentage, nCourses }
+    if(trackProgressInfo)
+      console.log('trackProgressInfo.percentage: ', trackProgressInfo.percentage);
+      
     let formattedTopicItem = Object.assign({}, topicItem);
+
     formattedTopicItem.id = topicItem._id;
     delete formattedTopicItem._id;
+    
+    formattedTopicItem.learningTrackProgressPercent = trackProgressInfo ? trackProgressInfo.percentage : 0;
+    
     return formattedTopicItem;
   }
   
@@ -19,41 +27,58 @@ export default function TopicItemScreenViewModel() {
       if (error) {
         console.log(error.message);
         return;
-      }
-      // NOTE: ['learningTrackId'], ['courseId'], ['trackId']      
-      setTopicItem(topicItemFactory(response.response[0]));
+      }     
+      setTopicItem(topicItemBuilder(response.response[0]));
   }
 
-  function handleLessonSubmit(trackId, topicItemId) {
-    // console.log('also: topicItem: ', topicItem);  // cannot access topicItem from here
+  async function handleProgressUpdate(trackId, courseId, topicId, topicItemId) {
+    if (!userIsEnrolledInTrack(trackId))
+      await enrollUser(trackId);
+    updateProgress(trackId, courseId, topicId, topicItemId);
+  }
+
+  async function handleLessonSubmit(trackId, courseId, topicId, topicItemId) {
     console.log('lesson completed; id: ', topicItemId);
-    userIsEnrolled(trackId)
-      ? console.log('progress record updated')
-      : console.log('progress record created');
+    await handleProgressUpdate(trackId, courseId, topicId, topicItemId)
     return true;
   }
 
-  function handleMCQSubmit(topicItemId, optionIndex) {
+  async function handleMCQSubmit(trackId, courseId, topicId, topicItemId, optionIndex) {
     let isCorrect = (optionIndex == topicItem.mcqAnswerIndex);
-    isCorrect
-      ? console.log('correct MCQ answer; id: ', topicItemId)
-      : console.log('incorrect MCQ answer; id: ', topicItemId);
+
+    if (isCorrect) {
+      console.log('correct MCQ answer; id: ', topicItemId);
+      await handleProgressUpdate(trackId, courseId, topicId, topicItemId);
+    }
+    else
+      console.log('incorrect MCQ answer; id: ', topicItemId);
+    
     return isCorrect;
   }
 
-  function handleTFQSubmit(topicItemId, answer) {
+  async function handleTFQSubmit(trackId, courseId, topicId, topicItemId, answer) {
     let isCorrect = (answer == topicItem.tfqAnswer);
-    isCorrect
-      ? console.log('correct TFQ answer; id: ', topicItemId)
-      : console.log('incorrect TFQ answer; id: ', topicItemId);
+
+    if (isCorrect) {
+      console.log('correct TFQ answer; id: ', topicItemId);
+      await handleProgressUpdate(trackId, courseId, topicId, topicItemId);
+    }
+    else
+      console.log('incorrect TFQ answer; id: ', topicItemId);
+
     return isCorrect;
   }
 
-  function handleSAQSubmit(topicItemId, answer) {
+  async function handleSAQSubmit(trackId, courseId, topicId, topicItemId, answer) {
     let isCorrect = (topicItem.saqAnswer.find(element => element == answer));
-    isCorrect
-      ? console.log('correct SAQ answer; [answer, id]: ', answer, topicItemId)
-      : console.log('incorrect SAQ answer; [answer, id]: ', answer, topicItemId);
+
+    if (isCorrect) {
+      console.log('correct SAQ answer; [id, answer]: ', topicItemId, answer);
+      await handleProgressUpdate(trackId, courseId, topicId, topicItemId);
+    }
+    else
+      console.log('incorrect SAQ answer; [id, answer]: ', topicItemId, answer);
+    
     return isCorrect;
   }
 

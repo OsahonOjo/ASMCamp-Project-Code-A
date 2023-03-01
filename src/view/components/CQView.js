@@ -5,7 +5,7 @@ import CollapsibleHeadingAndListCard from "./CollapsibleHeadingAndListCard";
 
 import './styles/card.css';
 
-function CQView({ title, nXP, content, instructions, hints }) {
+function CQView({ trackId, courseId, topicId, topicItemId, title, nXP, content, instructions, hints }) {
 
   const INSTRUCTIONS_HEADING = "Instructions";
   const HINTS_HEADING = "Hints";

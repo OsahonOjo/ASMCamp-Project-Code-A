@@ -5,7 +5,7 @@ import Tag from './Tag';
 import './styles/card.css';
 import { commonDisplayStyles } from './styles/commonDisplayStyles';
 
-function SAQResponseCard({ topicItemId, handleSubmit, showModal }) {
+function SAQResponseCard({ trackId, courseId, topicId, topicItemId, handleSubmit, showModal }) {
 
   const RESPONSE_HEADING = "Responses";
   const SUBMIT_BUTTON_TEXT = "Submit";
@@ -15,11 +15,11 @@ function SAQResponseCard({ topicItemId, handleSubmit, showModal }) {
     setInput(event.target.value);
   }
 
-  function handleFormSubmit(event) {
+  async function handleFormSubmit(event) {
     event.preventDefault();
     //let processedInput = input.toLowerCase();
     let processedInput = input.slice();
-    let isCorrect = handleSubmit(topicItemId, processedInput);
+    let isCorrect = await handleSubmit(trackId, courseId, topicId, topicItemId, processedInput);
     showModal(isCorrect);
   }
 

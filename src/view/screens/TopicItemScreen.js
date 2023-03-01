@@ -1,7 +1,6 @@
 /* libraries */
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { enrollUser } from "../../model/UserDataModel";
 
 /* assets */
 import backIcon from "../assets/back.png";
@@ -92,13 +91,6 @@ export default function TopicItemScreen() {
         itemType={topicItemTypes.LSN }
         disabled={loading ? true : false}/>
 
-      <button onClick={async () => {
-        await enrollUser('63c819463074896247a739e8');
-        console.log('learning track progress: ', window.LearningTrackProgress);
-      }}>
-        Click Here to Enroll 
-      </button>
-
       {/* buttons for navigation between topic items */}
       <div style={commonDisplayStyles.displayFlexCenter}>
         <button type="button">
@@ -113,6 +105,8 @@ export default function TopicItemScreen() {
       { topicItemState.type == topicItemTypes.LSN 
         ? <LessonView 
             trackId={topicItemState.learningTrackId}
+            courseId={topicItemState.courseId}
+            topicId={topicItemState.topicId}
             topicItemId={topicItemState.id}
             title={topicItemState.title} 
             nXP={topicItemState.xp} 
@@ -130,6 +124,9 @@ export default function TopicItemScreen() {
             hints={topicItemState.hints}
             ResponseCard={
               <MCQResponseCard 
+                trackId={topicItemState.learningTrackId}
+                courseId={topicItemState.courseId}
+                topicId={topicItemState.topicId}
                 topicItemId={topicItemState.id}
                 options={topicItemState.mcqOptions}
                 handleSubmit={handleMCQSubmit}
@@ -145,6 +142,9 @@ export default function TopicItemScreen() {
             hints={topicItemState.hints}
             ResponseCard={
               <TFQResponseCard 
+                trackId={topicItemState.learningTrackId}
+                courseId={topicItemState.courseId}
+                topicId={topicItemState.topicId}
                 topicItemId={topicItemState.id}
                 handleSubmit={handleTFQSubmit}
                 showModal={openModal}/>} />
@@ -159,6 +159,9 @@ export default function TopicItemScreen() {
             hints={topicItemState.hints}
             ResponseCard={
               <SAQResponseCard 
+                trackId={topicItemState.learningTrackId}
+                courseId={topicItemState.courseId}
+                topicId={topicItemState.topicId}
                 topicItemId={topicItemState.id}
                 handleSubmit={handleSAQSubmit}
                 showModal={openModal}/>}/>
@@ -166,6 +169,9 @@ export default function TopicItemScreen() {
 
       { topicItemState.type == topicItemTypes.CQ 
         ? <CQView
+            trackId={topicItemState.learningTrackId}
+            courseId={topicItemState.courseId}
+            topicId={topicItemState.topicId}
             topicItemId={topicItemState.id}
             title={topicItemState.title} 
             nXP={topicItemState.xp} 
@@ -185,7 +191,10 @@ export default function TopicItemScreen() {
       <div style={{background: 'white', height: '40px', width: '100%'}}><p></p></div>
       
       <div style={{...commonDisplayStyles.stickToBottom, ...commonDisplayStyles.displayFlexCenter, background: '#ACC8F1', height: '40px'}}>
-        <ProgressBar percentage={null} hasLabel={true} labelOnRightSide={false}/>
+        <ProgressBar 
+          percentage={topicItemState.learningTrackProgressPercent} 
+          hasLabel={true} 
+          labelOnRightSide={false}/>
       </div>
     </>
   );

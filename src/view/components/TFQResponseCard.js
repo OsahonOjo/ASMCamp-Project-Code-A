@@ -3,7 +3,7 @@ import Tag from './Tag';
 import './styles/card.css';
 import { commonDisplayStyles } from './styles/commonDisplayStyles';
 
-function TFQResponseCard({ topicItemId, handleSubmit, showModal }) {
+function TFQResponseCard({ trackId, courseId, topicId, topicItemId, handleSubmit, showModal }) {
 
   const HEADING_TEXT = "Responses";
   const TRUE_TEXT = "True";
@@ -16,16 +16,16 @@ function TFQResponseCard({ topicItemId, handleSubmit, showModal }) {
 
       <div>
 
-        <button onClick={() => { 
-          let isCorrect = handleSubmit(topicItemId, true);
+        <button onClick={async () => { 
+          let isCorrect = await handleSubmit(trackId, courseId, topicId, topicItemId, true);
           showModal(isCorrect);
          }}>
           <input type="radio" name="tfqOptionChosen" value={true} />
           <label>{TRUE_TEXT}</label>
         </button><br />
 
-        <button onClick={() => { 
-          let isCorrect = handleSubmit(topicItemId, false);
+        <button onClick={async () => { 
+          let isCorrect = await handleSubmit(trackId, courseId, topicId, topicItemId, false);
           showModal(isCorrect);
         }}>
           <input type="radio" name="tfqOptionChosen" value={false} />

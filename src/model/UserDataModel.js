@@ -27,27 +27,143 @@ async function callFetchAPI(method, path, options) {
 
 // BASE_API_URL: localhost:3001/api/v1
 export async function enrollUser(trackId) {
-    let path = `${BASE_API_URL}${VIEW_PREFIX}/template/progress/track/${trackId}`;
-    const { response, error } = await callFetchAPI(REQUEST_METHODS.GET, path, GET_REQUEST_OPTIONS);  // { response, error }
+    let path = `${BASE_API_URL}${VIEW_PREFIX}/template/progress/${trackId}`;
+    const { response, error } = await callFetchAPI(REQUEST_METHODS.GET, path, GET_REQUEST_OPTIONS);  // response: { response: {} }
     if (error) {
         console.log(error.message);
         return;
     }
-    console.log('response: ', response);
-    console.log('window.LearningTrackProgress: ', window.LearningTrackProgress);
-    Object.assign(window.LearningTrackProgress, response.learningTrackProgress);
+
+    // window.LearningTrackProgress, .CourseProgress, .TopicProgress init. at game start
+    const learningTrackProgress = response.response.learningTrackProgress;
+    window.LearningTrackProgress[learningTrackProgress.id] = learningTrackProgress;
+
+    const courseProgress = response.response.courseProgress;  // { id1: {}, id2: {} }
+    Object.keys(courseProgress).forEach(key => {
+        window.CourseProgress[key] = courseProgress[key];
+    });
+
+    const topicProgress = response.response.topicProgress;  // { id1: {}, id2: {} }
+    Object.keys(topicProgress).forEach(key => {
+        window.TopicProgress[key] = topicProgress[key];
+    });
 }
 
-export function userIsEnrolled(trackId) {
+export function userIsEnrolledInTrack(trackId) {
     let record = window.LearningTrackProgress[trackId];
     return record ? true : false;
 }
 
-export function getTrackProgress(trackId) {
-    if (!userIsEnrolled(trackId))
+export function userIsEnrolledInCourse(courseId) {
+    let record = window.CourseProgress[courseId];
+    return record ? true : false;
+}
+
+export function userIsEnrolledInTopic(topicId) {
+    let record = window.TopicProgress[topicId];
+    return record ? true : false;
+}
+
+function topicItemIsComplete(topicId, topicItemId) {
+    let topicItem = window.TopicProgress[topicId].topicItemsCompleted.find(element => element.id == topicItemId);
+    return topicItem && Object.keys(topicItem).length != 0 ? true : false;
+}
+
+// NB: New Terminology: 
+// Progress data: related to XP earned and completing items, topics, etc.
+// Game data: includes progress data, rewards, leaderboard standings, etc.
+
+export function updateProgress(trackId, courseId, topicId, topicItemId) {
+    if (topicItemIsComplete(topicId, topicItemId)){
+        console.log(`topic item ${topicItemId} has already been completed`);
+        return;
+    }
+    let { xpEarned } = updateTopicProgress(topicId, topicItemId);
+    updateCourseProgress(courseId, topicId, xpEarned);
+    updateLearningTrackProgress(trackId, courseId, xpEarned);
+}
+
+function updateTopicProgress(topicId, topicItemId) {
+    // move topic item of interest from not completed to completed
+    let topicItemsCompleted = window.TopicProgress[topicId].topicItemsCompleted;
+    let topicItemsNotCompleted = window.TopicProgress[topicId].topicItemsNotCompleted;
+    let topicItemIndex = topicItemsNotCompleted.findIndex(element => element.id == topicItemId);
+    let topicItem = topicItemsNotCompleted[topicItemIndex];
+    topicItemsCompleted[topicItemIndex] = Object.assign({}, topicItem);
+    topicItemsNotCompleted[topicItemIndex] = {};
+    
+    // increment totalXPEarned
+    window.TopicProgress[topicId].totalXPEarned += topicItem.xp;
+
+    return { xpEarned: topicItem.xp };
+}
+
+// TODO: verify this function works
+function updateCourseProgress(courseId, topicId, xp) {
+    // increment totalXPEarned
+    let courseProgress = window.CourseProgress[courseId];
+    courseProgress.totalXPEarned += xp;
+
+    // if topic is complete, move from not completed to completed 
+    let topicProgressPercent = getTopicProgressInfo(topicId).percentage;
+    // console.log('topicProgressPercent: ', topicProgressPercent);
+    if (topicProgressPercent >= 100) {
+        let topicsCompletedIds = courseProgress.topicsCompletedIds;
+        let topicsNotCompletedIds = courseProgress.topicsNotCompletedIds;
+        let topicIdIndex = topicsNotCompletedIds.findIndex(element => element == topicId);
+        topicsCompletedIds[topicIdIndex] = topicId;
+        topicsNotCompletedIds[topicIdIndex] = "";
+    }
+}
+
+// TODO: verify this function works
+function updateLearningTrackProgress(trackId, courseId, xp) {
+    // increment totalXPEarned
+    let learningTrackProgress = window.LearningTrackProgress[trackId];
+    learningTrackProgress.totalXPEarned += xp;
+
+    // if course is complete, move from not completed to completed 
+    let courseProgressPercent = getCourseProgressInfo(courseId).percentage;
+    // console.log('courseProgressPercent: ', courseProgressPercent);
+    if (courseProgressPercent >= 100) {
+        let coursesCompletedIds = learningTrackProgress.coursesCompletedIds;
+        let coursesNotCompletedIds = learningTrackProgress.coursesNotCompletedIds;
+        let courseIdIndex = coursesNotCompletedIds.findIndex(element => element == courseId);
+        coursesCompletedIds[courseIdIndex] = courseId;
+        coursesNotCompletedIds[courseIdIndex] = "";
+    }
+}
+
+// getXProgress() functions return null if user is not enrolled
+export function getTrackProgressInfo(trackId) {
+    if (!userIsEnrolledInTrack(trackId))
         return null;
     let record = window.LearningTrackProgress[trackId];
-    return Math.round((record.totalXPEarned / record.totalTrackXP) * 100);
+    console.log('record: ', record);
+    return {
+        percentage: Math.round((record.totalXPEarned / record.totalTrackXP) * 100),
+        nCourses: record.nCourses
+    };
+}
+
+export function getCourseProgressInfo(courseId) {
+    if (!userIsEnrolledInCourse(courseId))
+        return null;
+    let record = window.CourseProgress[courseId];
+    return {
+        percentage: Math.round((record.totalXPEarned / record.totalCourseXP) * 100),
+        nTopics: record.nTopics
+    };
+}
+
+export function getTopicProgressInfo(topicId) {
+    if (!userIsEnrolledInTopic(topicId))
+        return null;
+    let record = window.TopicProgress[topicId];
+    return {
+        percentage: Math.round((record.totalXPEarned / record.totalTopicXP) * 100),
+        nTopicItems: record.nTopicItems
+    };
 }
 
 function learningTrackProgressRecordBuilder(id, courseIds, totalTrackXP) {
@@ -135,9 +251,3 @@ function topicProgressRecordBuilder(id, seqNumber, topicItemRecords, totalTopicX
 function topicItemRecordBuilder(id, seqNumber, xp) {
     return { id, seqNumber, xp };
 }
-
-//       if (!window.CourseProgress)
-//         window.CourseProgress = {};
-//       if (!window.TopicProgress)
-//         window.TopicProgress = {};
-

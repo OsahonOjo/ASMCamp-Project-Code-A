@@ -1,6 +1,6 @@
 import React from 'react';
 import { getAllTracks } from '../../model/EduDataModel';
-import { getTrackProgress } from '../../model/UserDataModel';
+import { getTrackProgressInfo } from '../../model/UserDataModel';
 
 export default function AllLearningTracksScreenViewModel() {
 
@@ -17,7 +17,7 @@ export default function AllLearningTracksScreenViewModel() {
             shortDescription: learningTrackEntity.shortDescription, 
             longDescription: learningTrackEntity.longDescription, 
             nCourses: learningTrackEntity.courseIds.length,
-            progress: getTrackProgress(learningTrackEntity._id)
+            progress: getTrackProgressInfo(learningTrackEntity._id)
         };
     }
 
