@@ -3,6 +3,7 @@ import ProgressAndRewardsScreenViewModel from "./ProgressAndRewardsScreenViewMod
 
 import BackButtonNavbar from "../components/BackButtonNavbar";
 import BadgeCard from "../components/BadgeCard";
+import ProgressBar from "../components/ProgressBar";
 
 import badgeIcon from '../assets/hexagons_Prosymbols_Premium.png';
 
@@ -50,28 +51,72 @@ export default function ProgressAndRewardsScreen() {
     ];
     // BadgeCard({ icon, iconSize, name, criteria, isComplete, displayInline })
 
+    // TODO: change to allLearningTracksGameData
+    const { allLearningTracksProgressData, getAllLearningTracksProgressData } = ProgressAndRewardsScreenViewModel();
+    const [ allLearningTracksProgressState, setAllLearningTracksProgressState ] = React.useState([]);
+    const [ progressSelectTagValue, setProgressSelectTagValue ] = React.useState(-1);
+
+    React.useEffect(() => {
+        getAllLearningTracksProgressData();
+    }, []);
+
+    React.useEffect(() => {
+        allLearningTracksProgressData && allLearningTracksProgressData.length != 0
+            ? setAllLearningTracksProgressState(allLearningTracksProgressData)
+            : setAllLearningTracksProgressState([]);
+        console.log('in view: allLearningTracksProgressData: ', allLearningTracksProgressData);
+        // WHY IS THIS AN  OBJECT ?
+    }, [allLearningTracksProgressData]);
+
+    console.log('in view: allLearningTracksProgressState: ', allLearningTracksProgressState);
+
+    function handleViewProgressChange(event) {
+        event.preventDefault();
+        setProgressSelectTagValue(event.target.value);
+    }
+
     return (
         <>
             <BackButtonNavbar title={NAVBAR_TEXT} to={PREVIOUS_PAGE}/>
-            <details className="card">
+            <details open className="card">
                 <summary style={{ textAlign: 'center' }}>{MY_PROGRESS_LABEL}</summary>
                 <hr />
 
                 <div>
                     <label htmlFor="view-progress-by-track">Select Learning Track:</label><br />
-                    <select name="view-progress-by-track" style={{ width: '90%' }}>
-                        {tracksOptions.map(track => 
-                            <option key={track} value={track}>{track}</option>)}
+                    <select 
+                        name="view-progress-by-track" 
+                        onChange={handleViewProgressChange}
+                        value={progressSelectTagValue}
+                        style={{ width: '90%' }}>
+                            <option value={-1}>All Tracks</option>
+                            {allLearningTracksProgressState.map((record, index) => 
+                                <option key={index} value={index}>{record.title}</option>)}
                     </select>
+                    <input type="text" readOnly={true} value={progressSelectTagValue} style={{ width: '20%' }}/>
                 </div>
-
-                <ul>
-                    <li>Item 1</li>
-                    <li>Item 2</li>
-                    <li>Item 3</li>
+                <br/>
+                <ul style={{ listStyleType: 'none' }}>
+                    {progressSelectTagValue == -1
+                        ? allLearningTracksProgressState.map((record, index) => 
+                                <li key={index}>
+                                    {record.title}
+                                    <ProgressBar 
+                                        percentage={record.percentage} 
+                                        hasLabel={true} 
+                                        labelOnRightSide={false}/>
+                                </li>
+                            )
+                        : <li>
+                            {allLearningTracksProgressState[progressSelectTagValue].title}
+                            <ProgressBar 
+                                percentage={allLearningTracksProgressState[progressSelectTagValue].percentage} 
+                                hasLabel={true} 
+                                labelOnRightSide={false}/>
+                        </li>}
                 </ul>
             </details>
-            <details className="card">
+            <details open className="card">
                 <summary style={{ textAlign: 'center' }}>{MY_REWARDS_LABEL}</summary>
                 <hr />
 

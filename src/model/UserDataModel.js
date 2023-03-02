@@ -135,6 +135,13 @@ function updateLearningTrackProgress(trackId, courseId, xp) {
 }
 
 // getXProgress() functions return null if user is not enrolled
+export function getTrackProgressAll() {
+    let record = window.LearningTrackProgress;  // if no record, returns undefined 
+    if (!record || Object.keys(record).length == 0)
+        return null;
+    return record;
+}
+
 export function getTrackProgressInfo(trackId) {
     if (!userIsEnrolledInTrack(trackId))
         return null;
