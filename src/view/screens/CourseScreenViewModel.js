@@ -8,7 +8,7 @@ export default function CourseScreenViewModel() {
     const [courseDetails, setCourseDetails] = React.useState({});
     const [topicsAndTopicItems, setTopicsAndTopicItems] = React.useState([]);
 
-    function courseDetailsFactory(courseEntity) {
+    function courseDetailsBuilder(courseEntity) {
         let courseProgressInfo = getCourseProgressInfo(courseEntity._id);  // { percentage, nTopics }
         return { 
             courseId: courseEntity._id, // NB: _id in a Course entity
@@ -31,7 +31,7 @@ export default function CourseScreenViewModel() {
             console.log(error.message);
             return;
         }
-        let details = courseDetailsFactory(response.response);  
+        let details = courseDetailsBuilder(response.response);  
         setCourseDetails(details); 
     }
 

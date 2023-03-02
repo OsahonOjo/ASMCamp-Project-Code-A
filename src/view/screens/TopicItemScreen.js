@@ -192,7 +192,7 @@ export default function TopicItemScreen() {
       
       <div style={{...commonDisplayStyles.stickToBottom, ...commonDisplayStyles.displayFlexCenter, background: '#ACC8F1', height: '40px'}}>
         <ProgressBar 
-          percentage={topicItemState.learningTrackProgressPercent} 
+          percentage={topicItemState.learningTrackProgress} 
           hasLabel={true} 
           labelOnRightSide={false}/>
       </div>

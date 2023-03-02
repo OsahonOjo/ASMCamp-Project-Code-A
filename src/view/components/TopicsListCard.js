@@ -18,13 +18,13 @@ function TopicsListCard({ topicsData, userIsEnrolled }) {
 
   return (
     <>
-      <details open className="card card--clickable">
+      <div className="card card--clickable">
 
-        <summary>
+        <div>
           <img src={mainCardIcon} alt="main card icon" className="icon--30px"/>
 					<span>Topics</span>
 					<img src={bulletIcon} alt="main card icon" className="icon--10px"/>
-        </summary>
+        </div>
 
         {topicsData.map(topic => 
           <TopicDetailsCard 
@@ -37,7 +37,7 @@ function TopicsListCard({ topicsData, userIsEnrolled }) {
             hasLabel={true}
             labelOnRightSide={false}
             topicItems={topic.topicItems}/>)}
-      </details>
+      </div>
     </>
   );
 }

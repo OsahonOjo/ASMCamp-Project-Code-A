@@ -5,19 +5,16 @@ import { userIsEnrolledInTrack, enrollUser, updateProgress, getTrackProgressInfo
 export default function TopicItemScreenViewModel() {
 
   const [topicItem, setTopicItem] = React.useState({});
+  const [progress, setProgress] = React.useState(0);
 
-  // rename _id field to id
+  // rename '_id' field to 'id'
   function topicItemBuilder(topicItem) {
-    let trackProgressInfo = getTrackProgressInfo(topicItem.learningTrackId);  // { percentage, nCourses }
-    if(trackProgressInfo)
-      console.log('trackProgressInfo.percentage: ', trackProgressInfo.percentage);
-      
     let formattedTopicItem = Object.assign({}, topicItem);
-
     formattedTopicItem.id = topicItem._id;
     delete formattedTopicItem._id;
     
-    formattedTopicItem.learningTrackProgressPercent = trackProgressInfo ? trackProgressInfo.percentage : 0;
+    let learningTrackProgressInfo = getTrackProgressInfo(topicItem.learningTrackId);  // { percentage, nCourses }
+    formattedTopicItem.learningTrackProgress = learningTrackProgressInfo ? learningTrackProgressInfo.percentage : 0;
     
     return formattedTopicItem;
   }
@@ -35,6 +32,11 @@ export default function TopicItemScreenViewModel() {
     if (!userIsEnrolledInTrack(trackId))
       await enrollUser(trackId);
     updateProgress(trackId, courseId, topicId, topicItemId);
+    // reflect updated progress on progress bar
+    const nextTopicItem = Object.assign({}, topicItem);
+    let learningTrackProgressInfo = getTrackProgressInfo(topicItem.learningTrackId);  // { percentage, nCourses }
+    nextTopicItem.learningTrackProgress = learningTrackProgressInfo.percentage;
+    setTopicItem(nextTopicItem);
   }
 
   async function handleLessonSubmit(trackId, courseId, topicId, topicItemId) {
@@ -88,6 +90,7 @@ export default function TopicItemScreenViewModel() {
 
   return {
     topicItem, 
+    progress,
     getTopicItemData,
     handleLessonSubmit,
     handleMCQSubmit,

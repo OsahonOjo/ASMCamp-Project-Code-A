@@ -68,7 +68,7 @@ function TopicDetailsCard({ title, shortDescription, nXP, userIsEnrolled, percen
 
           <CollapsibleParagraph text={shortDescription} />
 
-          <details>
+          <details open>
             <summary>
               <span>{SHOW_ITEMS_TEXT}</span>
               <img src={bulletIcon} alt="main card icon" className="icon--10px"/>

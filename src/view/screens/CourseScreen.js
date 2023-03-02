@@ -57,14 +57,17 @@ export default function CourseScreen() {
         nQuestions={courseDetailsState.nQuestions}
         userIsEnrolled={courseDetailsState.userIsEnrolled}/>
 
+      {/* wrapping in ternary operator handles case when progressInfo is null */}
       {courseDetailsState.progressInfo
         ? <ProgressCard 
             isForLearningTrack={false}
             nInProgress={0}
+            percentage={courseDetailsState.progressInfo.percentage}
             nComplete={Math.round( (courseDetailsState.progressInfo.percentage / 100) * courseDetailsState.progressInfo.nTopics )}
             nTotal={courseDetailsState.progressInfo.nTopics}/> 
         : null}      
 
+      {/** TODO: remove <details> from TopicsListCard  */}
       <TopicsListCard 
         topicsData={topicsAndTopicItemsState}
         userIsEnrolled={false}/>

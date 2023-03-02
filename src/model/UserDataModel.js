@@ -138,8 +138,9 @@ function updateLearningTrackProgress(trackId, courseId, xp) {
 export function getTrackProgressInfo(trackId) {
     if (!userIsEnrolledInTrack(trackId))
         return null;
-    let record = window.LearningTrackProgress[trackId];
-    console.log('record: ', record);
+    let record = window.LearningTrackProgress[trackId];  // if no record, returns undefined 
+    if (!record || Object.keys(record).length == 0)
+        return null;
     return {
         percentage: Math.round((record.totalXPEarned / record.totalTrackXP) * 100),
         nCourses: record.nCourses
@@ -149,7 +150,9 @@ export function getTrackProgressInfo(trackId) {
 export function getCourseProgressInfo(courseId) {
     if (!userIsEnrolledInCourse(courseId))
         return null;
-    let record = window.CourseProgress[courseId];
+    let record = window.CourseProgress[courseId];  // if no record, returns undefined 
+    if (!record || Object.keys(record).length == 0)
+        return null;
     return {
         percentage: Math.round((record.totalXPEarned / record.totalCourseXP) * 100),
         nTopics: record.nTopics
@@ -159,7 +162,9 @@ export function getCourseProgressInfo(courseId) {
 export function getTopicProgressInfo(topicId) {
     if (!userIsEnrolledInTopic(topicId))
         return null;
-    let record = window.TopicProgress[topicId];
+    let record = window.TopicProgress[topicId];  // if no record, returns undefined 
+    if (!record || Object.keys(record).length == 0)
+        return null;
     return {
         percentage: Math.round((record.totalXPEarned / record.totalTopicXP) * 100),
         nTopicItems: record.nTopicItems

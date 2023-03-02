@@ -81,11 +81,15 @@ export default function LearningTrackScreen() {
         nHours={trackDetailsState.nHours}
         nCourses={trackDetailsState.nCourses} /> 
 
-      <ProgressCard 
-        isForLearningTrack={true}
-        nInProgress={1}
-        nComplete={2}
-        nTotal={4}/>    
+      {/* wrapping in ternary operator handles case when progressInfo is null */}
+      {trackDetailsState.progressInfo
+        ? <ProgressCard 
+            isForLearningTrack={true}
+            nInProgress={0}
+            percentage={trackDetailsState.progressInfo.percentage}
+            nComplete={Math.round( ( trackDetailsState.progressInfo.percentage / 100) * trackDetailsState.progressInfo.nCourses )}
+            nTotal={trackDetailsState.progressInfo.nCourses}/> 
+        : null}   
 
       <CourseListCard 
         courses={courseSummariesState}

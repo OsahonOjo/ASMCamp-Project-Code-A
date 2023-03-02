@@ -41,9 +41,10 @@ export default function AllLearningTracksScreen() {
           to={`${NEXT_PAGE}/${summary.id}`}
           userIsEnrolled={summary.progress ? true : false}
           progressBar={
+            /* wrapping in ternary operator handles case when progress is null */
             summary.progress
               ? {
-                  percentage: summary.progress,
+                  percentage: summary.progress.percentage,
                   hasLabel: true,
                   labelOnRightSide: false
                 }

@@ -1,5 +1,6 @@
 import React from "react";
 import { getTrack, getAllCoursesInTrack } from '../../model/EduDataModel';
+import { getTrackProgressInfo } from '../../model/UserDataModel';
 
 export default function LearningTrackScreenViewModel() {
 
@@ -8,8 +9,16 @@ export default function LearningTrackScreenViewModel() {
   const [courseSummaries, setCourseSummaries] = React.useState([]);
 
   function trackDetailsFactory(trackId, title, shortDescription, longDescription, nCourses, nHours) {
-    return { trackId, // NB: _id in a Learning Track entity
-      title, longDescription, shortDescription, nCourses, nHours };
+    let trackProgressInfo = getTrackProgressInfo(trackId);  // returns { percentage, nCourses } or null
+    return { 
+      trackId, // NB: _id in a Learning Track entity
+      title, 
+      longDescription, 
+      shortDescription, 
+      nCourses, 
+      nHours,
+      progressInfo: trackProgressInfo ? trackProgressInfo : null
+     };
   }
 
   async function getTrackDetailsData(trackId) {

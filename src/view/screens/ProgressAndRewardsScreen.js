@@ -1,3 +1,5 @@
+import React from "react";
+import ProgressAndRewardsScreenViewModel from "./ProgressAndRewardsScreenViewModel";
 
 import BackButtonNavbar from "../components/BackButtonNavbar";
 import BadgeCard from "../components/BadgeCard";

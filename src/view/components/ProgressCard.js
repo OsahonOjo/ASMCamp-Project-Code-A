@@ -11,7 +11,7 @@ import './styles/card.css';
 import './styles/icon.css';
 import { commonDisplayStyles } from "./styles/commonDisplayStyles";
 
-function ProgressCard({ isForLearningTrack, nInProgress, nComplete, nTotal }) {
+function ProgressCard({ isForLearningTrack, nInProgress, percentage, nComplete, nTotal }) {
 
 	const [state, setState] = React.useState({ open: true });
 	const BULLET_ICON_SIZE = '10px';
@@ -23,39 +23,39 @@ function ProgressCard({ isForLearningTrack, nInProgress, nComplete, nTotal }) {
 	};
 	const COURSES = "Courses";
 	const TOPICS = "Topics";
-	const COURSES_COMPLETE = `${nInProgress}/${nTotal} ${isForLearningTrack ? COURSES : TOPICS} In Progress`;
-	const COURSES_IN_PROGRESS = `${nComplete}/${nTotal} ${isForLearningTrack ? COURSES : TOPICS} Complete`;
+	const COURSES_COMPLETE = `${nInProgress}/${nTotal} ${isForLearningTrack ? COURSES : TOPICS} Complete`;
+	const COURSES_IN_PROGRESS = `${nComplete}/${nTotal} ${isForLearningTrack ? COURSES : TOPICS} In Progress`;
 	const calcPercentage = () => Math.round( (nComplete / nTotal) * 100 );
 
 	return (
 
-		<details open={state.open} className="card card--clicakble">
+		<div className="card card--clicakble">
 
-			<summary>
+			<div>
 				<i className="fa fa-tachometer" style={commonDisplayStyles.icon24Style}></i>
 				<span>Progress</span>
 				<img src={bulletIcon} alt="main card icon" className="icon--10px"/>
-			</summary>
+			</div>
 
 			<div style={commonDisplayStyles.indented}>
 				{<ProgressBar 
-					percentage={calcPercentage()}
+					percentage={percentage}
 					hasLabel={true}
 					labelOnRightSide={false} />}
+
+				{/* {<IconAndTextListItem 
+					icon={bulletIcon}
+					text={COURSES_IN_PROGRESS}
+					style={iconAndTextListItemStyle}/>} */}
 
 				{<IconAndTextListItem 
 					icon={bulletIcon}
 					text={COURSES_COMPLETE}
 					style={iconAndTextListItemStyle}/>}
 
-				{<IconAndTextListItem 
-					icon={bulletIcon}
-					text={COURSES_IN_PROGRESS}
-					style={iconAndTextListItemStyle}/>}
-
 			</div>
 
-		</details>
+		</div>
 
 	);
 }

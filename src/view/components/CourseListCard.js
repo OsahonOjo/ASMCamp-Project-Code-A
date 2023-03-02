@@ -43,13 +43,13 @@ function CourseListCard({ courses, viewModeNextPageUrlStem, editMode, editModeNe
 
   return (
     <>
-      <details open className="card">
+      <div className="card">
 
-        <summary>
+        <div>
           <span className="material-symbols-outlined" style={commonDisplayStyles.icon24Style}>collections_bookmark</span>
           <span>Courses</span>
           <img src={bulletIcon} alt="main card icon" className="icon--10px"/>
-        </summary>
+        </div>
 
         {courses.map(course => 
           <CourseSummaryCard 
@@ -67,7 +67,7 @@ function CourseListCard({ courses, viewModeNextPageUrlStem, editMode, editModeNe
             nextPageUrl={editMode ? `${editModeNextPageUrlStem}/${course.id}` : `${viewModeNextPageUrlStem}/${course.id}`} />)}
 
         {editMode ? newCourseElement : null}
-      </details>
+      </div>
     </>
   );
 }
