@@ -8,7 +8,7 @@ import headingIcon from '../assets/hexagons_Prosymbols_Premium.png';
 
 import './styles/card.css';
 
-function RewardsCard({ mainIconSize, itemIconSize, rewards }) {
+function RewardsCard({ mainIconSize, itemIconSize, badges }) {
 
   const HEADING = "Rewards";
   const iconAndTextListItemStyle = {
@@ -28,14 +28,15 @@ function RewardsCard({ mainIconSize, itemIconSize, rewards }) {
           style={iconAndTextListItemStyle}/>
       </summary>
 
-      {rewards.map(reward => 
+      {badges.map(badge => 
         <BadgeCard 
-          key={reward.name}
+          key={badge.id}
           icon={headingIcon}
           iconSize={itemIconSize}
-          name={reward.name}
-          criteria={reward.criteria}
-          isComplete={reward.isComplete}/>
+          name={badge.title}
+          type={badge.type}
+          criteria={badge.contentTitle}
+          isComplete={false}/>
       )}      
 
     </details>
@@ -45,7 +46,7 @@ function RewardsCard({ mainIconSize, itemIconSize, rewards }) {
 RewardsCard.propTypes = { 
   mainIconSize: PropTypes.string, 
   itemIconSize: PropTypes.string, 
-  rewards: PropTypes.array 
+  badges: PropTypes.array 
 };
 
 export default RewardsCard;

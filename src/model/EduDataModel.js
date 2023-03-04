@@ -41,6 +41,21 @@ export async function getAllCoursesInTrack(trackId) {
     return callFetchAPI(REQUEST_METHODS.GET, path, GET_REQUEST_OPTIONS);
 }
 
+export async function getAllTopicsInTrack(trackId) {
+    let path = `${BASE_API_URL}${VIEW_PREFIX}${TRACK}/${trackId}/topics`;
+    return callFetchAPI(REQUEST_METHODS.GET, path, GET_REQUEST_OPTIONS);
+}
+
+export async function getAllTopicItemsInTrack(trackId) {
+    let path = `${BASE_API_URL}${VIEW_PREFIX}${TRACK}/${trackId}/items`;
+    return callFetchAPI(REQUEST_METHODS.GET, path, GET_REQUEST_OPTIONS);
+}
+
+export async function getAllBadgesInTrack(trackId) {
+    let path = `${BASE_API_URL}${VIEW_PREFIX}${TRACK}/${trackId}/badges`;
+    return callFetchAPI(REQUEST_METHODS.GET, path, GET_REQUEST_OPTIONS);
+}
+
 export async function getCourse(courseId) {
     let path = `${BASE_API_URL}${VIEW_PREFIX}/course/${courseId}`;
     return callFetchAPI(REQUEST_METHODS.GET, path, GET_REQUEST_OPTIONS);
@@ -110,6 +125,12 @@ export async function createTopicEntity(learningTrackId, courseId, title, seqNum
 export async function createTopicItemEntity(topicItemData) {
     let path = `${BASE_API_URL}${POST_PREFIX}/create/item`;
     let post_request_options = postRequestOptionsFactory(JSON.stringify(topicItemData));
+    return callFetchAPI(REQUEST_METHODS.POST, path, post_request_options);
+}
+
+export async function createBadgeEntity(badgeData) {
+    let path = `${BASE_API_URL}${POST_PREFIX}/create/badge`;
+    let post_request_options = postRequestOptionsFactory(JSON.stringify(badgeData));
     return callFetchAPI(REQUEST_METHODS.POST, path, post_request_options);
 }
 

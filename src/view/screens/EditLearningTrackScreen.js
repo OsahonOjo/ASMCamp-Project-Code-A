@@ -36,7 +36,7 @@ export default function EditLearningTrackScreen() {
       description: entityType == ENTITY_TYPES.TOPIC ? true : false
     };
   };
-  const trackEntityValuesFactory = (id, title, shortDescription, longDescription) => {
+  const trackEntityValuesBuilder = (id, title, shortDescription, longDescription) => {
     return {
       id,
       learningTrackId: "", 
@@ -58,11 +58,14 @@ export default function EditLearningTrackScreen() {
   const { trackId } = useParams();
 
   const [screenMode, setScreenMode] = React.useState(trackId != 0 ? SCREEN_MODE.EDIT_EXISTING_ENTITY : SCREEN_MODE.CREATE_NEW_ENTITY);
-  const [learningTrackEntityState, setLearningTrackEntityState] = React.useState(trackEntityValuesFactory(EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING));
+  const [learningTrackEntityState, setLearningTrackEntityState] = React.useState(trackEntityValuesBuilder(EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING));
   const [courseSummariesState, setCourseSummariesState] = React.useState([]);
+  const [allTopicsInTrackState, setAllTopicsInTrackState] = React.useState([]);
+  const [allTopicItemsInTrackState, setAllTopicItemsInTrackState] = React.useState([]);
+  const [badgesState, setBadgesState] = React.useState([]);
 
   const { trackDetails, courseSummaries, getTrackDetailsData, getCourseSummariesData } = LearningTrackScreenViewModel();
-  const { createLearningTrack, updateLearningTrack } = EditLearningTrackScreenViewModel();
+  const { createLearningTrack, updateLearningTrack, allTopicsInTrack, allTopicItemsInTrack, getAllTopicsInTrackData, getAllTopicItemsInTrackData, badges, getAllBadgesInLearningTrack, createBadge } = EditLearningTrackScreenViewModel();
 
   React.useEffect(() => {
     setScreenMode(trackId != 0 ? SCREEN_MODE.EDIT_EXISTING_ENTITY : SCREEN_MODE.CREATE_NEW_ENTITY);
@@ -72,6 +75,9 @@ export default function EditLearningTrackScreen() {
     if (screenMode == SCREEN_MODE.EDIT_EXISTING_ENTITY) {
       getTrackDetailsData(trackId);
       getCourseSummariesData(trackId);
+      getAllTopicsInTrackData(trackId);
+      getAllTopicItemsInTrackData(trackId);
+      getAllBadgesInLearningTrack(trackId);
     }
   }, []);
   
@@ -79,15 +85,37 @@ export default function EditLearningTrackScreen() {
     if (screenMode == SCREEN_MODE.EDIT_EXISTING_ENTITY) {
       // account for when trackDetails and courseSummaries are {}
       trackDetails && Object.keys(trackDetails).length != 0
-        ? setLearningTrackEntityState(trackEntityValuesFactory(trackDetails.trackId, trackDetails.title, trackDetails.shortDescription, trackDetails.longDescription)) 
-        : setLearningTrackEntityState(trackEntityValuesFactory(EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING));
-      courseSummaries && Object.keys(courseSummaries).length != 0
+        ? setLearningTrackEntityState(trackEntityValuesBuilder(trackDetails.trackId, trackDetails.title, trackDetails.shortDescription, trackDetails.longDescription)) 
+        : setLearningTrackEntityState(trackEntityValuesBuilder(EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING));
+      courseSummaries && courseSummaries.length != 0
         ? setCourseSummariesState(courseSummaries) 
         : setCourseSummariesState([]);
     }
   }, [trackDetails, courseSummaries]);
 
-  function handleFormSubmission(event, data) {
+  React.useEffect(() => {
+    if (screenMode == SCREEN_MODE.EDIT_EXISTING_ENTITY) {
+      // account for when allTopicsInTrack and allTopicItemsInTrack are []
+      allTopicsInTrack && allTopicsInTrack.length != 0
+        ? setAllTopicsInTrackState(allTopicsInTrack)
+        : setAllTopicsInTrackState([]);
+      allTopicItemsInTrack && allTopicItemsInTrack.length != 0
+        ? setAllTopicItemsInTrackState(allTopicItemsInTrack)
+        : setAllTopicItemsInTrackState([]);
+    }
+  }, [allTopicsInTrack, allTopicItemsInTrack]);
+
+  React.useEffect(() => {
+    if (screenMode == SCREEN_MODE.EDIT_EXISTING_ENTITY) {
+      badges && badges.length != 0 ? setBadgesState(badges) : setBadgesState([]);  // account for when badges is []
+    }
+  }, [badges]);
+
+  // console.log('allTopicsInTrackState: ', allTopicsInTrackState);
+  // console.log('allTopicItemsInTrackState: ', allTopicItemsInTrackState);
+  // console.log('badgesState: ', badgesState);
+
+  function handleTrackEntityFormSubmission(event, data) {
     event.preventDefault();
     console.log('form data: ', data);
 
@@ -103,7 +131,7 @@ export default function EditLearningTrackScreen() {
       updateLearningTrack(data.id, data.title, data.shortDescription, data.longDescription)
         .then((updatedEntity) => {
           console.log('EDIT_EXISTING_ENTITY updatedEntity: ', updatedEntity);
-          let newState = trackEntityValuesFactory(updatedEntity.id, updatedEntity.title, updatedEntity.shortDescription, updatedEntity.longDescription);
+          let newState = trackEntityValuesBuilder(updatedEntity.id, updatedEntity.title, updatedEntity.shortDescription, updatedEntity.longDescription);
           console.log('new state: ', newState);
           setLearningTrackEntityState(newState);
           console.log('updated learningTrackEntityState: ', learningTrackEntityState);
@@ -125,6 +153,20 @@ export default function EditLearningTrackScreen() {
     }
   }
 
+  function extractDataForBadgeSelect(entities) {
+    let dataForBadgeSelect = [];
+    entities.forEach(entity => {
+      dataForBadgeSelect.push({
+        id: entity.id,
+        title: entity.title
+      });
+    });
+    // console.log('dataForBadgeSelect: ', dataForBadgeSelect);
+    return dataForBadgeSelect;
+  }
+
+  console.log('in EditLearningTrackScreen');
+
   return (
     <>
       <BackButtonNavbar title={NAVBAR_TEXT} to={PREVIOUS_PAGE_URL} />
@@ -132,7 +174,7 @@ export default function EditLearningTrackScreen() {
       <GenericEntityForm 
         relevantFields={relevantFieldsFactory(ENTITY_TYPES.TRACK)}
         fieldValues={learningTrackEntityState}
-        handleSubmit={handleFormSubmission} />
+        handleSubmit={handleTrackEntityFormSubmission} />
         
       {screenMode == SCREEN_MODE.CREATE_NEW_ENTITY
         ? null
@@ -145,11 +187,21 @@ export default function EditLearningTrackScreen() {
               editModeNextPageUrlStem={"/instructors/edit/course"}
               learningTrackId={trackId} />
 
-            <AddRewardsCard />
+            <AddRewardsCard 
+              learningTrack={{
+                id: learningTrackEntityState.id,
+                title: learningTrackEntityState.title
+              }}
+              courses={extractDataForBadgeSelect(courseSummariesState)}
+              topics={extractDataForBadgeSelect(allTopicsInTrackState)}
+              topicItems={extractDataForBadgeSelect(allTopicItemsInTrackState)}
+              badges={badgesState}
+              createBadge={createBadge}
+              deleteBadge={() => {}} />
 
-            <button>Publish Changes</button>
+            <button>TODO: Publish Changes</button>
             <hr />
-            <button>Delete Learning Track</button>
+            <button>TODO: Delete Learning Track</button>
           </>}
     </>
   );

@@ -55,21 +55,32 @@ export default function LearningTrackScreen() {
   ];
   
   const { trackId } = useParams();
-  const { trackDetails, courseSummaries, getTrackDetailsData, getCourseSummariesData } = LearningTrackScreenViewModel();
+  const { trackDetails, courseSummaries, getTrackDetailsData, getCourseSummariesData, badges, getAllBadgesInLearningTrack, } = LearningTrackScreenViewModel();
   
   // if trackDetailsState is empty, CollapsibleParagraph throws a TypeError
   const [trackDetailsState, setTrackDetailsState] = React.useState({});
   const [courseSummariesState, setCourseSummariesState] = React.useState([]);
+  const [badgesState, setBadgesState] = React.useState([]);
 
   React.useEffect(() => {
     getTrackDetailsData(trackId);
     getCourseSummariesData(trackId);
+    getAllBadgesInLearningTrack(trackId);
   }, []);
 
   React.useEffect(() => {
-    trackDetails ? setTrackDetailsState(trackDetails) : setTrackDetailsState({});
-    courseSummaries ? setCourseSummariesState(courseSummaries) : setCourseSummariesState([])
-  }, [trackDetails, courseSummaries]);
+    trackDetails && Object.keys(trackDetails).length != 0
+      ? setTrackDetailsState(trackDetails) 
+      : setTrackDetailsState({});
+    courseSummaries && courseSummaries.length != 0
+      ? setCourseSummariesState(courseSummaries) 
+      : setCourseSummariesState([])
+    badges && courseSummaries.length != 0
+      ? setBadgesState(badges)
+      : setBadgesState([]);
+  }, [trackDetails, courseSummaries, badges]);
+
+  console.log('on LearningTrackScreen');
 
   return (
     <>
@@ -102,8 +113,8 @@ export default function LearningTrackScreen() {
 
       <RewardsCard 
         mainIconSize={"20px"}
-        itemIconSize={"20px"}
-        rewards={rewardsData}/>
+        itemIconSize={"60px"}
+        badges={badgesState}/>
     </>
   );
 }

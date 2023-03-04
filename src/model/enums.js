@@ -10,3 +10,10 @@ export const topicItemTypes = {
   SAQ: "SAQ",
   CQ: "CQ"
 };
+
+export const badgeTypes = {
+  TPITM: { typeId: 'TPITM', name: 'Completed Topic Item' },
+  TOPIC: { typeId: 'TOPIC', name: 'Completed Topic' },
+  COURS: { typeId: 'COURS', name: 'Completed Course' },
+  TRACK: { typeId: 'TRACK', name: 'Completed Learning Track' }
+};

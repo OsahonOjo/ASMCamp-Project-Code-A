@@ -100,7 +100,7 @@ export default function ProgressAndRewardsScreen() {
                     {progressSelectTagValue == -1
                         ? allLearningTracksProgressState.map((record, index) => 
                                 <li key={index}>
-                                    {record.title}
+                                    <p>{record.title}</p>
                                     <ProgressBar 
                                         percentage={record.percentage} 
                                         hasLabel={true} 
@@ -108,7 +108,7 @@ export default function ProgressAndRewardsScreen() {
                                 </li>
                             )
                         : <li>
-                            {allLearningTracksProgressState[progressSelectTagValue].title}
+                            <p>{allLearningTracksProgressState[progressSelectTagValue].title}   </p>
                             <ProgressBar 
                                 percentage={allLearningTracksProgressState[progressSelectTagValue].percentage} 
                                 hasLabel={true} 

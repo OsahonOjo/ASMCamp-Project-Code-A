@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import HamburgerNavbar from "../components/HamburgerNavbar";
 import IconAndTextListItem from "../components/IconAndTextListItem";
 import SideNavigationMenu from "../components/SideNavigationMenu";
+import Temp from './Temp';
 
 import mainIcon from '../assets/hexagons_Prosymbols_Premium.png';
 import nextPageIcon from '../assets/next.png';
@@ -31,6 +32,7 @@ function InstructorsAreaScreen() {
     <>
       <HamburgerNavbar title={NAVBAR_TEXT} />
       <SideNavigationMenu />
+      <Link to={"/instructors/temp"}>Click to go to Temp</Link>
       {menuItems.map(menuItem => 
         <div 
           key={menuItem.itemTitle}

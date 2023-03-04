@@ -11,8 +11,8 @@ function AddInstructorsCard() {
 
   const HEADING = "Add Instructors";
   const INSTRUCTOR_SEARCH_TEXT = "Instructor Search";
-  const ADD_INSTRUCTOR_TEXT = "Add Instructor";
-  const SEARCH_BUTTON_TEXT = "Search Instructor";
+  const ADD_INSTRUCTOR_TEXT = "TODO: Add Instructor";
+  const SEARCH_BUTTON_TEXT = "TODO: Search Instructor";
   const instructors = [
     "Matthew Murdock",
     "Karen Page",
@@ -28,9 +28,11 @@ function AddInstructorsCard() {
   };
 
   return (
-    <div className='card'>
-      <h4>{HEADING}</h4>
+    <details className='card'>
+      <summary>{HEADING}</summary>
       
+      <hr/>
+
       <div style={commonDisplayStyles.indented}>
         {instructors.map(instructor => 
           <div key={instructor}>
@@ -47,7 +49,7 @@ function AddInstructorsCard() {
       <input type="text" /><br />
       <p>Instructor Not Found</p>
       <button type="button">{ADD_INSTRUCTOR_TEXT}</button>
-    </div>
+    </details>
   );
 }
 

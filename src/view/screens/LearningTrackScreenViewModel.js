@@ -1,5 +1,5 @@
 import React from "react";
-import { getTrack, getAllCoursesInTrack } from '../../model/EduDataModel';
+import { getTrack, getAllCoursesInTrack, getAllBadgesInTrack } from '../../model/EduDataModel';
 import { getTrackProgressInfo } from '../../model/UserDataModel';
 
 export default function LearningTrackScreenViewModel() {
@@ -7,6 +7,28 @@ export default function LearningTrackScreenViewModel() {
   const HOURS_PER_COURSE = 4;
   const [trackDetails, setTrackDetails] = React.useState({});
   const [courseSummaries, setCourseSummaries] = React.useState([]);
+  const [ badges, setBadges ] = React.useState([]);
+
+  async function getAllBadgesInLearningTrack(trackId) {
+    const { response, error } = await getAllBadgesInTrack(trackId);
+    if (error) {
+        console.log(error.message);
+        return;
+    }
+    let allBadgesData = response.response;
+    // console.log('allBadgesData: ', allBadgesData);
+    allBadgesData = renameUnderscoreId(allBadgesData);
+    // console.log('allBadgesData: ', allBadgesData);
+    setBadges(allBadgesData);
+  }
+
+  function renameUnderscoreId(arrayOfEntities) {
+    arrayOfEntities.forEach(element => {
+        element.id = element._id;
+        delete element._id;
+    });
+    return arrayOfEntities;
+  }
 
   function trackDetailsFactory(trackId, title, shortDescription, longDescription, nCourses, nHours) {
     let trackProgressInfo = getTrackProgressInfo(trackId);  // returns { percentage, nCourses } or null
@@ -59,7 +81,9 @@ export default function LearningTrackScreenViewModel() {
     trackDetails, 
     courseSummaries, 
     getTrackDetailsData,
-    getCourseSummariesData
+    getCourseSummariesData,
+    badges,
+    getAllBadgesInLearningTrack,
   };
 }
 

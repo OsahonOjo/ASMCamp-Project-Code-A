@@ -16,6 +16,7 @@ import ProgressAndRewardsScreen from './screens/ProgressAndRewardsScreen';
 import StudentLeaderboardScreen from './screens/StudentLeaderboardScreen';
 import InstructorLeaderboardScreen from './screens/InstructorLeaderboardScreen';
 import ManageGroupsScreen from './screens/ManageGroupsScreen';
+import Temp from './screens/Temp';
 
 // testing link: https://www.facebook.com/embed/instantgames/599022965028716/player?game_url=https://localhost:3000/
 // remember: font awesome and bootstrap have been <link>'d in index.html so make use of them
@@ -40,6 +41,8 @@ export default function App() {
         <Route path="/students/leaderboards" element={<StudentLeaderboardScreen />} />
         
         <Route path="/instructors" element={<InstructorsAreaScreen />} />
+
+        <Route path="/instructors/temp" element={<Temp />} />
 
         <Route path="/instructors/tracks" element={<ManageLearningTracksScreen />} />
         <Route path="/instructors/edit/track/:trackId" element={<EditLearningTrackScreen />} />

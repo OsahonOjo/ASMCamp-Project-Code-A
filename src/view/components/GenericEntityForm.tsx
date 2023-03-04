@@ -35,8 +35,9 @@ interface GenericEditEntityViewProps {
 export default function GenericEntityForm({ relevantFields, fieldValues, handleSubmit }: GenericEditEntityViewProps): JSX.Element {
 
     const BUTTON_TEXT = "Save";
-    const N_ROWS_SHORT_DESC = 5;
-    const N_ROWS_LONG_DESC = 7;
+    const N_ROWS_SHORT_DESC = 4;
+    const N_ROWS_LONG_DESC = 5;
+    const FORM_ELEMENT_WIDTH = '100%';
 
     const navigate = useNavigate();
 
@@ -56,7 +57,7 @@ export default function GenericEntityForm({ relevantFields, fieldValues, handleS
                 readOnly={true}
                 type="text" 
                 value={inputs.id} 
-                style={{width: '80%'}}/>
+                style={{width: FORM_ELEMENT_WIDTH}}/>
         </div>;
 
     const learningTrackIdField = 
@@ -67,7 +68,7 @@ export default function GenericEntityForm({ relevantFields, fieldValues, handleS
                 readOnly={true}
                 type="text" 
                 value={inputs.learningTrackId} 
-                style={{width: '80%'}}/>
+                style={{width: FORM_ELEMENT_WIDTH}}/>
         </div>;
 
     const courseIdField = 
@@ -78,7 +79,7 @@ export default function GenericEntityForm({ relevantFields, fieldValues, handleS
                 readOnly={true}
                 type="text" 
                 value={inputs.courseId} 
-                style={{width: '80%'}}/>
+                style={{width: FORM_ELEMENT_WIDTH}}/>
         </div>;
 
     const titleField = 
@@ -89,7 +90,7 @@ export default function GenericEntityForm({ relevantFields, fieldValues, handleS
                 type="text" 
                 value={inputs.title} 
                 onChange={handleTitleInputChange}
-                style={{width: '80%'}}/>
+                style={{width: FORM_ELEMENT_WIDTH}}/>
         </div>;
 
     const shortDescriptionField = 
@@ -100,7 +101,7 @@ export default function GenericEntityForm({ relevantFields, fieldValues, handleS
                 value={inputs.shortDescription} 
                 onChange={handleShortDescInputChange}
                 rows={N_ROWS_SHORT_DESC}
-                style={{width: '80%'}}></textarea>
+                style={{width: FORM_ELEMENT_WIDTH}}></textarea>
         </div>;
 
     const longDescriptionField = 
@@ -111,7 +112,7 @@ export default function GenericEntityForm({ relevantFields, fieldValues, handleS
                 value={inputs.longDescription} 
                 onChange={handleLongDescInputChange}
                 rows={N_ROWS_LONG_DESC}
-                style={{width: '80%'}}></textarea>
+                style={{width: FORM_ELEMENT_WIDTH}}></textarea>
         </div>;
 
     const descriptionField = 
@@ -122,7 +123,7 @@ export default function GenericEntityForm({ relevantFields, fieldValues, handleS
                 value={inputs.description} 
                 onChange={handleDescInputChange}
                 rows={N_ROWS_SHORT_DESC}
-                style={{width: '80%'}}></textarea>
+                style={{width: FORM_ELEMENT_WIDTH}}></textarea>
         </div>;
 
     const seqNumberField = 
