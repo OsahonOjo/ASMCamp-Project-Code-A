@@ -54,6 +54,7 @@ export default function App() {
         <Route path="/instructors/groups" element={<ManageGroupsScreen />} />
 
         <Route path="/" element={<Navigate replace to="/tracks" />} />
+        <Route path="*" element={<Navigate replace to="/tracks" />} />
         {/* Without the 'replace' prop, the browser will keep track of the history, including the redirect. */}
 
       </Routes>
