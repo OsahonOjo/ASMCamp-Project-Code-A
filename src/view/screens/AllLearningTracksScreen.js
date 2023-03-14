@@ -36,8 +36,7 @@ export default function AllLearningTracksScreen() {
             trackId: summary.id, 
             title: summary.title, 
             shortDescription: summary.shortDescription,
-            longDescription: summary.longDescription,
-            nCourses: summary.nCourses }} 
+            longDescription: summary.longDescription }} 
           to={`${NEXT_PAGE}/${summary.id}`}
           userIsEnrolled={summary.progress ? true : false}
           progressBar={

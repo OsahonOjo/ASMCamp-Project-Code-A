@@ -12,12 +12,12 @@ export default function AllLearningTracksScreenViewModel() {
 
     function summaryBuilder(learningTrackEntity) {
         let trackProgressInfo = getTrackProgressInfo(learningTrackEntity._id);  // returns { percentage, nCourses } or null
+        // nCourses: learningTrackEntity.courseIds.length,
         return { 
             id: learningTrackEntity._id, 
             title: learningTrackEntity.title, 
             shortDescription: learningTrackEntity.shortDescription, 
-            longDescription: learningTrackEntity.longDescription, 
-            nCourses: learningTrackEntity.courseIds.length,
+            longDescription: learningTrackEntity.longDescription,
             progress: trackProgressInfo ? trackProgressInfo : null
         };
     }

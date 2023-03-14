@@ -172,6 +172,8 @@ export function getTopicProgressInfo(topicId) {
     let record = window.TopicProgress[topicId];  // if no record, returns undefined 
     if (!record || Object.keys(record).length == 0)
         return null;
+        // TODO: get list of completed topic items 
+        // and indicate completed topic items on Course Screen
     return {
         percentage: Math.round((record.totalXPEarned / record.totalTopicXP) * 100),
         nTopicItems: record.nTopicItems

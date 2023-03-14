@@ -39,6 +39,11 @@ export default function TopicItemScreenViewModel() {
     setTopicItem(nextTopicItem);
   }
 
+  // + validateMCQAnswer(answer, submittedAnswer): boolean
+  // + validateTFQAnswer(answer, submittedAnswer): boolean
+  // + validateSAQAnswer(answer, submittedAnswer): boolean
+  // + validateCQAnswer(answer, submittedAnswer): boolean
+
   async function handleLessonSubmit(trackId, courseId, topicId, topicItemId) {
     console.log('lesson completed; id: ', topicItemId);
     await handleProgressUpdate(trackId, courseId, topicId, topicItemId)
