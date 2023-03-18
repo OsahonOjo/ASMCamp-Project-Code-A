@@ -7,6 +7,10 @@ import BackButtonNavbar from "../components/BackButtonNavbar";
 import GenericEntityForm from "../components/GenericEntityForm";
 import TopicsListCardNoTopicItems from "../components/TopicsListCardNoTopicItems";
 
+import { styles } from '../components/styles/commonDisplayStyles';
+
+import { constants } from '../../modelsAndData/constants';
+
 export default function EditCourseScreen() {
 
     const NAVBAR_TEXT = "Edit Course";
@@ -15,12 +19,20 @@ export default function EditCourseScreen() {
     const NEXT_PAGE_URL_STEM = "/instructors/edit/topic";
     const EMPTY_STRING = "";
 
+    const { PRIMARY_TEXT_COLOR_DARK, SECONDARY_BACKGROUND_COLOR_DARK } = constants;
+    const TEXT_COLOR = PRIMARY_TEXT_COLOR_DARK;
+    const DEFAULT_MARGIN = '10px';
+    const DEFAULT_MARGIN_X2 = '20px';
+    const FONT_ICON_AND_TEXT_SEPARATION = '10px';
+    const LABEL_FONT_SIZE = '20px';
+    const TEXT_INPUT_FONT_SIZE = '18px';
+
     const topicsListMainIcon = {
-        icon: <span className="material-symbols-outlined">topic</span>,
+        icon: <span className="material-symbols-outlined" style={{ ...styles.mainIcon24pxFont, marginRight: DEFAULT_MARGIN, color: '#444' }}>topic</span>,
         style: {}
     };
     const topicListLinkIcon = {
-        icon: <span className="material-symbols-outlined">edit</span>,
+        icon: <span className="material-symbols-outlined" style={{ ...styles.icon30px, marginRight: DEFAULT_MARGIN, color: TEXT_COLOR }}>edit</span>,
         style: {},
         to: NEXT_PAGE_URL_STEM
     };
@@ -169,13 +181,13 @@ export default function EditCourseScreen() {
                         ? location.state.from 
                         : (screenMode == SCREEN_MODE.EDIT_EXISTING_ENTITY ? `${PREVIOUS_PAGE_URL}/${courseDetails.learningTrackId}` : null) } />
             
-            <button type="button" onClick={() => { console.log('screenMode: ', screenMode) }}>Click for Screen Mode</button>
+            {/* <button type="button" onClick={() => { console.log('screenMode: ', screenMode) }}>Click for Screen Mode</button>
 
             <button type="button" onClick={() => { 
                 console.log('courseDetails: ', courseDetails);
                 console.log('courseEntityState: ', courseEntityState); }}>
                     Click for States
-            </button>
+            </button> */}
 
             <GenericEntityForm 
                 relevantFields={relevantFieldsFactory(ENTITY_TYPES.COURSE)}
@@ -193,8 +205,8 @@ export default function EditCourseScreen() {
                         learningTrackId={courseEntityState.learningTrackId} 
                         courseId={courseEntityState.id} /> {/* topic's courseId is course's id */}
                         
-                    <hr />
-                    <button>Delete Course</button>
+                    {/* <hr /> */}
+                    {/* <button>Delete Course</button> */}
                   </> }
 
         </>

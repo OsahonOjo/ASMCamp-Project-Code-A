@@ -1,6 +1,6 @@
 import React from "react";
-import { getTrack, getAllCoursesInTrack, getAllBadgesInTrack } from '../../model/EduDataModel';
-import { getTrackProgressInfo } from '../../model/UserDataModel';
+import { getTrack, getAllCoursesInTrack, getAllBadgesInTrack } from '../../modelsAndData/EduDataModel';
+import { getTrackProgressInfo } from '../../modelsAndData/UserDataModel';
 
 export default function LearningTrackScreenViewModel() {
 
@@ -50,7 +50,7 @@ export default function LearningTrackScreenViewModel() {
         return;
     }
     let trackEntity = response.response;
-    let details = trackDetailsFactory(trackEntity._id, trackEntity.title, trackEntity.shortDescription, trackEntity.longDescription, trackEntity.courseIds.length, trackEntity.courseIds.length * HOURS_PER_COURSE);
+    let details = trackDetailsFactory(trackEntity._id, trackEntity.title, trackEntity.shortDescription, trackEntity.longDescription, trackEntity.nCourses, trackEntity.nCourses * HOURS_PER_COURSE);
     setTrackDetails(details);
   }
 

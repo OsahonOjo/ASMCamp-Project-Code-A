@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Temp() {
+export default function ReactExecutionTextComponent() {
 
     const [ state1, setState1 ] = React.useState(0);
     const [ state2, setState2 ] = React.useState(0);

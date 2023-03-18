@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 /** JS object containing common display styles such as 'display: inline' */
-import { commonDisplayStyles } from "./styles/commonDisplayStyles";
+import { styles } from "./styles/commonDisplayStyles";
 
 /**
  * A React.js component comprised of an icon and some text displayed inline
@@ -22,16 +22,17 @@ interface IconAndTextListItemProps {
       height: string,
       width: string
     },
+    separation: string,
     displayInline?: boolean
   };
 };
 
 function IconAndTextListItem({ icon, text, style }: IconAndTextListItemProps): JSX.Element {
-
+ 
   return (
-    <div style={style.displayInline ? commonDisplayStyles.inline : commonDisplayStyles.block}>
-      <img src={icon} style={style.iconSize} alt="list item icon"/>
-      <p style={commonDisplayStyles.inline}>{text}</p>
+    <div style={style.displayInline ? styles.inline : styles.block}>
+      <img src={icon} style={{ ...style.iconSize, marginRight: style.separation }} alt="list item icon"/>
+      <p style={styles.inline}>{text}</p>
     </div>
   );
 }

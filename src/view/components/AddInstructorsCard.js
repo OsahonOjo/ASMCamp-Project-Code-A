@@ -3,7 +3,7 @@ import IconAndTextListItem from './IconAndTextListItem';
 import mainIcon from '../assets/hexagons_Prosymbols_Premium.png';
 import minusIcon from '../assets/minus_Pixel_perfect.png';
 
-import { commonDisplayStyles } from './styles/commonDisplayStyles';
+import { styles } from './styles/commonDisplayStyles';
 import './styles/card.css';
 import './styles/icon.css';
 
@@ -33,7 +33,7 @@ function AddInstructorsCard() {
       
       <hr/>
 
-      <div style={commonDisplayStyles.indented}>
+      <div style={styles.indented}>
         {instructors.map(instructor => 
           <div key={instructor}>
             <IconAndTextListItem 

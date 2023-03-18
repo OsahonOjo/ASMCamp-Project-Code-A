@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import "./styles/Navbar.css";
 
-function HamburgerNavbar({ title }) {
+export default function HamburgerNavbar({ title }) {
 
   return (
     <>
@@ -19,5 +19,3 @@ function HamburgerNavbar({ title }) {
 HamburgerNavbar.propTypes = {
   title: PropTypes.string
 };
-
-export default HamburgerNavbar;

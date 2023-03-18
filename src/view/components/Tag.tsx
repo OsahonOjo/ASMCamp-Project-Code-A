@@ -1,31 +1,40 @@
 import React from "react";
 
 interface TagProps {
-  text: string;
-  displayBlock?: boolean;
-  backgroundColor?: string;
-  borderColor?: string;
-  borderWidth?: string; 
-  fontSize?: string;
+  text: {
+    content: string;
+    style: object;
+  };
+  container: {
+    baseStyle: {
+      display?: string;
+      backgroundColor?: string;
+      borderColor?: string;
+      borderWidth?: string;
+      borderStyle?: string;
+      width?: string;
+    };
+    otherStyle?: object;
+  };
 };
 
 /**@description A React.js component for creating a text-based tag */
 
-function Tag({ text, displayBlock, backgroundColor, borderColor, borderWidth, fontSize }: TagProps): JSX.Element {
-  const containerDivStyle = {
-    display: displayBlock ? 'block' : 'inline',
-    backgroundColor: backgroundColor ? backgroundColor : 'transparent',
-    borderStyle: 'solid', // create borders then color for declare borderStyle before borderColor 
-    borderWidth: borderWidth ? borderWidth : '0px',
-    borderColor: borderColor ? borderColor : 'transparent', 
-    width: 'fit-content'
+export default function Tag({ text, container }: TagProps): JSX.Element {
+  const containerStyle = {
+    // wordWrap: 'nowrap',
+    display: container.baseStyle.display ? container.baseStyle.display : 'inline',
+    backgroundColor: container.baseStyle.backgroundColor ? container.baseStyle.backgroundColor : 'transparent',
+    borderColor: container.baseStyle.borderColor ? container.baseStyle.borderColor : 'transparent', 
+    borderWidth: container.baseStyle.borderWidth ? container.baseStyle.borderWidth : '0px',
+    borderStyle: container.baseStyle.borderStyle ? container.baseStyle.borderStyle : 'solid', // must declare borderStyle before borderColor 
+    width: container.baseStyle.width ? container.baseStyle.width : 'fit-content',
+    ...container.otherStyle
   };
 
-  const textStyle = {
-    fontSize: fontSize ? fontSize : '8px',
-  };
-
-  return <div style={containerDivStyle}><span style={textStyle}>{text}</span></div>;
+  return (
+    <div style={containerStyle}>
+      <span style={{ ...text.style }}>{text.content}</span>
+    </div>
+  );
 }
-
-export default Tag;

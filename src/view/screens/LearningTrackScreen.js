@@ -9,7 +9,7 @@ import CourseListCard from "../components/CourseListCard";
 import InstructorsCard from "../components/InstructorsCard";
 import RewardsCard from "../components/RewardsCard";
 
-import { rewardTypes } from "../../model/enums";
+import { rewardTypes } from "../../modelsAndData/enums";
 
 import headerIcon from '../assets/hexagons_Prosymbols_Premium.png';
 import forwardIcon from '../assets/next.png';
@@ -106,10 +106,10 @@ export default function LearningTrackScreen() {
         courses={courseSummariesState}
         viewModeNextPageUrlStem={"/course"} />
 
-      <InstructorsCard 
+      {/* <InstructorsCard 
         mainIconSize={"20px"}
         itemIconSize={"20px"}
-        instructors={instructorsData}/>
+        instructors={instructorsData}/> */}
 
       <RewardsCard 
         mainIconSize={"20px"}

@@ -6,7 +6,7 @@ import CollapsibleParagraph from './CollapsibleParagraph';
 
 import './styles/card.css';
 import './styles/icon.css';
-import { commonDisplayStyles } from "./styles/commonDisplayStyles";
+import { styles } from "./styles/commonDisplayStyles";
 
 interface VersatileCardSegmentProps {
     mainIcon: {

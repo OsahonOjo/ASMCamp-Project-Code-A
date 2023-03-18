@@ -3,12 +3,30 @@ import { stack as Menu } from "react-burger-menu";
 import { NavLink } from "react-router-dom";
 
 import profileIcon from '../assets/hexagons_Prosymbols_Premium.png';
-import listIcon from "../assets/cell_Freepik.png";
+import menuItemIcon from "../assets/cell_Freepik.png";
 
-import { styles } from "./styles/burgerStyles.js";
-import './styles/icon.css';
+import { styles as burgerStyles } from "./styles/burgerStyles";
+import { styles as frequentStyles } from "./styles/commonDisplayStyles";
 
-function SideNavigationMenu() {
+import { constants } from "../../modelsAndData/constants";
+
+export default function SideNavigationMenu({ username }) {
+
+  const HEADING_PADDING_TOP = "20px";
+  const MENU_ITEM_ICON_MARGIN_RIGHT = '15px';
+  const PROFILE_SECTION_PADDING = "15px";
+  const LEFT_SPACE_DEFAULT = '20px';  // "SPACE" being either padding or margin
+  const LEFT_SPACE_INDENTED = '30px';
+
+  const { PRIMARY_TEXT_COLOR_DARK, SECONDARY_BACKGROUND_COLOR_DARK } = constants;
+  const TEXT_COLOR = PRIMARY_TEXT_COLOR_DARK;
+  const LINE_COLOR = frequentStyles.vDarkModeTextColor1;
+  const DEFAULT_MARGIN = '10px';
+  const DEFAULT_MARGIN_X2 = '20px';
+  const DEFAULT_MARGIN_X3 = '30px';
+  const DEFAULT_PADDING = '10px';
+
+  let playerName = username ? username : "FirstName LastName";
 
   const menuItems = [
     { url: "/tracks", itemTitle: "Learning Tracks", isIndented: false }, 
@@ -20,36 +38,85 @@ function SideNavigationMenu() {
     { url: "/", itemTitle: "Contact", isIndented: false }
   ];
 
+  const menuHeading = <span style={{ marginLeft: LEFT_SPACE_DEFAULT }}>ASMCamp</span>;
+
+  const userProfileSection =
+    <div style={{ padding: PROFILE_SECTION_PADDING, display: 'flex' }}>
+      {/* <img 
+        src={profileIcon} 
+        alt="profile photo" 
+        style={frequentStyles.icon50px} /> */}
+      <span 
+        className="material-symbols-outlined" 
+        style={{ ...frequentStyles.profileIcon, marginRight: DEFAULT_MARGIN, color: '#444' }}>
+          account_circle
+      </span>
+      <span style={{ marginLeft: LEFT_SPACE_DEFAULT }}>{playerName}</span>
+    </div>;
+
   return (
-    <Menu styles={styles}>
-      <span>ASMCamp</span>
-      <hr />
+    <Menu styles={burgerStyles}>
+      <div style={{ paddingTop: HEADING_PADDING_TOP }}>
+        {menuHeading}
+        <hr style={{ borderColor: LINE_COLOR }}/>
 
-      <div>
-        <img src={profileIcon} alt="user profile icon" className="icon--50px" />
-        <span>Username</span>
+        {userProfileSection}
+        <hr style={{ borderColor: LINE_COLOR, marginBottom: '5px' }} />
       </div>
-      <hr />
 
-      {
-        menuItems.map(menuItem => (
-          <NavLink
-            key={menuItem.itemTitle}
-            to={menuItem.url} 
-            style={menuItem.isIndented ? styles.indented : null}>
-              <img src={listIcon} alt="list item icon" className="icon--20px" />
-              <span>{menuItem.itemTitle}</span>
-          </NavLink>
-        ))
-      }
+      <NavLink
+          key={menuItems[0].itemTitle}
+          to={menuItems[0].url}
+          style={ 
+            menuItems[0].isIndented 
+              ? { marginLeft: LEFT_SPACE_INDENTED } 
+              : { marginLeft: LEFT_SPACE_DEFAULT }}>
+
+                {/* <span 
+                  className="material-symbols-outlined" 
+                  style={{ ...frequentStyles.mainIcon24pxFont, marginRight: DEFAULT_MARGIN, color: '#444' }}>
+                    person
+                </span> */}
+                <span style={{ marginRight: DEFAULT_MARGIN }}>
+                  <i className="fa fa-road" style={{ ...frequentStyles.mainIcon24pxFont, color: '#444' }}></i>
+                </span>
+                <span style={{ color: TEXT_COLOR }}>
+                  {menuItems[0].itemTitle}
+                </span>
+
+        </NavLink>
+
+        <NavLink
+          key={menuItems[4].itemTitle}
+          to={menuItems[4].url}
+          style={ 
+            menuItems[4].isIndented 
+              ? { marginLeft: LEFT_SPACE_INDENTED } 
+              : { marginLeft: LEFT_SPACE_DEFAULT }}>
+
+                <span 
+                  className="material-symbols-outlined" 
+                  style={{ ...frequentStyles.mainIcon24pxFont, marginRight: DEFAULT_MARGIN, color: '#444' }}>
+                    supervisor_account
+                </span>
+                <span style={{ color: TEXT_COLOR }}>
+                  {menuItems[4].itemTitle}
+                </span>
+
+        </NavLink>
       
     </Menu>
   );
 }
 
-export default SideNavigationMenu;
+/* 
+    /* <img 
+      src={menuItemIcon} 
+      alt="menu item icon" 
+      style={{ marginRight: MENU_ITEM_ICON_MARGIN_RIGHT, ...frequentStyles.icon20px }} /> *
 
-/* to make menu close when a link is clicked, you must specify onOpen and onClose like this 
+
+    to make menu close when a link is clicked, you must specify onOpen and onClose like this 
         
       const [menuOpenState, setMenuOpenState] = React.useState(false);
 
@@ -61,6 +128,7 @@ export default SideNavigationMenu;
         setMenuOpenState(false);
       };
 
+
         isOpen={menuOpenState}
         onOpen={handleStateChange}
         onClose={handleStateChange}
@@ -71,4 +139,4 @@ export default SideNavigationMenu;
           className="side-nav-menu-link" >
             Topics
         </NavLink>
-    */
+*/

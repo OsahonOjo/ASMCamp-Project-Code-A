@@ -4,6 +4,7 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 
 import ProgressBar from "./ProgressBar";
 import IconAndTextListItem from "./IconAndTextListItem";
+import FontIconAndTextListItem from "./FontIconAndTextListItem";
 import Tag from "./Tag";
 import CollapsibleParagraph from "./CollapsibleParagraph";
 
@@ -13,7 +14,8 @@ import bulletIcon from "../assets/cell_Freepik.png";
 
 import './styles/card.css';
 import './styles/icon.css';
-import { commonDisplayStyles } from "./styles/commonDisplayStyles";
+import { styles } from "./styles/commonDisplayStyles";
+import { constants } from "../../modelsAndData/constants";
 
 /*
   let slug = title.toLowerCase().replace(/ /g, "-");
@@ -24,7 +26,7 @@ import { commonDisplayStyles } from "./styles/commonDisplayStyles";
  *  comprise that topic.
  */
 
-function TopicDetailsCard({ title, shortDescription, nXP, userIsEnrolled, percentage, hasLabel, labelOnRightSide, topicItems }) {
+export default function TopicDetailsCard({ title, shortDescription, nXP, userIsEnrolled, percentage, hasLabel, labelOnRightSide, topicItems }) {
 
   const NEXT_PAGE_URL = "/topicitem";
   const BULLET_ICON_SIZE = "10px";
@@ -35,43 +37,114 @@ function TopicDetailsCard({ title, shortDescription, nXP, userIsEnrolled, percen
 		},
     displayInline: true
 	};
-  const TAG_TEXT = `${nXP} XP`;
+  const TAG_TEXT = `${nXP ? nXP : 0} XP`;
   const TAG_BORDER_WIDTH = "1px";
   const TAG_BORDER_COLOR = "black";
   const TAG_FONT_SIZE = "20px";
   const TAG_DISPLAY_BLOCK = true;
   const SHOW_ITEMS_TEXT = "Show Topic Items";
   const HIDE_ITEMS_TEXT = "Hide Topic Items";
+
+  const MAIN_ICON_MARGIN_RIGHT = '10px';
+  const FONT_ICON_AND_TEXT_SEPARATION = '10px';
+  const DEFAULT_MARGIN = '10px';
+  const BODY_TEXT_RIGHT_MARGIN = '20px';
+
+  const { PRIMARY_TEXT_COLOR_DARK } = constants;
+  const TEXT_COLOR = PRIMARY_TEXT_COLOR_DARK;
+
   const location = useLocation();
+
+  const mainIcon = 
+    <div>
+      <span 
+        className="material-symbols-outlined" 
+        style={{ ...styles.mainIcon24pxFont, marginRight: MAIN_ICON_MARGIN_RIGHT }}>
+          topic
+      </span>
+    </div>;
+
+  const xpTag = 
+    <Tag 
+      text={{
+        content: TAG_TEXT,
+        style: { 
+          color: TEXT_COLOR,
+          fontSize: TAG_FONT_SIZE
+        }
+      }} 
+      container={{
+        baseStyle: { 
+          display: 'inline',
+          borderWidth: TAG_BORDER_WIDTH,
+          borderColor: TEXT_COLOR
+        },
+        otherStyle: {
+          marginLeft: DEFAULT_MARGIN,
+          padding: '0px',
+          borderRadius: '5px'
+        }
+      }} />;
+
+  // NOTE: function is very coupled; relies on several component-level global variables
+  function xpTagBuilder(text) {
+    return (
+      <Tag 
+        text={{
+          content: text,
+          style: { 
+            color: TEXT_COLOR,
+            fontSize: '16px'
+          }
+        }} 
+        container={{
+          baseStyle: { 
+            display: 'block'
+          },
+          otherStyle: {
+            padding: '0px',
+            borderRadius: '5px'
+          }
+        }} />
+    );
+  }  
 
   return (
 
-    <div>
+    <>
       <hr />
 
-      <div style={commonDisplayStyles.displayFlex}>
+      <div style={styles.displayFlexRow}>
+
+        {mainIcon}
 
         <div>
-          <img src={mainCardIcon} alt="main card icon" className="icon--30px"/>
-        </div>
+          <div style={{ color: TEXT_COLOR, ...styles.h4SizeAndWeight }}>{title}{xpTag}</div>
 
-        <div>
+          <p>
+            {
+              userIsEnrolled 
+                ? <ProgressBar 
+                    percentage={percentage}
+                    hasLabel={hasLabel}
+                    labelOnRightSide={labelOnRightSide}/> 
+                : null 
+            }
+          </p>
 
-          <h4>{title}</h4>
-          <Tag text={TAG_TEXT} displayBlock={TAG_DISPLAY_BLOCK} borderWidth={TAG_BORDER_WIDTH} borderColor={TAG_BORDER_COLOR} fontSize={TAG_FONT_SIZE}/>
-
-          {userIsEnrolled ? 
-              <ProgressBar 
-                percentage={percentage}
-                hasLabel={hasLabel}
-                labelOnRightSide={labelOnRightSide}/> : null }
-
-          <CollapsibleParagraph text={shortDescription} />
+          <CollapsibleParagraph 
+            text={shortDescription}
+            paragraphStyle={{ color: TEXT_COLOR, marginRight: BODY_TEXT_RIGHT_MARGIN }} />
 
           <details open>
-            <summary>
-              <span>{SHOW_ITEMS_TEXT}</span>
-              <img src={bulletIcon} alt="main card icon" className="icon--10px"/>
+            <summary style={{ marginBottom: '20px' }}>
+              <br/>
+              <span style={{ color: TEXT_COLOR }}>{SHOW_ITEMS_TEXT}</span>
+              <span 
+                className="material-symbols-outlined"
+                style={{ color: TEXT_COLOR, ...styles.downChevron, marginLeft: MAIN_ICON_MARGIN_RIGHT }}>
+                  expand_more
+              </span>
             </summary>
 
             {
@@ -80,25 +153,29 @@ function TopicDetailsCard({ title, shortDescription, nXP, userIsEnrolled, percen
                   to={`/topic/${topicItem.topicId}/item/${index+1}`}
                   state={{ courseId: topicItem.courseId }}
                   key={topicItem.title}>
+                    <div style={{ ...styles.displayFlexRow, marginBottom: DEFAULT_MARGIN }}>
 
-                    <div style={commonDisplayStyles.displayFlex}>
-
-                      <div style={commonDisplayStyles.inline}>
-                        <IconAndTextListItem 
-                          icon={bulletIcon}
-                          text={topicItem.title}
-                          style={iconAndTextListItemStyle}/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <div style={{ marginTop: DEFAULT_MARGIN }}>
+                        <span className="material-symbols-outlined" style={{ ...styles.listItemIcon14pxFont, marginRight: MAIN_ICON_MARGIN_RIGHT }}>category</span>
                       </div>
-                      
-                      <div style={commonDisplayStyles.inline}>
-                        <IconAndTextListItem 
-                          icon={bulletIcon}
-                          text={`${topicItem.xp} XP`}
-                          style={iconAndTextListItemStyle}/>
-                        <img src={bulletIcon} alt="main card icon" className="icon--10px"/>
-                      </div>                    
 
+                      <div>
+                          {xpTagBuilder(`${topicItem.xp ? topicItem.xp : 0} XP`)}
+                          
+                          <div style={{ ...styles.displayFlexRow }}>
+                              <p style={{ flexGrow: 9 }}>
+                                <span style={{ color: TEXT_COLOR }}>{topicItem.title}</span>
+                              </p>
+                            <span 
+                              className="material-symbols-outlined" 
+                              style={{ ...styles.icon35pxFont, color: TEXT_COLOR, flexGrow: 0 }}>
+                                navigate_next
+                            </span>
+                          </div>
+                          
+                      </div>
+
+                      
                     </div>
                 </Link>)
             }
@@ -109,7 +186,7 @@ function TopicDetailsCard({ title, shortDescription, nXP, userIsEnrolled, percen
 
       </div>
 
-    </div>
+    </>
   );
 }
 
@@ -123,4 +200,17 @@ TopicDetailsCard.propTypes = {
   topicItems: PropTypes.array
 };
 
-export default TopicDetailsCard;
+/*
+    <IconAndTextListItem 
+      icon={bulletIcon}
+      text={topicItem.title}
+      style={iconAndTextListItemStyle}/>
+
+    <div style={styles.inline}>
+      <IconAndTextListItem 
+        icon={bulletIcon}
+        text={}
+        style={iconAndTextListItemStyle}/>
+      <img src={bulletIcon} alt="main card icon" className="icon--10px"/>
+    </div>   
+*/

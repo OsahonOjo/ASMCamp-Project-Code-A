@@ -50,21 +50,29 @@ export async function enrollUser(trackId) {
 }
 
 export function userIsEnrolledInTrack(trackId) {
+    if (!window.LearningTrackProgress)
+        return undefined;
     let record = window.LearningTrackProgress[trackId];
     return record ? true : false;
 }
 
 export function userIsEnrolledInCourse(courseId) {
+    if (!window.CourseProgress)
+        return undefined;
     let record = window.CourseProgress[courseId];
     return record ? true : false;
 }
 
 export function userIsEnrolledInTopic(topicId) {
+    if (!window.TopicProgress)
+        return undefined;
     let record = window.TopicProgress[topicId];
     return record ? true : false;
 }
 
 function topicItemIsComplete(topicId, topicItemId) {
+    if (!window.TopicProgress)
+        return undefined;
     let topicItem = window.TopicProgress[topicId].topicItemsCompleted.find(element => element.id == topicItemId);
     return topicItem && Object.keys(topicItem).length != 0 ? true : false;
 }
@@ -143,7 +151,7 @@ export function getTrackProgressAll() {
 }
 
 export function getTrackProgressInfo(trackId) {
-    if (!userIsEnrolledInTrack(trackId))
+    if (!userIsEnrolledInTrack(trackId))  // checks that window.LearningTrackProgress exists
         return null;
     let record = window.LearningTrackProgress[trackId];  // if no record, returns undefined 
     if (!record || Object.keys(record).length == 0)
@@ -155,7 +163,7 @@ export function getTrackProgressInfo(trackId) {
 }
 
 export function getCourseProgressInfo(courseId) {
-    if (!userIsEnrolledInCourse(courseId))
+    if (!userIsEnrolledInCourse(courseId))  // checks that window.CourseProgress exists
         return null;
     let record = window.CourseProgress[courseId];  // if no record, returns undefined 
     if (!record || Object.keys(record).length == 0)
@@ -167,7 +175,7 @@ export function getCourseProgressInfo(courseId) {
 }
 
 export function getTopicProgressInfo(topicId) {
-    if (!userIsEnrolledInTopic(topicId))
+    if (!userIsEnrolledInTopic(topicId))  // checks that window.TopicProgress exists
         return null;
     let record = window.TopicProgress[topicId];  // if no record, returns undefined 
     if (!record || Object.keys(record).length == 0)

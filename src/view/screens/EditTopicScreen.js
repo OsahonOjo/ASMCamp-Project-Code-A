@@ -6,6 +6,10 @@ import BackButtonNavbar from "../components/BackButtonNavbar";
 import GenericEntityForm from "../components/GenericEntityForm";
 import TopicItemsListCard from "../components/TopicItemsListCard";
 
+import { styles } from "../components/styles/commonDisplayStyles";
+
+import { constants } from '../../modelsAndData/constants';
+
 /**
  *  An EditXScreen gets the ID's it requires via one of two methods depending on the screen's mode.
  *  Both methods depend on the screen's xId URL paramter.
@@ -28,13 +32,17 @@ export default function EditTopicScreen() {
     const CURRENT_PAGE_URL_STEM = "/instructors/edit/topic";
     const NEXT_PAGE_URL_STEM = "/instructors/edit/item";
     const EMPTY_STRING = "";
+
+    const { PRIMARY_TEXT_COLOR_DARK, SECONDARY_BACKGROUND_COLOR_DARK } = constants;
+    const TEXT_COLOR = PRIMARY_TEXT_COLOR_DARK;
+    const DEFAULT_MARGIN = '10px';
     
     const topicItemsListMainIcon = {
-        icon: <span className="material-symbols-outlined">category</span>,
+        icon: <span className="material-symbols-outlined" style={{ ...styles.mainIcon24pxFont, marginRight: DEFAULT_MARGIN, color: '#444' }}>category</span>,
         style: {}
     };
     const topicItemsListLinkIcon = {
-        icon: <span className="material-symbols-outlined">edit</span>,
+        icon: <span className="material-symbols-outlined" style={{ ...styles.icon30px, marginRight: DEFAULT_MARGIN, color: TEXT_COLOR }}>edit</span>,
         style: {},
         to: NEXT_PAGE_URL_STEM
     };
@@ -164,7 +172,7 @@ export default function EditTopicScreen() {
                         ? location.state.from 
                         : (screenMode == SCREEN_MODE.EDIT_EXISTING_ENTITY ? `${PREVIOUS_PAGE_URL_STEM}/${topicEntityState.courseId}` : null) } />
 
-            <button>
+            {/* <button>
                 <Link to={NEXT_PAGE_URL_STEM}>To Edit Topic Item</Link>
             </button>
 
@@ -174,7 +182,7 @@ export default function EditTopicScreen() {
                 console.log('topicData: ', topicData);
                 console.log('topicEntityState: ', topicEntityState); }}>
                     Click for States
-            </button>
+            </button> */}
 
             <GenericEntityForm 
                 relevantFields={relevantFieldsFactory(ENTITY_TYPES.TOPIC)}
@@ -193,8 +201,8 @@ export default function EditTopicScreen() {
                         courseId={topicEntityState.courseId} 
                         topicId={topicEntityState.id} /> {/* topicItem's topicId is topic's id */}
                         
-                    <hr />
-                    <button>Delete Topic</button>
+                    {/* <hr />
+                    <button>Delete Topic</button> */}
                   </> }
         </>
     );

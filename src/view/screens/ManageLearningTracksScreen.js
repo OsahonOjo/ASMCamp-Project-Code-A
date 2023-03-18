@@ -5,6 +5,7 @@ import AllLearningTracksScreenViewModel from './AllLearningTracksScreenViewModel
 import BackButtonNavbar from "../components/BackButtonNavbar";
 import LearningTrackSummaryCard from "../components/LearningTrackSummaryCard";
 import IconAndTextListItem from '../components/IconAndTextListItem';
+import FontIconAndTextListItem from '../components/FontIconAndTextListItem';
 
 import mainIcon from '../assets/hexagons_Prosymbols_Premium.png';
 import editIcon from '../assets/pen_alkhalifi_design.png';
@@ -12,6 +13,9 @@ import nextPageIcon from '../assets/next.png';
 
 import '../components/styles/icon.css';
 import '../components/styles/card.css';
+import { styles } from '../components/styles/commonDisplayStyles';
+
+import { constants } from '../../modelsAndData/constants';
 
 export default function ManageLearningTracksScreen() {
 
@@ -59,6 +63,11 @@ export default function ManageLearningTracksScreen() {
     learningTrackSummaries ? setSummaries(learningTrackSummaries) : setSummaries([]);
   }, [learningTrackSummaries]);
 
+  const { PRIMARY_TEXT_COLOR_DARK } = constants;
+  const TEXT_COLOR = PRIMARY_TEXT_COLOR_DARK;
+  const DEFAULT_MARGIN = '10px';
+  const FONT_ICON_AND_TEXT_SEPARATION = '10px';
+
   return (
     <div>
       <BackButtonNavbar title={NAVBAR_TEXT} to={PREVIOUS_PAGE_URL} />
@@ -76,11 +85,37 @@ export default function ManageLearningTracksScreen() {
         </div>
       )}
 
+{/* 
+const mainIcon = 
+    <span style={{ marginRight: MAIN_ICON_MARGIN_RIGHT }}>
+      <i className="fa fa-road" style={styles.mainIcon24pxFont}></i>
+    </span>; */}
+
       <div className="card">
         <Link 
           to={`${NEXT_PAGE_URL_STEM}/0`}>
-            <IconAndTextListItem icon={mainIcon} text={NEW_TRACK_TEXT} style={iconAndTextListItemStyle}/>  
-            <img src={nextPageIcon} alt="next page icon" className="icon--20px"/>
+            {/* <IconAndTextListItem icon={mainIcon} text={NEW_TRACK_TEXT} style={iconAndTextListItemStyle}/>   */}
+            <FontIconAndTextListItem 
+              iFontIcon={{
+                className: "fa fa-road",
+                style: {
+                  ...styles.mainIcon24pxFont,
+                  marginRight: FONT_ICON_AND_TEXT_SEPARATION,
+                  color: '#444'
+                }
+              }}
+              text={{
+                content: NEW_TRACK_TEXT,
+                style: {
+                  color: TEXT_COLOR,
+                }
+              }}
+              containerStyle={{
+                // padding: DEFAULT_PADDING,
+                display: 'inline',
+                ...styles.h3SizeAndWeight
+              }}/>
+            {/* <img src={nextPageIcon} alt="next page icon" className="icon--20px"/> */}
         </Link> 
       </div>
     </div>

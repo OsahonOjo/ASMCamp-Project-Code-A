@@ -16,10 +16,11 @@ import TFQResponseCard from "../components/TFQResponseCard";
 import SAQResponseCard from "../components/SAQResponseCard";
 
 /* data */
-import Model from "../../model/model.js";
-import { topicItemTypes } from "../../model/enums";
+import Model from "../../modelsAndData/model.js";
+import { topicItemTypes } from "../../modelsAndData/enums";
+import { constants } from "../../modelsAndData/constants";
 
-import { commonDisplayStyles } from "../components/styles/commonDisplayStyles";
+import { styles } from "../components/styles/commonDisplayStyles";
 import MCQView from "../components/MCQView";
 import SAQView from "../components/SAQView";
 import CQView from "../components/CQView";
@@ -33,7 +34,15 @@ export default function TopicItemScreen() {
   
   const NAVBAR_TEXT = "Topic Item";
   const COURSE_OUTLINE_TEXT = "Course Outline";
-  
+
+  const DEFAULT_MARGIN = '10px';
+  const { 
+    PRIMARY_TEXT_COLOR_DARK, 
+    PRIMARY_BACKGROUND_COLOR_DARK,
+    SECONDARY_BACKGROUND_COLOR_DARK
+  } = constants;
+  const TEXT_COLOR = PRIMARY_TEXT_COLOR_DARK;
+
   const { topicId, seqNumber } = useParams();
 
   const { topicItem, getTopicItemData, handleLessonSubmit, handleMCQSubmit, handleTFQSubmit, handleSAQSubmit, handleCQSubmit } = TopicItemScreenViewModel();
@@ -58,16 +67,24 @@ export default function TopicItemScreen() {
   // /topic/:topicId/item/:seqNumber
 
   const modelRef = React.useRef(null);
-  const MODAL_SUCCESS_TEXT = "Success!";
-  const MODAL_FAILURE_TEXT = "Incorrect...";
+  const MODAL_SUCCESS_TEXT = "SUCCESS!";
+  const MODAL_FAILURE_TEXT = "INCORRECT.";
   const [modalState, setModalOpen]  = React.useState({ open: false, text: "" });
   const modalStyle = { 
     display: modalState.open ? "block" : "none", 
     borderStyle: 'solid', 
     borderWidth: '1px', 
     borderColor: '#ccc', 
-    margin: '10px', 
-    textAlign: 'center' 
+    // margin: '10px', 
+    textAlign: 'center',
+    color: '#fff',
+    background: 'gray',
+    position: 'fixed',
+    width: '80%',
+    height: '35%',
+    left: '10%',
+    right: '90%',
+    top: '20%'
   };
 
   function closeModal() {
@@ -83,6 +100,39 @@ export default function TopicItemScreen() {
     setModalOpen(nextState);
   }
 
+  const buttonBaseStyle = { 
+    fontSize: '16px', 
+    color: styles.vDarkModeTextColor3,
+    backgroundColor: styles.vDarkModeBackground1,
+    borderStyle: 'solid',
+    borderColor: styles.vDarkModeTextColor3,
+    borderWidth: '1px' 
+  };
+
+  const buttonStyle = { 
+    width: '150px', 
+    height: '2em', 
+    margin: DEFAULT_MARGIN,
+    fontSize: '16px', 
+    color: styles.vDarkModeTextColor3,
+    backgroundColor: styles.vDarkModeBackground1,
+    borderStyle: 'solid',
+    borderColor: styles.vDarkModeTextColor3,
+    borderWidth: '1px' 
+  };
+
+  const arrowButtonStyle = { 
+    // width: '150px', 
+    height: '2em', 
+    margin: DEFAULT_MARGIN,
+    fontSize: '16px', 
+    color: styles.vDarkModeTextColor3,
+    backgroundColor: styles.vDarkModeBackground1,
+    borderStyle: 'solid',
+    borderColor: styles.vDarkModeTextColor3,
+    borderWidth: '1px' 
+  };
+
   return (
     <>
       <TopicItemScreenNavbar 
@@ -92,14 +142,28 @@ export default function TopicItemScreen() {
         disabled={loading ? true : false}/>
 
       {/* buttons for navigation between topic items */}
-      <div style={commonDisplayStyles.displayFlexCenter}>
-        <button type="button">
-          <img src={backIcon} alt="go to previous topic item" className="icon--20px"/>
+      <div style={{ ...styles.displayFlexRowCenter, marginTop: DEFAULT_MARGIN, marginBottom: '-15px' }}>
+
+        <button type="button" style={arrowButtonStyle}>
+          <span 
+            className="material-symbols-outlined" 
+            style={{ ...styles.icon20pxFont, color: TEXT_COLOR, verticalAlign: 'middle' }}>
+              arrow_back_ios_new
+          </span>
+          {/* <img src={backIcon} alt="go to previous topic item" className="icon--20px"/> */}
         </button>
-        <button type="button">{COURSE_OUTLINE_TEXT}</button>
-        <button type="button">
-          <img src={forwardIcon} alt="go to next topic item" className="icon--20px"/>
+
+        <button type="button" style={buttonStyle}>{COURSE_OUTLINE_TEXT}</button>
+        
+        <button type="button" style={arrowButtonStyle}>
+          {/* <img src={forwardIcon} alt="go to next topic item" className="icon--20px"/> */}
+          <span 
+            className="material-symbols-outlined" 
+            style={{ ...styles.icon20pxFont, color: TEXT_COLOR, verticalAlign: 'middle' }}>
+              arrow_forward_ios
+          </span>
         </button>
+      
       </div>
 
       { topicItemState.type == topicItemTypes.LSN 
@@ -182,15 +246,18 @@ export default function TopicItemScreen() {
 
       {/* modal */}
       <div id="modal" ref={modelRef} style={modalStyle}>
-        <span onClick={closeModal}>&times;</span>
-        <div>
-          <h3>{modalState.text}</h3>
+        <div style={{ textAlign: 'right' }}>
+          <span style={{ fontSize: '35px', marginRight: '17px' }} onClick={closeModal}>&times;</span>
+        </div>
+        <hr  style={{ borderColor: '#fff' }}/>
+        <div style={{ height: '55%', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+          <h1 style={{ height: 'fit-content' }}>{modalState.text}</h1>
         </div>
       </div>
 
-      <div style={{background: 'white', height: '40px', width: '100%'}}><p></p></div>
+      <div style={{background: 'white', height: '20px', width: '100%'}}><p></p></div>
       
-      <div style={{...commonDisplayStyles.stickToBottom, ...commonDisplayStyles.displayFlexCenter, background: '#ACC8F1', height: '40px'}}>
+      <div style={{...styles.stickToBottom, ...styles.displayFlexRowCenter, background: PRIMARY_BACKGROUND_COLOR_DARK, height: '20px'}}>
         <ProgressBar 
           percentage={topicItemState.learningTrackProgress} 
           hasLabel={true} 

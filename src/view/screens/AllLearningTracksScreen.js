@@ -27,20 +27,20 @@ export default function AllLearningTracksScreen() {
 
   return (
     <>
-      <SideNavigationMenu />
+      <SideNavigationMenu/>
       <HamburgerNavbar title={NAVBAR_TEXT}/>
       {summaries.map(summary => 
         <LearningTrackSummaryCard 
           key={summary.title}
+          to={`${NEXT_PAGE}/${summary.id}`}
+          userIsEnrolled={summary.progress ? true : false}
           trackDetails={{ 
             trackId: summary.id, 
             title: summary.title, 
             shortDescription: summary.shortDescription,
             longDescription: summary.longDescription }} 
-          to={`${NEXT_PAGE}/${summary.id}`}
-          userIsEnrolled={summary.progress ? true : false}
+          /* wrapping in ternary operator handles case when progress is null */
           progressBar={
-            /* wrapping in ternary operator handles case when progress is null */
             summary.progress
               ? {
                   percentage: summary.progress.percentage,
@@ -48,7 +48,8 @@ export default function AllLearningTracksScreen() {
                   labelOnRightSide: false
                 }
               : null
-          }/>)}
+          }/>
+        )}
     </>
   );
 }

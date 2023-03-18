@@ -5,11 +5,13 @@ import BadgeCard from "./BadgeCard";
 import mainIcon from '../assets/hexagons_Prosymbols_Premium.png';
 import minusIcon from '../assets/minus_Pixel_perfect.png';
 
-import { commonDisplayStyles } from './styles/commonDisplayStyles';
+import { styles } from './styles/commonDisplayStyles';
 import './styles/card.css';
 import './styles/icon.css';
 
-import { rewardTypes, badgeTypes } from "../../model/enums";
+import { constants } from '../../modelsAndData/constants';
+
+import { rewardTypes, badgeTypes } from "../../modelsAndData/enums";
 
 export default function AddRewardsCard({ learningTrack, courses, topics, topicItems, badges, createBadge, deleteBadge }) {
 
@@ -17,6 +19,18 @@ export default function AddRewardsCard({ learningTrack, courses, topics, topicIt
   const CREATE_BADGE_TEXT = "Create Badge";
   const FORM_ELEMENT_WIDTH = '100%';
   const ICON_SIZE = '80px';
+  const DELETE_TEXT = "DELETE BADGE";
+
+  const { PRIMARY_TEXT_COLOR_DARK, SECONDARY_BACKGROUND_COLOR_DARK } = constants;
+  const TEXT_COLOR = PRIMARY_TEXT_COLOR_DARK;
+  const DEFAULT_MARGIN = '10px';
+  const DEFAULT_MARGIN_X2 = '20px';
+  const FONT_ICON_AND_TEXT_SEPARATION = '10px';
+  const LABEL_FONT_SIZE = '20px';
+  const TEXT_INPUT_FONT_SIZE = '18px';
+  const SELECT_TAG_HEIGHT = '2em';
+  const BADGE_CARD_MARGIN = '40px';
+
   const rewards = [
     {
       type: rewardTypes.BADGE,
@@ -117,7 +131,7 @@ export default function AddRewardsCard({ learningTrack, courses, topics, topicIt
       <select 
         required 
         name="select-topic-item" 
-        style={{ width: FORM_ELEMENT_WIDTH }}
+        style={{ height: SELECT_TAG_HEIGHT, width: FORM_ELEMENT_WIDTH, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px', borderBottomWidth: '2px', borderColor: TEXT_COLOR }}
         value={badgeData.contentId}
         onChange={handleContentSelect}>
           {selectOption}
@@ -132,7 +146,7 @@ export default function AddRewardsCard({ learningTrack, courses, topics, topicIt
       <select 
         required 
         name="select-topic" 
-        style={{ width: FORM_ELEMENT_WIDTH }} 
+        style={{ height: SELECT_TAG_HEIGHT, width: FORM_ELEMENT_WIDTH, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px', borderBottomWidth: '2px', borderColor: TEXT_COLOR }} 
         value={badgeData.contentId}
         onChange={handleContentSelect}>
           {selectOption}
@@ -147,7 +161,7 @@ export default function AddRewardsCard({ learningTrack, courses, topics, topicIt
       <select 
         required 
         name="select-course" 
-        style={{ width: FORM_ELEMENT_WIDTH }}
+        style={{ height: SELECT_TAG_HEIGHT, width: FORM_ELEMENT_WIDTH, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px', borderBottomWidth: '2px', borderColor: TEXT_COLOR }}
         value={badgeData.contentId}
         onChange={handleContentSelect}>
           {selectOption}
@@ -162,7 +176,7 @@ export default function AddRewardsCard({ learningTrack, courses, topics, topicIt
       <select 
         required
         name="select-learning-track" 
-        style={{ width: FORM_ELEMENT_WIDTH }}
+        style={{ height: SELECT_TAG_HEIGHT, width: FORM_ELEMENT_WIDTH, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px', borderBottomWidth: '2px', borderColor: TEXT_COLOR }}
         value={badgeData.contentId}
         onChange={handleContentSelect}>
           {selectOption}
@@ -170,57 +184,83 @@ export default function AddRewardsCard({ learningTrack, courses, topics, topicIt
       </select>
     </>;
 
+  const buttonStyle = { 
+    width: '200px', 
+    height: '2em', 
+    margin: DEFAULT_MARGIN,
+    fontSize: '18px', 
+    fontWeight: 'bold',
+    color: styles.vDarkModeTextColor3,
+    backgroundColor: styles.vDarkModeBackground1,
+    // textAlign: 'left',
+    borderWidth: '1px',
+    borderColor: TEXT_COLOR
+  };
+
+  const deleteButtonStyle = { 
+    width: '95%', 
+    height: '2em', 
+    margin: DEFAULT_MARGIN,
+    fontSize: '18px', 
+    fontWeight: 'bold',
+    color: styles.vDarkModeTextColor3,
+    backgroundColor: styles.vDarkModeBackground1,
+    // textAlign: 'left',
+    borderWidth: '1px',
+    borderColor: TEXT_COLOR
+  };
+
   return (
     <>
       <div className='card'>
-        <h4>{HEADING}</h4>
+        <h4 style={{ color: TEXT_COLOR, ...styles.h3SizeAndWeight }}>{HEADING}</h4>
 
         <hr/>
 
-        <p>A player can get a badge after completing a topic item, topic, course or learning track.</p>
+        <p style={{ color: TEXT_COLOR }}>A player can get a badge after completing a topic item, topic, course or learning track.</p>
+        <br/>
 
         <div>
           {badges.map(badge => 
-            <div key={badge.id} className="card card-display--flex">
-                <div style={{ flexGrow: 9 }}>
-                  <BadgeCard 
+            <div key={badge.id} className="card" style={{ marginBottom: BADGE_CARD_MARGIN }}>
+                <BadgeCard 
                     icon={mainIcon}
                     iconSize={ICON_SIZE}
                     name={badge.title}
                     type={badge.type}
                     criteria={badge.contentTitle}
                     isComplete={false} /> 
-                </div>
-                <img src={minusIcon} alt="minus icon" className='icon--20px'/>
+                  <button style={deleteButtonStyle}>{DELETE_TEXT}</button>
             </div>
           )}
         </div>
       </div>
 
-      <details className="card">
-        <summary style={{textAlign: 'center'}}>{CREATE_BADGE_TEXT}</summary>
+      {/* Create Badge section */}
+      <details style={{ color: TEXT_COLOR }} className="card">
+        <summary style={{ textAlign: 'center', ...styles.h4SizeAndWeight }}>{CREATE_BADGE_TEXT}</summary>
 
         <hr />
 
-        <form onSubmit={handleSubmit}>
-          <fieldset>
-            <label>Title</label><br />
-            <input required type="text" value={badgeData.title} onChange={handleInputChange} style={{ width: FORM_ELEMENT_WIDTH }}/>
+        <form onSubmit={handleSubmit} style={{ fontSize: '20px' }}>
+          <fieldset style={{ marginBottom: DEFAULT_MARGIN_X2 }}>
+            <label style={{ fontSize: LABEL_FONT_SIZE }}>Title</label><br />
+            <input required type="text" value={badgeData.title} onChange={handleInputChange} style={{ width: FORM_ELEMENT_WIDTH, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px', borderBottomWidth: '2px', borderColor: TEXT_COLOR }}/>
           </fieldset>
 
-          <fieldset>
-            <label htmlFor="select-badge-type">Badge Type</label><br />
+          <fieldset style={{ marginBottom: DEFAULT_MARGIN_X2 }}>
+            <label style={{ fontSize: TEXT_INPUT_FONT_SIZE }} htmlFor="select-badge-type">Badge Type</label><br />
             <select 
               required
               name="select-badge-type" 
-              style={{ width: FORM_ELEMENT_WIDTH }}
+              style={{ height: '2em', width: FORM_ELEMENT_WIDTH, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px', borderBottomWidth: '2px', borderColor: TEXT_COLOR }}
               value={badgeData.type}
               onChange={handleBadgeTypeSelect}>
                 {selectOption}
                 {Object.keys(badgeTypes).map((key) => 
                   <option key={key} value={key}>{badgeTypes[key].name}</option>)}
             </select>
-            <input type="text" readOnly={true} value={badgeData.type} style={{ width: '20%' }}/>
+            <input type="text" readOnly={true} value={badgeData.type} style={{ width: '20%', backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px', borderColor: 'transparent' }}/>
           </fieldset>
           
           <fieldset>
@@ -231,10 +271,27 @@ export default function AddRewardsCard({ learningTrack, courses, topics, topicIt
           </fieldset>
           <br/>
 
-          <button type="submit">Save Reward</button>
+          <div style={{ textAlign: 'right' }}>
+            <button style={buttonStyle} type="submit">Save Reward</button>
+          </div>
         </form>
 
       </details>
     </>
   );
 }
+
+/*
+    <div key={badge.id} className="card card-display--flex">
+        <div style={{ flexGrow: 9 }}>
+          <BadgeCard 
+            icon={mainIcon}
+            iconSize={ICON_SIZE}
+            name={badge.title}
+            type={badge.type}
+            criteria={badge.contentTitle}
+            isComplete={false} /> 
+        </div>
+        <img src={minusIcon} alt="minus icon" className='icon--20px'/>
+    </div>
+*/

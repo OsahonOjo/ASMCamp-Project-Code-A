@@ -9,6 +9,9 @@ import badgeIcon from '../assets/hexagons_Prosymbols_Premium.png';
 
 import '../components/styles/card.css';
 import '../components/styles/icon.css';
+import { styles } from "../components/styles/commonDisplayStyles";
+
+import { constants } from "../../modelsAndData/constants";
 
 export default function ProgressAndRewardsScreen() {
 
@@ -51,6 +54,9 @@ export default function ProgressAndRewardsScreen() {
     ];
     // BadgeCard({ icon, iconSize, name, criteria, isComplete, displayInline })
 
+    const { PRIMARY_TEXT_COLOR_DARK } = constants;
+    const TEXT_COLOR = PRIMARY_TEXT_COLOR_DARK;
+
     // TODO: change to allLearningTracksGameData
     const { allLearningTracksProgressData, getAllLearningTracksProgressData } = ProgressAndRewardsScreenViewModel();
     const [ allLearningTracksProgressState, setAllLearningTracksProgressState ] = React.useState([]);
@@ -78,7 +84,7 @@ export default function ProgressAndRewardsScreen() {
     return (
         <>
             <BackButtonNavbar title={NAVBAR_TEXT} to={PREVIOUS_PAGE}/>
-            <details open className="card">
+            <details open className="card" style={{ color: TEXT_COLOR }}>
                 <summary style={{ textAlign: 'center' }}>{MY_PROGRESS_LABEL}</summary>
                 <hr />
 
@@ -116,18 +122,19 @@ export default function ProgressAndRewardsScreen() {
                         </li>}
                 </ul>
             </details>
+
             <details open className="card">
-                <summary style={{ textAlign: 'center' }}>{MY_REWARDS_LABEL}</summary>
+                <summary style={{ textAlign: 'center', color: TEXT_COLOR }}>{MY_REWARDS_LABEL}</summary>
                 <hr />
 
                 <div>
-                    <label htmlFor="view-rewards-by-track">Select Learning Track:</label><br />
+                    <label style={{ color: TEXT_COLOR }} htmlFor="view-rewards-by-track" >Select Learning Track:</label><br />
                     <select name="view-rewards-by-track" style={{ width: '90%' }}>
                         {tracksOptions.map(track => 
                             <option key={track} value={track}>{track}</option>)}
                     </select>
 
-                    <label htmlFor="view-rewards-by-reward">Select Reward:</label><br />
+                    <label style={{ color: TEXT_COLOR }} htmlFor="view-rewards-by-reward">Select Reward:</label><br />
                     <select name="view-rewards-by-reward" style={{ width: '90%' }}>
                         {rewardsOptions.map(reward => 
                             <option key={reward} value={reward}>{reward}</option>)}

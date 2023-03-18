@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 import './styles/card.css';
 import './styles/icon.css';
+import { styles } from '../components/styles/commonDisplayStyles';
+
+import { constants } from '../../modelsAndData/constants';
 
 interface GenericEditEntityViewProps {
     relevantFields: {
@@ -39,6 +42,27 @@ export default function GenericEntityForm({ relevantFields, fieldValues, handleS
     const N_ROWS_LONG_DESC = 5;
     const FORM_ELEMENT_WIDTH = '100%';
 
+    const { PRIMARY_TEXT_COLOR_DARK, SECONDARY_BACKGROUND_COLOR_DARK } = constants;
+    const TEXT_COLOR = PRIMARY_TEXT_COLOR_DARK;
+    const DEFAULT_MARGIN = '10px';
+    const DEFAULT_MARGIN_X2 = '20px';
+    const FONT_ICON_AND_TEXT_SEPARATION = '10px';
+    const LABEL_FONT_SIZE = '20px';
+    const TEXT_INPUT_FONT_SIZE = '18px';
+
+    const buttonStyle = { 
+        width: '100px', 
+        height: '2em', 
+        margin: DEFAULT_MARGIN,
+        fontSize: '18px', 
+        fontWeight: 'bold',
+        color: styles.vDarkModeTextColor3,
+        backgroundColor: styles.vDarkModeBackground1,
+        // textAlign: 'left',
+        borderWidth: '1px',
+        borderColor: TEXT_COLOR
+    };
+
     const navigate = useNavigate();
 
     // props are read-only so store fieldValues in a state
@@ -50,86 +74,141 @@ export default function GenericEntityForm({ relevantFields, fieldValues, handleS
     }, [fieldValues]);
 
     const idField = 
-        <div>
+        <div style={{ marginBottom: DEFAULT_MARGIN_X2 }}>
             <label>ID</label><br />
             <input 
                 required 
                 readOnly={true}
                 type="text" 
                 value={inputs.id} 
-                style={{width: FORM_ELEMENT_WIDTH}}/>
+                style={{
+                    width: FORM_ELEMENT_WIDTH,
+                    fontSize: TEXT_INPUT_FONT_SIZE, 
+                    backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
+                    borderWidth: '0px'
+                }}/>
         </div>;
 
     const learningTrackIdField = 
-        <div>
+        <div style={{ marginBottom: DEFAULT_MARGIN_X2 }}>
             <label>Learning Track ID</label><br />
             <input 
                 required 
                 readOnly={true}
                 type="text" 
                 value={inputs.learningTrackId} 
-                style={{width: FORM_ELEMENT_WIDTH}}/>
+                style={{
+                    width: FORM_ELEMENT_WIDTH,
+                    fontSize: TEXT_INPUT_FONT_SIZE, 
+                    backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
+                    borderWidth: '0px'
+                }}/>
         </div>;
 
     const courseIdField = 
-        <div>
+        <div style={{ marginBottom: DEFAULT_MARGIN_X2 }}>
             <label>Course ID</label><br />
             <input 
                 required 
                 readOnly={true}
                 type="text" 
                 value={inputs.courseId} 
-                style={{width: FORM_ELEMENT_WIDTH}}/>
+                style={{
+                    width: FORM_ELEMENT_WIDTH,
+                    fontSize: TEXT_INPUT_FONT_SIZE, 
+                    backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
+                    borderWidth: '0px'
+                }}/>
         </div>;
 
     const titleField = 
-        <div>
-            <label>Title</label><br />
+        <div style={{ marginBottom: DEFAULT_MARGIN_X2 }}>
+            <label style={{ ...styles.h4SizeAndWeight }}>Title</label><br />
             <input 
                 required 
                 type="text" 
                 value={inputs.title} 
                 onChange={handleTitleInputChange}
-                style={{width: FORM_ELEMENT_WIDTH}}/>
+                style={{ 
+                    width: FORM_ELEMENT_WIDTH, 
+                    fontSize: TEXT_INPUT_FONT_SIZE, 
+                    backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
+                    borderColor: TEXT_COLOR,
+                    borderWidth: '0px',
+                    borderBottomWidth: '2px'}}/>
         </div>;
 
     const shortDescriptionField = 
-        <div>
-            <label>Short Description</label><br />
+        <div style={{ marginBottom: DEFAULT_MARGIN_X2 }}>
+            <label style={{ ...styles.h4SizeAndWeight }}>Short Description</label><br />
             <textarea 
                 required 
                 value={inputs.shortDescription} 
                 onChange={handleShortDescInputChange}
                 rows={N_ROWS_SHORT_DESC}
-                style={{width: FORM_ELEMENT_WIDTH}}></textarea>
+                style={{ 
+                    width: FORM_ELEMENT_WIDTH, 
+                    fontSize: TEXT_INPUT_FONT_SIZE, 
+                    backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
+                    borderColor: TEXT_COLOR,
+                    borderWidth: '0px',
+                    borderLeftWidth: '2px',
+                    padding: '10px'}}>
+            </textarea>
         </div>;
 
     const longDescriptionField = 
-        <div>
-            <label>Long Description</label><br />
+        <div style={{ marginBottom: DEFAULT_MARGIN_X2 }}>
+            <label style={{ ...styles.h4SizeAndWeight }}>Long Description</label><br />
             <textarea 
                 required 
                 value={inputs.longDescription} 
                 onChange={handleLongDescInputChange}
                 rows={N_ROWS_LONG_DESC}
-                style={{width: FORM_ELEMENT_WIDTH}}></textarea>
+                style={{ 
+                    width: FORM_ELEMENT_WIDTH, 
+                    fontSize: TEXT_INPUT_FONT_SIZE, 
+                    backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
+                    borderColor: TEXT_COLOR,
+                    borderWidth: '0px',
+                    borderLeftWidth: '2px',
+                    padding: '10px'}}>
+            </textarea>
         </div>;
 
     const descriptionField = 
-        <div>
-            <label>Description</label><br />
+        <div style={{ marginBottom: DEFAULT_MARGIN_X2 }}>
+            <label style={{ ...styles.h4SizeAndWeight }}>Description</label><br />
             <textarea 
                 required 
                 value={inputs.description} 
                 onChange={handleDescInputChange}
                 rows={N_ROWS_SHORT_DESC}
-                style={{width: FORM_ELEMENT_WIDTH}}></textarea>
+                style={{width: FORM_ELEMENT_WIDTH, 
+                    fontSize: TEXT_INPUT_FONT_SIZE, 
+                    backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
+                    borderColor: TEXT_COLOR,
+                    borderWidth: '0px',
+                    borderLeftWidth: '2px',
+                    padding: '10px'}}>
+            </textarea>
         </div>;
 
     const seqNumberField = 
-        <div>
-            <label>Sequence Number</label><br />
-            <input type="number" min="1" value={inputs.seqNumber} onChange={handleSeqNumberInputChange}/>
+        <div style={{ marginBottom: DEFAULT_MARGIN_X2 }}>
+            <label style={{ ...styles.h4SizeAndWeight }}>Sequence Number</label><br />
+            <input 
+                type="number" 
+                min="1" 
+                value={inputs.seqNumber} 
+                onChange={handleSeqNumberInputChange}
+                style={{ 
+                    width: FORM_ELEMENT_WIDTH, 
+                    fontSize: TEXT_INPUT_FONT_SIZE, 
+                    backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
+                    borderColor: TEXT_COLOR,
+                    borderWidth: '0px',
+                    borderBottomWidth: '2px'}}/>
         </div>;
 
     function handleTitleInputChange(event: ChangeEvent<HTMLInputElement>) {
@@ -163,7 +242,10 @@ export default function GenericEntityForm({ relevantFields, fieldValues, handleS
     }
 
     return (
-        <form className="card" onSubmit={(event) => { handleSubmit(event, inputs) }}>
+        <form 
+            className="card" 
+            style={{ color: TEXT_COLOR, fontSize: '20px' }}
+            onSubmit={(event) => { handleSubmit(event, inputs) }}>
             {relevantFields.id ? idField : null}
             {relevantFields.learningTrackId ? learningTrackIdField : null}
             {relevantFields.courseId ? courseIdField : null}
@@ -172,7 +254,9 @@ export default function GenericEntityForm({ relevantFields, fieldValues, handleS
             {relevantFields.shortDescription ? shortDescriptionField : null}
             {relevantFields.description ? descriptionField : null}
             {relevantFields.longDescription ? longDescriptionField : null}
-            <button type="submit">{BUTTON_TEXT}</button>
+            <div style={{ textAlign: 'right' }}>
+                <button style={buttonStyle} type="submit">{BUTTON_TEXT}</button>
+            </div>
         </form>
     );
 }

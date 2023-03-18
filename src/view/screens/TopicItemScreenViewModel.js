@@ -1,6 +1,6 @@
 import React from 'react';
-import { getTopicItem } from '../../model/EduDataModel';
-import { userIsEnrolledInTrack, enrollUser, updateProgress, getTrackProgressInfo } from "../../model/UserDataModel";
+import { getTopicItem } from '../../modelsAndData/EduDataModel';
+import { userIsEnrolledInTrack, enrollUser, updateProgress, getTrackProgressInfo } from "../../modelsAndData/UserDataModel";
 
 export default function TopicItemScreenViewModel() {
 

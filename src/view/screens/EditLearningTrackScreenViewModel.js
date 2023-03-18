@@ -1,5 +1,5 @@
 import React from "react";
-import { createTrack, updateTrack, getAllTopicsInTrack, getAllTopicItemsInTrack, getAllBadgesInTrack, createBadgeEntity } from "../../model/EduDataModel";
+import { createTrack, updateTrack, getAllTopicsInTrack, getAllTopicItemsInTrack, getAllBadgesInTrack, createBadgeEntity } from "../../modelsAndData/EduDataModel";
 
 export default function EditLearningTrackScreenViewModel() {
 

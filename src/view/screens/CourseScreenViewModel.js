@@ -1,6 +1,6 @@
 import React from "react"
-import { getCourse, getAllTopicsInCourse, getAllTopicItemsInCourse } from '../../model/EduDataModel';
-import { getCourseProgressInfo } from '../../model/UserDataModel';
+import { getCourse, getAllTopicsInCourse, getAllTopicItemsInCourse } from '../../modelsAndData/EduDataModel';
+import { getCourseProgressInfo } from '../../modelsAndData/UserDataModel';
 
 export default function CourseScreenViewModel() {
 

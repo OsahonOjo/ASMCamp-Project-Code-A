@@ -1,34 +1,55 @@
+/* NOTE:
+   1. To change position of burger, change bmBurgerButton object in burgerStyles.js 
+   2. To change position of .navbar-title, change the height style under .navbar-icon-placeholder 
+   3. .navbar, .navbar-padding, and .navbar-icon-placeholder height should be equal
+*/
+
 .navbar {
-    background: linear-gradient(45deg,#0E86D4, #68BBE3);
+    background: #152028;
     position: fixed;
     top: 0px;
     left: 0px;
     right: 0px;
-    height: 60px;
+    height: 74px;
+}
+
+.navbar-padding {
+    height: 74px;
 }
 
 .navbar-title {
     display: inline-block;
     vertical-align: middle;
-    font-size: 18pt;
+    font-size: 20pt;
     font-weight: bold;
+    color: #ddd;
+    /* border: solid 1px black; */
 }
 
+/* for HanburgerNavbar */
 .navbar-icon-placeholder {
     display: inline-block;
     vertical-align: middle;
-    height: 60px;
+    height: 74px;
     width: 66px;  /* 15px + 36px + 15px */
 }
 
+/* for other Navbars */
 .navbar-icon {
+    display: inline-block;
+    vertical-align: middle;
+    height: 74px;
+    width: 60px;
+    padding-top: 10px;
+    padding-left: 3px;
+}
+
+/* .navbar-icon {
     display: inline-block;
     vertical-align: middle;
     height: 30px;
     width: 30px;
-    margin: 12px;  
-}
-
-.navbar-padding {
-    height: 70px;
-}
+    margin: 12px;
+    margin-top: 17px;
+    margin-bottom: 17px;
+} */

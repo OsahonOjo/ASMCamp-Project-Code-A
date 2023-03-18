@@ -10,6 +10,9 @@ import GenericEntityForm from "../components/GenericEntityForm";
 import CourseListCard from "../components/CourseListCard";
 
 import '../components/styles/card.css';
+import { styles } from '../components/styles/commonDisplayStyles';
+
+import { constants } from '../../modelsAndData/constants';
 
 export default function EditLearningTrackScreen() {
 
@@ -17,6 +20,11 @@ export default function EditLearningTrackScreen() {
   const PREVIOUS_PAGE_URL = "/instructors/tracks";
   const CURRENT_PAGE_URL_STEM = "/instructors/edit/track";
   const EMPTY_STRING = "";
+
+  const { PRIMARY_TEXT_COLOR_DARK } = constants;
+  const TEXT_COLOR = PRIMARY_TEXT_COLOR_DARK;
+  const DEFAULT_MARGIN = '10px';
+  const FONT_ICON_AND_TEXT_SEPARATION = '10px';
 
   /** for GenericEntityForm */
   const ENTITY_TYPES = {
@@ -171,15 +179,17 @@ export default function EditLearningTrackScreen() {
     <>
       <BackButtonNavbar title={NAVBAR_TEXT} to={PREVIOUS_PAGE_URL} />
       
-      <GenericEntityForm 
-        relevantFields={relevantFieldsFactory(ENTITY_TYPES.TRACK)}
-        fieldValues={learningTrackEntityState}
-        handleSubmit={handleTrackEntityFormSubmission} />
+      <div>
+        <GenericEntityForm 
+          relevantFields={relevantFieldsFactory(ENTITY_TYPES.TRACK)}
+          fieldValues={learningTrackEntityState}
+          handleSubmit={handleTrackEntityFormSubmission} />
+      </div>
         
       {screenMode == SCREEN_MODE.CREATE_NEW_ENTITY
         ? null
         : <>
-            <AddInstructorsCard />
+            {/* <AddInstructorsCard /> */}
             
             <CourseListCard 
               courses={courseSummariesState}
@@ -199,9 +209,9 @@ export default function EditLearningTrackScreen() {
               createBadge={createBadge}
               deleteBadge={() => {}} />
 
-            <button>TODO: Publish Changes</button>
+            {/* <button>TODO: Publish Changes</button>
             <hr />
-            <button>TODO: Delete Learning Track</button>
+            <button>TODO: Delete Learning Track</button> */}
           </>}
     </>
   );

@@ -6,9 +6,12 @@ import EditTopicItemScreenViewModel from "./EditTopicItemScreenViewModel";
 
 import BackButtonNavbar from "../components/BackButtonNavbar";
 
-import { topicItemTypes } from "../../model/enums";
+import { topicItemTypes } from "../../modelsAndData/enums";
 
 import '../components/styles/card.css';
+import { styles } from "../components/styles/commonDisplayStyles";
+
+import { constants } from "../../modelsAndData/constants";
 
 export default function EditTopicItemScreen() {
 
@@ -18,7 +21,20 @@ export default function EditTopicItemScreen() {
     const CURRENT_PAGE_URL_STEM = "/instructors/edit/item";
     const EMPTY_STRING = ""; 
     const DEFAULT_FORM_ELEMENT_WIDTH = "80%";
-    const EDITOR_WIDTH = "90%";
+    const EDITOR_WIDTH = "100%";
+
+    const N_TEXTAREA_ROWS = 2;
+
+    const { PRIMARY_TEXT_COLOR_DARK, SECONDARY_BACKGROUND_COLOR_DARK } = constants;
+    const TEXT_COLOR = PRIMARY_TEXT_COLOR_DARK;
+    const DEFAULT_MARGIN = '10px';
+    const DEFAULT_MARGIN_X2 = '20px';
+    const DEFAULT_MARGIN_X3 = '30px';
+    const DEFAULT_PADDING = '10px';
+    const FONT_ICON_AND_TEXT_SEPARATION = '10px';
+    const LABEL_FONT_SIZE = '20px';
+    const TEXT_INPUT_FONT_SIZE = '20px';
+    const FORM_ELEMENT_WIDTH = '100%';
 
     const topicItemTypesArray = ["Select"];
     Object.keys(topicItemTypes).forEach(key => {
@@ -289,67 +305,145 @@ export default function EditTopicItemScreen() {
         }
     }
 
+    const buttonStyle = { 
+        width: '95%', 
+        height: '2em', 
+        margin: DEFAULT_MARGIN,
+        marginBottom: DEFAULT_MARGIN_X3,
+        fontSize: '18px', 
+        fontWeight: 'bold',
+        color: styles.vDarkModeTextColor3,
+        backgroundColor: styles.vDarkModeBackground1,
+        // textAlign: 'left',
+        borderWidth: '1px',
+        borderColor: TEXT_COLOR
+    };
+
+    const saveButtonStyle = { 
+        width: '50%', 
+        height: '2em', 
+        margin: DEFAULT_MARGIN,
+        marginBottom: DEFAULT_MARGIN,
+        fontSize: '18px', 
+        fontWeight: 'bold',
+        color: styles.vDarkModeTextColor3,
+        backgroundColor: styles.vDarkModeBackground1,
+        // textAlign: 'left',
+        borderWidth: '1px',
+        borderColor: TEXT_COLOR
+    };
+
     return (
         <>
             {/* in SCREEN_MODE.CREATE_NEW_ENTITY, you can't go beyond this screen so you can trust the value of location.state.from */}
             <BackButtonNavbar title={NAVBAR_TEXT} to={location.state.from} />
             
-            <button type="button" onClick={() => { console.log('screenMode: ', screenMode) }}>Click for Screen Mode</button>
+            {/* <button type="button" onClick={() => { console.log('screenMode: ', screenMode) }}>Click for Screen Mode</button> */}
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} style={{ color: TEXT_COLOR }}>
 
                 <div className="card">
                     <div>
                         <label>ID</label><br />
-                        <input required readOnly={true} type="text" value={inputs.id} style={{width: DEFAULT_FORM_ELEMENT_WIDTH}}/>
+                        <input required readOnly={true} type="text" value={inputs.id} style={{ width: DEFAULT_FORM_ELEMENT_WIDTH, fontSize: TEXT_INPUT_FONT_SIZE, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px' }}/>
                     </div>
 
                     <div>
                         <label>Learning Track ID</label><br />
-                        <input required readOnly={true} type="text" value={inputs.learningTrackId} style={{width: DEFAULT_FORM_ELEMENT_WIDTH}}/>
+                        <input required readOnly={true} type="text" value={inputs.learningTrackId} style={{ width: DEFAULT_FORM_ELEMENT_WIDTH, fontSize: TEXT_INPUT_FONT_SIZE, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px' }}/>
                     </div>
 
                     <div>
                         <label>Course ID</label><br />
-                        <input required readOnly={true} type="text" value={inputs.courseId} style={{width: DEFAULT_FORM_ELEMENT_WIDTH}}/>
+                        <input required readOnly={true} type="text" value={inputs.courseId} style={{ width: DEFAULT_FORM_ELEMENT_WIDTH, fontSize: TEXT_INPUT_FONT_SIZE, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px' }}/>
                     </div>
 
                     <div>
                         <label>Topic ID</label><br />
-                        <input required readOnly={true} type="text" value={inputs.topicId} style={{width: DEFAULT_FORM_ELEMENT_WIDTH}}/>
+                        <input required readOnly={true} type="text" value={inputs.topicId} style={{ width: DEFAULT_FORM_ELEMENT_WIDTH, fontSize: TEXT_INPUT_FONT_SIZE, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px' }}/>
                     </div>
                 </div>
 
                 <div className="card">
-                    <label>Title</label><br />
-                    <input required type="text" value={inputs.title} onChange={handleTitleInputChange} style={{width: DEFAULT_FORM_ELEMENT_WIDTH}}/>
+                    <label style={{ ...styles.h4SizeAndWeight }}>Title</label><br />
+                    <input 
+                        required 
+                        type="text" 
+                        value={inputs.title} 
+                        onChange={handleTitleInputChange} 
+                        style={{ 
+                            width: FORM_ELEMENT_WIDTH, 
+                            fontSize: TEXT_INPUT_FONT_SIZE, 
+                            backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
+                            borderColor: TEXT_COLOR,
+                            marginBottom: DEFAULT_MARGIN,
+                            borderWidth: '0px',
+                            borderBottomWidth: '2px'}}/>
                 </div>
 
                 <div className="card">
-                    <label>Sequence Number</label><br />
-                    <input type="number" min="1" value={inputs.seqNumber} onChange={handleSeqNumberInputChange} style={{width: DEFAULT_FORM_ELEMENT_WIDTH}}/>
+                    <label style={{ ...styles.h4SizeAndWeight }}>Sequence Number</label><br />
+                    <input 
+                        type="number" 
+                        min="1" 
+                        value={inputs.seqNumber} 
+                        onChange={handleSeqNumberInputChange} 
+                        style={{ 
+                            width: FORM_ELEMENT_WIDTH, 
+                            fontSize: TEXT_INPUT_FONT_SIZE, 
+                            backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
+                            borderColor: TEXT_COLOR,
+                            marginBottom: DEFAULT_MARGIN,
+                            borderWidth: '0px',
+                            borderBottomWidth: '2px'}}/>
                 </div>
 
                 <div className="card">
-                    <label>XP</label><br />
-                    <input required type="number" min="1" value={inputs.xp} onChange={handleXPInputChange} style={{width: DEFAULT_FORM_ELEMENT_WIDTH}}/>
+                    <label style={{ ...styles.h4SizeAndWeight }}>XP</label><br />
+                    <input 
+                        required 
+                        type="number" 
+                        min="1" 
+                        value={inputs.xp} 
+                        onChange={handleXPInputChange} 
+                        style={{ 
+                            width: FORM_ELEMENT_WIDTH, 
+                            fontSize: TEXT_INPUT_FONT_SIZE, 
+                            backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
+                            borderColor: TEXT_COLOR,
+                            marginBottom: DEFAULT_MARGIN,
+                            borderWidth: '0px',
+                            borderBottomWidth: '2px'}}/>
                 </div>
 
                 {/* type selection here */}
                 <div className="card">
-                    <label htmlFor="select-topic-item-type"><p>Type</p></label><br />
-                    <select name="select-topic-item-type" value={inputs.type} onChange={handleTopicItemTypeSelectChange} style={{width: DEFAULT_FORM_ELEMENT_WIDTH}}>
-                        {topicItemTypesArray.map(type => 
-                            <option key={type} value={type}>{type}</option>)}
+                    <label style={{ ...styles.h4SizeAndWeight }} htmlFor="select-topic-item-type"><p>Type</p></label><br />
+                    <select 
+                        name="select-topic-item-type" 
+                        value={inputs.type} 
+                        onChange={handleTopicItemTypeSelectChange} 
+                        style={{ 
+                            width: FORM_ELEMENT_WIDTH, 
+                            fontSize: TEXT_INPUT_FONT_SIZE, 
+                            backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
+                            borderColor: TEXT_COLOR,
+                            marginBottom: DEFAULT_MARGIN,
+                            borderWidth: '0px',
+                            borderBottomWidth: '2px'}}>
+                                {topicItemTypesArray.map(type => 
+                                    <option key={type} value={type}>{type}</option>)}
                     </select>
                 </div>
 
                 <div className="card">
-                    <label>{(inputs.type == "LSN" || inputs.type == "Select") ? "Content" : "Question"}</label><br />
+                    <label style={{ ...styles.h4SizeAndWeight }}>{(inputs.type == "LSN" || inputs.type == "Select") ? "Content" : "Question"}</label><br />
                     <p>The content of the lesson or question goes here. Please use Markdown notation.</p>
+                    <br/>
                     <Editor 
                         required
                         height='30vh'
+                        theme='vs-dark'
                         width={EDITOR_WIDTH}
                         language='markdown'
                         value={inputs.content}
@@ -359,90 +453,134 @@ export default function EditTopicItemScreen() {
                 {/* Instructions card */}
                 {(inputs.type != "LSN" && inputs.type != "Select")
                     ?   <div className="card">
-                            <p>Instructions</p>
+                            <p style={{ ...styles.h4SizeAndWeight }}>Instructions</p>
                             <ul>
                                 {inputs.instructions.map((instruction, index) => 
-                                    <li key={`${instruction}${index}`}>
-                                        <span>{instruction}</span>
-                                        <button 
-                                            type="button" 
-                                            onClick={() => { handleDeleteInstruction(index) }}>
-                                                <span className="material-symbols-outlined">do_not_disturb_on</span>
-                                        </button>
+                                    <li key={`${instruction}${index}`} style={{ marginBottom: DEFAULT_MARGIN_X2 }} >
+                                        <div style={{ display: 'flex' }}>
+                                            <span>{instruction}</span>
+                                            <button 
+                                                type="button" 
+                                                style={{ color: TEXT_COLOR, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px' }}
+                                                onClick={() => { handleDeleteInstruction(index) }}>
+                                                    <span className="material-symbols-outlined">do_not_disturb_on</span>
+                                            </button>
+                                        </div>
                                     </li>)}
                             </ul>
 
-                            <input 
+                            <textarea
                                 type="text" 
-                                placeholder="Enter instructions for user here" 
+                                placeholder="Enter instruction here"
                                 value={instructionState} 
                                 onChange={handleInstructionInputChange}
-                                style={{width: DEFAULT_FORM_ELEMENT_WIDTH}} />
-                            <button 
-                                type="button" 
-                                onClick={handleAddInstruction}>
-                                    <span className="material-symbols-outlined">add_circle</span>
-                            </button> 
+                                style={{
+                                    width: '100%', 
+                                    fontSize: TEXT_INPUT_FONT_SIZE, 
+                                    backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
+                                    borderColor: TEXT_COLOR,
+                                    borderWidth: '0px',
+                                    borderLeftWidth: '2px',
+                                    padding: DEFAULT_PADDING
+                                }}>
+                            </textarea>
+                            <div style={{ textAlign: 'right' }}>
+                                <button 
+                                    type="button" 
+                                    style={saveButtonStyle}
+                                    onClick={handleAddInstruction}>
+                                        Add Instruction
+                                        {/* <span className="material-symbols-outlined">add_circle</span> */}
+                                </button> 
+                            </div>
                         </div>
                     : null}
 
                 {inputs.type == "MCQ" 
                     ?   <div className="card">
-                            <p>Options</p>
-                            <p>Select the radio button for the correct answer.</p>
-                            <ul>
+                            <p style={{ ...styles.h4SizeAndWeight }}>Options</p>
+                            <p>Select the radio button for the correct option.</p>
+                            <ul style={{ listStyleType: 'none', marginLeft: '-20px' }}>
                                 {inputs.mcqOptions.map((option, index) => 
-                                    <li key={`${option}${index}`}>
-                                        <label>
-                                            <input 
-                                                type="radio" 
-                                                value={index}
-                                                checked={inputs.mcqAnswerIndex == index}
-                                                onChange={selectMCQOptionAsAnswer} />
-                                            {option}
-                                        </label>
-                                        <button 
-                                            type="button" 
-                                            onClick={() => { handleDeleteMCQOption(index) }}>
-                                                <span className="material-symbols-outlined">do_not_disturb_on</span>
-                                        </button>
+                                    <li key={`${option}${index}`} style={{ marginBottom: DEFAULT_MARGIN_X2, fontWeight:'normal', fontSize: LABEL_FONT_SIZE }}>
+                                        <div style={{ display: 'flex' }}>
+                                            <label>
+                                                <input 
+                                                    type="radio" 
+                                                    value={index}
+                                                    checked={inputs.mcqAnswerIndex == index}
+                                                    style={{ marginRight: DEFAULT_MARGIN_X2 }}
+                                                    onChange={selectMCQOptionAsAnswer} />
+                                                {option}
+                                            </label>
+                                            <button 
+                                                type="button" 
+                                                style={{ color: TEXT_COLOR, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px' }}
+                                                onClick={() => { handleDeleteMCQOption(index) }}>
+                                                    <span className="material-symbols-outlined">do_not_disturb_on</span>
+                                            </button>
+                                        </div>
                                     </li>)}
                             </ul>
-                            <input 
-                                type="text" 
+                            <textarea 
+                                rows={N_TEXTAREA_ROWS}
                                 placeholder="Enter option here" 
                                 value={mcqOptionState} 
                                 onChange={handleMCQInputChange}
-                                style={{width: DEFAULT_FORM_ELEMENT_WIDTH}} />
-                            <button 
-                                type="button" 
-                                onClick={handleAddMCQOption}>
-                                    <span className="material-symbols-outlined">add_circle</span>
-                            </button>                     
+                                style={{
+                                    width: '100%', 
+                                    fontSize: TEXT_INPUT_FONT_SIZE, 
+                                    backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
+                                    borderColor: TEXT_COLOR,
+                                    borderWidth: '0px',
+                                    borderLeftWidth: '2px',
+                                    padding: DEFAULT_PADDING
+                                }}>
+                            </textarea>
+                            <div style={{ textAlign: 'right' }}>
+                                <button 
+                                    type="button" 
+                                    style={saveButtonStyle}
+                                    onClick={handleAddMCQOption}>
+                                        Add Option
+                                        {/* <span className="material-symbols-outlined">add_circle</span> */}
+                                </button> 
+                            </div>             
                         </div> 
                     : null}
 
                 {inputs.type == "TFQ" 
                     ?   <div className="card">
-                            <p>Answer</p>
+                            <p style={{ ...styles.h4SizeAndWeight }}>Answer</p>
                             <p>Select either True or False.</p>
-                            <select value={inputs.tfqAnswer} onChange={handleTFQSelectChange} style={{width: DEFAULT_FORM_ELEMENT_WIDTH}}>
-                                <option value={false}>False</option>
-                                <option value={true}>True</option>
+                            <select 
+                                value={inputs.tfqAnswer}
+                                onChange={handleTFQSelectChange} 
+                                style={{
+                                    width: '100%', 
+                                    fontSize: TEXT_INPUT_FONT_SIZE, 
+                                    backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
+                                    borderColor: TEXT_COLOR,
+                                    borderWidth: '0px',
+                                    borderBottomWidth: '2px'
+                                }}>
+                                    <option value={false}>False</option>
+                                    <option value={true}>True</option>
                             </select>
                         </div>
                     : null}
 
                 {inputs.type == "SAQ" 
                     ?   <div className="card">
-                            <p>Answers</p>
-                            <p>Enter possible answers for question here.</p>
+                            <p style={{ ...styles.h4SizeAndWeight }}>Answers</p>
+                            {/* <p>Enter possible answers here.</p> */}
                             <ul>
                                 {inputs.saqAnswer.map((answer, index) => 
-                                    <li key={`${answer}${index}`}>
+                                    <li key={`${answer}${index}`} style={{ marginBottom: DEFAULT_MARGIN_X2 }}>
                                         <span>{answer}</span>
                                         <button 
-                                            type="button" 
+                                            type="button"
+                                            style={{ color: TEXT_COLOR, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px' }}
                                             onClick={() => { handleDeleteSAQAnswer(index) }}>
                                                 <span className="material-symbols-outlined">do_not_disturb_on</span>
                                         </button>
@@ -450,15 +588,27 @@ export default function EditTopicItemScreen() {
                             </ul>
                             <input 
                                 type="text" 
-                                placeholder="Enter possible answers for question here" 
+                                placeholder="Enter possible answer here" 
                                 value={saqAnswerState} 
                                 onChange={handleSAQInputChange}
-                                style={{width: DEFAULT_FORM_ELEMENT_WIDTH}} />
-                            <button 
-                                type="button" 
-                                onClick={handleAddSAQAnswer}>
-                                    <span className="material-symbols-outlined">add_circle</span>
-                            </button> 
+                                style={{
+                                    width: '100%', 
+                                    fontSize: TEXT_INPUT_FONT_SIZE, 
+                                    backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
+                                    borderColor: TEXT_COLOR,
+                                    borderWidth: '0px',
+                                    borderBottomWidth: '2px',
+                                    marginBottom: DEFAULT_MARGIN
+                                }} />
+                            <div style={{ textAlign: 'right' }}>
+                                <button 
+                                    type="button" 
+                                    style={saveButtonStyle}
+                                    onClick={handleAddSAQAnswer}>
+                                        Add Answer
+                                        {/* <span className="material-symbols-outlined">add_circle</span> */}
+                                </button> 
+                            </div>
                         </div>
                     : null}
 
@@ -467,38 +617,54 @@ export default function EditTopicItemScreen() {
                 {/* Hints card */}
                 {(inputs.type != "LSN" && inputs.type != "Select")
                     ?   <div className="card">
-                            <p>Hints</p>
+                            <p style={{ ...styles.h4SizeAndWeight }}>Hints</p>
                             <ul>
                                 {inputs.hints.map((hint, index) => 
-                                    <li key={`${hint}${index}`}>
-                                        <span>{hint}</span>
-                                        <button 
-                                            type="button" 
-                                            onClick={() => { handleDeleteHint(index) }}>
-                                                <span className="material-symbols-outlined">do_not_disturb_on</span>
-                                        </button>
+                                    <li key={`${hint}${index}`} style={{ marginBottom: DEFAULT_MARGIN_X2 }}>
+                                        <div style={{ display: 'flex' }}>
+                                            <span>{hint}</span>
+                                            <button 
+                                                type="button" 
+                                                style={{ color: TEXT_COLOR, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px' }}
+                                                onClick={() => { handleDeleteHint(index) }}>
+                                                    <span className="material-symbols-outlined">do_not_disturb_on</span>
+                                            </button>
+                                        </div>
                                     </li>)}
                             </ul>
 
-                            <input 
-                                type="text" 
-                                placeholder="Enter hints for user here" 
+                            <textarea 
+                                rows={N_TEXTAREA_ROWS}
+                                placeholder="Enter hint here"
                                 value={hintState} 
                                 onChange={handleHintInputChange}
-                                style={{width: DEFAULT_FORM_ELEMENT_WIDTH}} />
-                            <button 
-                                type="button" 
-                                onClick={handleAddHint}>
-                                    <span className="material-symbols-outlined">add_circle</span>
-                            </button> 
+                                style={{
+                                    width: '100%', 
+                                    fontSize: TEXT_INPUT_FONT_SIZE, 
+                                    backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
+                                    borderColor: TEXT_COLOR,
+                                    borderWidth: '0px',
+                                    borderLeftWidth: '2px',
+                                    padding: DEFAULT_PADDING
+                                }} >
+                            </textarea>
+                            <div style={{ textAlign: 'right' }}>
+                                <button 
+                                    type="button" 
+                                    style={saveButtonStyle}
+                                    onClick={handleAddHint}>
+                                        Add Hint
+                                        {/* <span className="material-symbols-outlined">add_circle</span> */}
+                                </button> 
+                            </div>
                         </div>
                     : null}
 
-                <button type="submit">Save Current Topic Item</button>
+                <button style={buttonStyle} type="submit">Save Topic Item</button>
 
             </form>
-            <hr />
-            <button type="button">Delete Topic Item</button>
+            {/* <hr />
+            <button type="button">Delete Topic Item</button> */}
 
             <div>
 

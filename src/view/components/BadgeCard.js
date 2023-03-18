@@ -1,11 +1,13 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-import { badgeTypes } from "../../model/enums";
+import { badgeTypes } from "../../modelsAndData/enums";
 
 import Tag from "./Tag";
 
-import './styles/card.css';
+import './styles/card.css'; 
+import { styles } from "./styles/commonDisplayStyles";
+import { constants } from "../../modelsAndData/constants";
 
 function BadgeCard({ icon, iconSize, name, type, criteria, isComplete, displayInline }) {
 
@@ -13,6 +15,10 @@ function BadgeCard({ icon, iconSize, name, type, criteria, isComplete, displayIn
   const TAG_TEXT_COMPLETE = "COMPLETE";
   const TAG_FONT_SIZE = "14px";
   const COMPLETE_TEXT = "Complete";
+  const MAIN_ICON_MARGIN_RIGHT = '10px';
+
+  const { PRIMARY_TEXT_COLOR_DARK } = constants;
+  const TEXT_COLOR = PRIMARY_TEXT_COLOR_DARK;
   let typeText = "";
   const style = {
     width: iconSize,
@@ -20,11 +26,6 @@ function BadgeCard({ icon, iconSize, name, type, criteria, isComplete, displayIn
     backgroundColor: '#add8e6',
     borderRadius: '50%'
   };
-
-  // {type && type == badgeTypes.TPITM.typeId ? "Topic Item" : null}
-  // {type && type == badgeTypes.TOPIC.typeId ? "Topic" : null}
-  // {type && type == badgeTypes.COURS.typeId ? "Course" : null}
-  // {type && type == badgeTypes.TRACK.typeId ? "Learning Track" : null}
 
   switch(type) {
     case badgeTypes.TPITM.typeId:
@@ -41,19 +42,55 @@ function BadgeCard({ icon, iconSize, name, type, criteria, isComplete, displayIn
       break;
   }
 
+  const badgeLabelTag = 
+    <Tag 
+      text={{
+        content: TAG_TEXT_BADGE,
+        style: { 
+          color: TEXT_COLOR,
+          fontSize: TAG_FONT_SIZE
+        }
+      }} 
+      container={{
+        baseStyle: { display: 'block' }
+      }} />;
+
+  const badgeIsCompleteTag = 
+    <Tag 
+      text={{
+        content: TAG_TEXT_COMPLETE,
+        style: { 
+          color: TEXT_COLOR,
+          fontSize: TAG_FONT_SIZE
+        }
+      }} 
+      container={{
+        baseStyle: { 
+          borderWidth: '1px',
+          borderColor: TEXT_COLOR
+        },
+        otherStyle: {
+          padding: '3px'
+        }
+      }} />;
+
   return (
     <div className="card-display--flex">
 
-      <div>
-        <img src={icon} style={style} alt="list item icon"/>
+      <div style={{ marginRight: MAIN_ICON_MARGIN_RIGHT }}>
+        <span className="material-symbols-outlined" style={{ ...styles.mainIcon36pxFont }}>
+          token
+        </span>
       </div>
 
-      <div>
-        <Tag text={TAG_TEXT_BADGE} displayBlock={true} fontSize={TAG_FONT_SIZE}/> 
+      <div style={{ color: TEXT_COLOR }}>
+        
+        {badgeLabelTag}
         <p style={{ fontSize: '30px' }}>{name}</p>
-        <Tag text={TAG_TEXT_COMPLETE} displayBlock={false} fontSize={TAG_FONT_SIZE} borderWidth={'1px'} borderColor={style.backgroundColor}/> 
+        {badgeIsCompleteTag}
 
         <p>
+          <br/>
           <span>{criteria}</span>
           <br/>
           <span style={{ fontSize: '16px' }}>

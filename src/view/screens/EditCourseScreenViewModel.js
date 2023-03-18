@@ -1,5 +1,5 @@
 import React from "react";
-import { createCourseEntity, updateCourseEntity } from "../../model/EduDataModel";
+import { createCourseEntity, updateCourseEntity } from "../../modelsAndData/EduDataModel";
 
 export default function EditCourseScreenViewModel() {
 

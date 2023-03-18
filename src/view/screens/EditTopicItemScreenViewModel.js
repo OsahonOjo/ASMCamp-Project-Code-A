@@ -1,5 +1,5 @@
 import React from "react";
-import { getTopicItemById, createTopicItemEntity, updateTopicItemEntity } from "../../model/EduDataModel";
+import { getTopicItemById, createTopicItemEntity, updateTopicItemEntity } from "../../modelsAndData/EduDataModel";
 
 export default function EditTopicItemScreenViewModel() {
 

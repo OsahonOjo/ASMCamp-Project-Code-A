@@ -1,16 +1,26 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-import IconAndTextListItem from "./IconAndTextListItem";
+import FontIconAndTextListItem from "./FontIconAndTextListItem";
 
 import headingIcon from '../assets/hexagons_Prosymbols_Premium.png';
 
 import './styles/card.css';
-import { commonDisplayStyles } from "./styles/commonDisplayStyles";
+import { styles } from "./styles/commonDisplayStyles";
 
-function InstructorsCard({ mainIconSize, itemIconSize, instructors }) {
+export default function InstructorsCard({ mainIconSize, itemIconSize, instructors }) {
 
   const HEADING = "Instructors";
+
+  const TEXT_COLOR = styles.vDarkModeTextColor3;
+  const LINE_COLOR = styles.vDarkModeTextColor1;
+
+  const MAIN_ICON_MARGIN_RIGHT = '10px';
+  const BODY_TEXT_LEFT_INDENT = '43px';
+  const BODY_TEXT_RIGHT_MARGIN = '30px';
+  const FONT_ICON_AND_TEXT_SEPARATION = '10px';
+  const DEFAULT_MARGIN = '10px';
+
   const iconAndTextListItemStyleMain = {
 		iconSize: {
 			height: mainIconSize,
@@ -24,23 +34,57 @@ function InstructorsCard({ mainIconSize, itemIconSize, instructors }) {
 		}
 	};
 
+  const heading = 
+    <FontIconAndTextListItem 
+      spanFontIcon={{
+        className: "material-symbols-outlined",
+        content: "supervisor_account",
+        style: {
+          ...styles.mainIcon24pxFont,
+          marginRight: FONT_ICON_AND_TEXT_SEPARATION
+        }
+      }}
+      text={{
+        content: HEADING,
+        style: {
+          color: TEXT_COLOR,
+          ...styles.h3SizeAndWeight
+        }
+      }}
+      containerStyle={{
+        margin: DEFAULT_MARGIN,
+        marginLeft: '0px'
+      }}/>;
+
   return (
-    <details open className="card">
+    <details className="card">
 
-      <summary>
-        <IconAndTextListItem 
-          icon={headingIcon}
-          text={HEADING}
-          style={iconAndTextListItemStyleMain}/>
-      </summary>
+      <summary>{heading}</summary>
 
-      <div style={commonDisplayStyles.indented}>
+      <hr style={{ borderColor: LINE_COLOR }}/>
+
+      <div style={styles.indented}>
         {instructors.map(instructor => 
-          <IconAndTextListItem 
+          <FontIconAndTextListItem 
             key={instructor.name}
-            icon={instructor.icon}
-            text={instructor.name}
-            style={iconAndTextListItemStyleItem}/>)}
+            spanFontIcon={{
+              className: "material-symbols-outlined",
+              content: "person",
+              style: {
+                ...styles.mainIcon24pxFont,
+                marginRight: FONT_ICON_AND_TEXT_SEPARATION
+              }
+            }}
+            text={{
+              content: instructor.name,
+              style: {
+                color: TEXT_COLOR,
+              }
+            }}
+            containerStyle={{
+              margin: DEFAULT_MARGIN,
+              marginLeft: '0px'
+            }}/>)}
       </div>
 
     </details>
@@ -53,4 +97,9 @@ InstructorsCard.propTypes = {
   instructors: PropTypes.array 
 };
 
-export default InstructorsCard;
+/*
+    <IconAndTextListItem 
+      icon={headingIcon}
+      text={HEADING}
+      style={iconAndTextListItemStyleMain}/>
+*/

@@ -1,6 +1,6 @@
 import React from 'react';
-import { getAllTracks } from '../../model/EduDataModel';
-import { getTrackProgressAll } from '../../model/UserDataModel';
+import { getAllTracks } from '../../modelsAndData/EduDataModel';
+import { getTrackProgressAll } from '../../modelsAndData/UserDataModel';
 
 export default function ProgressAndRewardsScreenViewModel() {
 

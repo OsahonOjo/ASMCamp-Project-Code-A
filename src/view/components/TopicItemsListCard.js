@@ -2,14 +2,18 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 
 import IconAndTextListItem from "./IconAndTextListItem";
+import FontIconAndTextListItem from "./FontIconAndTextListItem";
 import VersatileCardSegment from "./VersatileCardSegment";
+
 
 import headingIcon from '../assets/hexagons_Prosymbols_Premium.png';
 
 import './styles/card.css';
 import './styles/icon.css';
-import { commonDisplayStyles } from "./styles/commonDisplayStyles";
+import { styles } from "./styles/commonDisplayStyles";
 import { Link } from "react-router-dom";
+
+import { constants } from "../../modelsAndData/constants";
 
 // interface TopicsListCardNoTopicItemsProps {
 //     topicItemsData: [{
@@ -36,11 +40,23 @@ export default function TopicItemsListCard({ topicItemsData, mainIcon, linkIcon,
     const CARD_HEADING = "Topic Items";
     const CREATE_NEW_TOPIC_TEXT = "Create New Topic Item";
     const ICON_SIZE = '20px';
+
+    const { PRIMARY_TEXT_COLOR_DARK, SECONDARY_BACKGROUND_COLOR_DARK } = constants;
+    const TEXT_COLOR = PRIMARY_TEXT_COLOR_DARK;
+    const DEFAULT_MARGIN = '10px';
+    const FONT_ICON_AND_TEXT_SEPARATION = '10px';
+
     const location = useLocation();
+
+    const viewModeLinkIconMargins = {
+        // marginTop: '0px',
+        marginLeft: '40px',
+        // paddingTop: '10px'
+    };
 
     return (
         <div className="card">
-            <p>{CARD_HEADING}</p>
+            <p style={{ color: TEXT_COLOR, ...styles.h3SizeAndWeight }}>{CARD_HEADING}</p>
 
             {topicItemsData.map(topicItem => 
                 <VersatileCardSegment 
@@ -49,7 +65,9 @@ export default function TopicItemsListCard({ topicItemsData, mainIcon, linkIcon,
                     linkIcon={linkIcon}
                     heading={{
                         text: topicItem.title,
-                        style: {}
+                        style: {
+                            color: TEXT_COLOR,
+                        }
                     }}
                     paragraphOne={{
                         text: topicItem.description,
@@ -63,7 +81,7 @@ export default function TopicItemsListCard({ topicItemsData, mainIcon, linkIcon,
             <Link 
                 to={`${linkStem}/0`}
                 state={{ from: location.pathname, learningTrackId, courseId, topicId }}>
-                <div className="card-display--flex">
+                {/* <div className="card-display--flex">
                     <div style={{ flexGrow: 9 }}>
                         <IconAndTextListItem 
                             icon={headingIcon}
@@ -78,6 +96,34 @@ export default function TopicItemsListCard({ topicItemsData, mainIcon, linkIcon,
                     </div>
                     <div>
                         <span className="material-symbols-outlined">navigate_next</span>
+                    </div>
+                </div> */}
+                <div style={{ display: 'flex' }}>
+                    <FontIconAndTextListItem 
+                        spanFontIcon={{
+                            className: "material-symbols-outlined",
+                            content: "category",
+                            style: {
+                            ...styles.mainIcon24pxFont,
+                            marginRight: FONT_ICON_AND_TEXT_SEPARATION,
+                            color: '#444'
+                            }
+                        }}
+                        text={{
+                            content: CREATE_NEW_TOPIC_TEXT,
+                            style: {
+                            color: TEXT_COLOR,
+                            ...styles.h4SizeAndWeight
+                            }
+                        }}
+                        containerStyle={{
+                            // padding: DEFAULT_PADDING,
+                            display: 'inline'
+                        }}/>
+                    <div>
+                        <span className="material-symbols-outlined" style={{ ...styles.icon40pxFont, ...viewModeLinkIconMargins, color: TEXT_COLOR }}>
+                        navigate_next
+                        </span>
                     </div>
                 </div>
             </Link>
