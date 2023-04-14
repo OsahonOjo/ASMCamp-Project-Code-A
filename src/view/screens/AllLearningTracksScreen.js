@@ -7,6 +7,23 @@ import LearningTrackSummaryCard from '../components/LearningTrackSummaryCard';
 
 export default function AllLearningTracksScreen() {
 
+/*
+IDEAS:
+
+  0. incorporate a loading state
+
+  1. move initial viewmodel call into useEffect:
+    - remove states from inside the viewmodel
+    - putting returned values from viewmodel in a state(s) in the view
+      so that they will be there when the component is reloaded from cache
+    - function in the viewmodel follow functional programming principles
+
+  2. remove states from view
+    - NAH. state has to be in view to provide data 
+      when the component is reloaded from cache
+
+*/
+
   const NAVBAR_TEXT = "ASMCamp";
   const NEXT_PAGE = "/track";
   const { learningTrackSummaries, getLearningTrackSummaries } = AllLearningTracksScreenViewModel();
