@@ -376,6 +376,7 @@ export default function EditTopicItemScreen() {
                             fontSize: TEXT_INPUT_FONT_SIZE, 
                             backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
                             borderColor: TEXT_COLOR,
+                            color: TEXT_COLOR,
                             marginBottom: DEFAULT_MARGIN,
                             borderWidth: '0px',
                             borderBottomWidth: '2px'}}/>
@@ -393,6 +394,7 @@ export default function EditTopicItemScreen() {
                             fontSize: TEXT_INPUT_FONT_SIZE, 
                             backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
                             borderColor: TEXT_COLOR,
+                            color: TEXT_COLOR,
                             marginBottom: DEFAULT_MARGIN,
                             borderWidth: '0px',
                             borderBottomWidth: '2px'}}/>
@@ -411,6 +413,7 @@ export default function EditTopicItemScreen() {
                             fontSize: TEXT_INPUT_FONT_SIZE, 
                             backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
                             borderColor: TEXT_COLOR,
+                            color: TEXT_COLOR,
                             marginBottom: DEFAULT_MARGIN,
                             borderWidth: '0px',
                             borderBottomWidth: '2px'}}/>
@@ -428,6 +431,7 @@ export default function EditTopicItemScreen() {
                             fontSize: TEXT_INPUT_FONT_SIZE, 
                             backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
                             borderColor: TEXT_COLOR,
+                            color: TEXT_COLOR,
                             marginBottom: DEFAULT_MARGIN,
                             borderWidth: '0px',
                             borderBottomWidth: '2px'}}>
@@ -479,6 +483,7 @@ export default function EditTopicItemScreen() {
                                     fontSize: TEXT_INPUT_FONT_SIZE, 
                                     backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
                                     borderColor: TEXT_COLOR,
+                                    color: TEXT_COLOR,
                                     borderWidth: '0px',
                                     borderLeftWidth: '2px',
                                     padding: DEFAULT_PADDING
@@ -532,6 +537,7 @@ export default function EditTopicItemScreen() {
                                     fontSize: TEXT_INPUT_FONT_SIZE, 
                                     backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
                                     borderColor: TEXT_COLOR,
+                                    color: TEXT_COLOR,
                                     borderWidth: '0px',
                                     borderLeftWidth: '2px',
                                     padding: DEFAULT_PADDING
@@ -561,6 +567,7 @@ export default function EditTopicItemScreen() {
                                     fontSize: TEXT_INPUT_FONT_SIZE, 
                                     backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
                                     borderColor: TEXT_COLOR,
+                                    color: TEXT_COLOR,
                                     borderWidth: '0px',
                                     borderBottomWidth: '2px'
                                 }}>
@@ -596,6 +603,7 @@ export default function EditTopicItemScreen() {
                                     fontSize: TEXT_INPUT_FONT_SIZE, 
                                     backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
                                     borderColor: TEXT_COLOR,
+                                    color: TEXT_COLOR,
                                     borderWidth: '0px',
                                     borderBottomWidth: '2px',
                                     marginBottom: DEFAULT_MARGIN
@@ -643,6 +651,7 @@ export default function EditTopicItemScreen() {
                                     fontSize: TEXT_INPUT_FONT_SIZE, 
                                     backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
                                     borderColor: TEXT_COLOR,
+                                    color: TEXT_COLOR,
                                     borderWidth: '0px',
                                     borderLeftWidth: '2px',
                                     padding: DEFAULT_PADDING

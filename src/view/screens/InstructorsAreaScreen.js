@@ -38,6 +38,10 @@ function InstructorsAreaScreen() {
   const DEFAULT_PADDING = '10px';
   const FONT_ICON_AND_TEXT_SEPARATION = '10px';
 
+{/* <span className="material-symbols-outlined" style={styles.mainIcon24pxFont}>
+      conversion_path
+    </span> */}
+
   return (
     <>
       <HamburgerNavbar title={NAVBAR_TEXT} />
@@ -50,8 +54,9 @@ function InstructorsAreaScreen() {
             to={menuItems[0].url}>
               {/* <IconAndTextListItem icon={mainIcon} text={menuItems[0].itemTitle} style={iconAndTextListItemStyle}/>   */}
               <FontIconAndTextListItem 
-                iFontIcon={{
-                  className: "fa fa-road",
+                spanFontIcon={{
+                  className: "material-symbols-outlined",
+                  content: "conversion_path",
                   style: {
                     ...styles.mainIcon24pxFont,
                     marginRight: FONT_ICON_AND_TEXT_SEPARATION,

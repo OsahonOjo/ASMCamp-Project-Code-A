@@ -55,9 +55,14 @@ export default function LearningTrackDetailsCard({ title, longDescription, nHour
   };
 
   const mainIcon = 
-    <span style={{ marginRight: MAIN_ICON_MARGIN_RIGHT }}>
-      <i className="fa fa-road" style={{ ...styles.mainIcon24pxFont }}></i>
+    <span style={{ marginRight: MAIN_ICON_MARGIN_RIGHT  }}>
+        <span className="material-symbols-outlined" style={styles.mainIcon24pxFont}>
+        conversion_path
+      </span>
     </span>;
+    // <span style={{ marginRight: MAIN_ICON_MARGIN_RIGHT }}>
+    //   <i className="fa fa-road" style={{ ...styles.mainIcon24pxFont }}></i>
+    // </span>;
 
   const mainBody = 
     <div style={{ marginRight: BODY_TEXT_RIGHT_MARGIN }}>

@@ -52,9 +52,14 @@ export default function LearningTrackSummaryCard({ trackDetails, userIsEnrolled,
   const location = useLocation();
 
   const mainIcon = 
-    <span style={{ marginRight: MAIN_ICON_MARGIN_RIGHT }}>
-      <i className="fa fa-road" style={styles.mainIcon24pxFont}></i>
+    <span>
+      <span className="material-symbols-outlined" style={{ ...styles.mainIcon24pxFont, marginRight: MAIN_ICON_MARGIN_RIGHT }}>
+        conversion_path
+      </span>
     </span>;
+    // <span style={{ marginRight: MAIN_ICON_MARGIN_RIGHT }}>
+    //   <i className="fa fa-road" style={styles.mainIcon24pxFont}></i>
+    // </span>;
 
   const heading = 
     <Link 
@@ -97,11 +102,17 @@ export default function LearningTrackSummaryCard({ trackDetails, userIsEnrolled,
       text={trackDetails.shortDescription}
       paragraphStyle={{ color: TEXT_COLOR, marginRight: BODY_TEXT_RIGHT_MARGIN }} />;
 
+  const topStyle = { 
+    display: 'flex',
+    flexDirection: 'row' as 'row'
+  };
+  // https://stackoverflow.com/questions/62432985/typescript-saying-a-string-is-invalid-even-though-its-in-the-union
+
   return (
     <div className="card">
 
       {/* style={{ ...styles.displayFlex }} causes error for this <div>*/}
-      <div className="card-display--flex">
+      <div style={topStyle}>
         {mainIcon}{heading}{linkIcon}
       </div>
 
@@ -113,6 +124,8 @@ export default function LearningTrackSummaryCard({ trackDetails, userIsEnrolled,
     </div>
   );
 }
+
+// className="card-display--flex"
 
 /*
   // import nextPageIcon from '../assets/next.png';

@@ -16,7 +16,7 @@ import { constants } from '../../modelsAndData/constants';
 
 export default function EditLearningTrackScreen() {
 
-  const NAVBAR_TEXT = "Edit Learning Track";
+  const NAVBAR_TEXT = "Edit Track";
   const PREVIOUS_PAGE_URL = "/instructors/tracks";
   const CURRENT_PAGE_URL_STEM = "/instructors/edit/track";
   const EMPTY_STRING = "";

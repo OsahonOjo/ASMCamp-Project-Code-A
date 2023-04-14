@@ -134,6 +134,7 @@ export default function GenericEntityForm({ relevantFields, fieldValues, handleS
                     fontSize: TEXT_INPUT_FONT_SIZE, 
                     backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
                     borderColor: TEXT_COLOR,
+                    color: TEXT_COLOR,
                     borderWidth: '0px',
                     borderBottomWidth: '2px'}}/>
         </div>;
@@ -151,6 +152,7 @@ export default function GenericEntityForm({ relevantFields, fieldValues, handleS
                     fontSize: TEXT_INPUT_FONT_SIZE, 
                     backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
                     borderColor: TEXT_COLOR,
+                    color: TEXT_COLOR,
                     borderWidth: '0px',
                     borderLeftWidth: '2px',
                     padding: '10px'}}>
@@ -170,6 +172,7 @@ export default function GenericEntityForm({ relevantFields, fieldValues, handleS
                     fontSize: TEXT_INPUT_FONT_SIZE, 
                     backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
                     borderColor: TEXT_COLOR,
+                    color: TEXT_COLOR,
                     borderWidth: '0px',
                     borderLeftWidth: '2px',
                     padding: '10px'}}>
@@ -188,6 +191,7 @@ export default function GenericEntityForm({ relevantFields, fieldValues, handleS
                     fontSize: TEXT_INPUT_FONT_SIZE, 
                     backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
                     borderColor: TEXT_COLOR,
+                    color: TEXT_COLOR,
                     borderWidth: '0px',
                     borderLeftWidth: '2px',
                     padding: '10px'}}>
@@ -207,6 +211,7 @@ export default function GenericEntityForm({ relevantFields, fieldValues, handleS
                     fontSize: TEXT_INPUT_FONT_SIZE, 
                     backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, 
                     borderColor: TEXT_COLOR,
+                    color: TEXT_COLOR,
                     borderWidth: '0px',
                     borderBottomWidth: '2px'}}/>
         </div>;

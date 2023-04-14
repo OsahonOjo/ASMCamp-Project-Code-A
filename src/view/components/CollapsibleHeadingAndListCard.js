@@ -10,7 +10,7 @@ function CollapsibleHeadingAndListCard({ heading, list, closedByDefault }) {
     <details open={closedByDefault ? false : true} className="card">
       <summary>
         <h4 style={styles.inline}>{heading}</h4>
-				<img src={bulletIcon} alt="main card icon" className="icon--10px"/>
+				{/* <img src={bulletIcon} alt="main card icon" className="icon--10px"/> */}
       </summary>
       <hr />
       <ul>

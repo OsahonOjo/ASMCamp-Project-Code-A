@@ -27,7 +27,10 @@ export default function ProgressCard({ isForLearningTrack, nInProgress, percenta
 		<div className="card">
 
 			<div style={{ marginTop: DEFAULT_MARGIN }}>
-				<i className="fa fa-tachometer" style={{ ...styles.mainIcon24pxFont, marginRight: MAIN_ICON_MARGIN_RIGHT }}></i>
+				{/* <i className="fa fa-tachometer" style={{ ...styles.mainIcon24pxFont, marginRight: MAIN_ICON_MARGIN_RIGHT }}></i> */}
+				<span class="material-symbols-outlined" style={{ ...styles.mainIcon24pxFont, marginRight: MAIN_ICON_MARGIN_RIGHT }}>
+					clock_loader_40
+				</span>
 				<span style={{ color: TEXT_COLOR, ...styles.h3SizeAndWeight }}>Progress</span>
 			</div>
 

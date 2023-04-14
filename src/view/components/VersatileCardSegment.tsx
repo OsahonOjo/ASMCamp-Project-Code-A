@@ -39,6 +39,18 @@ interface VersatileCardSegmentProps {
     to: string
 };
 
+/*
+    Layout vs. Component
+    Layout is for things like navbars that you use across a lot of pages
+    Component is more specific
+    So, VersatileCardSegment should be VersatileCardSegmentLayout
+    https://www.youtube.com/watch?v=UUga4-z7b6s
+*/
+
+/*
+    Add enableDivider prop
+*/
+
 export default function VersatileCardSegment({ mainIcon, heading, progress, paragraphOne, paragraphTwo, extraComponent, linkIcon, to }: VersatileCardSegmentProps): JSX.Element {
 
     const location = useLocation();

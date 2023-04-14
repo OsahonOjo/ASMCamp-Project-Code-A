@@ -8,6 +8,7 @@ import menuItemIcon from "../assets/cell_Freepik.png";
 import { styles as burgerStyles } from "./styles/burgerStyles";
 import { styles as frequentStyles } from "./styles/commonDisplayStyles";
 
+
 import { constants } from "../../modelsAndData/constants";
 
 export default function SideNavigationMenu({ username }) {
@@ -38,7 +39,7 @@ export default function SideNavigationMenu({ username }) {
     { url: "/", itemTitle: "Contact", isIndented: false }
   ];
 
-  const menuHeading = <span style={{ marginLeft: LEFT_SPACE_DEFAULT }}>ASMCamp</span>;
+  const menuHeading = <span style={{ marginLeft: LEFT_SPACE_DEFAULT, fontWeight: 'bold', fontVariant: 'small-caps' }}>ASMCamp</span>;
 
   const userProfileSection =
     <div style={{ padding: PROFILE_SECTION_PADDING, display: 'flex' }}>
@@ -77,8 +78,11 @@ export default function SideNavigationMenu({ username }) {
                   style={{ ...frequentStyles.mainIcon24pxFont, marginRight: DEFAULT_MARGIN, color: '#444' }}>
                     person
                 </span> */}
-                <span style={{ marginRight: DEFAULT_MARGIN }}>
+                {/* <span style={{ marginRight: DEFAULT_MARGIN }}>
                   <i className="fa fa-road" style={{ ...frequentStyles.mainIcon24pxFont, color: '#444' }}></i>
+                </span> */}
+                <span className="material-symbols-outlined" style={{ ...frequentStyles.mainIcon24pxFont, marginRight: DEFAULT_MARGIN }}>
+                  conversion_path
                 </span>
                 <span style={{ color: TEXT_COLOR }}>
                   {menuItems[0].itemTitle}

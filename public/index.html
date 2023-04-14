@@ -10,9 +10,9 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/> -->
     <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" crossorigin="anonymous"/>
 
     <!--
@@ -26,6 +26,26 @@
             background-color: #22303c;
             /* color: #ddd; */
             font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* width */
+        ::-webkit-scrollbar {
+                width: 2px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
         }
     </style>
 
@@ -544,14 +564,14 @@
         const PLAYER_IMAGE_WIDTH = "100px";
     
         // TODO: remove these in production version
-        window.LearningTrackProgress = initialLearningTrackProgress;
-        window.CourseProgress = initialCourseProgress;
-        window.TopicProgress = initialTopicProgress;
-        console.log("initial progress data: ", { 
-            LearningTrackProgress: window.LearningTrackProgress,
-            CourseProgress: window.CourseProgress,
-            TopicProgress: window.TopicProgress
-        });
+        // window.LearningTrackProgress = initialLearningTrackProgress;
+        // window.CourseProgress = initialCourseProgress;
+        // window.TopicProgress = initialTopicProgress;
+        // console.log("initial progress data: ", { 
+        //     LearningTrackProgress: window.LearningTrackProgress,
+        //     CourseProgress: window.CourseProgress,
+        //     TopicProgress: window.TopicProgress
+        // });
 
         // testing link: https://www.facebook.com/embed/instantgames/599022965028716/player?game_url=https://localhost:8080
         window.FBInstant
@@ -577,17 +597,20 @@
                 window.FBInstant.player
                     .getDataAsync(['LearningTrackProgress', 'CourseProgress', 'TopicProgress'])
                     .then(function(data) {
-                        console.log("getDataAsync() has resolved; data: ", data);
-                        if (data['LearningTrackProgress']) {
+                        console.log("getDataAsync() has resolved; initial progress data from designated cloud storage: ", data);
+                        if (data['LearningTrackProgress'] && data['CourseProgress'] && data['TopicProgress']) {
                             window.LearningTrackProgress = data['LearningTrackProgress'];
                             window.CourseProgress = data['CourseProgress'];
                             window.TopicProgress = data['TopicProgress'];
                         }
                         else {
                             // TODO: initialize these to {} in production version
-                            window.LearningTrackProgress = initialLearningTrackProgress;
-                            window.CourseProgress = initialCourseProgress;
-                            window.TopicProgress = initialTopicProgress;
+                            // window.LearningTrackProgress = initialLearningTrackProgress;
+                            // window.CourseProgress = initialCourseProgress;
+                            // window.TopicProgress = initialTopicProgress;
+                            window.LearningTrackProgress = {};
+                            window.CourseProgress = {};
+                            window.TopicProgress = {};
                         }
                         window.FBInstant.setLoadingProgress(100);
                         window.FBInstant.startGameAsync().then(console.log("startGameAsync() has resolved: game started"));

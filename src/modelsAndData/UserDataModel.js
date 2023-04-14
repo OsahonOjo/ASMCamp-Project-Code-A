@@ -89,6 +89,19 @@ export function updateProgress(trackId, courseId, topicId, topicItemId) {
     let { xpEarned } = updateTopicProgress(topicId, topicItemId);
     updateCourseProgress(courseId, topicId, xpEarned);
     updateLearningTrackProgress(trackId, courseId, xpEarned);
+    persistUserProgress();
+}
+
+async function persistUserProgress() {
+    window.FBInstant.player
+        .setDataAsync({
+            'LearningTrackProgress': window.LearningTrackProgress, 
+            'CourseProgress': window.CourseProgress, 
+            'TopicProgress': window.TopicProgress,
+        })
+        .then(function() {
+            console.log('user progress update has been persisted');
+        });
 }
 
 function updateTopicProgress(topicId, topicItemId) {

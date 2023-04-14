@@ -52,7 +52,7 @@ export default function AddRewardsCard({ learningTrack, courses, topics, topicIt
     }
   ];
 
-  const DEFAULR_BADGE_DATA = {
+  const DEFAULT_BADGE_DATA = {
     learningTrackId: learningTrack.id,
     title: "",
     type: "",
@@ -60,7 +60,7 @@ export default function AddRewardsCard({ learningTrack, courses, topics, topicIt
     contentTitle: ""
   };
 
-  const [ badgeData, setBadgeData ] = React.useState(DEFAULR_BADGE_DATA);
+  const [ badgeData, setBadgeData ] = React.useState(DEFAULT_BADGE_DATA);
 
   function handleInputChange(event) {
     const nextFormData = Object.assign({}, badgeData);
@@ -85,6 +85,8 @@ export default function AddRewardsCard({ learningTrack, courses, topics, topicIt
 
   async function handleSubmit(event) {
     event.preventDefault();
+    console.log("badge creation attempt; badgeData:", badgeData);
+    
     if (badgeData.learningTrackId == '-1' || badgeData.learningTrackId == '') {
       console.log('No learning track ID found.');
       return;
@@ -115,7 +117,7 @@ export default function AddRewardsCard({ learningTrack, courses, topics, topicIt
     let success = await createBadge(submissionData);  // returns true or null
     if (success) {
       console.log('Form submitted: ', submissionData);
-      setBadgeData(DEFAULR_BADGE_DATA);  // clear badge creation form
+      setBadgeData(DEFAULT_BADGE_DATA);  // clear badge creation form
     }
     else
       console.log('Form submission failed');
@@ -131,7 +133,7 @@ export default function AddRewardsCard({ learningTrack, courses, topics, topicIt
       <select 
         required 
         name="select-topic-item" 
-        style={{ height: SELECT_TAG_HEIGHT, width: FORM_ELEMENT_WIDTH, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px', borderBottomWidth: '2px', borderColor: TEXT_COLOR }}
+        style={{ height: SELECT_TAG_HEIGHT, width: FORM_ELEMENT_WIDTH, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px', borderBottomWidth: '2px', borderColor: TEXT_COLOR, color: TEXT_COLOR }}
         value={badgeData.contentId}
         onChange={handleContentSelect}>
           {selectOption}
@@ -146,7 +148,7 @@ export default function AddRewardsCard({ learningTrack, courses, topics, topicIt
       <select 
         required 
         name="select-topic" 
-        style={{ height: SELECT_TAG_HEIGHT, width: FORM_ELEMENT_WIDTH, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px', borderBottomWidth: '2px', borderColor: TEXT_COLOR }} 
+        style={{ height: SELECT_TAG_HEIGHT, width: FORM_ELEMENT_WIDTH, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px', borderBottomWidth: '2px', borderColor: TEXT_COLOR, color: TEXT_COLOR }} 
         value={badgeData.contentId}
         onChange={handleContentSelect}>
           {selectOption}
@@ -161,7 +163,7 @@ export default function AddRewardsCard({ learningTrack, courses, topics, topicIt
       <select 
         required 
         name="select-course" 
-        style={{ height: SELECT_TAG_HEIGHT, width: FORM_ELEMENT_WIDTH, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px', borderBottomWidth: '2px', borderColor: TEXT_COLOR }}
+        style={{ height: SELECT_TAG_HEIGHT, width: FORM_ELEMENT_WIDTH, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px', borderBottomWidth: '2px', borderColor: TEXT_COLOR, color: TEXT_COLOR }}
         value={badgeData.contentId}
         onChange={handleContentSelect}>
           {selectOption}
@@ -176,7 +178,7 @@ export default function AddRewardsCard({ learningTrack, courses, topics, topicIt
       <select 
         required
         name="select-learning-track" 
-        style={{ height: SELECT_TAG_HEIGHT, width: FORM_ELEMENT_WIDTH, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px', borderBottomWidth: '2px', borderColor: TEXT_COLOR }}
+        style={{ height: SELECT_TAG_HEIGHT, width: FORM_ELEMENT_WIDTH, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px', borderBottomWidth: '2px', borderColor: TEXT_COLOR, color: TEXT_COLOR }}
         value={badgeData.contentId}
         onChange={handleContentSelect}>
           {selectOption}
@@ -194,7 +196,8 @@ export default function AddRewardsCard({ learningTrack, courses, topics, topicIt
     backgroundColor: styles.vDarkModeBackground1,
     // textAlign: 'left',
     borderWidth: '1px',
-    borderColor: TEXT_COLOR
+    borderColor: TEXT_COLOR, 
+    color: TEXT_COLOR
   };
 
   const deleteButtonStyle = { 
@@ -207,7 +210,8 @@ export default function AddRewardsCard({ learningTrack, courses, topics, topicIt
     backgroundColor: styles.vDarkModeBackground1,
     // textAlign: 'left',
     borderWidth: '1px',
-    borderColor: TEXT_COLOR
+    borderColor: TEXT_COLOR, 
+    color: TEXT_COLOR
   };
 
   return (
@@ -245,7 +249,7 @@ export default function AddRewardsCard({ learningTrack, courses, topics, topicIt
         <form onSubmit={handleSubmit} style={{ fontSize: '20px' }}>
           <fieldset style={{ marginBottom: DEFAULT_MARGIN_X2 }}>
             <label style={{ fontSize: LABEL_FONT_SIZE }}>Title</label><br />
-            <input required type="text" value={badgeData.title} onChange={handleInputChange} style={{ width: FORM_ELEMENT_WIDTH, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px', borderBottomWidth: '2px', borderColor: TEXT_COLOR }}/>
+            <input required type="text" value={badgeData.title} onChange={handleInputChange} style={{ width: FORM_ELEMENT_WIDTH, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px', borderBottomWidth: '2px', borderColor: TEXT_COLOR, color: TEXT_COLOR }}/>
           </fieldset>
 
           <fieldset style={{ marginBottom: DEFAULT_MARGIN_X2 }}>
@@ -253,14 +257,14 @@ export default function AddRewardsCard({ learningTrack, courses, topics, topicIt
             <select 
               required
               name="select-badge-type" 
-              style={{ height: '2em', width: FORM_ELEMENT_WIDTH, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px', borderBottomWidth: '2px', borderColor: TEXT_COLOR }}
+              style={{ height: '2em', width: FORM_ELEMENT_WIDTH, backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px', borderBottomWidth: '2px', borderColor: TEXT_COLOR, color: TEXT_COLOR }}
               value={badgeData.type}
               onChange={handleBadgeTypeSelect}>
                 {selectOption}
                 {Object.keys(badgeTypes).map((key) => 
                   <option key={key} value={key}>{badgeTypes[key].name}</option>)}
             </select>
-            <input type="text" readOnly={true} value={badgeData.type} style={{ width: '20%', backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px', borderColor: 'transparent' }}/>
+            <input type="text" readOnly={true} value={badgeData.type} style={{ width: '20%', backgroundColor: SECONDARY_BACKGROUND_COLOR_DARK, borderWidth: '0px', borderColor: 'transparent', color: TEXT_COLOR }}/>
           </fieldset>
           
           <fieldset>

@@ -19,7 +19,7 @@ import { constants } from '../../modelsAndData/constants';
 
 export default function ManageLearningTracksScreen() {
 
-  const NAVBAR_TEXT = "Manage Learning Tracks";
+  const NAVBAR_TEXT = "Manage Tracks";
   const NEW_TRACK_TEXT = "Create New Learning Track";
   const PREVIOUS_PAGE_URL = "/instructors";
   const NEXT_PAGE_URL_STEM = "/instructors/edit/track"; // /:trackId -> /0, /:trackId
@@ -68,6 +68,10 @@ export default function ManageLearningTracksScreen() {
   const DEFAULT_MARGIN = '10px';
   const FONT_ICON_AND_TEXT_SEPARATION = '10px';
 
+{/* <span className="material-symbols-outlined" style={styles.mainIcon24pxFont}>
+      conversion_path
+    </span> */}
+
   return (
     <div>
       <BackButtonNavbar title={NAVBAR_TEXT} to={PREVIOUS_PAGE_URL} />
@@ -96,8 +100,9 @@ const mainIcon =
           to={`${NEXT_PAGE_URL_STEM}/0`}>
             {/* <IconAndTextListItem icon={mainIcon} text={NEW_TRACK_TEXT} style={iconAndTextListItemStyle}/>   */}
             <FontIconAndTextListItem 
-              iFontIcon={{
-                className: "fa fa-road",
+              spanFontIcon={{
+                className: "material-symbols-outlined",
+                content: "conversion_path",
                 style: {
                   ...styles.mainIcon24pxFont,
                   marginRight: FONT_ICON_AND_TEXT_SEPARATION,
