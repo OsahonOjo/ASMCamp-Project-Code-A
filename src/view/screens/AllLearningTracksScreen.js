@@ -26,47 +26,68 @@ IDEAS:
 
   const NAVBAR_TEXT = "ASMCamp";
   const NEXT_PAGE = "/track";
-  const { learningTrackSummaries, getLearningTrackSummaries } = AllLearningTracksScreenViewModel();
-  const [summaries, setSummaries] = React.useState([]);
 
+  const [ loading, setLoading ] = React.useState(true);
+  const [ summaries, setSummaries ] = React.useState([]);
+  const [ vmCallbacks, setVMCallbacks ] = React.useState({});
+
+  // const { learningTrackSummaries, getLearningTrackSummaries } = AllLearningTracksScreenViewModel();
+
+  // useEffect's 1st argument is supposed to be a function that returns either nothing (undefined) or another function
+  // since an async function returns a promise, it cannot be used as that 1st argument
   // pass empty dependency array to make useEffect run only once after initial component render
+
   React.useEffect(() => { 
     console.log('AllLearningTracksScreen: inside first useEffect');
-    getLearningTrackSummaries();
+    // getLearningTrackSummaries();
+    const getLearningTrackSummaries = AllLearningTracksScreenViewModel();
+    getLearningTrackSummaries()
+      .then((summaries) => {
+        setSummaries(summaries);
+        setLoading(false);
+      })
+      .catch((error) => { 
+        console.log(error);
+        setLoading(true);
+      });
   }, []);
 
-  React.useEffect(() => {
-    console.log('AllLearningTracksScreen: inside second useEffect');
-    learningTrackSummaries && learningTrackSummaries.length != 0
-      ? setSummaries(learningTrackSummaries) 
-      : setSummaries([]);
-  }, [learningTrackSummaries]);
+  // React.useEffect(() => {
+  //   console.log('AllLearningTracksScreen: inside second useEffect');
+  //   learningTrackSummaries && learningTrackSummaries.length != 0
+  //     ? setSummaries(learningTrackSummaries) 
+  //     : setSummaries([]);
+  // }, [learningTrackSummaries]);
+
+
 
   return (
     <>
       <SideNavigationMenu/>
       <HamburgerNavbar title={NAVBAR_TEXT}/>
-      {summaries.map(summary => 
-        <LearningTrackSummaryCard 
-          key={summary.title}
-          to={`${NEXT_PAGE}/${summary.id}`}
-          userIsEnrolled={summary.progress ? true : false}
-          trackDetails={{ 
-            trackId: summary.id, 
-            title: summary.title, 
-            shortDescription: summary.shortDescription,
-            longDescription: summary.longDescription }} 
-          /* wrapping in ternary operator handles case when progress is null */
-          progressBar={
-            summary.progress
-              ? {
-                  percentage: summary.progress.percentage,
-                  hasLabel: true,
-                  labelOnRightSide: false
-                }
-              : null
-          }/>
-        )}
+      { loading
+          ? <p>Loading</p>
+          : summaries.map(summary => 
+              <LearningTrackSummaryCard 
+                key={summary.title}
+                to={`${NEXT_PAGE}/${summary.id}`}
+                userIsEnrolled={summary.progress ? true : false}
+                trackDetails={{ 
+                  trackId: summary.id, 
+                  title: summary.title, 
+                  shortDescription: summary.shortDescription,
+                  longDescription: summary.longDescription }} 
+                /* wrapping in ternary operator handles case when progress is null */
+                progressBar={
+                  summary.progress
+                    ? {
+                        percentage: summary.progress.percentage,
+                        hasLabel: true,
+                        labelOnRightSide: false
+                      }
+                    : null
+                }/>
+              )}
     </>
   );
 }
