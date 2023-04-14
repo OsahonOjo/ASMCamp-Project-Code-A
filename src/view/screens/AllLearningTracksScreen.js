@@ -14,7 +14,7 @@ IDEAS:
 
   1. move initial viewmodel call into useEffect:
     - remove states from inside the viewmodel
-    - putting returned values from viewmodel in a state(s) in the view
+    - putting returned data from viewmodel in a state(s) in the view
       so that they will be there when the component is reloaded from cache
     - function in the viewmodel follow functional programming principles
 
@@ -24,12 +24,17 @@ IDEAS:
 
 */
 
+  // TODO
+  // 1. convert everything that can be to layouts, instead of components
+  // 2. replace <p>Loading</p> with spinner
+
+
   const NAVBAR_TEXT = "ASMCamp";
-  const NEXT_PAGE = "/track";
+  const NEXT_PAGE_URL_STEM = "/track";
 
   const [ loading, setLoading ] = React.useState(true);
   const [ summaries, setSummaries ] = React.useState([]);
-  const [ vmCallbacks, setVMCallbacks ] = React.useState({});
+  // const [ vmCallbacks, setVMCallbacks ] = React.useState({});
 
   // const { learningTrackSummaries, getLearningTrackSummaries } = AllLearningTracksScreenViewModel();
 
@@ -59,35 +64,33 @@ IDEAS:
   //     : setSummaries([]);
   // }, [learningTrackSummaries]);
 
-
-
   return (
     <>
       <SideNavigationMenu/>
       <HamburgerNavbar title={NAVBAR_TEXT}/>
-      { loading
-          ? <p>Loading</p>
-          : summaries.map(summary => 
-              <LearningTrackSummaryCard 
-                key={summary.title}
-                to={`${NEXT_PAGE}/${summary.id}`}
-                userIsEnrolled={summary.progress ? true : false}
-                trackDetails={{ 
-                  trackId: summary.id, 
-                  title: summary.title, 
-                  shortDescription: summary.shortDescription,
-                  longDescription: summary.longDescription }} 
-                /* wrapping in ternary operator handles case when progress is null */
-                progressBar={
-                  summary.progress
-                    ? {
-                        percentage: summary.progress.percentage,
-                        hasLabel: true,
-                        labelOnRightSide: false
-                      }
-                    : null
-                }/>
-              )}
+      {loading
+        ? <code>Loading</code>
+        : summaries.map(summary => 
+            <LearningTrackSummaryCard 
+              key={summary.title}
+              to={`${NEXT_PAGE_URL_STEM}/${summary.id}`}
+              userIsEnrolled={summary.progress ? true : false}
+              trackDetails={{ 
+                trackId: summary.id, 
+                title: summary.title, 
+                shortDescription: summary.shortDescription,
+                longDescription: summary.longDescription }} 
+              /* wrapping in ternary operator handles case when progress is null */
+              progressBar={
+                summary.progress
+                  ? {
+                      percentage: summary.progress.percentage,
+                      hasLabel: true,
+                      labelOnRightSide: false
+                    }
+                  : null
+              }/>
+            )}
     </>
   );
 }

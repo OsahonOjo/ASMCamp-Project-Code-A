@@ -43,7 +43,7 @@ export default function AllLearningTracksScreenViewModel() {
         const { response, error } = await getAllTracks();  //  "response": { "response": {} or [] }
         if (error) {
             console.log(error.message);
-            return Promise.reject(error.message);
+            return Promise.reject(error);
         }
         // setState(summarizeLearningTrackEntities(response.response));
 

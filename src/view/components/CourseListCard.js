@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from 'prop-types';
 import { Link, useLocation } from "react-router-dom";
 
 import CourseSummaryCard from "./CourseSummaryCard";
@@ -14,9 +13,31 @@ import './styles/card.css';
 import { styles } from "./styles/commonDisplayStyles";
 
 import { constants } from "../../modelsAndData/constants";
+import { ReactBurgerMenu } from "react-burger-menu";
+
+/*
+  NOTE:
+    1. React props show up as undefined at first
+
+      State-setting is an asynchronous operation so it's wise to manually 
+      safeguard against undefined values that might be present before getting 
+      updated state.
+
+      This applied to props too since props are derived from state.
+
+    2. The UI is NOT re-rendered automatically when props change.
+      The particular prop of concern here is "courses".
+
+      There are four reasons why a component would re-render itself: 
+      state changes, parent (or children) re-renders, context changes, and hooks changes.
+
+      However, since "courses" is a state in the parent, if "courses" changes in the parent,
+      the parent will re-render, which will cause this component to re-render
+      so you don't need to handle prop changes yourself in this case. 
+*/
 
 export default function CourseListCard({ courses, viewModeNextPageUrlStem, editMode, editModeNextPageUrlStem, learningTrackId }) {
-
+  
   const NEW_COURSE_TEXT = "Create New Course";
   const ICON_SIZE = "20px";
 
@@ -28,6 +49,16 @@ export default function CourseListCard({ courses, viewModeNextPageUrlStem, editM
   const DEFAULT_MARGIN = '10px';
 
   const location = useLocation();
+
+  // const [ courseSummaries, setCourseSummaries ] = React.useState([]);
+
+  // React.useEffect(() => {
+  //   setCourseSummaries(courses);
+  // }, [courses]);
+
+  // React.useEffect(() => {
+  //   console.log("CourseListCard: courseSummaries (state): ", courseSummaries);
+  // }, [courseSummaries]);
 
   const iconAndTextListItemStyle = {
 		iconSize: {
@@ -96,20 +127,22 @@ export default function CourseListCard({ courses, viewModeNextPageUrlStem, editM
           <span style={{ marginLeft: LEFT_SPACE_DEFAULT, ...styles.h3SizeAndWeight, color: TEXT_COLOR }}>Courses</span>
         </div>
 
-        {courses.map(course => 
-          <CourseSummaryCard 
-            key={course.id}
-            courseId={course.id}
-            learningTrackId={course.learningTrackId}
-            title={course.title}
-            shortDescription={course.shortDescription}
-            nHours={course.nHours}
-            userIsEnrolled={course.userIsEnrolled}
-            percentage={course.percentage}
-            hasLabel={true}
-            labelOnRightSide={false}
-            editMode={editMode}
-            nextPageUrl={editMode ? `${editModeNextPageUrlStem}/${course.id}` : `${viewModeNextPageUrlStem}/${course.id}`} />)}
+        {courses
+          ? courses.map(course => 
+              <CourseSummaryCard 
+                key={course.id}
+                courseId={course.id}
+                learningTrackId={course.learningTrackId}
+                title={course.title}
+                shortDescription={course.shortDescription}
+                nHours={course.nHours}
+                userIsEnrolled={course.userIsEnrolled}
+                percentage={course.percentage}
+                hasLabel={true}
+                labelOnRightSide={false}
+                editMode={editMode}
+                nextPageUrl={editMode ? `${editModeNextPageUrlStem}/${course.id}` : `${viewModeNextPageUrlStem}/${course.id}`} />)
+          : null}
 
         {editMode ? newCourseElement : null}
 
@@ -119,10 +152,6 @@ export default function CourseListCard({ courses, viewModeNextPageUrlStem, editM
     </>
   );
 }
-
-CourseListCard.propTypes = {
-  courses: PropTypes.array
-};
 
 // const EDIT_MODE_NEXT_PAGE_URL = "/instructors/edit/course";
 // const NORMAL_MODE_NEXT_PAGE_URL = `/course/${courseId}`;

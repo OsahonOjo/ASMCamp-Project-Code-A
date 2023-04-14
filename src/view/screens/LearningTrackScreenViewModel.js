@@ -4,22 +4,26 @@ import { getTrackProgressInfo } from '../../modelsAndData/UserDataModel';
 
 export default function LearningTrackScreenViewModel() {
 
+  // format expectations: 
+  // { response, error } => { "response": { "response": {} or [] }, error }
+
   const HOURS_PER_COURSE = 4;
-  const [trackDetails, setTrackDetails] = React.useState({});
-  const [courseSummaries, setCourseSummaries] = React.useState([]);
-  const [ badges, setBadges ] = React.useState([]);
+  // const [trackDetails, setTrackDetails] = React.useState({});
+  // const [courseSummaries, setCourseSummaries] = React.useState([]);
+  // const [ badges, setBadges ] = React.useState([]);
 
   async function getAllBadgesInLearningTrack(trackId) {
     const { response, error } = await getAllBadgesInTrack(trackId);
     if (error) {
         console.log(error.message);
-        return;
+        return Promise.reject(error);
     }
     let allBadgesData = response.response;
     // console.log('allBadgesData: ', allBadgesData);
     allBadgesData = renameUnderscoreId(allBadgesData);
     // console.log('allBadgesData: ', allBadgesData);
-    setBadges(allBadgesData);
+    // setBadges(allBadgesData);
+    return Promise.resolve(allBadgesData);
   }
 
   function renameUnderscoreId(arrayOfEntities) {
@@ -47,11 +51,12 @@ export default function LearningTrackScreenViewModel() {
     const { response, error } = await getTrack(trackId);
     if (error) {
         console.log(error.message);
-        return;
+        return Promise.reject(error);
     }
     let trackEntity = response.response;
     let details = trackDetailsFactory(trackEntity._id, trackEntity.title, trackEntity.shortDescription, trackEntity.longDescription, trackEntity.nCourses, trackEntity.nCourses * HOURS_PER_COURSE);
-    setTrackDetails(details);
+    // setTrackDetails(details);
+    return Promise.resolve(details);
   }
 
   function courseSummaryFactory(id, learningTrackId, title, shortDescription) {
@@ -70,19 +75,20 @@ export default function LearningTrackScreenViewModel() {
     const { response, error } = await getAllCoursesInTrack(trackId);
     if (error) {
         console.log(error.message);
-        return;
+        return Promise.reject(error);
     }
     // NOTE: here, learningTrackId is ['learningTrackId'] for some reason
     let summaries = summarizeCourseEntities(response.response);
-    setCourseSummaries(summaries);
+    // setCourseSummaries(summaries);
+    return Promise.resolve(summaries);
   }
 
   return {
-    trackDetails, 
-    courseSummaries, 
+    // trackDetails, 
+    // courseSummaries, 
     getTrackDetailsData,
     getCourseSummariesData,
-    badges,
+    // badges,
     getAllBadgesInLearningTrack,
   };
 }

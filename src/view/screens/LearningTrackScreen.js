@@ -20,8 +20,13 @@ import infoIcon from '../assets/polygon_riajulislam.png';
 
 export default function LearningTrackScreen() {
 
+  // TODO
+  // 1. populate instructors card from trackDetails
+  // 2. replace "Loading" text with spinners
+
   const NAVBAR_TEXT = "Learning Track";
-  const PREVIOUS_PAGE = "/tracks";
+  const PREVIOUS_PAGE_URL = "/tracks";
+
   const HOURS_PER_COURSE = 4;
   const instructorsData = [
     {
@@ -33,7 +38,112 @@ export default function LearningTrackScreen() {
       name: "Virgil Hawkins"
     }
   ];
-  const rewardsData = [
+  
+  const { trackId } = useParams();
+  
+  const [ trackDetailsLoading, setTrackDetailsLoading ] = React.useState(true);
+  const [ courseSummariesLoading, setCourseSummariesLoading ] = React.useState(true);
+  const [ badgesLoading, setBadgesLoading ] = React.useState(true);
+
+  // if trackDetails is empty, CollapsibleParagraph throws a TypeError
+  const [ trackDetails, setTrackDetails ] = React.useState({});
+  const [ courseSummaries, setCourseSummaries ] = React.useState([]);
+  const [ badges, setBadges ] = React.useState([]);
+
+  React.useEffect(() => {
+    const { getTrackDetailsData, getCourseSummariesData, getAllBadgesInLearningTrack } = LearningTrackScreenViewModel();
+
+    getTrackDetailsData(trackId)
+      .then((details) => {
+        setTrackDetails(details);
+        setTrackDetailsLoading(false);
+      })
+      .catch((error) => { 
+        console.log(error);
+        setTrackDetailsLoading(true);
+      });
+
+    getCourseSummariesData(trackId)
+      .then((summaries) => {
+        setCourseSummaries(summaries);
+        setCourseSummariesLoading(false);
+      })
+      .catch((error) => { 
+        console.log(error);
+        setCourseSummariesLoading(true);
+      });
+
+    getAllBadgesInLearningTrack(trackId)
+      .then((badges) => {
+        setBadges(badges);
+        setBadgesLoading(false);
+      })
+      .catch((error) => { 
+        console.log(error);
+        setBadgesLoading(true);
+      });
+  }, []);
+
+  // React.useEffect(() => {
+  //   trackDetails && Object.keys(trackDetails).length != 0
+  //     ? setTrackDetails(trackDetails) 
+  //     : setTrackDetails({});
+  //   courseSummaries && courseSummaries.length != 0
+  //     ? setCourseSummaries(courseSummaries) 
+  //     : setCourseSummaries([])
+  //   badges && courseSummaries.length != 0
+  //     ? setBadges(badges)
+  //     : setBadges([]);
+  // }, [trackDetails, courseSummaries, badges]);
+
+  return (
+    <>
+      <BackButtonNavbar title={NAVBAR_TEXT} to={PREVIOUS_PAGE_URL}/> 
+
+      {trackDetailsLoading
+        ? <code>Loading</code>
+        : <>
+            <LearningTrackDetailsCard 
+              title={trackDetails.title}
+              longDescription={trackDetails.longDescription}
+              nHours={trackDetails.nHours}
+              nCourses={trackDetails.nCourses} />
+
+            {trackDetails.progressInfo
+              ? <ProgressCard 
+                  isForLearningTrack={true}
+                  nInProgress={0}
+                  percentage={trackDetails.progressInfo.percentage}
+                  nComplete={Math.round( ( trackDetails.progressInfo.percentage / 100) * trackDetails.progressInfo.nCourses )}
+                  nTotal={trackDetails.progressInfo.nCourses}/> 
+              : null}
+
+            {courseSummariesLoading
+              ? <code>Loading Courses</code>
+              : <CourseListCard 
+                  courses={courseSummaries}
+                  viewModeNextPageUrlStem={"/course"} />}
+
+            {/* Should be populated from trackDetails */}
+            <InstructorsCard 
+              mainIconSize={"20px"}
+              itemIconSize={"20px"}
+              instructors={instructorsData}/>
+
+            {badgesLoading
+              ? <code>Loading Badges</code>
+              : <RewardsCard 
+                  mainIconSize={"20px"}
+                  itemIconSize={"60px"}
+                  badges={badges}/>}
+          </>}
+    </>
+  );
+}
+
+/*  
+
+ const rewardsData = [
     {
       type: rewardTypes.BADGE,
       name: "Expertise",
@@ -53,73 +163,7 @@ export default function LearningTrackScreen() {
       isComplete: false
     }
   ];
-  
-  const { trackId } = useParams();
-  const { trackDetails, courseSummaries, getTrackDetailsData, getCourseSummariesData, badges, getAllBadgesInLearningTrack, } = LearningTrackScreenViewModel();
-  
-  // if trackDetailsState is empty, CollapsibleParagraph throws a TypeError
-  const [trackDetailsState, setTrackDetailsState] = React.useState({});
-  const [courseSummariesState, setCourseSummariesState] = React.useState([]);
-  const [badgesState, setBadgesState] = React.useState([]);
 
-  React.useEffect(() => {
-    getTrackDetailsData(trackId);
-    getCourseSummariesData(trackId);
-    getAllBadgesInLearningTrack(trackId);
-  }, []);
-
-  React.useEffect(() => {
-    trackDetails && Object.keys(trackDetails).length != 0
-      ? setTrackDetailsState(trackDetails) 
-      : setTrackDetailsState({});
-    courseSummaries && courseSummaries.length != 0
-      ? setCourseSummariesState(courseSummaries) 
-      : setCourseSummariesState([])
-    badges && courseSummaries.length != 0
-      ? setBadgesState(badges)
-      : setBadgesState([]);
-  }, [trackDetails, courseSummaries, badges]);
-
-  console.log('on LearningTrackScreen');
-
-  return (
-    <>
-      <BackButtonNavbar title={NAVBAR_TEXT} to={PREVIOUS_PAGE}/> 
-
-      <LearningTrackDetailsCard 
-        title={trackDetailsState.title}
-        longDescription={trackDetailsState.longDescription}
-        nHours={trackDetailsState.nHours}
-        nCourses={trackDetailsState.nCourses} /> 
-
-      {/* wrapping in ternary operator handles case when progressInfo is null */}
-      {trackDetailsState.progressInfo
-        ? <ProgressCard 
-            isForLearningTrack={true}
-            nInProgress={0}
-            percentage={trackDetailsState.progressInfo.percentage}
-            nComplete={Math.round( ( trackDetailsState.progressInfo.percentage / 100) * trackDetailsState.progressInfo.nCourses )}
-            nTotal={trackDetailsState.progressInfo.nCourses}/> 
-        : null}   
-
-      <CourseListCard 
-        courses={courseSummariesState}
-        viewModeNextPageUrlStem={"/course"} />
-
-      {/* <InstructorsCard 
-        mainIconSize={"20px"}
-        itemIconSize={"20px"}
-        instructors={instructorsData}/> */}
-
-      <RewardsCard 
-        mainIconSize={"20px"}
-        itemIconSize={"60px"}
-        badges={badgesState}/>
-    </>
-  );
-}
-
-/*  
     details:
     {
       title: "Learning Track Title",
